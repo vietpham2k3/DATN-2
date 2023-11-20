@@ -1,0 +1,132 @@
+.justify-content-center {
+  display: flex;
+  justify-content: center;
+}
+.Modal {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: white;
+  padding: 20px;
+  border-radius: 5px;
+  width: 600px;
+}
+
+.Overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.flex {
+  display: flex;
+  justify-items: center;
+}
+.ull {
+  display: flex;
+  justify-content: space-evenly;
+  flex-wrap: wrap;
+  list-style: none;
+  padding: 0;
+}
+
+.image-preview-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.preview-image {
+  width: 200px;
+  height: auto;
+  margin: 5px;
+}
+// Here you can add other styles
+.input-search {
+  width: 50%;
+  height: 100%;
+  border: 1px solid gray;
+  border-radius: 15px;
+  padding-left: 10px;
+}
+.input-search-sp {
+  width: 50%;
+  height: 30%;
+  border: 1px solid gray;
+  border-radius: 15px;
+  padding-left: 10px;
+}
+.search {
+  display: flex;
+  justify-items: center;
+  justify-content: space-between;
+}
+
+.fa-pen {
+  color: #ffc107;
+}
+.fa-trash {
+  color: #dc3545;
+  :hover {
+    cursor: pointer;
+  }
+}
+.fa-solid {
+  border: none;
+  background-color: transparent;
+}
+select.form-select {
+  appearance: none;
+}
+
+select.form-select option[selected] {
+  background-color: red;
+}
+
+select.form-select option[selected]::before {
+  content: '';
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  margin-right: 5px;
+  background-color: red;
+}
+.col-6 {
+  display: flex;
+  flex-direction: column;
+}
+
+.flex-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.flex-container label {
+  margin-right: 1rem;
+}
+.slider {
+  width: 100%;
+  height: 2px;
+  background-color: #cdd9ed;
+  margin-top: 20px;
+}
+.slider .thumb {
+  width: 23px;
+  height: 23px;
+  cursor: grab;
+  background-color: #fff;
+  border-radius: 50%;
+  border: 2px solid black;
+  margin-top: -12px;
+}
+.box {
+  width: 250px;
+}
+

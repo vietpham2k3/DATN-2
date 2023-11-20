@@ -6,6 +6,10 @@ import App from './App'
 import reportWebVitals from './reportWebVitals'
 import { Provider } from 'react-redux'
 import store from './store'
+import 'bootstrap/dist/css/bootstrap.min.css'
+import 'react-toastify/dist/ReactToastify.css'
+import '@fortawesome/fontawesome-free/css/all.min.css'
+import '../src/scss/Router.scss'
 
 createRoot(document.getElementById('root')).render(
   <Provider store={store}>

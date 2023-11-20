@@ -1,0 +1,40 @@
+.ull {
+  display: flex;
+  justify-content: space-evenly;
+  flex-wrap: wrap;
+  list-style: none;
+  padding: 0;
+}
+
+li {
+  margin-right: 10px;
+  img {
+    width: 300px;
+    height: 450px;
+    object-fit: cover; /* Đảm bảo hình ảnh không bị méo */
+    border-radius: 5px; /* Bo góc hình ảnh */
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1); /* Hiệu ứng bóng đổ */
+  }
+}
+.image-preview-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.preview-image {
+  width: 200px;
+  height: auto;
+  margin: 5px;
+}
+.main-card {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
+}
+
+.main-card.show {
+  opacity: 1;
+  transform: translateY(0);
+  transition-delay: 0.3s;
+}

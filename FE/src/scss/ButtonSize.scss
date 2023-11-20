@@ -1,0 +1,17 @@
+.custom-button {
+  background-color: transparent;
+  border: none;
+  padding: 10px 20px;
+  font-size: 14px;
+  transition: background-color 0.2s;
+}
+
+.custom-button.active {
+  background-color: lightgray;
+}
+
+.button:active {
+  outline: none;
+  border: 2px solid blue;
+}
+

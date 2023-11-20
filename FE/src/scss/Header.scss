@@ -1,0 +1,137 @@
+.navbar {
+  display: flex;
+  justify-content: center;
+  background-color: #eef2f6;
+  text-align: center;
+}
+.header-content-container {
+  position: relative;
+}
+.navbar-expand-lg {
+  justify-content: center !important;
+}
+.search-container {
+  position: absolute;
+  top: 100%; /* Đặt top để ô tìm kiếm nằm dưới ô icon tìm kiếm */
+  right: 0;
+  z-index: 2; /* Đảm bảo ô tìm kiếm hiển thị trên nội dung */
+  height: 70%;
+  width: 250px;
+  // border: 1px solid gray;
+  border-radius: 15px;
+  background-color: #ffffff;
+  margin-right: 210px;
+  display: flex;
+  align-items: center;
+  padding-left: 15px;
+  box-shadow: 2px 2px 2px 2px;
+}
+
+.search-container-result {
+  position: absolute;
+  top: 100%; /* Đặt top để ô tìm kiếm nằm dưới ô icon tìm kiếm */
+  right: 0;
+  z-index: 2;
+  width: 250px;
+  padding: 10px 0 10px 0;
+  border-radius: 15px;
+  background-color: #ffffff;
+  margin-right: 210px;
+  // display: flex;
+  align-items: center;
+  box-shadow: 2px 2px 2px 2px;
+}
+.search-input {
+  height: 100%;
+  width: 95%;
+}
+
+.header {
+  // position: sticky;
+  top: 0;
+  width: 100%;
+  z-index: 9999;
+  text-align: center;
+  justify-content: center;
+}
+.flex-header {
+  display: flex;
+  justify-content: space-evenly;
+}
+.nav-1 {
+  display: flex;
+  justify-content: space-between;
+}
+.nameShop {
+  color: darkblue;
+  font-family: 'Comic Sans MS', cursive, sans-serif;
+  font-size: 30px !important;
+}
+.nav-item {
+  font-size: 20px;
+}
+.fa-user {
+  padding-right: 15px;
+}
+.fa-cart-shopping {
+  padding-right: 15px;
+}
+.nav-item {
+  display: flex;
+  justify-content: flex-end;
+}
+.nav-item:hover {
+  color: #000000;
+  font-weight: bold;
+}
+.box-search1 {
+  width: 100%;
+  height: 50px;
+  box-shadow: 0 0 5px;
+  border-radius: 30px;
+  display: flex;
+  align-items: center;
+  padding-left: 20px;
+  overflow: hidden;
+  background-color: white;
+}
+
+.input-seach1 {
+  border: none;
+  width: 100%;
+  height: 100%;
+  margin-left: 10px;
+  margin-right: 15px;
+  font-size: medium;
+}
+a:hover {
+  text-decoration: none;
+}
+a:focus {
+  text-decoration: none;
+  font-weight: bold;
+}
+.icon-login {
+  background-color: inherit !important;
+  border: none !important;
+  color: black !important;
+  font-size: 20px !important;
+  :hover {
+    background-color: inherit;
+    color: black;
+  }
+}
+.btn-login:hover {
+  background-color: inherit;
+  color: black;
+}
+.btn-login:active {
+  background-color: transparent !important;
+  color: inherit !important;
+}
+#dropdown-basic-button {
+  background-color: transparent;
+  border: none;
+  color: black;
+  font-size: 20px;
+}

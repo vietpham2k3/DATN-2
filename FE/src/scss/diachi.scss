@@ -1,0 +1,318 @@
+/* UserAccount.css */
+
+.user-profile {
+  display: flex;
+  align-items: center;
+}
+
+.avatar {
+  max-width: 150px; /* Đặt kích thước tối đa cho cột ảnh */
+  width: 120%; /* Đảm bảo ảnh không bị vỡ */
+  height: 1 20px; /* Đặt kích thước cho cột ảnh */
+  border-radius: 70%; /* Biểu tượng hình tròn */
+  overflow: hidden; /* Ẩn phần ngoài hình tròn */
+  border: 2px solid #ccc; /* Màu và độ dày của viền */
+  margin-right: 100px; /* Khoảng cách giữa cột */
+}
+
+.avatar-image img {
+  max-width: 100%; /* Đặt kích thước tối đa cho ảnh */
+  height: 100%; /* Đảm bảo tỷ lệ khung ảnh */
+  object-fit: cover; /* Đảm bảo ảnh đầy đủ trong hình tròn */
+}
+
+button {
+  padding: 10px 20px;
+  background-color: #fff; /* Màu nền trắng */
+  color: #007bff; /* Màu chữ xanh */
+  border: 2px solid #007bff; /* Viền xanh */
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease; /* Hiệu ứng hover */
+}
+
+/* CSS cho hover */
+button:hover {
+  background-color: #007bff; /* Màu nền xanh khi hover */
+  color: #fff; /* Màu chữ trắng khi hover */
+}
+
+.vertical-separator {
+  width: 1px;
+  background-color: #ccc;
+  margin: 0 10px;
+  height: 100%;
+}
+
+.col-2 {
+  background-color: white;
+}
+.row {
+  margin-top: 40px;
+}
+
+.no-border {
+  border: none;
+  background: none;
+  padding: 10px 20px;
+  margin: 0;
+  cursor: pointer;
+  font-family: 'Tahoma', sans-serif;
+  font-size: 16px;
+  color: black;
+}
+.col-2 {
+  width: 20%; /* Đặt kích thước cột 2 */
+  float: left;
+  padding: 10px;
+  background-color: #f1f1f1; /* Màu nền của cột 2 */
+}
+
+.col-9 {
+  width: 75%; /* Đặt kích thước cột 9 */
+  float: left;
+  padding: 10px;
+  background-color: #ffffff; /* Màu nền của cột 9 */
+}
+
+.separator {
+  width: 5%; /* Đặt kích thước đường dọc trắng */
+  height: 100%;
+  float: left;
+  background-color: #fff; /* Màu nền của đường dọc */
+  margin: 0;
+}
+
+
+.button2 {
+  display: inline-block;
+  margin: 10px;
+}
+
+.button2 button {
+  background-color: #3498db;
+  border: none;
+  color: #fff;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.button2 button:hover {
+  background-color: #1fc66a;
+}
+
+.right-aligned-modal {
+ position: fixed;
+ top: 50%;
+ left: 50%;
+ transform: translate(-50%, -50%);
+ background-color: white;
+ padding: 20px;
+ border: 1px solid #ccc;
+ box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+ max-width: 95%;
+}
+
+
+.modal-content {
+ border: 1px solid #0d89d7;
+ padding: 20px;
+ background-color: #fff;
+}
+.input-group {
+ position: relative;
+ margin-bottom: 20px;
+}
+.input1 input,
+.input1 select {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid rgb(144, 144, 144); /* Add a border */
+  border-radius: 5px; /* Add border-radius to round the corners */
+  background: transparent;
+  outline: none;
+  font-size: 16px;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.3); /* Add a box shadow */
+}
+
+
+
+.button1 {
+ display: flex;
+ justify-content: space-between;
+ margin-top: 20px;
+}
+
+.button1 button {
+ flex: 1;
+ padding: 10px 20px;
+ font-size: 16px;
+ background-color: #3498db;
+ color: #fff;
+ border: none;
+ cursor: pointer;
+ border-radius: 5px;
+ margin-right: 10px;
+}
+
+.button1 button:last-child {
+ margin-right: 0;
+}
+
+.button1 button:hover {
+ background-color: #2980b9;
+}
+
+.centered-modal {
+ position: fixed;
+ top: 50%;
+ left: 50%;
+ transform: translate(-50%, -50%);
+ display: flex;
+ justify-content: center;
+ align-items: center;
+}
+.button3 {
+ display: flex;
+ justify-content: space-between;
+ margin-top: 20px;
+}
+
+.button3 button {
+ background: #0074d9;
+ color: white;
+ border: none;
+ padding: 10px 20px;
+ cursor: pointer;
+ flex: 1;
+ margin: 0 10px; /* Add spacing between buttons */
+}
+
+.button3 button:hover {
+ background: #1a9461;
+}
+.button4 button {
+ background: gray;
+ color: white;
+ border: none;
+ padding: 10px 20px;
+ cursor: pointer;
+ flex: 1;
+ margin: 0 10px; /* Add spacing between buttons */
+}
+
+.button4 button:hover {
+ background: #060606;
+}
+
+/* ... */
+.address-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.button2 button {
+  /* Bỏ background-color và border để nút "Thêm Địa Chỉ Mới" không có nền */
+  background: #ccc;
+  border: none;
+  color: #000000;
+  padding: 10px 20px;
+  border-radius: 60px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  height: 50px;
+  font-size: 16px;
+}
+
+.button2 button:hover {
+  background-color: #9ccff1; /* Màu nền xanh khi hover */
+  color: #fff; /* Màu chữ trắng khi hover */
+}
+
+
+/* Chỉnh CSS cho modal tổng thể */
+.right-aligned-modal {
+  /* Đặt vị trí hiển thị modal tại giữa trang và căn giữa theo chiều ngang */
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 9999;
+
+  /* Tạo hiệu ứng transition cho modal */
+  transition: all 0.3s ease-in-out;
+
+  /* Tùy chỉnh kích thước và màu sắc của modal */
+  max-width: 400px;
+  width: 90%;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding: 20px;
+
+  h2 {
+    font-size: 1.5rem;
+    margin-bottom: 20px;
+  }
+
+  .modal-content {
+    /* Căn lề nội dung bên trong modal */
+    text-align: left;
+  }
+
+  form {
+    /* Tăng khoảng cách giữa các thành phần trong form */
+    display: grid;
+    gap: 10px;
+
+    .input1 {
+      display: grid;
+      gap: 10px;
+    }
+  }
+
+  label {
+    /* Tùy chỉnh màu và font chữ cho nhãn */
+    color: #333;
+    font-weight: 500;
+  }
+
+  select,
+  input[type="text"] {
+    /* Tùy chỉnh màu sắc, border và padding cho input và select box */
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+
+  .button3 {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    button {
+      /* Tùy chỉnh màu nút và viền */
+      padding: 10px 20px;
+      border: none;
+      border-radius: 5px;
+    }
+  }
+}
+
+/* Điều chỉnh CSS cho button đóng */
+.button4 {
+  margin-top: 10px;
+  display: flex;
+  justify-content: flex-end;
+
+  button {
+    /* Tùy chỉnh màu nút đóng và viền */
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+  }
+}

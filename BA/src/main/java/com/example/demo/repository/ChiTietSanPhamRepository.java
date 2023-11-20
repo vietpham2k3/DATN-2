@@ -72,7 +72,7 @@ public interface ChiTietSanPhamRepository extends JpaRepository<ChiTietSanPham, 
             , nativeQuery = true)
     List<String> getKCByIdMSAndIdSP(UUID idMS, UUID idSP);
 
-    @Query(value = "SELECT C.id, c.id_cl, c.id_sp, c.id_lsp, c.id_nsx, c.id_kc, c.id_ms, c.id_ca, c.ma, t.so_luong,\n" +
+    @Query(value = "SELECT C.id, c.id_cl, c.id_sp, c.id_lsp, c.id_nsx, c.id_kc, c.id_ms, c.ma, t.so_luong,\n" +
             "c.gia_ban, c.ngay_tao, c.ngay_sua, c.nguoi_tao, c.nguoi_sua, c.trang_thai\n" +
             "FROM ChiTietSanPham C\n" +
             "JOIN (\n" +
@@ -89,7 +89,7 @@ public interface ChiTietSanPhamRepository extends JpaRepository<ChiTietSanPham, 
     Page<ChiTietSanPham> getAll(Pageable pageable);
 
 
-    @Query(value = "SELECT C.id, c.id_cl, c.id_sp, c.id_lsp, c.id_nsx, c.id_kc, c.id_ms, c.id_ca, c.ma, t.so_luong,\n" +
+    @Query(value = "SELECT C.id, c.id_cl, c.id_sp, c.id_lsp, c.id_nsx, c.id_kc, c.id_ms, c.ma, t.so_luong,\n" +
             "c.gia_ban, c.ngay_tao, c.ngay_sua, c.nguoi_tao, c.nguoi_sua, c.trang_thai\n" +
             "FROM ChiTietSanPham C\n" +
             "JOIN (\n" +
@@ -111,9 +111,9 @@ public interface ChiTietSanPhamRepository extends JpaRepository<ChiTietSanPham, 
     @Query(value = "update ChiTietSanPham c set c.soLuong = :soLuong where c.id = :id")
     void update(Integer soLuong, UUID id);
 
-    @Query(value = "SELECT C.id, c.id_cl, c.id_sp, c.id_lsp, c.id_nsx, c.id_kc, c.id_ms, c.id_ca, c.ma, " +
+    @Query(value = "SELECT C.id, c.id_cl, c.id_sp, c.id_lsp, c.id_nsx, c.id_kc, c.id_ms, c.ma, " +
             "T.so_luong, c.gia_ban, c.ngay_tao, c.ngay_sua, c.nguoi_tao, c.nguoi_sua, c.trang_thai, cl.ten " +
-            "AS ChatLieu, ms.ten AS MauSac, lsp.ten AS LoaiSanPham, nsx.ten AS NhaSanXuat, ca.ten AS CoAo\n" +
+            "AS ChatLieu, ms.ten AS MauSac, lsp.ten AS LoaiSanPham, nsx.ten AS NhaSanXuat\n" +
             "FROM ChiTietSanPham C\n" +
             "JOIN (\n" +
             "    SELECT id_sp, SUM(so_luong) AS so_luong\n" +
@@ -131,7 +131,6 @@ public interface ChiTietSanPhamRepository extends JpaRepository<ChiTietSanPham, 
             "LEFT JOIN MauSac ms ON C.id_ms = ms.id\n" +
             "LEFT JOIN LoaiSanPham lsp ON C.id_lsp = lsp.id\n" +
             "LEFT JOIN NhaSanXuat nsx ON C.id_nsx = nsx.id\n" +
-            "LEFT JOIN CoAo ca ON C.id_ca = ca.id\n" +
             "WHERE\n" +
             "    (\n" +
             "        :key IS NULL OR\n" +
@@ -159,8 +158,6 @@ public interface ChiTietSanPhamRepository extends JpaRepository<ChiTietSanPham, 
             "    (:loaiSanPham IS NULL OR LOWER(lsp.ten) LIKE CONCAT('%', LOWER(:loaiSanPham), '%'))\n" +
             "AND\n" +
             "    (:nhaSanXuat IS NULL OR LOWER(nsx.ten) LIKE CONCAT('%', LOWER(:nhaSanXuat), '%'))\n" +
-            "AND\n" +
-            "    (:coAo IS NULL OR LOWER(ca.ten) LIKE CONCAT('%', LOWER(:coAo), '%'))\n" +
             "ORDER BY c.ngay_tao DESC;\n",
             nativeQuery = true)
     Page<ChiTietSanPham> search(
@@ -172,13 +169,12 @@ public interface ChiTietSanPhamRepository extends JpaRepository<ChiTietSanPham, 
             @Param("chatLieu") List<String> chatLieu,
             @Param("loaiSanPham") List<String> loaiSanPham,
             @Param("nhaSanXuat") List<String> nhaSanXuat,
-            @Param("coAo") List<String> coAo,
             Pageable pageable
     );
 
 
     @Query(value = "SELECT C.id, c.id_cl, c.id_sp, c.id_lsp, c.id_nsx, c.id_kc, c.id_ms, " +
-            "c.id_ca, c.ma, T.so_luong, " +
+            " c.ma, T.so_luong, " +
             "c.gia_ban, c.ngay_tao, c.ngay_sua, c.nguoi_tao, c.nguoi_sua, c.trang_thai " +
             "FROM ChiTietSanPham C " +
             "JOIN ( " +
@@ -198,7 +194,7 @@ public interface ChiTietSanPhamRepository extends JpaRepository<ChiTietSanPham, 
             "WHERE (:key IS NULL OR LOWER(S.ma) LIKE CONCAT('%', LOWER(:key), '%') OR LOWER(S.ten) LIKE CONCAT('%', LOWER(:key), '%')) " +
             " AND S.trang_thai = 1" +
             "GROUP BY C.id, c.id_cl, c.id_sp, c.id_lsp, c.id_nsx, c.id_kc, c.id_ms, " +
-            "c.id_ca, c.ma, T.so_luong, " +
+            " c.ma, T.so_luong, " +
             "c.gia_ban, c.ngay_tao, c.ngay_sua, c.nguoi_tao, c.nguoi_sua, c.trang_thai " +
             "ORDER BY c.ngay_tao DESC",
             countQuery = "SELECT COUNT(*) " +
@@ -220,7 +216,7 @@ public interface ChiTietSanPhamRepository extends JpaRepository<ChiTietSanPham, 
                     "WHERE (:key IS NULL OR LOWER(S.ma) LIKE CONCAT('%', LOWER(:key), '%') OR LOWER(S.ten) LIKE CONCAT('%', LOWER(:key), '%')) " +
                     " AND S.trang_thai = 1  " +
                     "GROUP BY C.id, c.id_cl, c.id_sp, c.id_lsp, c.id_nsx, c.id_kc, c.id_ms, " +
-                    "c.id_ca, c.ma, T.so_luong, " +
+                    " c.ma, T.so_luong, " +
                     "c.gia_ban,c.ngay_tao, c.ngay_sua, c.nguoi_tao, c.nguoi_sua, c.trang_thai " +
                     "ORDER BY c.ngay_tao DESC",
             nativeQuery = true)
@@ -231,7 +227,7 @@ public interface ChiTietSanPhamRepository extends JpaRepository<ChiTietSanPham, 
             "JOIN HoaDonChiTiet hdct ON hdct.id_ctsp = ctsp.id\n" +
             "JOIN SanPham sp ON sp.id = ctsp.id_sp\n" +
             "WHERE sp.trang_thai = 1\n" +
-            "GROUP BY ctsp.id, ctsp.gia_ban, ctsp.id_ca, ctsp.id_cl, ctsp.id_kc, ctsp.id_lsp, ctsp.id_ms, ctsp.id_nsx, ctsp.id_sp\n" +
+            "GROUP BY ctsp.id, ctsp.gia_ban, ctsp.id_cl, ctsp.id_kc, ctsp.id_lsp, ctsp.id_ms, ctsp.id_nsx, ctsp.id_sp\n" +
             ",ctsp.ma,ctsp.so_luong,ctsp.ngay_sua,ctsp.ngay_tao,ctsp.nguoi_sua,ctsp.nguoi_tao,ctsp.trang_thai\n" +
             "ORDER BY SUM(hdct.so_luong) DESC", nativeQuery = true)
     List<ChiTietSanPham> getAll();
@@ -255,7 +251,6 @@ public interface ChiTietSanPhamRepository extends JpaRepository<ChiTietSanPham, 
             "MAX(ctsp.id_nsx) AS id_nsx,\n" +
             "MAX(ctsp.id_kc) AS id_kc,\n" +
             "MAX(ctsp.id_ms) AS id_ms,\n" +
-            "MAX(ctsp.id_ca) AS id_ca,\n" +
             "MAX(ctsp.id) AS id,\n" +
             "MAX(ctsp.ma) AS ma,\n" +
             "SUM(hdct.so_luong) AS tong_so_luong,\n" +
@@ -295,8 +290,7 @@ public interface ChiTietSanPhamRepository extends JpaRepository<ChiTietSanPham, 
             	nsx.ten AS tenNhaSanXuat,
             	size.ten AS tenSize,
             	color.ten AS tenMau,
-            	lsp.ten as tenLoaiSanPham,
-            	ca.ten as tenCoAo
+            	lsp.ten as tenLoaiSanPham
             FROM ChiTietSanPham ctsp
             LEFT JOIN SanPham sp ON ctsp.id_sp = sp.id
             LEFT JOIN ChatLieu cl ON cl.id = ctsp.id_cl
@@ -304,12 +298,10 @@ public interface ChiTietSanPhamRepository extends JpaRepository<ChiTietSanPham, 
             LEFT JOIN KichCo size ON size.id = ctsp.id_kc
             LEFT JOIN MauSac color ON color.id = ctsp.id_ms
             LEFT JOIN LoaiSanPham lsp ON lsp.id = ctsp.id_lsp
-            LEFT JOIN CoAo ca ON ca.id = ctsp.id_ca
             WHERE
                   (((:#{#req.listMau.size()}) = 0 OR color.ten LIKE '')  OR color.ten IN (:#{#req.listMau}))
               AND (((:#{#req.listChatLieu.size()}) = 0 OR cl.ten LIKE '')  OR cl.ten IN (:#{#req.listChatLieu}))
               AND (((:#{#req.listSize.size()}) = 0 OR size.ten LIKE '')  OR size.ten IN (:#{#req.listSize}))
-              AND (((:#{#req.listCoAo.size()}) = 0 OR ca.ten LIKE '')  OR ca.ten IN (:#{#req.listCoAo}))
               AND (((:#{#req.listLoaiSanPham.size()}) = 0 OR lsp.ten LIKE '')  OR lsp.ten IN (:#{#req.listLoaiSanPham}))
               AND (((:#{#req.listNhaSanXuat.size()}) = 0 OR nsx.ten LIKE '')  OR nsx.ten IN (:#{#req.listNhaSanXuat}))
               AND (ctsp.gia_ban between :#{#req.giaBanMin} and :#{#req.giaBanMax})
@@ -318,7 +310,7 @@ public interface ChiTietSanPhamRepository extends JpaRepository<ChiTietSanPham, 
             , nativeQuery = true)
     List<ProductDetailClientRespose> filter(@Param("req") FilterProductClient req);
 
-    @Query(value = "SELECT C.id, c.id_cl, c.id_sp, c.id_lsp, c.id_nsx, c.id_kc, c.id_ms, c.id_ca, c.ma, " +
+    @Query(value = "SELECT C.id, c.id_cl, c.id_sp, c.id_lsp, c.id_nsx, c.id_kc, c.id_ms, c.ma, " +
             "T.so_luong, c.gia_ban, c.ngay_tao, c.ngay_sua, c.nguoi_tao, c.nguoi_sua, c.trang_thai " +
             "FROM ChiTietSanPham C\n" +
             "JOIN (\n" +

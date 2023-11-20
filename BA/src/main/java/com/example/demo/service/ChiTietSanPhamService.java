@@ -37,7 +37,6 @@ public interface ChiTietSanPhamService {
             List<String> chatLieu,
             List<String> loaiSanPham,
             List<String> nhaSanXuat,
-            List<String> coAo,
             Integer page
     );
 

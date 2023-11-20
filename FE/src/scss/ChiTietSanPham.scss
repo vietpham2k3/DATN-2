@@ -1,0 +1,243 @@
+/* SanPham.scss */
+
+/* Card Styles */
+.card {
+  margin: 20px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s ease-in-out;
+  /* Add a subtle transform effect */
+  cursor: pointer;
+
+  &:hover {
+    transform: scale(1.05);
+    /* Enlarge the card on hover */
+  }
+}
+
+.card img {
+  cursor: pointer;
+}
+
+.card-title {
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.card-text span {
+  color: #e74c3c;
+  font-weight: bold;
+  font-size: 16px;
+}
+
+.collapse {
+  margin-top: 10px;
+}
+
+.pagination {
+  margin-top: 20px;
+}
+
+.page-item {
+  display: inline-block;
+  margin: 2px;
+  cursor: pointer;
+
+  &.active .page-link {
+    background-color: #757779;
+    border-color: #757779;
+    color: #fff;
+    font-weight: bold;
+  }
+
+  .page-link::before {
+    content: none;
+  }
+}
+
+.custom-button {
+  width: 40px;
+  height: 40px;
+  margin-right: 10px;
+  margin-bottom: 10px;
+  background-color: #85b5d4;
+  /* Button background color */
+  color: #fff;
+  font-weight: bold;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.2s ease-in-out;
+  /* Add a background color transition */
+
+  &:hover {
+    background-color: #95e3ff;
+    /* Button background color on hover */
+  }
+}
+
+.color-filter-container {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  /* Align items vertically in the center */
+
+  .color-filter {
+    display: flex;
+    align-items: center;
+    margin-right: 20px;
+    /* Add margin to create space between color items */
+
+    .color-code {
+      width: 15px;
+      height: 15px;
+      margin-right: 5px;
+      /* Reduce the margin between color code and checkbox */
+      border: 1px solid gray;
+      border-radius: 50%;
+    }
+  }
+}
+
+// ColorFilters.scss
+.color-filter-container {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start; // Căn theo trục Y sang trái
+}
+
+.color-filter {
+  display: flex;
+  align-items: center; // Căn theo trục Y vào giữa
+  margin-bottom: 10px; // Khoảng cách giữa các màu
+}
+
+.color-code {
+  width: 20px; // Độ rộng của hộp màu
+  height: 20px; // Chiều cao của hộp màu
+  margin-right: 10px; // Khoảng cách giữa hộp màu và checkbox
+  border: 1px solid gray; // Viền xung quanh hộp màu
+  border-radius: 50%;
+}
+
+//checkbox
+/* Kiểu dáng cho phần "Chất Liệu", "Cổ Áo", và "Nhà Sản Xuất" */
+.accordion-item.eventKey-material,
+.accordion-item.eventKey-collar,
+.accordion-item.eventKey-manufacturer {
+  .accordion-collapse {
+    .mb-3 {
+      display: flex;
+      align-items: center;
+
+      .form-check {
+        display: flex;
+        align-items: center;
+        margin-right: 20px;
+
+        input[type='checkbox'] {
+          appearance: none;
+          -webkit-appearance: none;
+          -moz-appearance: none;
+          width: 15px;
+          height: 15px;
+          border: 2px solid #a4a4a4;
+          border-radius: 50%;
+          outline: none;
+          cursor: pointer;
+          margin-right: 5px;
+          transition: background-color 0.2s ease-in-out;
+        }
+
+        input[type='checkbox']:checked {
+          background-color: #434343;
+        }
+
+        label {
+          font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* Thay đổi kiểu chữ cho label */
+        }
+      }
+    }
+  }
+}
+
+/* Trong tệp CSS của bạn (hoặc SCSS) */
+.round-checkbox {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  width: 15px;
+  /* Độ rộng của checkbox */
+  height: 15px;
+  /* Chiều cao của checkbox */
+  border: 2px solid #a4a4a4;
+  /* Viền của checkbox */
+  border-radius: 50%;
+  /* Để biến checkbox thành hình tròn */
+  outline: none;
+  cursor: pointer;
+}
+
+.round-checkbox:checked {
+  background-color: #434343;
+  /* Màu nền khi checkbox được chọn */
+}
+
+/* Style for the product filters accordion */
+.accordion {
+  margin-top: 20px;
+
+  .accordion-item {
+    border: none;
+
+    .accordion-header {
+      border: none;
+      padding: 10px 0;
+      /* Adjust the padding to align with filter names */
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+
+      .accordion-button {
+        color: #000;
+        font-weight: bold;
+        border: none;
+        /* Remove border on the accordion button */
+        text-align: left;
+        /* Align the text to the left */
+      }
+    }
+
+    .mb-3 {
+      margin-bottom: 10px;
+    }
+
+    .accordion-collapse {
+      transition: max-height 0.3s ease-in-out;
+      overflow: hidden;
+
+      &.show {
+        max-height: 1000px;
+      }
+    }
+
+    .accordion-button:not(.collapsed) {
+      color: var(--bs-accordion-active-color);
+      background-color: rgb(255, 255, 255);
+      box-shadow: inset 0 calc(-1 * var(--bs-accordion-border-width)) 0 var(--bs-accordion-border-color);
+    }
+  }
+}
+
+.color-filters-section {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin-right: 20px;
+}
+
+.color-filters-section .color-filter {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+

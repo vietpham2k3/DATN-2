@@ -1,0 +1,146 @@
+.product-count {
+  display: flex;
+}
+.form-control {
+  width: 100%;
+  line-height: 1;
+}
+.btn-dark {
+  margin-top: 0;
+}
+
+.add-to-cart2,
+.like {
+  background: #ff9f1a;
+  padding: 1.2em 1.5em;
+  border: none;
+  text-transform: UPPERCASE;
+  font-weight: bold;
+  color: #fff;
+  margin-top: 15px;
+}
+.add-to-cart2:hover,
+.like:hover {
+  background: #b36800;
+  color: #fff;
+}
+
+.add-to-cart1,
+.like {
+  background: #b61717;
+  padding: 1.2em 1.5em;
+  border: none;
+  text-transform: UPPERCASE;
+  font-weight: bold;
+  color: #fff;
+  margin-top: 15px;
+  margin-left: 20px;
+}
+.add-to-cart1:hover,
+.like:hover {
+  background: #802525;
+  color: #fff;
+}
+.action {
+  padding-top: 30px;
+}
+.size {
+  display: inline-block;
+  border: 1px solid grey;
+  padding: 10px 13px;
+  font-weight: 700;
+  margin-left: 10px;
+  color: black;
+  font-size: 15px;
+  cursor: pointer;
+}
+.trangChu {
+  text-decoration: none;
+  padding-right: 10px;
+}
+.sanPham {
+  text-decoration: none;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+.trangChu:hover {
+  color: #f06be9;
+  font-weight: 600;
+}
+.sanPham:hover {
+  color: #f06be9;
+  font-weight: 600;
+}
+
+.flex_row {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-top: 20px;
+  margin-left: 85px;
+  max-width: 450px;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: thin;
+  scrollbar-color: transparent transparent;
+}
+
+.flex_row::-webkit-scrollbar {
+  width: 6px;
+}
+
+.flex_row::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.flex_row::-webkit-scrollbar-thumb {
+  background-color: transparent;
+}
+
+.flex_row:hover::-webkit-scrollbar-thumb {
+  background-color: rgba(0, 0, 0, 0.2);
+}
+
+.thumbnailAnh {
+  padding-left: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.clicked {
+  border: 3px solid gray;
+}
+.btns {
+  height: 40px;
+  width: 40px;
+  border-radius: 5px;
+  margin-top: auto;
+  margin-bottom: auto;
+}
+.actionImage {
+  display: flex;
+  text-align: center;
+  padding-left: 140px;
+}
+.anh1 {
+  width: 300px;
+  height: 350px;
+}
+.anh2 {
+  width: 100px;
+  height: 100px;
+}
+.active-button {
+  background-color: red;
+  color: white;
+}
+.activeMS {
+  content: '✔'; /* Sử dụng ký tự Unicode cho dấu tích xanh */
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 24px;
+  color: green; /* Màu của dấu tích xanh */
+}
+

@@ -1,0 +1,159 @@
+/* CheckoutForm container */
+.site-section {
+  padding: 50px 0;
+  background-color: rgb(243, 243, 243);
+}
+.tra-hang:hover {
+  color: #007bff;
+}
+.dia-chi-checkout {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  .change-dc {
+    cursor: pointer;
+    color: blue;
+  }
+}
+.change-dc-modal {
+  margin-top: -30px;
+}
+.text-default-dc {
+  color: orangered;
+}
+/* CheckoutForm container background */
+.ctn {
+  background: #ffffff;
+  border-radius: 5px;
+  padding: 20px;
+}
+
+/* Form elements */
+.fgr {
+  margin-bottom: 20px;
+}
+
+.fct {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+/* Labels */
+.fgr label {
+  font-weight: bold;
+  color: #333;
+}
+
+/* Select dropdowns */
+.fsl {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+/* Table styles */
+.tbl {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 20px;
+}
+
+.tbl th,
+.tbl td {
+  padding: 10px;
+  text-align: left;
+  border-bottom: 1px solid #ccc;
+}
+
+.tbl th {
+  font-weight: bold;
+  background-color: #f2f2f2;
+}
+
+/* Button styles */
+.btn-apply {
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+/* Checkboxes */
+.custom-control {
+  margin: 5px 0;
+}
+
+/* Accordion styles */
+.accordion-item {
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  margin-top: 10px;
+}
+
+.accordion-header {
+  padding: 10px;
+  cursor: pointer;
+}
+
+.accordion-body {
+  padding: 10px;
+}
+
+/* Add more specific CSS selectors and styles as needed */
+
+/* Responsive styles (adjust as needed) */
+@media (max-width: 768px) {
+  .col-md-6 {
+    width: 100%;
+  }
+}
+
+.color-circle {
+  width: 15px; /* Đặt kích thước theo mong muốn */
+  height: 15px; /* Đặt kích thước theo mong muốn */
+  border-radius: 50%; /* Biến thành hình tròn */
+  display: inline-block; /* Để nó hiển thị trên cùng một dòng với văn bản khác */
+}
+
+.product-image {
+  width: 60px;
+  height: 80px;
+  border-radius: 10%; /* Làm cho hình ảnh có góc tròn */
+}
+
+/* Tùy chỉnh kích thước hình ảnh logo */
+.payment-logo {
+  /* width: 40px; Điều chỉnh kích thước theo mong muốn */
+  /* // height: 40px; */
+  margin-left: 10px; /* Khoảng cách giữa checkbox và logo */
+}
+
+/* Điều chỉnh kích thước của nút radio */
+.custom-control-input[type='radio'] {
+  width: 20px;
+  height: 20px;
+}
+
+td {
+  vertical-align: middle; /* Căn giữa theo chiều dọc */
+}
+
+/* Điều chỉnh màu nền của nút khi chưa được chọn */
+.btn-apply {
+  background-color: burlywood; /* Thay đổi màu nền chưa được chọn theo ý muốn của bạn */
+  color: #fff; /* Thay đổi màu chữ (màu chữ trắng) */
+  transition: background-color 0.3s; /* Hiệu ứng màu nền chuyển đổi trong 0.3 giây */
+}
+
+/* Điều chỉnh màu nền của nút khi được chọn */
+.btn-apply.active,
+.btn-apply:active,
+.btn-apply:focus {
+  background-color: grey; /* Thay đổi màu nền khi được chọn theo ý muốn của bạn */
+  transition: background-color 0.3s; /* Hiệu ứng màu nền chuyển đổi trong 0.3 giây */
+}

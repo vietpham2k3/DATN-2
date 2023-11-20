@@ -110,11 +110,10 @@ public class ChiTietSanPhamServiceImpl implements ChiTietSanPhamService {
             List<String> chatLieu,
             List<String> loaiSanPham,
             List<String> nhaSanXuat,
-            List<String> coAo,
             Integer page
     ) {
         Pageable pageable = PageRequest.of(page, 5);
-        return repository.search(key, trangThai, min, max, mauSac, chatLieu, loaiSanPham, nhaSanXuat, coAo, pageable);
+        return repository.search(key, trangThai, min, max, mauSac, chatLieu, loaiSanPham, nhaSanXuat, pageable);
     }
 
 

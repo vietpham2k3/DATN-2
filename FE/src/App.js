@@ -1,6 +1,7 @@
 import React, { Component, Suspense } from 'react'
 import { HashRouter, Route, Routes } from 'react-router-dom'
 import './scss/style.scss'
+import { ToastContainer } from 'react-toastify'
 
 const loading = (
   <div className="pt-3 text-center">
@@ -30,6 +31,18 @@ class App extends Component {
             <Route path="*" name="Home" element={<DefaultLayout />} />
           </Routes>
         </Suspense>
+        <ToastContainer
+          position="top-right"
+          autoClose={2000}
+          hideProgressBar={false}
+          newestOnTop={false}
+          closeOnClick
+          rtl={false}
+          pauseOnFocusLoss
+          draggable
+          pauseOnHover
+          theme="light"
+        />
       </HashRouter>
     )
   }
