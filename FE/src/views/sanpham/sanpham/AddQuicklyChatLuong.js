@@ -7,6 +7,8 @@ import React from 'react'
 
 function MyVerticallyCenteredModal(props) {
   const { onHide, handleSubmit, values, setValues } = props
+
+  console.log(values)
   return (
     <Modal {...props} size="lg" aria-labelledby="contained-modal-title-vcenter" centered>
       <Modal.Header closeButton>
@@ -35,8 +37,8 @@ function MyVerticallyCenteredModal(props) {
                   type="radio"
                   name="inlineRadioOptions"
                   id="inlineRadio1"
-                  value="0"
-                  checked={true}
+                  value={0}
+                  checked={values.trangThai === 0}
                   onChange={() => setValues({ ...values, trangThai: 0 })}
                 />
                 <label className="form-check-label" htmlFor="inlineRadio1">
@@ -49,7 +51,8 @@ function MyVerticallyCenteredModal(props) {
                   type="radio"
                   name="inlineRadioOptions"
                   id="inlineRadio2"
-                  value="1"
+                  value={1}
+                  checked={values.trangThai === 1}
                   onChange={() => setValues({ ...values, trangThai: 1 })}
                 />
                 <label className="form-check-label" htmlFor="inlineRadio2">

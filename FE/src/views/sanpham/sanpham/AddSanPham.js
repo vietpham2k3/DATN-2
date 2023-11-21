@@ -23,6 +23,7 @@ import { postCreate } from '../../../service/ServiceChatLieu'
 import { add } from '../../../service/LoaiSanPhamService'
 import { postNSX } from '../../../service/NhaSanXuatService'
 import { postMS } from '../../../service/ServiceMauSac'
+import { postCreate as postKC } from '../../../service/KichCoService'
 import MyVerticallyCenteredModal from './AddQuicklyChatLuong'
 import AddMauSac from './AddQuicklyMauSac'
 function AddSanPham() {
@@ -67,8 +68,8 @@ function AddSanPham() {
   const [valuesCL, setValuesCL] = useState({
     ten: '',
     trangThai: 0,
-  })  
-  
+  })
+
   const [valuesMS, setValuesMS] = useState({
     ten: '#ffffffff',
     ma: '',
@@ -79,6 +80,7 @@ function AddSanPham() {
     setModalShow(false)
     setModalShowNSX(false)
     setModalShowLSP(false)
+    setModalShowKC(false)
     getAllList()
     setValuesCL({
       ten: '',
@@ -114,7 +116,7 @@ function AddSanPham() {
 
   const handleAddMS = (event) => {
     event.preventDefault()
-    addMS(valuesCL)
+    addMS(valuesMS)
   }
 
   const addMS = (value) => {
@@ -135,6 +137,19 @@ function AddSanPham() {
       toast.success('Thêm thành công')
       closeModal()
     }
+  }
+
+  const postKichCo = async (value) => {
+    const res = await postKC(value)
+    if (res) {
+      toast.success('Thêm thành công')
+      closeModal()
+    }
+  }
+
+  const handleSubmitKC = (event) => {
+    event.preventDefault()
+    postKichCo(valuesCL)
   }
 
   useEffect(() => {
@@ -523,7 +538,7 @@ function AddSanPham() {
           <MyVerticallyCenteredModal
             show={modalShowKC}
             onHide={() => setModalShowKC(false)}
-            handleSubmit={handleSubmit}
+            handleSubmit={handleSubmitKC}
             values={valuesCL}
             setValues={setValuesCL}
           />

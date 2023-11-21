@@ -30,9 +30,6 @@ import defaultImage from '../../../../src/assets/images/istockphoto-1396814518-6
 import { Table } from 'react-bootstrap'
 import ConfirmDelete from './ConfirmDelete'
 import UpdateMSKCCTSP from './UpdateMSKCCTSP'
-import Button from 'react-bootstrap/Button'
-import OverlayTrigger from 'react-bootstrap/OverlayTrigger'
-import Tooltip from 'react-bootstrap/Tooltip'
 import AddMauSac from './AddQuicklyMauSac'
 import { postMS } from '../../../service/ServiceMauSac'
 import QrCode from 'qrcode'
@@ -87,6 +84,12 @@ function UpdateSanPham() {
     trangThai: 1,
   })
 
+  const [valuesMS, setValuesMS] = useState({
+    ten: '#ffffffff',
+    ma: '',
+    trangThai: 0,
+  })
+
   useEffect(() => {
     getAllMSKC(idSP)
   }, [idSP])
@@ -106,7 +109,7 @@ function UpdateSanPham() {
 
   const handleAddMS = (event) => {
     event.preventDefault()
-    addMS(valuesCL)
+    addMS(valuesMS)
   }
 
   const addMS = (value) => {
@@ -624,56 +627,12 @@ function UpdateSanPham() {
               <Table hover className="my-4">
                 <thead>
                   <tr className="text-center">
-                    <th>
-                      <OverlayTrigger overlay={<Tooltip></Tooltip>}>
-                        <Button variant="" style={{ border: 'none' }}>
-                          <strong>#</strong>
-                        </Button>
-                      </OverlayTrigger>
-                    </th>
-                    <th>
-                      <OverlayTrigger overlay={<Tooltip>Thêm nhanh màu sắc</Tooltip>}>
-                        <Button
-                          variant=""
-                          style={{ border: 'none' }}
-                          onClick={() => setModalShowMS(true)}
-                        >
-                          <strong>Màu sắc</strong>
-                        </Button>
-                      </OverlayTrigger>
-                    </th>
-                    <th>
-                      <OverlayTrigger overlay={<Tooltip>Thêm nhanh kích cỡ</Tooltip>}>
-                        <Button
-                          variant=""
-                          style={{ border: 'none' }}
-                          onClick={() => setModalShowKC(true)}
-                        >
-                          <strong>Kích cỡ</strong>
-                        </Button>
-                      </OverlayTrigger>
-                    </th>
-                    <th>
-                      <OverlayTrigger overlay={<Tooltip></Tooltip>}>
-                        <Button variant="" style={{ border: 'none' }}>
-                          <strong>Số lượng</strong>
-                        </Button>
-                      </OverlayTrigger>
-                    </th>{' '}
-                    <th>
-                      <OverlayTrigger overlay={<Tooltip></Tooltip>}>
-                        <Button variant="" style={{ border: 'none' }}>
-                          <strong>Trạng thái</strong>
-                        </Button>
-                      </OverlayTrigger>
-                    </th>
-                    <th>
-                      <OverlayTrigger overlay={<Tooltip></Tooltip>}>
-                        <Button variant="" style={{ border: 'none' }}>
-                          <strong>Hành động</strong>
-                        </Button>
-                      </OverlayTrigger>
-                    </th>
+                    <th>#</th>
+                    <th>Màu sắc</th>
+                    <th>Kích cỡ</th>
+                    <th>Số lượng</th>
+                    <th>Trạng thái</th>
+                    <th>Hành động</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -872,8 +831,8 @@ function UpdateSanPham() {
         show={modalShowMS}
         onHide={() => setModalShowMS(false)}
         handleSubmit={handleAddMS}
-        values={valuesCL}
-        setValues={setValuesCL}
+        values={valuesMS}
+        setValues={setValuesMS}
       />
       <ConfirmDelete
         show={isShow}
