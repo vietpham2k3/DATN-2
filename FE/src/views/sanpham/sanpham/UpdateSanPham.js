@@ -1,7 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import React from 'react'
-import { useState } from 'react'
-import { CButton, CCard, CCardBody, CCardHeader, CCol, CRow } from '@coreui/react'
+import React from "react";
+import { useState } from "react";
+import { CCard, CCardBody, CCardHeader } from "@coreui/react";
 import {
   getAllListCL,
   getAllListLSP,
@@ -13,54 +13,53 @@ import {
   addAnh,
   getAllByIdSP,
   postCTSP,
-} from 'src/service/SanPhamService'
-import { useEffect } from 'react'
-import '../../../scss/SanPham.scss'
-import '../../../scss/UpdateSanPham.scss'
-import { toast } from 'react-toastify'
-import { Modal} from 'react-bootstrap';
-import { useNavigate, useParams } from 'react-router'
-import { postCreate } from 'src/service/ServiceChatLieu'
-import { add } from 'src/service/LoaiSanPhamService'
-import { postNSX } from 'src/service/NhaSanXuatService'
-import MyVerticallyCenteredModal from './AddQuicklyChatLuong'
-import AddMSKCCTSP from './AddMSKCCTSP'
-import { useRef } from 'react'
-import defaultImage from '../../../../src/assets/images/istockphoto-1396814518-612x612.jpg'
-import { Table } from 'react-bootstrap'
-import ConfirmDelete from './ConfirmDelete'
-import UpdateMSKCCTSP from './UpdateMSKCCTSP'
-import Button from 'react-bootstrap/Button'
-import OverlayTrigger from 'react-bootstrap/OverlayTrigger'
-import Tooltip from 'react-bootstrap/Tooltip'
-import AddMauSac from './AddQuicklyMauSac'
-import { postMS } from 'src/service/ServiceMauSac'
-import QrCode from 'qrcode'
+} from "src/service/SanPhamService";
+import { useEffect } from "react";
+import "../../../scss/SanPham.scss";
+import "../../../scss/UpdateSanPham.scss";
+import { toast } from "react-toastify";
+import { Modal } from "react-bootstrap";
+import { useNavigate, useParams } from "react-router";
+import { postCreate } from "src/service/ServiceChatLieu";
+import { add } from "src/service/LoaiSanPhamService";
+import { postNSX } from "src/service/NhaSanXuatService";
+import MyVerticallyCenteredModal from "./AddQuicklyChatLuong";
+import AddMSKCCTSP from "./AddMSKCCTSP";
+import { useRef } from "react";
+import defaultImage from "../../../../src/assets/images/istockphoto-1396814518-612x612.jpg";
+import { Table } from "react-bootstrap";
+import ConfirmDelete from "./ConfirmDelete";
+import UpdateMSKCCTSP from "./UpdateMSKCCTSP";
+import Button from "react-bootstrap/Button";
+import OverlayTrigger from "react-bootstrap/OverlayTrigger";
+import Tooltip from "react-bootstrap/Tooltip";
+import AddMauSac from "./AddQuicklyMauSac";
+import { postMS } from "src/service/ServiceMauSac";
+import QrCode from "qrcode";
 
 function UpdateSanPham() {
-  const [listCL, setListCL] = useState([])
-  const [listNSX, setListNSX] = useState([])
-  const [listLSP, setListLSP] = useState([])
-  const [modalShow, setModalShow] = useState(false)
-  const [isShow, setIsShow] = useState(false)
-  const [modalShowCA, setModalShowCA] = useState(false)
-  const [modalShowLSP, setModalShowLSP] = useState(false)
-  const [modalShowNSX, setModalShowNSX] = useState(false)
-  const [modalShowKC, setModalShowKC] = useState(false)
-  const [modalShowMS, setModalShowMS] = useState(false)
-  const [show, setShow] = useState(false)
-  const [showUpdate, setShowUpdate] = useState(false)
-  const { id, idSP } = useParams()
-  const navigate = useNavigate()
-  const [file, setFile] = useState([])
-  const [imageList, setImageList] = useState([])
-  const [listMSKC, setListMSKC] = useState([])
-  const [previewImages, setPreviewImages] = useState([])
-  const inputRef = useRef(null)
-  const [isLoading, setIsLoading] = useState(true)
-  const [idCTSP, setIdCTSP] = useState(null)
-  const mainCardRef = useRef(null)
-  const maxImages = 5
+  const [listCL, setListCL] = useState([]);
+  const [listNSX, setListNSX] = useState([]);
+  const [listLSP, setListLSP] = useState([]);
+  const [modalShow, setModalShow] = useState(false);
+  const [isShow, setIsShow] = useState(false);
+  const [modalShowLSP, setModalShowLSP] = useState(false);
+  const [modalShowNSX, setModalShowNSX] = useState(false);
+  const [modalShowKC, setModalShowKC] = useState(false);
+  const [modalShowMS, setModalShowMS] = useState(false);
+  const [show, setShow] = useState(false);
+  const [showUpdate, setShowUpdate] = useState(false);
+  const { id, idSP } = useParams();
+  const navigate = useNavigate();
+  const [file, setFile] = useState([]);
+  const [imageList, setImageList] = useState([]);
+  const [listMSKC, setListMSKC] = useState([]);
+  const [previewImages, setPreviewImages] = useState([]);
+  const inputRef = useRef(null);
+  const [isLoading, setIsLoading] = useState(true);
+  const [idCTSP, setIdCTSP] = useState(null);
+  const mainCardRef = useRef(null);
+  const maxImages = 5;
   const [showModal5, setShowModal5] = useState(false);
   const openModal5 = () => {
     setShowModal5(true);
@@ -71,139 +70,142 @@ function UpdateSanPham() {
 
   const [values, setValues] = useState({
     chatLieu: {
-      id: '',
+      id: "",
     },
     sanPham: {
-      ten: '',
-      moTa: '',
+      ten: "",
+      moTa: "",
     },
     loaiSanPham: {
-      id: '',
+      id: "",
     },
     nhaSanXuat: {
-      id: '',
+      id: "",
     },
-    soLuong: '',
-    giaBan: '',
+    soLuong: "",
+    giaBan: "",
     trangThai: 1,
-  })
+  });
 
   useEffect(() => {
-    getAllMSKC(idSP)
-  }, [idSP])
+    getAllMSKC(idSP);
+  }, [idSP]);
 
   const getAllMSKC = async (id) => {
     try {
-      const res = await getAllByIdSP(id)
+      const res = await getAllByIdSP(id);
       if (res && res.data) {
-        setListMSKC(res.data)
+        setListMSKC(res.data);
       }
     } catch (error) {
       // Xử lý lỗi nếu cần
     } finally {
-      setIsLoading(false)
+      setIsLoading(false);
     }
-  }
+  };
 
   const handleAddMS = (event) => {
-    event.preventDefault()
-    addMS(valuesCL)
-  }
+    event.preventDefault();
+    addMS(valuesCL);
+  };
 
   const addMS = (value) => {
-    const res = postMS(value)
+    const res = postMS(value);
     if (res) {
-      closeModal()
+      closeModal();
     }
-  }
+  };
 
   const handleAddNSX = (event) => {
-    event.preventDefault()
-    addNSX(valuesCL)
-  }
+    event.preventDefault();
+    addNSX(valuesCL);
+  };
 
   const addNSX = (value) => {
-    const res = postNSX(value)
+    const res = postNSX(value);
     if (res) {
-      closeModal()
+      closeModal();
     }
-  }
+  };
 
   const handleAddLSP = (event) => {
-    event.preventDefault()
-    addLSP(valuesCL)
-  }
+    event.preventDefault();
+    addLSP(valuesCL);
+  };
 
   const addLSP = (value) => {
-    const res = add(value)
+    const res = add(value);
     if (res) {
-      closeModal()
+      closeModal();
     }
-  }
+  };
 
   const handleDelete = (id) => {
-    setIsShow(true)
-    setIdCTSP(id)
-  }
+    setIsShow(true);
+    setIdCTSP(id);
+  };
 
   const handleClose = () => {
-    setIsShow(false)
-  }
+    setIsShow(false);
+  };
 
   const anh = async (value) => {
-    const res = await addAnh(value)
+    const res = await addAnh(value);
     if (res) {
-      toast.success('Thêm thành công')
-      getAllAnh(idCTSP !== null ? idCTSP : id)
+      toast.success("Thêm thành công");
+      getAllAnh(idCTSP !== null ? idCTSP : id);
     }
-  }
+  };
 
   const handleAddAnh = (event) => {
-    event.preventDefault()
+    event.preventDefault();
 
     if (file.length === 0) {
-      alert('Vui lòng chọn ít nhất một tệp ảnh.')
-      return
+      alert("Vui lòng chọn ít nhất một tệp ảnh.");
+      return;
     }
     if (imageList.length >= maxImages) {
-      alert('Bạn chỉ được tải lên tối đa ' + maxImages + ' ảnh.')
-      return
+      alert("Bạn chỉ được tải lên tối đa " + maxImages + " ảnh.");
+      return;
     }
-    const formData = new FormData()
+    const formData = new FormData();
     file.forEach((file) => {
-      formData.append('files', file)
-      formData.append('id', idCTSP !== null ? idCTSP : id)
-    })
+      formData.append("files", file);
+      formData.append("id", idCTSP !== null ? idCTSP : id);
+    });
 
     // Gửi formData đến server để xử lý
-    anh(formData)
+    anh(formData);
 
-    setFile([])
-    setPreviewImages([])
-    inputRef.current.value = null
-  }
+    setFile([]);
+    setPreviewImages([]);
+    inputRef.current.value = null;
+  };
 
   const handleDeleteImage = async (idAnh) => {
-    const res = await deleteAnh(idAnh)
+    const res = await deleteAnh(idAnh);
     if (res) {
-      toast.success('Xoá thành công')
-      getAllAnh(idCTSP !== null ? idCTSP : id)
+      toast.success("Xoá thành công");
+      getAllAnh(idCTSP !== null ? idCTSP : id);
     }
-  }
+  };
 
   const handleImageChange = (event) => {
-    const newFiles = Array.from(event.target.files)
-    setFile((prevFiles) => [...prevFiles, ...newFiles])
-    const newPreviewImages = newFiles.map((file) => URL.createObjectURL(file))
-    setPreviewImages((prevPreviewImages) => [...prevPreviewImages, ...newPreviewImages])
-  }
+    const newFiles = Array.from(event.target.files);
+    setFile((prevFiles) => [...prevFiles, ...newFiles]);
+    const newPreviewImages = newFiles.map((file) => URL.createObjectURL(file));
+    setPreviewImages((prevPreviewImages) => [
+      ...prevPreviewImages,
+      ...newPreviewImages,
+    ]);
+  };
 
   const getAllAnh = async (id) => {
-    const res = await listAnh(id)
+    const res = await listAnh(id);
     if (res) {
-      setImageList(res.data)
+      setImageList(res.data);
     }
-  }
+  };
 
   const imagePreviews = previewImages.map((previewImage) => (
     <img
@@ -212,175 +214,177 @@ function UpdateSanPham() {
       alt="Preview"
       key={previewImage}
     />
-  ))
+  ));
 
   const handleClick = () => {
-    inputRef.current.click()
-  }
+    inputRef.current.click();
+  };
 
   const [valuesCL, setValuesCL] = useState({
-    ten: '',
+    ten: "",
     trangThai: 0,
-  })
+  });
 
   const closeModal = () => {
-    toast.success('Thêm thành công')
-    setModalShowLSP(false)
-    setModalShow(false)
-    setModalShowNSX(false)
-    getAllList()
+    toast.success("Thêm thành công");
+    setModalShowLSP(false);
+    setModalShow(false);
+    setModalShowNSX(false);
+    getAllList();
     setValuesCL({
-      ten: '',
+      ten: "",
       trangThai: 0,
-    })
-  }
+    });
+  };
 
   useEffect(() => {
-    detail(idCTSP !== null ? idCTSP : id)
-    getAllAnh(idCTSP !== null ? idCTSP : id)
-  }, [idCTSP])
+    detail(idCTSP !== null ? idCTSP : id);
+    getAllAnh(idCTSP !== null ? idCTSP : id);
+  }, [idCTSP]);
 
   const detail = async (idCTSP) => {
-    const res = await detailCTSP(idCTSP)
+    const res = await detailCTSP(idCTSP);
     if (res) {
-      setValues(res.data)
+      setValues(res.data);
     }
-  }
+  };
 
   const handleSubmitCL = (event) => {
-    event.preventDefault()
-    post(valuesCL)
-  }
+    event.preventDefault();
+    post(valuesCL);
+  };
 
   const post = async (value) => {
-    const res = await postCreate(value)
+    const res = await postCreate(value);
     if (res) {
-      closeModal()
+      closeModal();
     }
-  }
+  };
 
   useEffect(() => {
-    getAllList()
-  }, [])
+    getAllList();
+  }, []);
 
   const putctsp = async (idSP, value) => {
-    const res = await putCTSP(idSP, value)
+    const res = await putCTSP(idSP, value);
     if (res) {
-      navigate('/san-pham/chi-tiet-san-pham')
+      navigate("/san-pham/chi-tiet-san-pham");
     }
-  }
+  };
 
   const putctspmodal = async (idCTSP, idSP, value) => {
-    const res = await putCTSP(idCTSP, value)
+    const res = await putCTSP(idCTSP, value);
     if (res) {
-      toast.success('Thành công')
-      getAllMSKC(idSP)
+      toast.success("Thành công");
+      getAllMSKC(idSP);
     }
-  }
+  };
 
   const handleSubmit = (event) => {
-    event.preventDefault()
+    event.preventDefault();
 
     listMSKC.forEach((d) => {
       // Tạo một bản sao của `values` để cập nhật
-      const updatedValues = { ...values }
+      const updatedValues = { ...values };
 
       // Xoá màu sắc và kích cỡ khỏi danh sách thuộc tính cần cập nhật
-      delete updatedValues.mauSac
-      delete updatedValues.kichCo
+      delete updatedValues.mauSac;
+      delete updatedValues.kichCo;
 
       // Lấy màu sắc và kích cỡ từ sản phẩm hiện tại và thêm vào `updatedValues`
-      updatedValues.mauSac = d.mauSac
-      updatedValues.kichCo = d.kichCo
+      updatedValues.mauSac = d.mauSac;
+      updatedValues.kichCo = d.kichCo;
 
       // Gọi hàm `putctsp` với giá trị đã được cập nhật
-      putctsp(d.id, updatedValues)
-    })
-    toast.success('Thành công')
-  }
+      putctsp(d.id, updatedValues);
+    });
+    toast.success("Thành công");
+  };
 
   const handleSubmitUpdate = async (event) => {
     try {
-      event.preventDefault()
-      await putctspmodal(idCTSP, idSP, values)
-      const updatedList = await getAllByIdSP(idSP, '')
+      event.preventDefault();
+      await putctspmodal(idCTSP, idSP, values);
+      const updatedList = await getAllByIdSP(idSP, "");
       if (updatedList && updatedList.data) {
-        setListMSKC(updatedList.data)
+        setListMSKC(updatedList.data);
       }
     } catch (error) {
-      toast.error('Lỗi')
+      toast.error("Lỗi");
     }
-  }
+  };
 
   const getAllList = async () => {
-    const resCL = await getAllListCL()
-    const resLSP = await getAllListLSP()
-    const resNSX = await getAllListNSX()
+    const resCL = await getAllListCL();
+    const resLSP = await getAllListLSP();
+    const resNSX = await getAllListNSX();
     if (resCL || resLSP || resNSX) {
-      setListCL(resCL.data)
-      setListLSP(resLSP.data)
-      setListNSX(resNSX.data)
+      setListCL(resCL.data);
+      setListLSP(resLSP.data);
+      setListNSX(resNSX.data);
     }
-  }
+  };
 
   const handleUpdate = (id) => {
-    setShowUpdate(true)
-    setIdCTSP(id)
-  }
+    setShowUpdate(true);
+    setIdCTSP(id);
+  };
 
   const postctsp = async (id, value) => {
-    const res = await postCTSP(value)
-    if (res.data === 'da ton tai') {
-      toast.success('Thêm số lượng thành công')
-      getAllMSKC(id)
+    const res = await postCTSP(value);
+    if (res.data === "da ton tai") {
+      toast.success("Thêm số lượng thành công");
+      getAllMSKC(id);
     } else {
-      toast.success('Thêm thành công')
-      getAllMSKC(id)
+      toast.success("Thêm thành công");
+      getAllMSKC(id);
     }
-  }
+  };
 
   const handleSubmitAdd = async (event) => {
-    event.preventDefault()
-    await postctsp(idSP, values)
-  }
+    event.preventDefault();
+    await postctsp(idSP, values);
+  };
 
   const handleChangeId = (id) => {
     if (idCTSP === id) {
       // toast.warning('Bạn đang xem ảnh của sản phẩm này');
     } else {
-      setIdCTSP(id)
+      setIdCTSP(id);
     }
-  }
+  };
 
   function confirmDeleteImage(imageId) {
     // Sử dụng hộp thoại xác nhận
-    const shouldDelete = window.confirm('Bạn có chắc chắn muốn xóa hình ảnh này?')
+    const shouldDelete = window.confirm(
+      "Bạn có chắc chắn muốn xóa hình ảnh này?"
+    );
     if (shouldDelete) {
       // Gọi hàm xóa hình ảnh khi người dùng xác nhận
-      handleDeleteImage(imageId)
+      handleDeleteImage(imageId);
     }
   }
 
   function confirmDeleteItem(itemId) {
-    handleDelete(itemId)
+    handleDelete(itemId);
   }
 
-  const [qrDataURL, setQRDataURL] = useState('')
+  const [qrDataURL, setQRDataURL] = useState("");
 
   useEffect(() => {
     const generateQRDataURL = async () => {
       if (values && values.id) {
         try {
-          const dataURL = await QrCode.toDataURL(values.id)
-          setQRDataURL(dataURL)
+          const dataURL = await QrCode.toDataURL(values.id);
+          setQRDataURL(dataURL);
         } catch (error) {
-          console.error('Error generating QR code:', error)
+          console.error("Error generating QR code:", error);
         }
       }
-    }
+    };
 
-    generateQRDataURL()
-  }, [values])
+    generateQRDataURL();
+  }, [values]);
 
   return (
     <div>
@@ -398,7 +402,9 @@ function UpdateSanPham() {
                 type="text"
                 className="form-control"
                 placeholder="Nhập tên sản phẩm..."
-                value={values.sanPham && values.sanPham.ten ? values.sanPham.ten : ''}
+                value={
+                  values.sanPham && values.sanPham.ten ? values.sanPham.ten : ""
+                }
                 onChange={(e) =>
                   setValues({
                     ...values,
@@ -416,21 +422,22 @@ function UpdateSanPham() {
                 className="form-control"
                 placeholder="Nhập giá sản phẩm..."
                 value={values.giaBan}
-                onChange={(e) => setValues({ ...values, giaBan: e.target.value })}
+                onChange={(e) =>
+                  setValues({ ...values, giaBan: e.target.value })
+                }
               />
             </div>
-           
 
-            
-        
             <div className="col-6">
               <label className="form-label me-3" htmlFor="trang-thai2">
-                Trạng thái:{' '}
-              </label>{' '}
+                Trạng thái:{" "}
+              </label>{" "}
               <select
                 className="form-select"
                 aria-label="Default select example"
-                onChange={(e) => setValues({ ...values, trangThai: e.target.value })}
+                onChange={(e) =>
+                  setValues({ ...values, trangThai: e.target.value })
+                }
               >
                 <option value="1" selected={values.sanPham.trangThai === 1}>
                   Kinh doanh
@@ -442,22 +449,22 @@ function UpdateSanPham() {
             </div>
             <div className="col-6">
               <label className="form-label me-3" htmlFor="trang-thai3">
-                Chất liệu{' '}
+                Chất liệu{" "}
                 <span
                   role="button"
                   tabIndex={0}
                   className="fa-solid"
                   onClick={() => setModalShow(true)}
                   onKeyDown={(e) => {
-                    if (e.key === 'Enter') {
-                      setModalShow(true)
+                    if (e.key === "Enter") {
+                      setModalShow(true);
                     }
                   }}
-                  style={{ cursor: 'pointer' }}
+                  style={{ cursor: "pointer" }}
                 >
                   <i className="fa-solid fa-plus"></i>
                 </span>
-              </label>{' '}
+              </label>{" "}
               <select
                 className="form-select"
                 aria-label="Default select example"
@@ -467,11 +474,15 @@ function UpdateSanPham() {
                     chatLieu: {
                       id: e.target.value,
                     },
-                  })
+                  });
                 }}
               >
                 {listCL.map((c) => (
-                  <option key={c.id} value={c.id} selected={c.id === values.chatLieu.id}>
+                  <option
+                    key={c.id}
+                    value={c.id}
+                    selected={c.id === values.chatLieu.id}
+                  >
                     {c.ten}
                   </option>
                 ))}
@@ -479,18 +490,18 @@ function UpdateSanPham() {
             </div>
             <div className="col-6">
               <label className="form-label me-3" htmlFor="trang-thai5">
-                Loại sản phẩm:{' '}
+                Loại sản phẩm:{" "}
                 <span
                   role="button"
                   tabIndex={0}
                   className="fa-solid"
                   onClick={() => setModalShowLSP(true)}
                   onKeyDown={(e) => {
-                    if (e.key === 'Enter') {
-                      setModalShowLSP(true)
+                    if (e.key === "Enter") {
+                      setModalShowLSP(true);
                     }
                   }}
-                  style={{ cursor: 'pointer' }}
+                  style={{ cursor: "pointer" }}
                 >
                   <i className="fa-solid fa-plus"></i>
                 </span>
@@ -504,11 +515,15 @@ function UpdateSanPham() {
                     loaiSanPham: {
                       id: e.target.value,
                     },
-                  })
+                  });
                 }}
               >
                 {listLSP.map((c) => (
-                  <option key={c.id} value={c.id} selected={c.id === values.loaiSanPham.id}>
+                  <option
+                    key={c.id}
+                    value={c.id}
+                    selected={c.id === values.loaiSanPham.id}
+                  >
                     {c.ten}
                   </option>
                 ))}
@@ -516,22 +531,22 @@ function UpdateSanPham() {
             </div>
             <div className="col-6">
               <label className="form-label me-3" htmlFor="trang-thai6">
-                Nhà sản xuất:{' '}
+                Nhà sản xuất:{" "}
                 <span
                   role="button"
                   tabIndex={0}
                   className="fa-solid"
                   onClick={() => setModalShowNSX(true)}
                   onKeyDown={(e) => {
-                    if (e.key === 'Enter') {
-                      setModalShowNSX(true)
+                    if (e.key === "Enter") {
+                      setModalShowNSX(true);
                     }
                   }}
-                  style={{ cursor: 'pointer' }}
+                  style={{ cursor: "pointer" }}
                 >
                   <i className="fa-solid fa-plus"></i>
                 </span>
-              </label>{' '}
+              </label>{" "}
               <select
                 className="form-select"
                 aria-label="Default select example"
@@ -541,11 +556,15 @@ function UpdateSanPham() {
                     nhaSanXuat: {
                       id: e.target.value,
                     },
-                  })
+                  });
                 }}
               >
                 {listNSX.map((c) => (
-                  <option key={c.id} value={c.id} selected={c.id === values.nhaSanXuat.id}>
+                  <option
+                    key={c.id}
+                    value={c.id}
+                    selected={c.id === values.nhaSanXuat.id}
+                  >
                     {c.ten}
                   </option>
                 ))}
@@ -560,7 +579,11 @@ function UpdateSanPham() {
                 className="form-control"
                 placeholder="Nhập mô tả sản phẩm..."
                 rows={3}
-                value={values.sanPham && values.sanPham.moTa ? values.sanPham.moTa : ''}
+                value={
+                  values.sanPham && values.sanPham.moTa
+                    ? values.sanPham.moTa
+                    : ""
+                }
                 onChange={(e) =>
                   setValues({
                     ...values,
@@ -606,19 +629,26 @@ function UpdateSanPham() {
         <CCardBody>
           <div className="row">
             <div className="col-10 d-flex align-items-center justify-content-start">
-            <div className="col-md-2" style={{ display: 'flex', justifyContent: 'flex-start' }}>
-              {qrDataURL && (
-                <img src={qrDataURL} style={{ width: '70px', height: '70px' }} alt="QR Code" />
-              )}
-            </div>
+              <div
+                className="col-md-2"
+                style={{ display: "flex", justifyContent: "flex-start" }}
+              >
+                {qrDataURL && (
+                  <img
+                    src={qrDataURL}
+                    style={{ width: "70px", height: "70px" }}
+                    alt="QR Code"
+                  />
+                )}
+              </div>
             </div>
             <div className="col-2 d-flex justify-content-end align-items-center">
               <button
                 type="submit"
                 className="btn btn-primary"
                 onClick={() => {
-                  setShow(true)
-                  setValues({ ...values, id: '' })
+                  setShow(true);
+                  setValues({ ...values, id: "" });
                 }}
               >
                 Thêm thuộc tính
@@ -630,16 +660,18 @@ function UpdateSanPham() {
                   <tr className="text-center">
                     <th>
                       <OverlayTrigger overlay={<Tooltip></Tooltip>}>
-                        <Button variant="" style={{ border: 'none' }}>
+                        <Button variant="" style={{ border: "none" }}>
                           <strong>#</strong>
                         </Button>
                       </OverlayTrigger>
                     </th>
                     <th>
-                      <OverlayTrigger overlay={<Tooltip>Thêm nhanh màu sắc</Tooltip>}>
+                      <OverlayTrigger
+                        overlay={<Tooltip>Thêm nhanh màu sắc</Tooltip>}
+                      >
                         <Button
                           variant=""
-                          style={{ border: 'none' }}
+                          style={{ border: "none" }}
                           onClick={() => setModalShowMS(true)}
                         >
                           <strong>Màu sắc</strong>
@@ -647,10 +679,12 @@ function UpdateSanPham() {
                       </OverlayTrigger>
                     </th>
                     <th>
-                      <OverlayTrigger overlay={<Tooltip>Thêm nhanh kích cỡ</Tooltip>}>
+                      <OverlayTrigger
+                        overlay={<Tooltip>Thêm nhanh kích cỡ</Tooltip>}
+                      >
                         <Button
                           variant=""
-                          style={{ border: 'none' }}
+                          style={{ border: "none" }}
                           onClick={() => setModalShowKC(true)}
                         >
                           <strong>Kích cỡ</strong>
@@ -659,21 +693,21 @@ function UpdateSanPham() {
                     </th>
                     <th>
                       <OverlayTrigger overlay={<Tooltip></Tooltip>}>
-                        <Button variant="" style={{ border: 'none' }}>
+                        <Button variant="" style={{ border: "none" }}>
                           <strong>Số lượng</strong>
                         </Button>
                       </OverlayTrigger>
-                    </th>{' '}
+                    </th>{" "}
                     <th>
                       <OverlayTrigger overlay={<Tooltip></Tooltip>}>
-                        <Button variant="" style={{ border: 'none' }}>
+                        <Button variant="" style={{ border: "none" }}>
                           <strong>Trạng thái</strong>
                         </Button>
                       </OverlayTrigger>
                     </th>
                     <th>
                       <OverlayTrigger overlay={<Tooltip></Tooltip>}>
-                        <Button variant="" style={{ border: 'none' }}>
+                        <Button variant="" style={{ border: "none" }}>
                           <strong>Hành động</strong>
                         </Button>
                       </OverlayTrigger>
@@ -694,20 +728,20 @@ function UpdateSanPham() {
                   ) : (
                     listMSKC.map((d, i) => (
                       <tr
-                key={d.id}
-                className="text-center"
-                onClick={() => {
-                  handleChangeId(d.id);
-                  openModal5();
-                }}
-                style={{ cursor: 'pointer' }}
-              >
+                        key={d.id}
+                        className="text-center"
+                        onClick={() => {
+                          handleChangeId(d.id);
+                          openModal5();
+                        }}
+                        style={{ cursor: "pointer" }}
+                      >
                         <td>{i + 1}</td>
                         <td
                           style={{
-                            display: 'flex',
-                            justifyContent: 'center',
-                            alignItems: 'center',
+                            display: "flex",
+                            justifyContent: "center",
+                            alignItems: "center",
                           }}
                         >
                           {d.mauSac && d.kichCo ? (
@@ -715,7 +749,7 @@ function UpdateSanPham() {
                               style={{
                                 backgroundColor: d.mauSac.ten,
                                 width: 50,
-                                borderRadius: '10px',
+                                borderRadius: "10px",
                               }}
                             >
                               &nbsp;
@@ -724,18 +758,24 @@ function UpdateSanPham() {
                             <p>Chưa có màu sắc nào</p>
                           )}
                         </td>
-                        <td>{d.kichCo ? d.kichCo.ten : 'Chưa có kích cỡ nào'}</td>
+                        <td>
+                          {d.kichCo ? d.kichCo.ten : "Chưa có kích cỡ nào"}
+                        </td>
                         <td>{d.soLuong || 0}</td>
-                        <td>{d.trangThai === 1 ? 'Kinh doanh' : 'Ngừng kinh doanh'}</td>
+                        <td>
+                          {d.trangThai === 1
+                            ? "Kinh doanh"
+                            : "Ngừng kinh doanh"}
+                        </td>
                         <td>
                           <button
                             onClick={() => handleUpdate(d.id)}
-                            style={{color: 'green'}}
+                            style={{ color: "green" }}
                             className="fa-solid fa-pen-nib"
                           ></button>
                           <button
                             onClick={() => confirmDeleteItem(d.id)}
-                            style={{color: 'orange'}}
+                            style={{ color: "orange" }}
                             className="fa-solid fa-trash-can mx-3"
                           ></button>
                         </td>
@@ -743,107 +783,126 @@ function UpdateSanPham() {
                     ))
                   )}
                 </tbody>
-                <Modal show={showModal5} onHide={closeModal5} backdrop="static" keyboard={false}>
-  <Modal.Header closeButton>
-    <Modal.Title>Thông tin chi tiết</Modal.Title>
-  </Modal.Header>
-  <Modal.Body>
-       <CCard className={`my-3 ${idCTSP !== null ? 'show' : ''}`} ref={mainCardRef}>
-        <CCardBody>
-          <form onSubmit={handleAddAnh}>
-            <div className="justify-content-center">
-              {file.length === 0 ? (
-                <span
-                  role="button"
-                  tabIndex={0}
-                  onClick={handleClick}
-                  onKeyPress={(e) => {
-                    if (e.key === 'Enter') {
-                      handleClick()
-                    }
-                  }}
-                  style={{ cursor: 'pointer' }}
+                <Modal
+                  show={showModal5}
+                  onHide={closeModal5}
+                  backdrop="static"
+                  keyboard={false}
                 >
-                  <img src={defaultImage} alt="" width={300} />
-                </span>
-              ) : (
-                <div>
-                  <div className="image-preview-container">{imagePreviews}</div>
-                </div>
-              )}
-              <input
-                type="file"
-                id="fileInput"
-                onChange={handleImageChange}
-                ref={inputRef}
-                multiple
-                style={{ display: 'none' }}
-              />
-            </div>
-            <div className="justify-content-center">{file ? file.name : 'Chọn ảnh'}</div>
-            <div className="justify-content-center">
-              <button type="submit" className="btn btn-primary">
-                Tải ảnh
-              </button>
-            </div>
-            <div className="justify-content-center">
-              {imageList.length === 0 ? (
-                <h1>Tải lên ảnh</h1>
-              ) : (
-                <>
-                  <br />
-                  <ul style={{ listStyle: 'none', padding: 0 }} className="ull">
-                    {imageList.map((image) => (
-                      <li
-                        key={image.id}
-                        style={{
-                          position: 'relative',
-                          marginBottom: '10px',
-                        }}
-                      >
-                        <img
-                          style={{ width: '300px', height: '450px' }}
-                          src={`data:image/jpeg;base64,${image.tenBase64}`}
-                          alt={image.ma}
-                        />
-                        <i
-                          style={{
-                            position: 'absolute',
-                            top: '10px',
-                            right: '10px',
-                            color: 'orange',
-                            border: 'none',
-                            padding: '5px 10px',
-                            cursor: 'pointer',
-                          }}
-                          className="fa-regular fa-trash-can"
-                          role="button"
-                          tabIndex={0}
-                          onClick={() => confirmDeleteImage(image.id)}
-                          onKeyDown={(e) => {
-                            if (e.key === 'Enter') {
-                              confirmDeleteImage(image.id)
-                            }
-                          }}
-                        ></i>
-                      </li>
-                    ))}
-                  </ul>
-                </>
-              )}
-            </div>
-          </form>
-        </CCardBody>
-      </CCard>
-  </Modal.Body>
-</Modal>
+                  <Modal.Header closeButton>
+                    <Modal.Title>Thông tin chi tiết</Modal.Title>
+                  </Modal.Header>
+                  <Modal.Body>
+                    <CCard
+                      className={`my-3 ${idCTSP !== null ? "show" : ""}`}
+                      ref={mainCardRef}
+                    >
+                      <CCardBody>
+                        <form onSubmit={handleAddAnh}>
+                          <div className="justify-content-center">
+                            {file.length === 0 ? (
+                              <span
+                                role="button"
+                                tabIndex={0}
+                                onClick={handleClick}
+                                onKeyPress={(e) => {
+                                  if (e.key === "Enter") {
+                                    handleClick();
+                                  }
+                                }}
+                                style={{ cursor: "pointer" }}
+                              >
+                                <img src={defaultImage} alt="" width={300} />
+                              </span>
+                            ) : (
+                              <div>
+                                <div className="image-preview-container">
+                                  {imagePreviews}
+                                </div>
+                              </div>
+                            )}
+                            <input
+                              type="file"
+                              id="fileInput"
+                              onChange={handleImageChange}
+                              ref={inputRef}
+                              multiple
+                              style={{ display: "none" }}
+                            />
+                          </div>
+                          <div className="justify-content-center">
+                            {file ? file.name : "Chọn ảnh"}
+                          </div>
+                          <div className="justify-content-center">
+                            <button type="submit" className="btn btn-primary">
+                              Tải ảnh
+                            </button>
+                          </div>
+                          <div className="justify-content-center">
+                            {imageList.length === 0 ? (
+                              <h1>Tải lên ảnh</h1>
+                            ) : (
+                              <>
+                                <br />
+                                <ul
+                                  style={{ listStyle: "none", padding: 0 }}
+                                  className="ull"
+                                >
+                                  {imageList.map((image) => (
+                                    <li
+                                      key={image.id}
+                                      style={{
+                                        position: "relative",
+                                        marginBottom: "10px",
+                                      }}
+                                    >
+                                      <img
+                                        style={{
+                                          width: "300px",
+                                          height: "450px",
+                                        }}
+                                        src={`data:image/jpeg;base64,${image.tenBase64}`}
+                                        alt={image.ma}
+                                      />
+                                      <i
+                                        style={{
+                                          position: "absolute",
+                                          top: "10px",
+                                          right: "10px",
+                                          color: "orange",
+                                          border: "none",
+                                          padding: "5px 10px",
+                                          cursor: "pointer",
+                                        }}
+                                        className="fa-regular fa-trash-can"
+                                        role="button"
+                                        tabIndex={0}
+                                        onClick={() =>
+                                          confirmDeleteImage(image.id)
+                                        }
+                                        onKeyDown={(e) => {
+                                          if (e.key === "Enter") {
+                                            confirmDeleteImage(image.id);
+                                          }
+                                        }}
+                                      ></i>
+                                    </li>
+                                  ))}
+                                </ul>
+                              </>
+                            )}
+                          </div>
+                        </form>
+                      </CCardBody>
+                    </CCard>
+                  </Modal.Body>
+                </Modal>
               </Table>
             </div>
           </div>
         </CCardBody>
       </CCard>
 
-   
       <AddMSKCCTSP
         show={show}
         onHide={() => setShow(false)}
@@ -880,7 +939,7 @@ function UpdateSanPham() {
         id={idSP}
       />
     </div>
-  )
+  );
 }
 
-export default UpdateSanPham
+export default UpdateSanPham;

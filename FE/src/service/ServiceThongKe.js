@@ -1,4 +1,4 @@
-import axios from '../custommize-axios';
+import axios from "../custommize-axios";
 
 const doanhThuTongTheoNgay = () => {
   return axios.get(`/api/thong-ke/doanh-thu-tong-ngay-hien-tai`);
@@ -109,15 +109,21 @@ const sanPhamBanChayNam = () => {
 };
 
 const sanPhamBanChayNgaySearch = (key) => {
-  return axios.get(`/api/thong-ke/san-pham-ban-chay-trong-ngay-search?key=${key}`);
+  return axios.get(
+    `/api/thong-ke/san-pham-ban-chay-trong-ngay-search?key=${key}`
+  );
 };
 
 const sanPhamBanChayThangSearch = (key) => {
-  return axios.get(`/api/thong-ke/san-pham-ban-chay-trong-thang-search?key=${key}`);
+  return axios.get(
+    `/api/thong-ke/san-pham-ban-chay-trong-thang-search?key=${key}`
+  );
 };
 
 const sanPhamBanChayNamSearch = (key) => {
-  return axios.get(`/api/thong-ke/san-pham-ban-chay-trong-nam-search?key=${key}`);
+  return axios.get(
+    `/api/thong-ke/san-pham-ban-chay-trong-nam-search?key=${key}`
+  );
 };
 
 const bieuDoNgay = () => {
@@ -165,5 +171,5 @@ export {
   doanhThuAllThang,
   bieuDoNgay,
   bieuDoThang,
-  bieuDoNam
+  bieuDoNam,
 };

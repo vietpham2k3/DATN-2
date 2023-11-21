@@ -1,41 +1,49 @@
+/* eslint-disable react/react-in-jsx-scope */
 /* eslint-disable jsx-a11y/label-has-associated-control */
 /* eslint-disable react/prop-types */
-import Modal from 'react-bootstrap/Modal'
-import Button from 'react-bootstrap/Button'
-import '../../../scss/AddQuickly.scss'
-import { getAllListMS, getAllListKC } from 'src/service/SanPhamService'
-import { useState } from 'react'
-import { useEffect } from 'react'
+import Modal from "react-bootstrap/Modal";
+import Button from "react-bootstrap/Button";
+import "../../../scss/AddQuickly.scss";
+import { getAllListMS, getAllListKC } from "src/service/SanPhamService";
+import { useState } from "react";
+import { useEffect } from "react";
 
 function UpdateMSKCCTSP(props) {
-  const { onHide, handleSubmit, values, setValues } = props
-  const [listMS, setListMS] = useState([])
-  const [listKC, setListLC] = useState([])
+  const { onHide, handleSubmit, values, setValues } = props;
+  const [listMS, setListMS] = useState([]);
+  const [listKC, setListLC] = useState([]);
 
   useEffect(() => {
-    getAllList()
-  }, [])
+    getAllList();
+  }, []);
 
   const getAllList = async () => {
-    const resMS = await getAllListMS()
-    const resKC = await getAllListKC()
+    const resMS = await getAllListMS();
+    const resKC = await getAllListKC();
     if (resMS || resKC) {
-      setListMS(resMS.data)
-      setListLC(resKC.data)
+      setListMS(resMS.data);
+      setListLC(resKC.data);
     }
-  }
+  };
 
   return (
-    <Modal {...props} size="md" aria-labelledby="contained-modal-title-vcenter" centered>
+    <Modal
+      {...props}
+      size="md"
+      aria-labelledby="contained-modal-title-vcenter"
+      centered
+    >
       <Modal.Header closeButton>
-        <Modal.Title id="contained-modal-title-vcenter">Thêm thuộc tính</Modal.Title>
+        <Modal.Title id="contained-modal-title-vcenter">
+          Thêm thuộc tính
+        </Modal.Title>
       </Modal.Header>
       <Modal.Body>
         <form className="row g-3" onSubmit={handleSubmit}>
           <div className="col-12">
             <div className="form-inline">
-              <label style={{ fontWeight: 'bold' }} className="form-label me-3">
-                Màu sắc:{' '}
+              <label style={{ fontWeight: "bold" }} className="form-label me-3">
+                Màu sắc:{" "}
               </label>
               {listMS.map((d, i) => (
                 <div key={i} className="form-check form-check-inline">
@@ -45,7 +53,9 @@ function UpdateMSKCCTSP(props) {
                     name="1"
                     id={d.id}
                     value={d.id}
-                    checked={values && values.mauSac && d.id === values.mauSac.id}
+                    checked={
+                      values && values.mauSac && d.id === values.mauSac.id
+                    }
                     onChange={() =>
                       setValues({
                         ...values,
@@ -56,7 +66,13 @@ function UpdateMSKCCTSP(props) {
                     }
                   />
                   <label className="form-check-label" htmlFor={d.id}>
-                    <div style={{ backgroundColor: d.ten, width: 50, borderRadius: '10px' }}>
+                    <div
+                      style={{
+                        backgroundColor: d.ten,
+                        width: 50,
+                        borderRadius: "10px",
+                      }}
+                    >
                       &nbsp;
                     </div>
                   </label>
@@ -66,8 +82,8 @@ function UpdateMSKCCTSP(props) {
           </div>
           <div className="col-12">
             <div className="form-inline">
-              <label style={{ fontWeight: 'bold' }} className="form-label me-3">
-                Kích cỡ:{' '}
+              <label style={{ fontWeight: "bold" }} className="form-label me-3">
+                Kích cỡ:{" "}
               </label>
               {listKC.map((d, i) => (
                 <div key={i} className="form-check form-check-inline">
@@ -76,7 +92,9 @@ function UpdateMSKCCTSP(props) {
                     type="radio"
                     name="2"
                     id={d.id}
-                    checked={values && values.kichCo && d.id === values.kichCo.id}
+                    checked={
+                      values && values.kichCo && d.id === values.kichCo.id
+                    }
                     value={d.id}
                     onChange={() =>
                       setValues({
@@ -96,8 +114,8 @@ function UpdateMSKCCTSP(props) {
           </div>
           <div className="col-12">
             <div className="form-inline">
-              <label style={{ fontWeight: 'bold' }} className="form-label me-3">
-                Số lượng:{' '}
+              <label style={{ fontWeight: "bold" }} className="form-label me-3">
+                Số lượng:{" "}
               </label>
               <div className="form-check form-check-inline">
                 <input
@@ -118,8 +136,8 @@ function UpdateMSKCCTSP(props) {
           </div>
           <div className="col-12">
             <div className="form-inline">
-              <label style={{ fontWeight: 'bold' }} className="form-label me-3">
-                Trạng thái:{' '}
+              <label style={{ fontWeight: "bold" }} className="form-label me-3">
+                Trạng thái:{" "}
               </label>
               <div className="form-check form-check-inline">
                 <input
@@ -157,7 +175,7 @@ function UpdateMSKCCTSP(props) {
         </form>
       </Modal.Body>
     </Modal>
-  )
+  );
 }
 
-export default UpdateMSKCCTSP
+export default UpdateMSKCCTSP;

@@ -1,4 +1,4 @@
-import axios from '../custommize-axios';
+import axios from "../custommize-axios";
 
 const pay = (id) => {
   return axios.get(`/api/pay/${id}`);

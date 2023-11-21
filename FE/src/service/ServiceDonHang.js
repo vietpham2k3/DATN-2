@@ -1,4 +1,4 @@
-import axios from '../custommize-axios';
+import axios from "../custommize-axios";
 
 const getAllPageDH = (page) => {
   return axios.get(`/api/hoa-don/hien-thi-page?page=${page}`);
@@ -14,19 +14,19 @@ const findVIP = (key, tuNgay, denNgay, trangThai, loaiDon, page) => {
 };
 
 const getAllHD = () => {
-  return axios.get('/api/hoa-don/hien-thi');
+  return axios.get("/api/hoa-don/hien-thi");
 };
 
 const getAllSPDoiHang = (id) => {
-  return axios.get('/api/hoa-don/hien-thi-sp-doi/' + id);
+  return axios.get("/api/hoa-don/hien-thi-sp-doi/" + id);
 };
 
 const getAllSP = () => {
-  return axios.get('/api/hoa-don/hien-thi-san-pham');
+  return axios.get("/api/hoa-don/hien-thi-san-pham");
 };
 
 const getAllKH = () => {
-  return axios.get('/api/hoa-don/getAll');
+  return axios.get("/api/hoa-don/getAll");
 };
 
 const getAllKCByIdMSAndIdSP = (idMS, idSP) => {
@@ -190,11 +190,11 @@ const hienThiHangLoi = (id) => {
 };
 
 const getAllSPLoi = (id) => {
-  return axios.get('/api/hoa-don/hien-thi-sp-loi/' + id);
+  return axios.get("/api/hoa-don/hien-thi-sp-loi/" + id);
 };
 
 const hangLoi = (id, values) => {
-  return axios.put('/api/hoa-don/update-sl-hang-loi/' + id, values);
+  return axios.put("/api/hoa-don/update-sl-hang-loi/" + id, values);
 };
 
 export {
@@ -246,5 +246,5 @@ export {
   getAllSPLoi,
   hienThiSPYCDoiHang,
   hienThiYCDoiHang,
-  hangLoi
+  hangLoi,
 };

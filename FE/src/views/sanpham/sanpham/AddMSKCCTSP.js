@@ -1,89 +1,98 @@
-import Modal from 'react-bootstrap/Modal'
-import Button from 'react-bootstrap/Button'
-import '../../../scss/AddQuickly.scss'
-import { getAllListMS, getAllListKC } from 'src/service/SanPhamService'
-import { useState } from 'react'
-import { useEffect } from 'react'
+/* eslint-disable react/react-in-jsx-scope */
+/* eslint-disable react/prop-types */
+import Modal from "react-bootstrap/Modal";
+import Button from "react-bootstrap/Button";
+import "../../../scss/AddQuickly.scss";
+import { getAllListMS, getAllListKC } from "src/service/SanPhamService";
+import { useState } from "react";
+import { useEffect } from "react";
 
 function AddMSKCCTSP(props) {
-  const { onHide, handleSubmit, values, setValues } = props
-  const [listMS, setListMS] = useState([])
-  const [listKC, setListLC] = useState([])
+  const { onHide, handleSubmit, values, setValues } = props;
+  const [listMS, setListMS] = useState([]);
+  const [listKC, setListLC] = useState([]);
 
   useEffect(() => {
-    getAllList()
-  }, [])
+    getAllList();
+  }, []);
 
   const getAllList = async () => {
-    const resMS = await getAllListMS()
-    const resKC = await getAllListKC()
+    const resMS = await getAllListMS();
+    const resKC = await getAllListKC();
     if (resMS || resKC) {
-      setListMS(resMS.data)
-      setListLC(resKC.data)
+      setListMS(resMS.data);
+      setListLC(resKC.data);
     }
-  }
+  };
 
   return (
-    <Modal {...props} size="md" aria-labelledby="contained-modal-title-vcenter" centered>
+    <Modal
+      {...props}
+      size="md"
+      aria-labelledby="contained-modal-title-vcenter"
+      centered
+    >
       <Modal.Header closeButton>
-        <Modal.Title id="contained-modal-title-vcenter">Thêm thuộc tính</Modal.Title>
+        <Modal.Title id="contained-modal-title-vcenter">
+          Thêm thuộc tính
+        </Modal.Title>
       </Modal.Header>
       <Modal.Body>
         <form className="row g-3" onSubmit={handleSubmit}>
-        <div className="col-12">
-        <div className="form-inline">
-          <label style={{ fontWeight: 'bold' }} className="form-label me-3">
-            Màu sắc:{' '}
-          </label>
-          <select
-              className="form-select"
-              aria-label="Default select example"
-              onChange={(e) => {
-                setValues({
-                  ...values,
-                  mauSac: {
-                    id: e.target.value,
-                  },
-                })
-              }}
-            >
-              {listMS.map((c) => (
-                <option key={c.id} value={c.id}>
-                  {c.ma}
-                </option>
-              ))}
-            </select>
-        </div>
-      </div>
-      <div className="col-12">
-        <div className="form-inline">
-          <label style={{ fontWeight: 'bold' }} className="form-label me-3">
-            Kích cỡ:{' '}
-          </label>
-          <select
-              className="form-select"
-              aria-label="Default select example"
-              onChange={(e) => {
-                setValues({
-                  ...values,
-                  kichCo: {
-                    id: e.target.value,
-                  },
-                })
-              }}
-            >
-              {listKC.map((c) => (
-                <option key={c.id} value={c.id}>
-                  {c.ten}
-                </option>
-              ))}
-            </select>
-        </div>
-      </div>
           <div className="col-12">
             <div className="form-inline">
-              <label style={{ fontWeight: 'bold' }} className="form-label me-3">
-                Số lượng:{' '}
+              <label style={{ fontWeight: "bold" }} className="form-label me-3">
+                Màu sắc:{" "}
+              </label>
+              <select
+                className="form-select"
+                aria-label="Default select example"
+                onChange={(e) => {
+                  setValues({
+                    ...values,
+                    mauSac: {
+                      id: e.target.value,
+                    },
+                  });
+                }}
+              >
+                {listMS.map((c) => (
+                  <option key={c.id} value={c.id}>
+                    {c.ma}
+                  </option>
+                ))}
+              </select>
+            </div>
+          </div>
+          <div className="col-12">
+            <div className="form-inline">
+              <label style={{ fontWeight: "bold" }} className="form-label me-3">
+                Kích cỡ:{" "}
+              </label>
+              <select
+                className="form-select"
+                aria-label="Default select example"
+                onChange={(e) => {
+                  setValues({
+                    ...values,
+                    kichCo: {
+                      id: e.target.value,
+                    },
+                  });
+                }}
+              >
+                {listKC.map((c) => (
+                  <option key={c.id} value={c.id}>
+                    {c.ten}
+                  </option>
+                ))}
+              </select>
+            </div>
+          </div>
+          <div className="col-12">
+            <div className="form-inline">
+              <label style={{ fontWeight: "bold" }} className="form-label me-3">
+                Số lượng:{" "}
               </label>
               <div className="form-check form-check-inline">
                 <input
@@ -103,8 +112,8 @@ function AddMSKCCTSP(props) {
           </div>
           <div className="col-12">
             <div className="form-inline">
-              <label style={{ fontWeight: 'bold' }} className="form-label me-3">
-                Trạng thái:{' '}
+              <label style={{ fontWeight: "bold" }} className="form-label me-3">
+                Trạng thái:{" "}
               </label>
               <div className="form-check form-check-inline">
                 <input
@@ -142,7 +151,7 @@ function AddMSKCCTSP(props) {
         </form>
       </Modal.Body>
     </Modal>
-  )
+  );
 }
 
-export default AddMSKCCTSP
+export default AddMSKCCTSP;
