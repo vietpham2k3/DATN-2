@@ -212,7 +212,7 @@ const SanPham = () => {
   }
 
   const handleUpdate = (idSp, id) => {
-    navigate(`/san-pham/chi-tiet-san-pham/detail/${id}/${idSp}`)
+    navigate(`/quan-ly-san-pham/san-pham/detail/${id}/${idSp}`)
     localStorage.setItem('idSP', idSp)
   }
   const uniqueColors = listMS.filter(
@@ -236,10 +236,6 @@ const SanPham = () => {
       setMauSacDefaultSelected(false)
     }
   }
-
-  // ...
-
-  // Trong JSX của combobox, bạn có thể hiển thị selectedValue thay vì mauSac.
 
   const handleChatLieuChange = (e) => {
     const selectedValue = e.target.value
@@ -440,7 +436,7 @@ const SanPham = () => {
         <CCard className="mb-4">
           <CCardHeader>
             <div style={{ display: 'flex', justifyContent: 'end' }}>
-              <Link className="btn btn-primary" to={'/san-pham/chi-tiet-san-pham/add'}>
+              <Link className="btn btn-primary" to={'/quan-ly-san-pham/san-pham/add'}>
                 Thêm sản phẩm
               </Link>
             </div>
