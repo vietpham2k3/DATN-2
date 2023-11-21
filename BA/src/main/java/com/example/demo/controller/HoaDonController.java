@@ -354,30 +354,6 @@ public class HoaDonController {
         return ResponseEntity.ok(serviceLSHD.findAllLSHDByIDsHD(id));
     }
 
-    public class TrangThaiWrapper {
-        private int[] trangThai;
-
-        public int[] getTrangThai() {
-            return trangThai;
-        }
-
-        public TrangThaiWrapper() {
-        }
-
-        public void setTrangThai(String trangThai) {
-            if (trangThai != null && !trangThai.trim().isEmpty()) {
-                String[] trangThaiStrings = trangThai.split(",");
-                int[] trangThaiInts = new int[trangThaiStrings.length];
-                for (int i = 0; i < trangThaiStrings.length; i++) {
-                    trangThaiInts[i] = Integer.parseInt(trangThaiStrings[i].trim());
-                }
-                this.trangThai = trangThaiInts;
-            } else {
-                this.trangThai = new int[0];
-            }
-        }
-    }
-
     @GetMapping("hien-thi-page-find")
     public ResponseEntity<?> findVIP(String key, String tuNgay, String denNgay, Integer[] trangThai,
                                      Integer loaiDon, Double minSL, Double maxSL, Double minTT,
