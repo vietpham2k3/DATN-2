@@ -1,207 +1,204 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
 /* eslint-disable react-hooks/exhaustive-deps */
-import React from 'react';
+import React from 'react'
 // import { Card } from '@mui/material';
 // project imports
-import MainCard from 'ui-component/cards/MainCard';
-import { useState } from 'react';
-import { getAllListCL, getAllListCO, getAllListKC, getAllListLSP, getAllListMS, getAllListNSX, postCTSP } from 'services/SanPhamService';
-import { useEffect } from 'react';
-import '../../scss/SanPham.scss';
-import { toast } from 'react-toastify';
-import { useNavigate } from 'react-router';
-import { postCreate } from 'services/ServiceChatLieu';
-import { postCreate as postCa } from 'services/ServiceCoAo';
-import { add } from 'services/LoaiSanPhamService';
-import { postNSX } from 'services/NhaSanXuatService';
-import MyVerticallyCenteredModal from './AddQuicklyChatLuong';
+import { CButton, CCard, CCardBody, CCardHeader, CCol, CRow } from '@coreui/react'
+import { useState } from 'react'
+import {
+  getAllListCL,
+  getAllListKC,
+  getAllListLSP,
+  getAllListMS,
+  getAllListNSX,
+  postCTSP,
+} from 'src/service/SanPhamService'
+import { useEffect } from 'react'
+import '../../../scss/SanPham.scss'
+import { toast } from 'react-toastify'
+import { useNavigate } from 'react-router'
+import { postCreate } from 'src/service/ServiceChatLieu'
+import { add } from 'src/service/LoaiSanPhamService'
+import { postNSX } from 'src/service/NhaSanXuatService'
+import MyVerticallyCenteredModal from './AddQuicklyChatLuong'
 
 function AddSanPham() {
-  const [listCL, setListCL] = useState([]);
-  const [listNSX, setListNSX] = useState([]);
-  const [listLSP, setListLSP] = useState([]);
-  const [listCA, setListCA] = useState([]);
-  const [listMS, setListMS] = useState([]);
-  const [listKC, setListLC] = useState([]);
-  const [modalShow, setModalShow] = useState(false);
-  const [modalShowCA, setModalShowCA] = useState(false);
-  const [modalShowLSP, setModalShowLSP] = useState(false);
-  const [modalShowNSX, setModalShowNSX] = useState(false);
-  const [isHidden, setIsHidden] = useState(true);
-  const [confirmClicked, setConfirmClicked] = useState(false);
+  const [listCL, setListCL] = useState([])
+  const [listNSX, setListNSX] = useState([])
+  const [listLSP, setListLSP] = useState([])
+  const [listMS, setListMS] = useState([])
+  const [listKC, setListLC] = useState([])
+  const [modalShow, setModalShow] = useState(false)
+  const [modalShowLSP, setModalShowLSP] = useState(false)
+  const [modalShowNSX, setModalShowNSX] = useState(false)
+  const [isHidden, setIsHidden] = useState(true)
+  const [confirmClicked, setConfirmClicked] = useState(false)
 
-  const navigate = useNavigate();
+  const navigate = useNavigate()
 
   const [values, setValues] = useState({
     chatLieu: {
-      id: ''
+      id: '',
     },
     sanPham: {
       ten: '',
-      moTa: ''
+      moTa: '',
     },
     loaiSanPham: {
-      id: ''
+      id: '',
     },
     nhaSanXuat: {
-      id: ''
+      id: '',
     },
     coAo: {
-      id: ''
+      id: '',
     },
     kichCo: {
-      id: ''
+      id: '',
     },
     mauSac: {
-      id: ''
+      id: '',
     },
     soLuong: '',
     giaBan: '',
-    trangThai: 1
-  });
+    trangThai: 1,
+  })
 
   const [valuesCL, setValuesCL] = useState({
     ten: '',
-    trangThai: 0
-  });
+    trangThai: 0,
+  })
 
   const closeModal = () => {
-    setModalShowCA(false);
-    setModalShow(false);
-    setModalShowNSX(false);
-    setModalShowLSP(false);
-    getAllList();
+    setModalShow(false)
+    setModalShowNSX(false)
+    setModalShowLSP(false)
+    getAllList()
     setValuesCL({
       ten: '',
-      trangThai: 0
-    });
-  };
+      trangThai: 0,
+    })
+  }
 
   const handleAddNSX = (event) => {
-    event.preventDefault();
-    addNSX(valuesCL);
-  };
+    event.preventDefault()
+    addNSX(valuesCL)
+  }
 
   const addNSX = (value) => {
-    const res = postNSX(value);
+    const res = postNSX(value)
     if (res) {
-      toast.success('Thêm thành công');
-      closeModal();
+      toast.success('Thêm thành công')
+      closeModal()
     }
-  };
+  }
 
   const handleAddLSP = (event) => {
-    event.preventDefault();
-    addLSP(valuesCL);
-  };
+    event.preventDefault()
+    addLSP(valuesCL)
+  }
 
   const addLSP = (value) => {
-    const res = add(value);
+    const res = add(value)
     if (res) {
-      toast.success('Thêm thành công');
-      closeModal();
+      toast.success('Thêm thành công')
+      closeModal()
     }
-  };
-
-  const handleSubmitCA = (event) => {
-    event.preventDefault();
-    postCA(valuesCL);
-  };
-
-  const postCA = (value) => {
-    const res = postCa(value);
-    if (res) {
-      toast.success('Thêm thành công');
-      closeModal();
-    }
-  };
+  }
 
   const handleSubmitCL = (event) => {
-    event.preventDefault();
-    post(valuesCL);
-  };
+    event.preventDefault()
+    post(valuesCL)
+  }
 
   const post = async (value) => {
-    const res = await postCreate(value);
+    const res = await postCreate(value)
     if (res) {
-      toast.success('Thêm thành công');
-      closeModal();
+      toast.success('Thêm thành công')
+      closeModal()
     }
-  };
+  }
 
   useEffect(() => {
-    getAllList();
-  }, []);
+    getAllList()
+  }, [])
 
   const postctsp = async (value) => {
-    const res = await postCTSP(value);
+    const res = await postCTSP(value)
     if (res) {
-      toast.success('Thêm thành công');
-      navigate(`/san-pham/chi-tiet-san-pham/detail/${res.data.id}/${res.data.sanPham.id}`);
+      toast.success('Thêm thành công')
+      navigate(`/san-pham/chi-tiet-san-pham/detail/${res.data.id}/${res.data.sanPham.id}`)
     }
-  };
+  }
 
   const handleSubmit = async (event) => {
-    event.preventDefault();
+    event.preventDefault()
     if (!values.mauSac.id || !values.kichCo.id || !values.soLuong) {
-      toast.error('Vui lòng chọn thuộc tính để thêm vào sản phẩm');
-      return;
+      toast.error('Vui lòng chọn thuộc tính')
+      return
     }
-    await postctsp(values);
-  };
+    await postctsp(values)
+  }
 
   const handleConfirmClick = () => {
     // Perform validation
-    if (values.sanPham.ten.trim() === '' || values.giaBan.trim() === '' || values.sanPham.moTa.trim() === '') {
+    if (
+      values.sanPham.ten.trim() === '' ||
+      values.giaBan.trim() === '' ||
+      values.sanPham.moTa.trim() === ''
+    ) {
       // Display an error message or prevent confirmation
-      toast.error('Vui lòng điền đầy đủ thông tin tên, mô tả và giá bán.');
+      toast.error('Không được để trống !')
     } else {
       // Validation passed, update the states
-      toast.success('Xác nhận thành công');
-      setIsHidden(false);
-      setConfirmClicked(true);
+      toast.success('Cập nhật thành công')
+      setIsHidden(false)
+      setConfirmClicked(true)
     }
-  };
+  }
 
   const getAllList = async () => {
-    const resCL = await getAllListCL();
-    const resLSP = await getAllListLSP();
-    const resCA = await getAllListCO();
-    const resNSX = await getAllListNSX();
-    const resMS = await getAllListMS();
-    const resKC = await getAllListKC();
-    if (resCL || resLSP || resCA || resNSX || resMS || resKC) {
-      setListCL(resCL.data);
-      setListCA(resCA.data);
-      setListLSP(resLSP.data);
-      setListNSX(resNSX.data);
-      setListMS(resMS.data);
-      setListLC(resKC.data);
-      if (resCL.data.length > 0 || resCA.data.length > 0 || resLSP.data.length > 0 || resNSX.data.length > 0) {
+    const resCL = await getAllListCL()
+    const resLSP = await getAllListLSP()
+    const resNSX = await getAllListNSX()
+    const resMS = await getAllListMS()
+    const resKC = await getAllListKC()
+    if (resCL || resLSP || resNSX || resMS || resKC) {
+      setListCL(resCL.data)
+      setListLSP(resLSP.data)
+      setListNSX(resNSX.data)
+      setListMS(resMS.data)
+      setListLC(resKC.data)
+      if (
+        resCL.data.length > 0 ||
+        resLSP.data.length > 0 ||
+        resNSX.data.length > 0
+      ) {
         setValues({
           ...values,
           chatLieu: {
-            id: resCL.data[0].id
-          },
-          coAo: {
-            id: resCA.data[0].id
+            id: resCL.data[0].id,
           },
           loaiSanPham: {
-            id: resLSP.data[0].id
+            id: resLSP.data[0].id,
           },
           nhaSanXuat: {
-            id: resNSX.data[0].id
-          }
-        });
+            id: resNSX.data[0].id,
+          },
+        })
       }
     }
-  };
+  }
 
   return (
     <div>
-      <MainCard>
+      <CCard className="mb-4">
+          <CCardHeader>
+            <strong>Thêm sản phẩm</strong>
+          </CCardHeader>
+          <CCardBody>
         <div className="row g-3">
-          <div className="col-md-12">
+          <div className="col-md-6">
             <label className="form-label" htmlFor="trang-thai">
               Tên
             </label>
@@ -213,25 +210,7 @@ function AddSanPham() {
               onChange={(e) =>
                 setValues({
                   ...values,
-                  sanPham: { ...values.sanPham, ten: e.target.value }
-                })
-              }
-            />
-          </div>
-          <div className="col-md-12">
-            <label className="form-label" htmlFor="trang-thai1">
-              Mô tả
-            </label>
-            <textarea
-              type="text"
-              className="form-control"
-              placeholder="Nhập mô tả sản phẩm..."
-              rows={3}
-              value={values.sanPham.moTa}
-              onChange={(e) =>
-                setValues({
-                  ...values,
-                  sanPham: { ...values.sanPham, moTa: e.target.value }
+                  sanPham: { ...values.sanPham, ten: e.target.value },
                 })
               }
             />
@@ -248,6 +227,7 @@ function AddSanPham() {
               onChange={(e) => setValues({ ...values, giaBan: e.target.value })}
             />
           </div>
+      
           <div className="col-6">
             <label className="form-label me-3" htmlFor="trang-thai2">
               Trạng thái:{' '}
@@ -271,7 +251,7 @@ function AddSanPham() {
                 onClick={() => setModalShow(true)}
                 onKeyDown={(e) => {
                   if (e.key === 'Enter') {
-                    setModalShow(true);
+                    setModalShow(true)
                   }
                 }}
                 style={{ cursor: 'pointer' }}
@@ -286,9 +266,9 @@ function AddSanPham() {
                 setValues({
                   ...values,
                   chatLieu: {
-                    id: e.target.value
-                  }
-                });
+                    id: e.target.value,
+                  },
+                })
               }}
             >
               {listCL.map((c) => (
@@ -308,7 +288,7 @@ function AddSanPham() {
                 onClick={() => setModalShowLSP(true)}
                 onKeyDown={(e) => {
                   if (e.key === 'Enter') {
-                    setModalShowLSP(true);
+                    setModalShowLSP(true)
                   }
                 }}
                 style={{ cursor: 'pointer' }}
@@ -323,49 +303,12 @@ function AddSanPham() {
                 setValues({
                   ...values,
                   loaiSanPham: {
-                    id: e.target.value
-                  }
-                });
+                    id: e.target.value,
+                  },
+                })
               }}
             >
               {listLSP.map((c) => (
-                <option key={c.id} value={c.id}>
-                  {c.ten}
-                </option>
-              ))}
-            </select>
-          </div>
-          <div className="col-6">
-            <label className="form-label me-3" htmlFor="trang-thai6s">
-              Cổ áo:{' '}
-              <span
-                role="button"
-                tabIndex={0}
-                className="fa-solid"
-                onClick={() => setModalShowCA(true)}
-                onKeyDown={(e) => {
-                  if (e.key === 'Enter') {
-                    setModalShowCA(true);
-                  }
-                }}
-                style={{ cursor: 'pointer' }}
-              >
-                <i className="fa-solid fa-plus"></i>
-              </span>
-            </label>{' '}
-            <select
-              className="form-select"
-              aria-label="Default select example"
-              onChange={(e) => {
-                setValues({
-                  ...values,
-                  coAo: {
-                    id: e.target.value
-                  }
-                });
-              }}
-            >
-              {listCA.map((c) => (
                 <option key={c.id} value={c.id}>
                   {c.ten}
                 </option>
@@ -382,7 +325,7 @@ function AddSanPham() {
                 onClick={() => setModalShowNSX(true)}
                 onKeyDown={(e) => {
                   if (e.key === 'Enter') {
-                    setModalShowNSX(true);
+                    setModalShowNSX(true)
                   }
                 }}
                 style={{ cursor: 'pointer' }}
@@ -397,9 +340,9 @@ function AddSanPham() {
                 setValues({
                   ...values,
                   nhaSanXuat: {
-                    id: e.target.value
-                  }
-                });
+                    id: e.target.value,
+                  },
+                })
               }}
             >
               {listNSX.map((c) => (
@@ -408,6 +351,24 @@ function AddSanPham() {
                 </option>
               ))}
             </select>
+          </div>
+          <div className="col-md-6">
+            <label className="form-label" htmlFor="trang-thai1">
+              Mô tả
+            </label>
+            <textarea
+              type="text"
+              className="form-control"
+              placeholder="Nhập mô tả sản phẩm..."
+              rows={3}
+              value={values.sanPham.moTa}
+              onChange={(e) =>
+                setValues({
+                  ...values,
+                  sanPham: { ...values.sanPham, moTa: e.target.value },
+                })
+              }
+            />
           </div>
           <div className="col-12 d-flex justify-content-end">
             {!isHidden && (
@@ -434,13 +395,6 @@ function AddSanPham() {
           setValues={setValuesCL}
         />
         <MyVerticallyCenteredModal
-          show={modalShowCA}
-          onHide={() => setModalShowCA(false)}
-          handleSubmit={handleSubmitCA}
-          values={valuesCL}
-          setValues={setValuesCL}
-        />
-        <MyVerticallyCenteredModal
           show={modalShowLSP}
           onHide={() => setModalShowLSP(false)}
           handleSubmit={handleAddLSP}
@@ -454,10 +408,16 @@ function AddSanPham() {
           values={valuesCL}
           setValues={setValuesCL}
         />
-      </MainCard>
+        </CCardBody>
+      </CCard>
       {!isHidden && (
         <div className="hidden-element">
-          <MainCard className="my-3">
+
+          <CCard className="my-3">
+          <CCardHeader>
+            <strong>Thêm thuộc tính</strong>
+          </CCardHeader>
+          <CCardBody>
             <div className="row">
               <div className="col-12">
                 <h2>Thuộc tính</h2>
@@ -480,13 +440,15 @@ function AddSanPham() {
                             setValues({
                               ...values,
                               mauSac: {
-                                id: d.id
-                              }
+                                id: d.id,
+                              },
                             })
                           }
                         />
                         <label className="form-check-label" htmlFor={d.id}>
-                          <div style={{ backgroundColor: d.ten, width: 50, borderRadius: '10px' }}>&nbsp;</div>
+                          <div style={{ backgroundColor: d.ten, width: 50, borderRadius: '10px' }}>
+                            &nbsp;
+                          </div>
                         </label>
                       </div>
                     ))}
@@ -509,8 +471,8 @@ function AddSanPham() {
                             setValues({
                               ...values,
                               kichCo: {
-                                id: d.id
-                              }
+                                id: d.id,
+                              },
                             })
                           }
                         />
@@ -535,7 +497,7 @@ function AddSanPham() {
                         onChange={(e) =>
                           setValues({
                             ...values,
-                            soLuong: e.target.value
+                            soLuong: e.target.value,
                           })
                         }
                       />
@@ -544,11 +506,12 @@ function AddSanPham() {
                 </div>
               </div>
             </div>
-          </MainCard>
+            </CCardBody>
+          </CCard>
         </div>
       )}
     </div>
-  );
+  )
 }
 
-export default AddSanPham;
+export default AddSanPham

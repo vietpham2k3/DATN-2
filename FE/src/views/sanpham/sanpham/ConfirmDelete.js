@@ -1,6 +1,6 @@
 /* eslint-disable react/prop-types */
 import { Button, Modal } from 'react-bootstrap';
-import { deleteMSKC } from 'services/SanPhamService';
+import { deleteMSKC } from 'src/service/SanPhamService';
 import { toast } from 'react-toastify';
 
 const ConfirmDelete = (props) => {
@@ -10,7 +10,7 @@ const ConfirmDelete = (props) => {
     let res = await deleteMSKC(dataDelete);
     try {
       if (res) {
-        toast.success('Delete success!');
+        toast.success('Xóa thành công!');
         handleClose();
         getAll(id);
       }
@@ -34,7 +34,7 @@ const ConfirmDelete = (props) => {
           <Modal.Title>Thông báo</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <div className="body-add-new">Bạn có chắc muốn ngừng kinh doanh thuộc tính này không?</div>
+          <div className="body-add-new">Bạn có muốn ngừng kinh doanh thuộc tính này?</div>
         </Modal.Body>
         <Modal.Footer>
           <Button variant="secondary" onClick={handleClose}>

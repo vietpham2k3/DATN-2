@@ -6,7 +6,6 @@ import '../../../scss/SanPham.scss'
 import { Link, useNavigate } from 'react-router-dom'
 import { useState, useEffect } from 'react'
 import { getAllCTSP, deleteCTSP, searchCTSP } from 'src/service/SanPhamService'
-// import defaul from '../../assets/images/default-placeholder.png';
 import { toast } from 'react-toastify'
 import _ from 'lodash'
 import Slider from 'react-slider'
@@ -281,16 +280,16 @@ const SanPham = () => {
           </CCardHeader>
           <CCardBody>
             <div className="row">
-              <div className="col-6 search d-flex align-items-center row">
+              <div className="col-12 search d-flex align-items-center row">
                 <input
                   type="text"
                   className="input-search-sp box col-auto"
                   placeholder="Search..."
                   value={term}
                   onChange={handleInputChange}
-                  style={{ width: '500px' }}
+                  style={{ width: '300px', height: '35px', marginLeft: 10 }}
                 />
-                <div className="box d-flex flex-row col-auto">
+                <div style={{ marginRight: 80 }} className="box d-flex flex-row col-auto">
                   <div className="form-check">
                     <input
                       className="form-check-input"
@@ -319,7 +318,7 @@ const SanPham = () => {
                     <label
                       className="form-check-label"
                       htmlFor="exampleRadios2"
-                      style={{ width: '120px' }}
+                      style={{ width: '150px' }}
                     >
                       Ngừng kinh doanh
                     </label>
@@ -336,13 +335,13 @@ const SanPham = () => {
                     <label
                       className="form-check-label"
                       htmlFor="exampleRadios3"
-                      style={{ width: '120px' }}
+                      style={{ width: '150px' }}
                     >
                       Đang kinh doanh
                     </label>
                   </div>
                 </div>
-                <div className="box col-auto" style={{ marginLeft: '120px', width: '200px' }}>
+                <div className="box col-auto" style={{ marginLeft: '50px', width: '330px' }}>
                   <div className="values">
                     <strong>Khoảng giá:</strong>{' '}
                     {convertToCurrency(values[0]) + ' - ' + convertToCurrency(values[1])}
@@ -360,14 +359,10 @@ const SanPham = () => {
                   ></Slider>
                 </div>
               </div>
-              <div className="col-6 d-none d-md-block">
-                <div color="blue" className="float-end">
-                  <Link className="btn btn-primary" to={'/san-pham/chi-tiet-san-pham/add'}>
-                    Thêm <i className="fa-solid fa-plus fa-beat fa-lg"></i>
-                  </Link>
-                </div>
-              </div>
             </div>
+            <br></br>
+            <br></br>
+
             <Form>
               <Row>
                 <Col>
@@ -442,7 +437,11 @@ const SanPham = () => {
       <CCol xs={12}>
         <CCard className="mb-4">
           <CCardHeader>
-            <strong>Sản phẩm</strong> <small></small>
+            <div style={{ display: 'flex', justifyContent: 'end' }}>
+              <Link className="btn btn-primary" to={'/san-pham/chi-tiet-san-pham/add'}>
+                Thêm sản phẩm
+              </Link>
+            </div>
           </CCardHeader>
           <CCardBody>
             <div className="row">

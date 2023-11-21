@@ -141,7 +141,6 @@ public interface ChiTietSanPhamRepository extends JpaRepository<ChiTietSanPham, 
             "        LOWER(ms.ten) LIKE CONCAT('%', LOWER(:key), '%') OR\n" +
             "        LOWER(lsp.ten) LIKE CONCAT('%', LOWER(:key), '%') OR\n" +
             "        LOWER(nsx.ten) LIKE CONCAT('%', LOWER(:key), '%') OR\n" +
-            "        LOWER(ca.ten) LIKE CONCAT('%', LOWER(:key), '%') OR\n" +
             "        LOWER(S.ten) LIKE CONCAT('%', LOWER(:key), '%')  -- Thêm điều kiện tìm kiếm theo tên sản phẩm\n" +
             "    )\n" +
             "AND\n" +

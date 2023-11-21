@@ -1,29 +1,29 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
 /* eslint-disable react/prop-types */
-import Modal from 'react-bootstrap/Modal';
-import Button from 'react-bootstrap/Button';
-import '../../scss/AddQuickly.scss';
-import { getAllListMS, getAllListKC } from 'services/SanPhamService';
-import { useState } from 'react';
-import { useEffect } from 'react';
+import Modal from 'react-bootstrap/Modal'
+import Button from 'react-bootstrap/Button'
+import '../../../scss/AddQuickly.scss'
+import { getAllListMS, getAllListKC } from 'src/service/SanPhamService'
+import { useState } from 'react'
+import { useEffect } from 'react'
 
 function UpdateMSKCCTSP(props) {
-  const { onHide, handleSubmit, values, setValues } = props;
-  const [listMS, setListMS] = useState([]);
-  const [listKC, setListLC] = useState([]);
+  const { onHide, handleSubmit, values, setValues } = props
+  const [listMS, setListMS] = useState([])
+  const [listKC, setListLC] = useState([])
 
   useEffect(() => {
-    getAllList();
-  }, []);
+    getAllList()
+  }, [])
 
   const getAllList = async () => {
-    const resMS = await getAllListMS();
-    const resKC = await getAllListKC();
+    const resMS = await getAllListMS()
+    const resKC = await getAllListKC()
     if (resMS || resKC) {
-      setListMS(resMS.data);
-      setListLC(resKC.data);
+      setListMS(resMS.data)
+      setListLC(resKC.data)
     }
-  };
+  }
 
   return (
     <Modal {...props} size="md" aria-labelledby="contained-modal-title-vcenter" centered>
@@ -50,13 +50,15 @@ function UpdateMSKCCTSP(props) {
                       setValues({
                         ...values,
                         mauSac: {
-                          id: d.id
-                        }
+                          id: d.id,
+                        },
                       })
                     }
                   />
                   <label className="form-check-label" htmlFor={d.id}>
-                    <div style={{ backgroundColor: d.ten, width: 50, borderRadius: '10px' }}>&nbsp;</div>
+                    <div style={{ backgroundColor: d.ten, width: 50, borderRadius: '10px' }}>
+                      &nbsp;
+                    </div>
                   </label>
                 </div>
               ))}
@@ -80,8 +82,8 @@ function UpdateMSKCCTSP(props) {
                       setValues({
                         ...values,
                         kichCo: {
-                          id: d.id
-                        }
+                          id: d.id,
+                        },
                       })
                     }
                   />
@@ -107,7 +109,7 @@ function UpdateMSKCCTSP(props) {
                   onChange={(e) =>
                     setValues({
                       ...values,
-                      soLuong: e.target.value
+                      soLuong: e.target.value,
                     })
                   }
                 />
@@ -155,7 +157,7 @@ function UpdateMSKCCTSP(props) {
         </form>
       </Modal.Body>
     </Modal>
-  );
+  )
 }
 
-export default UpdateMSKCCTSP;
+export default UpdateMSKCCTSP

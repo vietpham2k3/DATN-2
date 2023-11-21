@@ -1,7 +1,7 @@
 {
-  "name": "@coreui/coreui-free-react-admin-template",
+  "name": "@coreui/-free-react-admin-template",
   "version": "4.5.0",
-  "description": "CoreUI Free React Admin Template",
+  "description": "Shop bán giầy hàng đầu",
   "homepage": ".",
   "bugs": {
     "url": "https://github.com/coreui/coreui-free-react-admin-template/issues"
@@ -41,10 +41,12 @@
     "i": "^0.3.7",
     "npm": "^10.2.4",
     "prop-types": "^15.8.1",
+    "qrcode": "^1.5.3",
     "react": "^18.2.0",
     "react-app-polyfill": "^3.0.0",
     "react-bootstrap": "^2.9.1",
     "react-dom": "^18.2.0",
+    "react-input-color": "^4.0.1",
     "react-paginate": "^8.2.0",
     "react-redux": "^8.1.1",
     "react-router-dom": "^6.14.0",
@@ -54,6 +56,7 @@
     "simplebar-react": "^2.4.3"
   },
   "devDependencies": {
+    "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^14.0.0",
     "@testing-library/user-event": "^14.4.3",

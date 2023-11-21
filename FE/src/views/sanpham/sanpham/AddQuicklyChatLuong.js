@@ -2,7 +2,8 @@
 /* eslint-disable react/prop-types */
 import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
-import '../../scss/AddQuickly.scss';
+import '../../../scss/AddQuickly.scss';
+import React from 'react';
 
 function MyVerticallyCenteredModal(props) {
   const { onHide, handleSubmit, values, setValues } = props;

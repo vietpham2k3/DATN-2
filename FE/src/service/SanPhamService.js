@@ -42,20 +42,9 @@ const deleteMSKC = (id) => {
   return axios.put('/api/chi-tiet-san-pham/deleteMSKC/' + id)
 }
 
-const searchCTSP = (
-  key,
-  trangThai,
-  min,
-  max,
-  mauSac,
-  chatLieu,
-  loaiSanPham,
-  nhaSanXuat,
-  coAo,
-  page,
-) => {
+const searchCTSP = (key, trangThai, min, max, mauSac, chatLieu, loaiSanPham, nhaSanXuat, page) => {
   return axios.get(
-    `/api/chi-tiet-san-pham/search?key=${key}&trangThai=${trangThai}&min=${min}&max=${max}&mauSac=${mauSac}&chatLieu=${chatLieu}&loaiSanPham=${loaiSanPham}&nhaSanXuat=${nhaSanXuat}&coAo=${coAo}&page=${page}`,
+    `/api/chi-tiet-san-pham/search?key=${key}&trangThai=${trangThai}&min=${min}&max=${max}&mauSac=${mauSac}&chatLieu=${chatLieu}&loaiSanPham=${loaiSanPham}&nhaSanXuat=${nhaSanXuat}&page=${page}`,
   )
 }
 
@@ -65,10 +54,6 @@ const searchSP = (key, page) => {
 
 const detailCTSP = (id) => {
   return axios.get(`/api/chi-tiet-san-pham/detail/${id}`)
-}
-
-const getAllListCO = () => {
-  return axios.get(`/api/co-ao/getAll`)
 }
 
 const getAllListCL = () => {
@@ -138,7 +123,6 @@ export {
   putCTSP,
   searchCTSP,
   detailCTSP,
-  getAllListCO,
   getAllListCL,
   getAllListMS,
   getAllListLSP,

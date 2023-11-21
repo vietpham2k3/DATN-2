@@ -3,7 +3,7 @@
 import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
 import InputColor from 'react-input-color';
-import '../../scss/AddQuickly.scss';
+import '../../../scss/AddQuickly.scss';
 import { useState } from 'react';
 
 function AddMauSac(props) {
