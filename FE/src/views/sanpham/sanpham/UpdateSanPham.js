@@ -18,6 +18,7 @@ import { useEffect } from 'react'
 import '../../../scss/SanPham.scss'
 import '../../../scss/UpdateSanPham.scss'
 import { toast } from 'react-toastify'
+import { Modal} from 'react-bootstrap';
 import { useNavigate, useParams } from 'react-router'
 import { postCreate } from 'src/service/ServiceChatLieu'
 import { add } from 'src/service/LoaiSanPhamService'
@@ -60,6 +61,13 @@ function UpdateSanPham() {
   const [idCTSP, setIdCTSP] = useState(null)
   const mainCardRef = useRef(null)
   const maxImages = 5
+  const [showModal5, setShowModal5] = useState(false);
+  const openModal5 = () => {
+    setShowModal5(true);
+  };
+  const closeModal5 = () => {
+    setShowModal5(false);
+  };
 
   const [values, setValues] = useState({
     chatLieu: {
@@ -686,13 +694,14 @@ function UpdateSanPham() {
                   ) : (
                     listMSKC.map((d, i) => (
                       <tr
-                        key={d.id}
-                        className="text-center"
-                        onClick={() => {
-                          handleChangeId(d.id)
-                        }}
-                        style={{ cursor: 'pointer' }}
-                      >
+                key={d.id}
+                className="text-center"
+                onClick={() => {
+                  handleChangeId(d.id);
+                  openModal5();
+                }}
+                style={{ cursor: 'pointer' }}
+              >
                         <td>{i + 1}</td>
                         <td
                           style={{
@@ -734,13 +743,12 @@ function UpdateSanPham() {
                     ))
                   )}
                 </tbody>
-              </Table>
-            </div>
-          </div>
-        </CCardBody>
-      </CCard>
-
-      <CCard className={`my-3 ${idCTSP !== null ? 'show' : ''}`} ref={mainCardRef}>
+                <Modal show={showModal5} onHide={closeModal5} backdrop="static" keyboard={false}>
+  <Modal.Header closeButton>
+    <Modal.Title>Thông tin chi tiết</Modal.Title>
+  </Modal.Header>
+  <Modal.Body>
+       <CCard className={`my-3 ${idCTSP !== null ? 'show' : ''}`} ref={mainCardRef}>
         <CCardBody>
           <form onSubmit={handleAddAnh}>
             <div className="justify-content-center">
@@ -827,6 +835,15 @@ function UpdateSanPham() {
           </form>
         </CCardBody>
       </CCard>
+  </Modal.Body>
+</Modal>
+              </Table>
+            </div>
+          </div>
+        </CCardBody>
+      </CCard>
+
+   
       <AddMSKCCTSP
         show={show}
         onHide={() => setShow(false)}

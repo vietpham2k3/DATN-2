@@ -30,66 +30,56 @@ function AddMSKCCTSP(props) {
       </Modal.Header>
       <Modal.Body>
         <form className="row g-3" onSubmit={handleSubmit}>
-          <div className="col-12">
-            <div className="form-inline">
-              <label style={{ fontWeight: 'bold' }} className="form-label me-3">
-                Màu sắc:{' '}
-              </label>
-              {listMS.map((d, i) => (
-                <div key={i} className="form-check form-check-inline">
-                  <input
-                    className="form-check-input"
-                    type="radio"
-                    name="1"
-                    id={d.id}
-                    value={d.id}
-                    onChange={() =>
-                      setValues({
-                        ...values,
-                        mauSac: {
-                          id: d.id,
-                        },
-                      })
-                    }
-                  />
-                  <label className="form-check-label" htmlFor={d.id}>
-                    <div style={{ backgroundColor: d.ten, width: 50, borderRadius: '10px' }}>
-                      &nbsp;
-                    </div>
-                  </label>
-                </div>
+        <div className="col-12">
+        <div className="form-inline">
+          <label style={{ fontWeight: 'bold' }} className="form-label me-3">
+            Màu sắc:{' '}
+          </label>
+          <select
+              className="form-select"
+              aria-label="Default select example"
+              onChange={(e) => {
+                setValues({
+                  ...values,
+                  mauSac: {
+                    id: e.target.value,
+                  },
+                })
+              }}
+            >
+              {listMS.map((c) => (
+                <option key={c.id} value={c.id}>
+                  {c.ma}
+                </option>
               ))}
-            </div>
-          </div>
-          <div className="col-12">
-            <div className="form-inline">
-              <label style={{ fontWeight: 'bold' }} className="form-label me-3">
-                Kích cỡ:{' '}
-              </label>
-              {listKC.map((d, i) => (
-                <div key={i} className="form-check form-check-inline">
-                  <input
-                    className="form-check-input"
-                    type="radio"
-                    name="2"
-                    id={d.id}
-                    value={d.id}
-                    onChange={() =>
-                      setValues({
-                        ...values,
-                        kichCo: {
-                          id: d.id,
-                        },
-                      })
-                    }
-                  />
-                  <label className="form-check-label" htmlFor={d.id}>
-                    {d.ten}
-                  </label>
-                </div>
+            </select>
+        </div>
+      </div>
+      <div className="col-12">
+        <div className="form-inline">
+          <label style={{ fontWeight: 'bold' }} className="form-label me-3">
+            Kích cỡ:{' '}
+          </label>
+          <select
+              className="form-select"
+              aria-label="Default select example"
+              onChange={(e) => {
+                setValues({
+                  ...values,
+                  kichCo: {
+                    id: e.target.value,
+                  },
+                })
+              }}
+            >
+              {listKC.map((c) => (
+                <option key={c.id} value={c.id}>
+                  {c.ten}
+                </option>
               ))}
-            </div>
-          </div>
+            </select>
+        </div>
+      </div>
           <div className="col-12">
             <div className="form-inline">
               <label style={{ fontWeight: 'bold' }} className="form-label me-3">
@@ -146,10 +136,7 @@ function AddMSKCCTSP(props) {
           </div>
           <div className="col-12">
             <Button type="submit" className="btn btn-primary" onClick={onHide}>
-              Thêm
-            </Button>
-            <Button type="submit" className="btn btn-primary mx-3" onClick={getAllList}>
-              Reset
+              Thêm thuộc tính
             </Button>
           </div>
         </form>

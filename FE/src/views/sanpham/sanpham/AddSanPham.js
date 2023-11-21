@@ -20,8 +20,9 @@ import { useNavigate } from 'react-router'
 import { postCreate } from 'src/service/ServiceChatLieu'
 import { add } from 'src/service/LoaiSanPhamService'
 import { postNSX } from 'src/service/NhaSanXuatService'
+import { postMS } from 'src/service/ServiceMauSac'
 import MyVerticallyCenteredModal from './AddQuicklyChatLuong'
-
+import AddMauSac from './AddQuicklyMauSac'
 function AddSanPham() {
   const [listCL, setListCL] = useState([])
   const [listNSX, setListNSX] = useState([])
@@ -31,8 +32,8 @@ function AddSanPham() {
   const [modalShow, setModalShow] = useState(false)
   const [modalShowLSP, setModalShowLSP] = useState(false)
   const [modalShowNSX, setModalShowNSX] = useState(false)
-  const [isHidden, setIsHidden] = useState(true)
-  const [confirmClicked, setConfirmClicked] = useState(false)
+  const [modalShowKC, setModalShowKC] = useState(false)
+  const [modalShowMS, setModalShowMS] = useState(false)
 
   const navigate = useNavigate()
 
@@ -48,9 +49,6 @@ function AddSanPham() {
       id: '',
     },
     nhaSanXuat: {
-      id: '',
-    },
-    coAo: {
       id: '',
     },
     kichCo: {
@@ -106,6 +104,18 @@ function AddSanPham() {
     }
   }
 
+  const handleAddMS = (event) => {
+    event.preventDefault()
+    addMS(valuesCL)
+  }
+
+  const addMS = (value) => {
+    const res = postMS(value)
+    if (res) {
+      closeModal()
+    }
+  }
+
   const handleSubmitCL = (event) => {
     event.preventDefault()
     post(valuesCL)
@@ -134,7 +144,7 @@ function AddSanPham() {
   const handleSubmit = async (event) => {
     event.preventDefault()
     if (!values.mauSac.id || !values.kichCo.id || !values.soLuong) {
-      toast.error('Vui lòng chọn thuộc tính')
+      toast.error('Vui lòng điền đầy đủ thông tin')
       return
     }
     await postctsp(values)
@@ -145,7 +155,8 @@ function AddSanPham() {
     if (
       values.sanPham.ten.trim() === '' ||
       values.giaBan.trim() === '' ||
-      values.sanPham.moTa.trim() === ''
+      values.sanPham.moTa.trim() === '' ||
+      values.soLuong.trim() === ''
     ) {
       // Display an error message or prevent confirmation
       toast.error('Không được để trống !')
@@ -172,7 +183,9 @@ function AddSanPham() {
       if (
         resCL.data.length > 0 ||
         resLSP.data.length > 0 ||
-        resNSX.data.length > 0
+        resNSX.data.length > 0 ||
+        resMS.data.length > 0 ||
+        resKC.data.length > 0
       ) {
         setValues({
           ...values,
@@ -181,6 +194,12 @@ function AddSanPham() {
           },
           loaiSanPham: {
             id: resLSP.data[0].id,
+          },
+          mauSac: {
+            id: resMS.data[0].id,
+          },
+          kichCo: {
+            id: resKC.data[0].id,
           },
           nhaSanXuat: {
             id: resNSX.data[0].id,
@@ -352,6 +371,82 @@ function AddSanPham() {
               ))}
             </select>
           </div>
+          <div className="col-6">
+            <label className="form-label me-3" htmlFor="trang-thai6">
+              Màu sắc:{' '}
+              <span
+                role="button"
+                tabIndex={0}
+                className="fa-solid"
+                onClick={() => setModalShowMS(true)}
+                onKeyDown={(e) => {
+                  if (e.key === 'Enter') {
+                    setModalShowMS(true)
+                  }
+                }}
+                style={{ cursor: 'pointer' }}
+              >
+                <i className="fa-solid fa-plus"></i>
+              </span>
+            </label>{' '}
+            <select
+              className="form-select"
+              aria-label="Default select example"
+              onChange={(e) => {
+                setValues({
+                  ...values,
+                  mauSac: {
+                    id: e.target.value,
+                  },
+                })
+              }}
+            >
+              {listMS.map((c) => (
+                <option key={c.id} value={c.id}>
+                  {c.ma}
+                </option>
+              ))}
+            </select>
+          </div>
+          <div className="col-6">
+            <label className="form-label me-3" htmlFor="trang-thai6">
+              Kích cỡ:{' '}
+              <span
+                role="button"
+                tabIndex={0}
+                className="fa-solid"
+                onClick={() => setModalShowKC(true)}
+                onKeyDown={(e) => {
+                  if (e.key === 'Enter') {
+                    setModalShowKC(true)
+                  }
+                }}
+                style={{ cursor: 'pointer' }}
+              >
+                <i className="fa-solid fa-plus"></i>
+              </span>
+            </label>{' '}
+            <select
+              className="form-select"
+              aria-label="Default select example"
+              onChange={(e) => {
+                setValues({
+                  ...values,
+                  kichCo: {
+                    id: e.target.value,
+                  },
+                })
+              }}
+            >
+              {listKC.map((c) => (
+                <option key={c.id} value={c.id}>
+                  {c.ten}
+                </option>
+              ))}
+            </select>
+          </div>
+                
+          
           <div className="col-md-6">
             <label className="form-label" htmlFor="trang-thai1">
               Mô tả
@@ -370,21 +465,31 @@ function AddSanPham() {
               }
             />
           </div>
+
+          <div className="col-md-6">
+                <label className="form-label" htmlFor="trang-thai1">
+                      Số lượng:{' '}
+                    </label>
+                      <input
+                        type="number"
+                        className="form-control"
+                        id="exampleFormControlInput1"
+                        placeholder="Nhập số lượng"
+                        onChange={(e) =>
+                          setValues({
+                            ...values,
+                            soLuong: e.target.value,
+                          })
+                        }
+                      />
+          </div>
+
           <div className="col-12 d-flex justify-content-end">
-            {!isHidden && (
               <div className="hidden-element">
-                <button onClick={handleSubmit} type="submit" className="btn btn-primary">
-                  ADD
+                <button onClick={handleSubmit} type="submit" className="btn btn-info">
+                  Thêm
                 </button>
               </div>
-            )}
-            {confirmClicked ? (
-              <p></p>
-            ) : (
-              <button onClick={handleConfirmClick} type="submit" className="btn btn-success">
-                Xác Nhận
-              </button>
-            )}
           </div>
         </div>
         <MyVerticallyCenteredModal
@@ -408,108 +513,22 @@ function AddSanPham() {
           values={valuesCL}
           setValues={setValuesCL}
         />
+              <MyVerticallyCenteredModal
+        show={modalShowKC}
+        onHide={() => setModalShowKC(false)}
+        handleSubmit={handleSubmit}
+        values={valuesCL}
+        setValues={setValuesCL}
+      />
+      <AddMauSac
+        show={modalShowMS}
+        onHide={() => setModalShowMS(false)}
+        handleSubmit={handleAddMS}
+        values={valuesCL}
+        setValues={setValuesCL}
+      />
         </CCardBody>
       </CCard>
-      {!isHidden && (
-        <div className="hidden-element">
-
-          <CCard className="my-3">
-          <CCardHeader>
-            <strong>Thêm thuộc tính</strong>
-          </CCardHeader>
-          <CCardBody>
-            <div className="row">
-              <div className="col-12">
-                <h2>Thuộc tính</h2>
-              </div>
-              <div className="col-12">
-                <div className="col-12">
-                  <div className="form-inline">
-                    <label style={{ fontWeight: 'bold' }} className="form-label me-3">
-                      Màu sắc:{' '}
-                    </label>
-                    {listMS.map((d, i) => (
-                      <div key={i} className="form-check form-check-inline">
-                        <input
-                          className="form-check-input"
-                          type="radio"
-                          name="1"
-                          id={d.id}
-                          value={d.id}
-                          onChange={() =>
-                            setValues({
-                              ...values,
-                              mauSac: {
-                                id: d.id,
-                              },
-                            })
-                          }
-                        />
-                        <label className="form-check-label" htmlFor={d.id}>
-                          <div style={{ backgroundColor: d.ten, width: 50, borderRadius: '10px' }}>
-                            &nbsp;
-                          </div>
-                        </label>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-                <div className="col-12">
-                  <div className="form-inline">
-                    <label style={{ fontWeight: 'bold' }} className="form-label me-3">
-                      Kích cỡ:{' '}
-                    </label>
-                    {listKC.map((d, i) => (
-                      <div key={i} className="form-check form-check-inline">
-                        <input
-                          className="form-check-input"
-                          type="radio"
-                          name="2"
-                          id={d.id}
-                          value={d.id}
-                          onChange={() =>
-                            setValues({
-                              ...values,
-                              kichCo: {
-                                id: d.id,
-                              },
-                            })
-                          }
-                        />
-                        <label className="form-check-label" htmlFor={d.id}>
-                          {d.ten}
-                        </label>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-                <div className="col-12">
-                  <div className="form-inline">
-                    <label style={{ fontWeight: 'bold' }} className="form-label me-3">
-                      Số lượng:{' '}
-                    </label>
-                    <div className="form-check form-check-inline">
-                      <input
-                        type="number"
-                        className="form-control"
-                        id="exampleFormControlInput1"
-                        placeholder="Nhập số lượng"
-                        onChange={(e) =>
-                          setValues({
-                            ...values,
-                            soLuong: e.target.value,
-                          })
-                        }
-                      />
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            </CCardBody>
-          </CCard>
-        </div>
-      )}
     </div>
   )
 }
