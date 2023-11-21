@@ -1,4 +1,4 @@
-import axios from '../custommize-axios';
+import axios from "../custommize-axios";
 
 const fetchAll = () => {
   return axios.get(`/api/vai-tro/getAll`);
@@ -8,11 +8,11 @@ const fetchAllList = (page) => {
 };
 
 const postCreate = (values) => {
-  return axios.post('/api/vai-tro/add', values);
+  return axios.post("/api/vai-tro/add", values);
 };
 
 const putUpdateVT = (id, values) => {
-  return axios.put('/api/vai-tro/update/' + id, values);
+  return axios.put("/api/vai-tro/update/" + id, values);
 };
 const detailVT = (id) => {
   return axios.get(`/api/vai-tro/detail/` + id);
@@ -23,7 +23,17 @@ const deleteVT = (id, ma) => {
 };
 
 const searchVT = (key, trangThai, page) => {
-  return axios.get(`/api/vai-tro/serach?trangThai=${trangThai}&key=${key}&page=${page}`);
+  return axios.get(
+    `/api/vai-tro/serach?trangThai=${trangThai}&key=${key}&page=${page}`
+  );
 };
 
-export { fetchAll, detailVT, fetchAllList, postCreate, putUpdateVT, deleteVT, searchVT };
+export {
+  fetchAll,
+  detailVT,
+  fetchAllList,
+  postCreate,
+  putUpdateVT,
+  deleteVT,
+  searchVT,
+};

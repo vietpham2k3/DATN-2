@@ -1,12 +1,12 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
 /* eslint-disable react/prop-types */
-import Modal from 'react-bootstrap/Modal';
-import Button from 'react-bootstrap/Button';
-import '../../../scss/AddQuickly.scss';
-import React from 'react';
+import Modal from 'react-bootstrap/Modal'
+import Button from 'react-bootstrap/Button'
+import '../../../scss/AddQuickly.scss'
+import React from 'react'
 
 function MyVerticallyCenteredModal(props) {
-  const { onHide, handleSubmit, values, setValues } = props;
+  const { onHide, handleSubmit, values, setValues } = props
   return (
     <Modal {...props} size="lg" aria-labelledby="contained-modal-title-vcenter" centered>
       <Modal.Header closeButton>
@@ -66,7 +66,7 @@ function MyVerticallyCenteredModal(props) {
         </form>
       </Modal.Body>
     </Modal>
-  );
+  )
 }
 
-export default MyVerticallyCenteredModal;
+export default MyVerticallyCenteredModal

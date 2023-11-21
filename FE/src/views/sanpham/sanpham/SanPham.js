@@ -1,11 +1,13 @@
+/* eslint-disable jsx-a11y/alt-text */
+/* eslint-disable react-hooks/exhaustive-deps */
 import React from 'react'
-import { CButton, CCard, CCardBody, CCardHeader, CCol, CRow } from '@coreui/react'
+import { CCard, CCardBody, CCardHeader, CCol, CRow } from '@coreui/react'
 import ReactPaginate from 'react-paginate'
 import Table from 'react-bootstrap/Table'
 import '../../../scss/SanPham.scss'
 import { Link, useNavigate } from 'react-router-dom'
 import { useState, useEffect } from 'react'
-import { getAllCTSP, deleteCTSP, searchCTSP } from 'src/service/SanPhamService'
+import { getAllCTSP, deleteCTSP, searchCTSP } from '../../../service/SanPhamService'
 import { toast } from 'react-toastify'
 import _ from 'lodash'
 import Slider from 'react-slider'
@@ -15,7 +17,7 @@ import {
   getAllListLSP,
   getAllListMS,
   getAllListNSX,
-} from 'src/service/SanPhamService'
+} from '../../../service/SanPhamService'
 
 const MIN = 0
 const MAX = 1000000
@@ -210,7 +212,7 @@ const SanPham = () => {
   }
 
   const handleUpdate = (idSp, id) => {
-    navigate(`/san-pham/chi-tiet-san-pham/detail/${id}/${idSp}`)
+    navigate(`/quan-ly-san-pham/san-pham/detail/${id}/${idSp}`)
     localStorage.setItem('idSP', idSp)
   }
   const uniqueColors = listMS.filter(
@@ -234,10 +236,6 @@ const SanPham = () => {
       setMauSacDefaultSelected(false)
     }
   }
-
-  // ...
-
-  // Trong JSX của combobox, bạn có thể hiển thị selectedValue thay vì mauSac.
 
   const handleChatLieuChange = (e) => {
     const selectedValue = e.target.value
@@ -438,7 +436,7 @@ const SanPham = () => {
         <CCard className="mb-4">
           <CCardHeader>
             <div style={{ display: 'flex', justifyContent: 'end' }}>
-              <Link className="btn btn-primary" to={'/san-pham/chi-tiet-san-pham/add'}>
+              <Link className="btn btn-primary" to={'/quan-ly-san-pham/san-pham/add'}>
                 Thêm sản phẩm
               </Link>
             </div>

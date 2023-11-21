@@ -1,7 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React from 'react'
 import { useState } from 'react'
-import { CButton, CCard, CCardBody, CCardHeader, CCol, CRow } from '@coreui/react'
+import { CCard, CCardBody, CCardHeader } from '@coreui/react'
 import {
   getAllListCL,
   getAllListLSP,
@@ -13,16 +13,16 @@ import {
   addAnh,
   getAllByIdSP,
   postCTSP,
-} from 'src/service/SanPhamService'
+} from '../../../service/SanPhamService'
 import { useEffect } from 'react'
 import '../../../scss/SanPham.scss'
 import '../../../scss/UpdateSanPham.scss'
 import { toast } from 'react-toastify'
-import { Modal} from 'react-bootstrap';
+import { Modal } from 'react-bootstrap'
 import { useNavigate, useParams } from 'react-router'
-import { postCreate } from 'src/service/ServiceChatLieu'
-import { add } from 'src/service/LoaiSanPhamService'
-import { postNSX } from 'src/service/NhaSanXuatService'
+import { postCreate } from '../../../service/ServiceChatLieu'
+import { add } from '../../../service/LoaiSanPhamService'
+import { postNSX } from '../../../service/NhaSanXuatService'
 import MyVerticallyCenteredModal from './AddQuicklyChatLuong'
 import AddMSKCCTSP from './AddMSKCCTSP'
 import { useRef } from 'react'
@@ -34,7 +34,7 @@ import Button from 'react-bootstrap/Button'
 import OverlayTrigger from 'react-bootstrap/OverlayTrigger'
 import Tooltip from 'react-bootstrap/Tooltip'
 import AddMauSac from './AddQuicklyMauSac'
-import { postMS } from 'src/service/ServiceMauSac'
+import { postMS } from '../../../service/ServiceMauSac'
 import QrCode from 'qrcode'
 
 function UpdateSanPham() {
@@ -43,7 +43,6 @@ function UpdateSanPham() {
   const [listLSP, setListLSP] = useState([])
   const [modalShow, setModalShow] = useState(false)
   const [isShow, setIsShow] = useState(false)
-  const [modalShowCA, setModalShowCA] = useState(false)
   const [modalShowLSP, setModalShowLSP] = useState(false)
   const [modalShowNSX, setModalShowNSX] = useState(false)
   const [modalShowKC, setModalShowKC] = useState(false)
@@ -61,13 +60,13 @@ function UpdateSanPham() {
   const [idCTSP, setIdCTSP] = useState(null)
   const mainCardRef = useRef(null)
   const maxImages = 5
-  const [showModal5, setShowModal5] = useState(false);
+  const [showModal5, setShowModal5] = useState(false)
   const openModal5 = () => {
-    setShowModal5(true);
-  };
+    setShowModal5(true)
+  }
   const closeModal5 = () => {
-    setShowModal5(false);
-  };
+    setShowModal5(false)
+  }
 
   const [values, setValues] = useState({
     chatLieu: {
@@ -419,10 +418,7 @@ function UpdateSanPham() {
                 onChange={(e) => setValues({ ...values, giaBan: e.target.value })}
               />
             </div>
-           
 
-            
-        
             <div className="col-6">
               <label className="form-label me-3" htmlFor="trang-thai2">
                 Trạng thái:{' '}
@@ -606,11 +602,11 @@ function UpdateSanPham() {
         <CCardBody>
           <div className="row">
             <div className="col-10 d-flex align-items-center justify-content-start">
-            <div className="col-md-2" style={{ display: 'flex', justifyContent: 'flex-start' }}>
-              {qrDataURL && (
-                <img src={qrDataURL} style={{ width: '70px', height: '70px' }} alt="QR Code" />
-              )}
-            </div>
+              <div className="col-md-2" style={{ display: 'flex', justifyContent: 'flex-start' }}>
+                {qrDataURL && (
+                  <img src={qrDataURL} style={{ width: '70px', height: '70px' }} alt="QR Code" />
+                )}
+              </div>
             </div>
             <div className="col-2 d-flex justify-content-end align-items-center">
               <button
@@ -694,14 +690,14 @@ function UpdateSanPham() {
                   ) : (
                     listMSKC.map((d, i) => (
                       <tr
-                key={d.id}
-                className="text-center"
-                onClick={() => {
-                  handleChangeId(d.id);
-                  openModal5();
-                }}
-                style={{ cursor: 'pointer' }}
-              >
+                        key={d.id}
+                        className="text-center"
+                        onClick={() => {
+                          handleChangeId(d.id)
+                          openModal5()
+                        }}
+                        style={{ cursor: 'pointer' }}
+                      >
                         <td>{i + 1}</td>
                         <td
                           style={{
@@ -730,12 +726,12 @@ function UpdateSanPham() {
                         <td>
                           <button
                             onClick={() => handleUpdate(d.id)}
-                            style={{color: 'green'}}
+                            style={{ color: 'green' }}
                             className="fa-solid fa-pen-nib"
                           ></button>
                           <button
                             onClick={() => confirmDeleteItem(d.id)}
-                            style={{color: 'orange'}}
+                            style={{ color: 'orange' }}
                             className="fa-solid fa-trash-can mx-3"
                           ></button>
                         </td>
@@ -744,106 +740,110 @@ function UpdateSanPham() {
                   )}
                 </tbody>
                 <Modal show={showModal5} onHide={closeModal5} backdrop="static" keyboard={false}>
-  <Modal.Header closeButton>
-    <Modal.Title>Thông tin chi tiết</Modal.Title>
-  </Modal.Header>
-  <Modal.Body>
-       <CCard className={`my-3 ${idCTSP !== null ? 'show' : ''}`} ref={mainCardRef}>
-        <CCardBody>
-          <form onSubmit={handleAddAnh}>
-            <div className="justify-content-center">
-              {file.length === 0 ? (
-                <span
-                  role="button"
-                  tabIndex={0}
-                  onClick={handleClick}
-                  onKeyPress={(e) => {
-                    if (e.key === 'Enter') {
-                      handleClick()
-                    }
-                  }}
-                  style={{ cursor: 'pointer' }}
-                >
-                  <img src={defaultImage} alt="" width={300} />
-                </span>
-              ) : (
-                <div>
-                  <div className="image-preview-container">{imagePreviews}</div>
-                </div>
-              )}
-              <input
-                type="file"
-                id="fileInput"
-                onChange={handleImageChange}
-                ref={inputRef}
-                multiple
-                style={{ display: 'none' }}
-              />
-            </div>
-            <div className="justify-content-center">{file ? file.name : 'Chọn ảnh'}</div>
-            <div className="justify-content-center">
-              <button type="submit" className="btn btn-primary">
-                Tải ảnh
-              </button>
-            </div>
-            <div className="justify-content-center">
-              {imageList.length === 0 ? (
-                <h1>Tải lên ảnh</h1>
-              ) : (
-                <>
-                  <br />
-                  <ul style={{ listStyle: 'none', padding: 0 }} className="ull">
-                    {imageList.map((image) => (
-                      <li
-                        key={image.id}
-                        style={{
-                          position: 'relative',
-                          marginBottom: '10px',
-                        }}
-                      >
-                        <img
-                          style={{ width: '300px', height: '450px' }}
-                          src={`data:image/jpeg;base64,${image.tenBase64}`}
-                          alt={image.ma}
-                        />
-                        <i
-                          style={{
-                            position: 'absolute',
-                            top: '10px',
-                            right: '10px',
-                            color: 'orange',
-                            border: 'none',
-                            padding: '5px 10px',
-                            cursor: 'pointer',
-                          }}
-                          className="fa-regular fa-trash-can"
-                          role="button"
-                          tabIndex={0}
-                          onClick={() => confirmDeleteImage(image.id)}
-                          onKeyDown={(e) => {
-                            if (e.key === 'Enter') {
-                              confirmDeleteImage(image.id)
-                            }
-                          }}
-                        ></i>
-                      </li>
-                    ))}
-                  </ul>
-                </>
-              )}
-            </div>
-          </form>
-        </CCardBody>
-      </CCard>
-  </Modal.Body>
-</Modal>
+                  <Modal.Header closeButton>
+                    <Modal.Title>Thông tin chi tiết</Modal.Title>
+                  </Modal.Header>
+                  <Modal.Body>
+                    <CCard className={`my-3 ${idCTSP !== null ? 'show' : ''}`} ref={mainCardRef}>
+                      <CCardBody>
+                        <form onSubmit={handleAddAnh}>
+                          <div className="justify-content-center">
+                            {file.length === 0 ? (
+                              <span
+                                role="button"
+                                tabIndex={0}
+                                onClick={handleClick}
+                                onKeyPress={(e) => {
+                                  if (e.key === 'Enter') {
+                                    handleClick()
+                                  }
+                                }}
+                                style={{ cursor: 'pointer' }}
+                              >
+                                <img src={defaultImage} alt="" width={300} />
+                              </span>
+                            ) : (
+                              <div>
+                                <div className="image-preview-container">{imagePreviews}</div>
+                              </div>
+                            )}
+                            <input
+                              type="file"
+                              id="fileInput"
+                              onChange={handleImageChange}
+                              ref={inputRef}
+                              multiple
+                              style={{ display: 'none' }}
+                            />
+                          </div>
+                          <div className="justify-content-center">
+                            {file ? file.name : 'Chọn ảnh'}
+                          </div>
+                          <div className="justify-content-center">
+                            <button type="submit" className="btn btn-primary">
+                              Tải ảnh
+                            </button>
+                          </div>
+                          <div className="justify-content-center">
+                            {imageList.length === 0 ? (
+                              <h1>Tải lên ảnh</h1>
+                            ) : (
+                              <>
+                                <br />
+                                <ul style={{ listStyle: 'none', padding: 0 }} className="ull">
+                                  {imageList.map((image) => (
+                                    <li
+                                      key={image.id}
+                                      style={{
+                                        position: 'relative',
+                                        marginBottom: '10px',
+                                      }}
+                                    >
+                                      <img
+                                        style={{
+                                          width: '300px',
+                                          height: '450px',
+                                        }}
+                                        src={`data:image/jpeg;base64,${image.tenBase64}`}
+                                        alt={image.ma}
+                                      />
+                                      <i
+                                        style={{
+                                          position: 'absolute',
+                                          top: '10px',
+                                          right: '10px',
+                                          color: 'orange',
+                                          border: 'none',
+                                          padding: '5px 10px',
+                                          cursor: 'pointer',
+                                        }}
+                                        className="fa-regular fa-trash-can"
+                                        role="button"
+                                        tabIndex={0}
+                                        onClick={() => confirmDeleteImage(image.id)}
+                                        onKeyDown={(e) => {
+                                          if (e.key === 'Enter') {
+                                            confirmDeleteImage(image.id)
+                                          }
+                                        }}
+                                      ></i>
+                                    </li>
+                                  ))}
+                                </ul>
+                              </>
+                            )}
+                          </div>
+                        </form>
+                      </CCardBody>
+                    </CCard>
+                  </Modal.Body>
+                </Modal>
               </Table>
             </div>
           </div>
         </CCardBody>
       </CCard>
 
-   
       <AddMSKCCTSP
         show={show}
         onHide={() => setShow(false)}

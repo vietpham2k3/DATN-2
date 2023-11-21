@@ -21,15 +21,14 @@ const routes = [
   { path: '/theme/colors', name: 'Colors', element: Colors },
   { path: '/theme/typography', name: 'Typography', element: Typography },
 
-  { path: '/san-pham', name: 'SanPham', element: SanPham, exact: true },
-  { path: '/san-pham', name: 'Sản Phẩm', element: SanPham },
-  { path: '/san-pham/chi-tiet-san-pham/add', element: AddSanPham },
+  { path: '/quan-ly-san-pham/san-pham', name: 'Sản Phẩm', element: SanPham },
+  { path: '/quan-ly-san-pham/san-pham/add', element: AddSanPham },
   {
-    path: '/san-pham/chi-tiet-san-pham/detail/:id/:idSP',
+    path: '/quan-ly-san-pham/san-pham/detail/:id/:idSP',
     element: UpdateSanPham,
   },
-  { path: '/san-pham/mau-sac', name: 'Màu Sắc', element: MauSac },
-  { path: '/san-pham/chat-lieu', name: 'Chất Liệu', element: ChatLieu },
+  { path: '/quan-ly-san-pham/mau-sac', name: 'Màu Sắc', element: MauSac },
+  { path: '/quan-ly-san-pham/chat-lieu', name: 'Chất Liệu', element: ChatLieu },
 
   { path: '/charts', name: 'Charts', element: Charts },
   { path: '/thong-ke', name: 'Thống kê', element: Dashboard },

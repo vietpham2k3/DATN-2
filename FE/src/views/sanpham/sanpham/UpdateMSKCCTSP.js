@@ -1,9 +1,10 @@
+/* eslint-disable react/react-in-jsx-scope */
 /* eslint-disable jsx-a11y/label-has-associated-control */
 /* eslint-disable react/prop-types */
 import Modal from 'react-bootstrap/Modal'
 import Button from 'react-bootstrap/Button'
 import '../../../scss/AddQuickly.scss'
-import { getAllListMS, getAllListKC } from 'src/service/SanPhamService'
+import { getAllListMS, getAllListKC } from '../../../service/SanPhamService'
 import { useState } from 'react'
 import { useEffect } from 'react'
 
@@ -56,7 +57,13 @@ function UpdateMSKCCTSP(props) {
                     }
                   />
                   <label className="form-check-label" htmlFor={d.id}>
-                    <div style={{ backgroundColor: d.ten, width: 50, borderRadius: '10px' }}>
+                    <div
+                      style={{
+                        backgroundColor: d.ten,
+                        width: 50,
+                        borderRadius: '10px',
+                      }}
+                    >
                       &nbsp;
                     </div>
                   </label>

@@ -1,4 +1,4 @@
-import axios from '../custommize-axios';
+import axios from "../custommize-axios";
 
 const fetchAll = () => {
   return axios.get(`/api/kich-co/getAll`);
@@ -11,11 +11,11 @@ const fetchAllList = (page) => {
 };
 
 const postCreate = (values) => {
-  return axios.post('/api/kich-co/add', values);
+  return axios.post("/api/kich-co/add", values);
 };
 
 const putUpdateKC = (id, values) => {
-  return axios.put('/api/kich-co/update/' + id, values);
+  return axios.put("/api/kich-co/update/" + id, values);
 };
 const detailKC = (id) => {
   return axios.get(`/api/kich-co/detail/` + id);
@@ -26,7 +26,18 @@ const deleteKC = (id, ma) => {
 };
 
 const searchKC = (key, trangThai, page) => {
-  return axios.get(`/api/kich-co/serach?trangThai=${trangThai}&key=${key}&page=${page}`);
+  return axios.get(
+    `/api/kich-co/serach?trangThai=${trangThai}&key=${key}&page=${page}`
+  );
 };
 
-export { fetchAll, detailKC, fetchAllList, postCreate, putUpdateKC, deleteKC, searchKC, fetchAllCTSP };
+export {
+  fetchAll,
+  detailKC,
+  fetchAllList,
+  postCreate,
+  putUpdateKC,
+  deleteKC,
+  searchKC,
+  fetchAllCTSP,
+};

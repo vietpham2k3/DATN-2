@@ -1,9 +1,11 @@
+/* eslint-disable no-unused-vars */
+/* eslint-disable no-undef */
 /* eslint-disable jsx-a11y/label-has-associated-control */
 /* eslint-disable react-hooks/exhaustive-deps */
 import React from 'react'
 // import { Card } from '@mui/material';
 // project imports
-import { CButton, CCard, CCardBody, CCardHeader, CCol, CRow } from '@coreui/react'
+import { CCard, CCardBody, CCardHeader } from '@coreui/react'
 import { useState } from 'react'
 import {
   getAllListCL,
@@ -12,15 +14,15 @@ import {
   getAllListMS,
   getAllListNSX,
   postCTSP,
-} from 'src/service/SanPhamService'
+} from '../../../service/SanPhamService'
 import { useEffect } from 'react'
 import '../../../scss/SanPham.scss'
 import { toast } from 'react-toastify'
 import { useNavigate } from 'react-router'
-import { postCreate } from 'src/service/ServiceChatLieu'
-import { add } from 'src/service/LoaiSanPhamService'
-import { postNSX } from 'src/service/NhaSanXuatService'
-import { postMS } from 'src/service/ServiceMauSac'
+import { postCreate } from '../../../service/ServiceChatLieu'
+import { add } from '../../../service/LoaiSanPhamService'
+import { postNSX } from '../../../service/NhaSanXuatService'
+import { postMS } from '../../../service/ServiceMauSac'
 import MyVerticallyCenteredModal from './AddQuicklyChatLuong'
 import AddMauSac from './AddQuicklyMauSac'
 function AddSanPham() {
@@ -137,7 +139,7 @@ function AddSanPham() {
     const res = await postCTSP(value)
     if (res) {
       toast.success('Thêm thành công')
-      navigate(`/san-pham/chi-tiet-san-pham/detail/${res.data.id}/${res.data.sanPham.id}`)
+      navigate(`/quan-ly-san-pham/san-pham/detail/${res.data.id}/${res.data.sanPham.id}`)
     }
   }
 
@@ -212,321 +214,320 @@ function AddSanPham() {
   return (
     <div>
       <CCard className="mb-4">
-          <CCardHeader>
-            <strong>Thêm sản phẩm</strong>
-          </CCardHeader>
-          <CCardBody>
-        <div className="row g-3">
-          <div className="col-md-6">
-            <label className="form-label" htmlFor="trang-thai">
-              Tên
-            </label>
-            <input
-              type="text"
-              className="form-control"
-              placeholder="Nhập tên sản phẩm..."
-              value={values.sanPham.ten}
-              onChange={(e) =>
-                setValues({
-                  ...values,
-                  sanPham: { ...values.sanPham, ten: e.target.value },
-                })
-              }
-            />
-          </div>
-          <div className="col-md-6">
-            <label className="form-label" htmlFor="trang-thai1">
-              Giá bán
-            </label>
-            <input
-              type="text"
-              className="form-control"
-              placeholder="Nhập giá sản phẩm..."
-              value={values.giaBan}
-              onChange={(e) => setValues({ ...values, giaBan: e.target.value })}
-            />
-          </div>
-      
-          <div className="col-6">
-            <label className="form-label me-3" htmlFor="trang-thai2">
-              Trạng thái:{' '}
-            </label>{' '}
-            <select
-              className="form-select"
-              aria-label="Default select example"
-              onChange={(e) => setValues({ ...values, trangThai: e.target.value })}
-            >
-              <option value="1">Kinh doanh</option>
-              <option value="0">Ngừng kinh doanh</option>
-            </select>
-          </div>
-          <div className="col-6">
-            <label className="form-label me-3" htmlFor="trang-thai3">
-              Chất liệu{' '}
-              <span
-                role="button"
-                tabIndex={0}
-                className="fa-solid"
-                onClick={() => setModalShow(true)}
-                onKeyDown={(e) => {
-                  if (e.key === 'Enter') {
-                    setModalShow(true)
-                  }
-                }}
-                style={{ cursor: 'pointer' }}
-              >
-                <i className="fa-solid fa-plus"></i>
-              </span>
-            </label>{' '}
-            <select
-              className="form-select"
-              aria-label="Default select example"
-              onChange={(e) => {
-                setValues({
-                  ...values,
-                  chatLieu: {
-                    id: e.target.value,
-                  },
-                })
-              }}
-            >
-              {listCL.map((c) => (
-                <option key={c.id} value={c.id}>
-                  {c.ten}
-                </option>
-              ))}
-            </select>
-          </div>
-          <div className="col-6">
-            <label className="form-label me-3" htmlFor="trang-thai5">
-              Loại sản phẩm:{' '}
-              <span
-                role="button"
-                tabIndex={0}
-                className="fa-solid"
-                onClick={() => setModalShowLSP(true)}
-                onKeyDown={(e) => {
-                  if (e.key === 'Enter') {
-                    setModalShowLSP(true)
-                  }
-                }}
-                style={{ cursor: 'pointer' }}
-              >
-                <i className="fa-solid fa-plus"></i>
-              </span>
-            </label>
-            <select
-              className="form-select"
-              aria-label="Default select example"
-              onChange={(e) => {
-                setValues({
-                  ...values,
-                  loaiSanPham: {
-                    id: e.target.value,
-                  },
-                })
-              }}
-            >
-              {listLSP.map((c) => (
-                <option key={c.id} value={c.id}>
-                  {c.ten}
-                </option>
-              ))}
-            </select>
-          </div>
-          <div className="col-6">
-            <label className="form-label me-3" htmlFor="trang-thai6">
-              Nhà sản xuất:{' '}
-              <span
-                role="button"
-                tabIndex={0}
-                className="fa-solid"
-                onClick={() => setModalShowNSX(true)}
-                onKeyDown={(e) => {
-                  if (e.key === 'Enter') {
-                    setModalShowNSX(true)
-                  }
-                }}
-                style={{ cursor: 'pointer' }}
-              >
-                <i className="fa-solid fa-plus"></i>
-              </span>
-            </label>{' '}
-            <select
-              className="form-select"
-              aria-label="Default select example"
-              onChange={(e) => {
-                setValues({
-                  ...values,
-                  nhaSanXuat: {
-                    id: e.target.value,
-                  },
-                })
-              }}
-            >
-              {listNSX.map((c) => (
-                <option key={c.id} value={c.id}>
-                  {c.ten}
-                </option>
-              ))}
-            </select>
-          </div>
-          <div className="col-6">
-            <label className="form-label me-3" htmlFor="trang-thai6">
-              Màu sắc:{' '}
-              <span
-                role="button"
-                tabIndex={0}
-                className="fa-solid"
-                onClick={() => setModalShowMS(true)}
-                onKeyDown={(e) => {
-                  if (e.key === 'Enter') {
-                    setModalShowMS(true)
-                  }
-                }}
-                style={{ cursor: 'pointer' }}
-              >
-                <i className="fa-solid fa-plus"></i>
-              </span>
-            </label>{' '}
-            <select
-              className="form-select"
-              aria-label="Default select example"
-              onChange={(e) => {
-                setValues({
-                  ...values,
-                  mauSac: {
-                    id: e.target.value,
-                  },
-                })
-              }}
-            >
-              {listMS.map((c) => (
-                <option key={c.id} value={c.id}>
-                  {c.ma}
-                </option>
-              ))}
-            </select>
-          </div>
-          <div className="col-6">
-            <label className="form-label me-3" htmlFor="trang-thai6">
-              Kích cỡ:{' '}
-              <span
-                role="button"
-                tabIndex={0}
-                className="fa-solid"
-                onClick={() => setModalShowKC(true)}
-                onKeyDown={(e) => {
-                  if (e.key === 'Enter') {
-                    setModalShowKC(true)
-                  }
-                }}
-                style={{ cursor: 'pointer' }}
-              >
-                <i className="fa-solid fa-plus"></i>
-              </span>
-            </label>{' '}
-            <select
-              className="form-select"
-              aria-label="Default select example"
-              onChange={(e) => {
-                setValues({
-                  ...values,
-                  kichCo: {
-                    id: e.target.value,
-                  },
-                })
-              }}
-            >
-              {listKC.map((c) => (
-                <option key={c.id} value={c.id}>
-                  {c.ten}
-                </option>
-              ))}
-            </select>
-          </div>
-                
-          
-          <div className="col-md-6">
-            <label className="form-label" htmlFor="trang-thai1">
-              Mô tả
-            </label>
-            <textarea
-              type="text"
-              className="form-control"
-              placeholder="Nhập mô tả sản phẩm..."
-              rows={3}
-              value={values.sanPham.moTa}
-              onChange={(e) =>
-                setValues({
-                  ...values,
-                  sanPham: { ...values.sanPham, moTa: e.target.value },
-                })
-              }
-            />
-          </div>
+        <CCardHeader>
+          <strong>Thêm sản phẩm</strong>
+        </CCardHeader>
+        <CCardBody>
+          <div className="row g-3">
+            <div className="col-md-6">
+              <label className="form-label" htmlFor="trang-thai">
+                Tên
+              </label>
+              <input
+                type="text"
+                className="form-control"
+                placeholder="Nhập tên sản phẩm..."
+                value={values.sanPham.ten}
+                onChange={(e) =>
+                  setValues({
+                    ...values,
+                    sanPham: { ...values.sanPham, ten: e.target.value },
+                  })
+                }
+              />
+            </div>
+            <div className="col-md-6">
+              <label className="form-label" htmlFor="trang-thai1">
+                Giá bán
+              </label>
+              <input
+                type="text"
+                className="form-control"
+                placeholder="Nhập giá sản phẩm..."
+                value={values.giaBan}
+                onChange={(e) => setValues({ ...values, giaBan: e.target.value })}
+              />
+            </div>
 
-          <div className="col-md-6">
-                <label className="form-label" htmlFor="trang-thai1">
-                      Số lượng:{' '}
-                    </label>
-                      <input
-                        type="number"
-                        className="form-control"
-                        id="exampleFormControlInput1"
-                        placeholder="Nhập số lượng"
-                        onChange={(e) =>
-                          setValues({
-                            ...values,
-                            soLuong: e.target.value,
-                          })
-                        }
-                      />
-          </div>
+            <div className="col-6">
+              <label className="form-label me-3" htmlFor="trang-thai2">
+                Trạng thái:{' '}
+              </label>{' '}
+              <select
+                className="form-select"
+                aria-label="Default select example"
+                onChange={(e) => setValues({ ...values, trangThai: e.target.value })}
+              >
+                <option value="1">Kinh doanh</option>
+                <option value="0">Ngừng kinh doanh</option>
+              </select>
+            </div>
+            <div className="col-6">
+              <label className="form-label me-3" htmlFor="trang-thai3">
+                Chất liệu{' '}
+                <span
+                  role="button"
+                  tabIndex={0}
+                  className="fa-solid"
+                  onClick={() => setModalShow(true)}
+                  onKeyDown={(e) => {
+                    if (e.key === 'Enter') {
+                      setModalShow(true)
+                    }
+                  }}
+                  style={{ cursor: 'pointer' }}
+                >
+                  <i className="fa-solid fa-plus"></i>
+                </span>
+              </label>{' '}
+              <select
+                className="form-select"
+                aria-label="Default select example"
+                onChange={(e) => {
+                  setValues({
+                    ...values,
+                    chatLieu: {
+                      id: e.target.value,
+                    },
+                  })
+                }}
+              >
+                {listCL.map((c) => (
+                  <option key={c.id} value={c.id}>
+                    {c.ten}
+                  </option>
+                ))}
+              </select>
+            </div>
+            <div className="col-6">
+              <label className="form-label me-3" htmlFor="trang-thai5">
+                Loại sản phẩm:{' '}
+                <span
+                  role="button"
+                  tabIndex={0}
+                  className="fa-solid"
+                  onClick={() => setModalShowLSP(true)}
+                  onKeyDown={(e) => {
+                    if (e.key === 'Enter') {
+                      setModalShowLSP(true)
+                    }
+                  }}
+                  style={{ cursor: 'pointer' }}
+                >
+                  <i className="fa-solid fa-plus"></i>
+                </span>
+              </label>
+              <select
+                className="form-select"
+                aria-label="Default select example"
+                onChange={(e) => {
+                  setValues({
+                    ...values,
+                    loaiSanPham: {
+                      id: e.target.value,
+                    },
+                  })
+                }}
+              >
+                {listLSP.map((c) => (
+                  <option key={c.id} value={c.id}>
+                    {c.ten}
+                  </option>
+                ))}
+              </select>
+            </div>
+            <div className="col-6">
+              <label className="form-label me-3" htmlFor="trang-thai6">
+                Nhà sản xuất:{' '}
+                <span
+                  role="button"
+                  tabIndex={0}
+                  className="fa-solid"
+                  onClick={() => setModalShowNSX(true)}
+                  onKeyDown={(e) => {
+                    if (e.key === 'Enter') {
+                      setModalShowNSX(true)
+                    }
+                  }}
+                  style={{ cursor: 'pointer' }}
+                >
+                  <i className="fa-solid fa-plus"></i>
+                </span>
+              </label>{' '}
+              <select
+                className="form-select"
+                aria-label="Default select example"
+                onChange={(e) => {
+                  setValues({
+                    ...values,
+                    nhaSanXuat: {
+                      id: e.target.value,
+                    },
+                  })
+                }}
+              >
+                {listNSX.map((c) => (
+                  <option key={c.id} value={c.id}>
+                    {c.ten}
+                  </option>
+                ))}
+              </select>
+            </div>
+            <div className="col-6">
+              <label className="form-label me-3" htmlFor="trang-thai6">
+                Màu sắc:{' '}
+                <span
+                  role="button"
+                  tabIndex={0}
+                  className="fa-solid"
+                  onClick={() => setModalShowMS(true)}
+                  onKeyDown={(e) => {
+                    if (e.key === 'Enter') {
+                      setModalShowMS(true)
+                    }
+                  }}
+                  style={{ cursor: 'pointer' }}
+                >
+                  <i className="fa-solid fa-plus"></i>
+                </span>
+              </label>{' '}
+              <select
+                className="form-select"
+                aria-label="Default select example"
+                onChange={(e) => {
+                  setValues({
+                    ...values,
+                    mauSac: {
+                      id: e.target.value,
+                    },
+                  })
+                }}
+              >
+                {listMS.map((c) => (
+                  <option key={c.id} value={c.id}>
+                    {c.ma}
+                  </option>
+                ))}
+              </select>
+            </div>
+            <div className="col-6">
+              <label className="form-label me-3" htmlFor="trang-thai6">
+                Kích cỡ:{' '}
+                <span
+                  role="button"
+                  tabIndex={0}
+                  className="fa-solid"
+                  onClick={() => setModalShowKC(true)}
+                  onKeyDown={(e) => {
+                    if (e.key === 'Enter') {
+                      setModalShowKC(true)
+                    }
+                  }}
+                  style={{ cursor: 'pointer' }}
+                >
+                  <i className="fa-solid fa-plus"></i>
+                </span>
+              </label>{' '}
+              <select
+                className="form-select"
+                aria-label="Default select example"
+                onChange={(e) => {
+                  setValues({
+                    ...values,
+                    kichCo: {
+                      id: e.target.value,
+                    },
+                  })
+                }}
+              >
+                {listKC.map((c) => (
+                  <option key={c.id} value={c.id}>
+                    {c.ten}
+                  </option>
+                ))}
+              </select>
+            </div>
 
-          <div className="col-12 d-flex justify-content-end">
+            <div className="col-md-6">
+              <label className="form-label" htmlFor="trang-thai1">
+                Mô tả
+              </label>
+              <textarea
+                type="text"
+                className="form-control"
+                placeholder="Nhập mô tả sản phẩm..."
+                rows={3}
+                value={values.sanPham.moTa}
+                onChange={(e) =>
+                  setValues({
+                    ...values,
+                    sanPham: { ...values.sanPham, moTa: e.target.value },
+                  })
+                }
+              />
+            </div>
+
+            <div className="col-md-6">
+              <label className="form-label" htmlFor="trang-thai1">
+                Số lượng:{' '}
+              </label>
+              <input
+                type="number"
+                className="form-control"
+                id="exampleFormControlInput1"
+                placeholder="Nhập số lượng"
+                onChange={(e) =>
+                  setValues({
+                    ...values,
+                    soLuong: e.target.value,
+                  })
+                }
+              />
+            </div>
+
+            <div className="col-12 d-flex justify-content-end">
               <div className="hidden-element">
                 <button onClick={handleSubmit} type="submit" className="btn btn-info">
                   Thêm
                 </button>
               </div>
+            </div>
           </div>
-        </div>
-        <MyVerticallyCenteredModal
-          show={modalShow}
-          onHide={() => setModalShow(false)}
-          handleSubmit={handleSubmitCL}
-          values={valuesCL}
-          setValues={setValuesCL}
-        />
-        <MyVerticallyCenteredModal
-          show={modalShowLSP}
-          onHide={() => setModalShowLSP(false)}
-          handleSubmit={handleAddLSP}
-          values={valuesCL}
-          setValues={setValuesCL}
-        />
-        <MyVerticallyCenteredModal
-          show={modalShowNSX}
-          onHide={() => setModalShowNSX(false)}
-          handleSubmit={handleAddNSX}
-          values={valuesCL}
-          setValues={setValuesCL}
-        />
-              <MyVerticallyCenteredModal
-        show={modalShowKC}
-        onHide={() => setModalShowKC(false)}
-        handleSubmit={handleSubmit}
-        values={valuesCL}
-        setValues={setValuesCL}
-      />
-      <AddMauSac
-        show={modalShowMS}
-        onHide={() => setModalShowMS(false)}
-        handleSubmit={handleAddMS}
-        values={valuesCL}
-        setValues={setValuesCL}
-      />
+          <MyVerticallyCenteredModal
+            show={modalShow}
+            onHide={() => setModalShow(false)}
+            handleSubmit={handleSubmitCL}
+            values={valuesCL}
+            setValues={setValuesCL}
+          />
+          <MyVerticallyCenteredModal
+            show={modalShowLSP}
+            onHide={() => setModalShowLSP(false)}
+            handleSubmit={handleAddLSP}
+            values={valuesCL}
+            setValues={setValuesCL}
+          />
+          <MyVerticallyCenteredModal
+            show={modalShowNSX}
+            onHide={() => setModalShowNSX(false)}
+            handleSubmit={handleAddNSX}
+            values={valuesCL}
+            setValues={setValuesCL}
+          />
+          <MyVerticallyCenteredModal
+            show={modalShowKC}
+            onHide={() => setModalShowKC(false)}
+            handleSubmit={handleSubmit}
+            values={valuesCL}
+            setValues={setValuesCL}
+          />
+          <AddMauSac
+            show={modalShowMS}
+            onHide={() => setModalShowMS(false)}
+            handleSubmit={handleAddMS}
+            values={valuesCL}
+            setValues={setValuesCL}
+          />
         </CCardBody>
       </CCard>
     </div>

@@ -1,4 +1,4 @@
-import axios from '../custommize-axios';
+import axios from "../custommize-axios";
 
 const vaitro = () => {
   return axios.get(`/api/nhanvien/vaitro`);
@@ -9,11 +9,11 @@ const getAllPageNV = (page) => {
 };
 
 const getAllNV = (id) => {
-  return axios.get('/api/nhanvien/getAll' + id);
+  return axios.get("/api/nhanvien/getAll" + id);
 };
 
 const addNV = (values) => {
-  return axios.post('/api/nhanvien/add', values);
+  return axios.post("/api/nhanvien/add", values);
 };
 
 const deleteNhanVien = (id, values) => {
@@ -24,18 +24,29 @@ const deleteNhanVien = (id, values) => {
 // };
 
 const updateNV = (id, values) => {
-  return axios.put('/api/nhanvien/update/' + id, values);
+  return axios.put("/api/nhanvien/update/" + id, values);
 };
 
 const detailNV = (id) => {
-  return axios.get('/api/nhanvien/detail/' + id);
+  return axios.get("/api/nhanvien/detail/" + id);
 };
 
 const searchNV = (key, trangThai, page) => {
-  return axios.get(`/api/nhanvien/searchNV?key=${key}&trangThai=${trangThai}&page=${page}`);
+  return axios.get(
+    `/api/nhanvien/searchNV?key=${key}&trangThai=${trangThai}&page=${page}`
+  );
 };
 
-export { vaitro, getAllNV, addNV, deleteNhanVien, detailNV, updateNV, getAllPageNV, searchNV };
+export {
+  vaitro,
+  getAllNV,
+  addNV,
+  deleteNhanVien,
+  detailNV,
+  updateNV,
+  getAllPageNV,
+  searchNV,
+};
 
 // // import axios from "axios"
 // import axios from "../custommize-axios"

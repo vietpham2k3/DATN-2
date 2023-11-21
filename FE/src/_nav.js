@@ -1,18 +1,6 @@
 import React from 'react'
 import CIcon from '@coreui/icons-react'
-import {
-  cilBell,
-  cilCalculator,
-  cilChartPie,
-  cilCursor,
-  cilDescription,
-  cilDrop,
-  cilNotes,
-  cilPencil,
-  cilPuzzle,
-  cilSpeedometer,
-  cilStar,
-} from '@coreui/icons'
+import { cilChartPie, cilCursor, cilDrop, cilPencil, cilSpeedometer } from '@coreui/icons'
 import { CNavGroup, CNavItem, CNavTitle } from '@coreui/react'
 
 const _nav = [
@@ -49,23 +37,23 @@ const _nav = [
   {
     component: CNavGroup,
     name: 'Quản lý sản phẩm',
-    to: '/san-pham',
+    to: '/quan-ly-san-pham',
     icon: <CIcon icon={cilCursor} customClassName="nav-icon" />,
     items: [
       {
         component: CNavItem,
         name: 'Sản phẩm',
-        to: '/san-pham',
+        to: '/quan-ly-san-pham/san-pham',
       },
       {
         component: CNavItem,
         name: 'Màu sắc',
-        to: '/san-pham/mau-sac',
+        to: '/quan-ly-san-pham/mau-sac',
       },
       {
         component: CNavItem,
         name: 'Chất liệu',
-        to: '/san-pham/chat-lieu',
+        to: '/quan-ly-san-pham/chat-lieu',
       },
     ],
   },

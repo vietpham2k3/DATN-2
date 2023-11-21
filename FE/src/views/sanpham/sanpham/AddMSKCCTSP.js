@@ -1,7 +1,9 @@
+/* eslint-disable react/react-in-jsx-scope */
+/* eslint-disable react/prop-types */
 import Modal from 'react-bootstrap/Modal'
 import Button from 'react-bootstrap/Button'
 import '../../../scss/AddQuickly.scss'
-import { getAllListMS, getAllListKC } from 'src/service/SanPhamService'
+import { getAllListMS, getAllListKC } from '../../../service/SanPhamService'
 import { useState } from 'react'
 import { useEffect } from 'react'
 
@@ -30,56 +32,56 @@ function AddMSKCCTSP(props) {
       </Modal.Header>
       <Modal.Body>
         <form className="row g-3" onSubmit={handleSubmit}>
-        <div className="col-12">
-        <div className="form-inline">
-          <label style={{ fontWeight: 'bold' }} className="form-label me-3">
-            Màu sắc:{' '}
-          </label>
-          <select
-              className="form-select"
-              aria-label="Default select example"
-              onChange={(e) => {
-                setValues({
-                  ...values,
-                  mauSac: {
-                    id: e.target.value,
-                  },
-                })
-              }}
-            >
-              {listMS.map((c) => (
-                <option key={c.id} value={c.id}>
-                  {c.ma}
-                </option>
-              ))}
-            </select>
-        </div>
-      </div>
-      <div className="col-12">
-        <div className="form-inline">
-          <label style={{ fontWeight: 'bold' }} className="form-label me-3">
-            Kích cỡ:{' '}
-          </label>
-          <select
-              className="form-select"
-              aria-label="Default select example"
-              onChange={(e) => {
-                setValues({
-                  ...values,
-                  kichCo: {
-                    id: e.target.value,
-                  },
-                })
-              }}
-            >
-              {listKC.map((c) => (
-                <option key={c.id} value={c.id}>
-                  {c.ten}
-                </option>
-              ))}
-            </select>
-        </div>
-      </div>
+          <div className="col-12">
+            <div className="form-inline">
+              <label style={{ fontWeight: 'bold' }} className="form-label me-3">
+                Màu sắc:{' '}
+              </label>
+              <select
+                className="form-select"
+                aria-label="Default select example"
+                onChange={(e) => {
+                  setValues({
+                    ...values,
+                    mauSac: {
+                      id: e.target.value,
+                    },
+                  })
+                }}
+              >
+                {listMS.map((c) => (
+                  <option key={c.id} value={c.id}>
+                    {c.ma}
+                  </option>
+                ))}
+              </select>
+            </div>
+          </div>
+          <div className="col-12">
+            <div className="form-inline">
+              <label style={{ fontWeight: 'bold' }} className="form-label me-3">
+                Kích cỡ:{' '}
+              </label>
+              <select
+                className="form-select"
+                aria-label="Default select example"
+                onChange={(e) => {
+                  setValues({
+                    ...values,
+                    kichCo: {
+                      id: e.target.value,
+                    },
+                  })
+                }}
+              >
+                {listKC.map((c) => (
+                  <option key={c.id} value={c.id}>
+                    {c.ten}
+                  </option>
+                ))}
+              </select>
+            </div>
+          </div>
           <div className="col-12">
             <div className="form-inline">
               <label style={{ fontWeight: 'bold' }} className="form-label me-3">
