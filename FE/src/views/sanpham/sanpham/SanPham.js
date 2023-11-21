@@ -138,12 +138,6 @@ const SanPham = () => {
     }
   }
 
-  // const handleImageError = (index) => {
-  //   const updatedErrors = [...imageErrors];
-  //   updatedErrors[index] = true;
-  //   setImageErrors(updatedErrors);
-  // };
-
   function convertToCurrency(number) {
     // Chuyển đổi số thành định dạng tiền Việt Nam
     const formatter = new Intl.NumberFormat('vi-VN', {
@@ -366,6 +360,25 @@ const SanPham = () => {
 
             <Form>
               <Row>
+              <Col>
+                  <Form.Group controlId="mauSacSelect">
+                    <Form.Label style={{ fontWeight: 'bold' }}>Màu Sắc: </Form.Label>
+                    <Form.Select
+                      className="custom-select"
+                      onChange={handleMauSacChange}
+                      value={mauSac}
+                    >
+                      <option value="" disabled={mauSacDefaultSelected}>
+                        Tất cả màu sắc
+                      </option>
+                      {uniqueColors.map((c) => (
+                        <option key={c.ma} value={c.ma}>
+                          &nbsp;{c.ma}
+                        </option>
+                      ))}
+                    </Form.Select>
+                  </Form.Group>
+                </Col>
                 <Col>
                   <Form.Group controlId="chatLieuSelect">
                     <Form.Label style={{ fontWeight: 'bold' }}>Chất Liệu: </Form.Label>
@@ -423,25 +436,7 @@ const SanPham = () => {
                     </Form.Select>
                   </Form.Group>
                 </Col>
-                <Col>
-                  <Form.Group controlId="mauSacSelect">
-                    <Form.Label style={{ fontWeight: 'bold' }}>Màu Sắc: </Form.Label>
-                    <Form.Select
-                      className="custom-select"
-                      onChange={handleMauSacChange}
-                      value={mauSac}
-                    >
-                      <option value="" disabled={mauSacDefaultSelected}>
-                        Tất cả màu sắc
-                      </option>
-                      {uniqueColors.map((c) => (
-                        <option key={c.ma} value={c.ma}>
-                          &nbsp;{c.ma}
-                        </option>
-                      ))}
-                    </Form.Select>
-                  </Form.Group>
-                </Col>
+                
               </Row>
             </Form>
           </CCardBody>

@@ -32,6 +32,7 @@ import ConfirmDelete from './ConfirmDelete'
 import UpdateMSKCCTSP from './UpdateMSKCCTSP'
 import AddMauSac from './AddQuicklyMauSac'
 import { postMS } from '../../../service/ServiceMauSac'
+import { postCreate as postKC } from '../../../service/KichCoService'
 import QrCode from 'qrcode'
 
 function UpdateSanPham() {
@@ -112,11 +113,25 @@ function UpdateSanPham() {
     addMS(valuesMS)
   }
 
-  const addMS = (value) => {
-    const res = postMS(value)
+  const addMS = async (value) => {
+    const res = await postMS(value)
     if (res) {
       closeModal()
+      getAllMSKC()
     }
+  }
+  const postKichCo = async (value) => {
+    const res = await postKC(value)
+    if (res) {
+      toast.success('Thêm thành công')
+      closeModal()
+      getAllMSKC()
+    }
+  }
+
+  const handleSubmitKC = (event) => {
+    event.preventDefault()
+    postKichCo(valuesCL)
   }
 
   const handleAddNSX = (event) => {
@@ -229,7 +244,9 @@ function UpdateSanPham() {
     toast.success('Thêm thành công')
     setModalShowLSP(false)
     setModalShow(false)
+    setModalShowKC(false)
     setModalShowNSX(false)
+    setModalShowMS(false)
     getAllList()
     setValuesCL({
       ten: '',
@@ -266,10 +283,10 @@ function UpdateSanPham() {
   }, [])
 
   const putctsp = async (idSP, value) => {
-    const res = await putCTSP(idSP, value)
-    if (res) {
-      navigate('/san-pham/chi-tiet-san-pham')
-    }
+    await putCTSP(idSP, value)
+    // if (res) {
+    //   navigate('/quan-ly-san-pham/chi-tiet-san-pham')
+    // }
   }
 
   const putctspmodal = async (idCTSP, idSP, value) => {
@@ -595,6 +612,20 @@ function UpdateSanPham() {
             values={valuesCL}
             setValues={setValuesCL}
           />
+          <MyVerticallyCenteredModal
+            show={modalShowKC}
+            onHide={() => setModalShowKC(false)}
+            handleSubmit={handleSubmitKC}
+            values={valuesCL}
+            setValues={setValuesCL}
+          />
+          <AddMauSac
+            show={modalShowMS}
+            onHide={() => setModalShowMS(false)}
+            handleSubmit={handleAddMS}
+            values={valuesMS}
+            setValues={setValuesMS}
+          />
         </CCardBody>
       </CCard>
 
@@ -628,8 +659,40 @@ function UpdateSanPham() {
                 <thead>
                   <tr className="text-center">
                     <th>#</th>
-                    <th>Màu sắc</th>
-                    <th>Kích cỡ</th>
+                    <th>
+                      Màu sắc{' '}
+                      <span
+                        role="button"
+                        tabIndex={0}
+                        className="fa-solid"
+                        onClick={() => setModalShowMS(true)}
+                        onKeyDown={(e) => {
+                          if (e.key === 'Enter') {
+                            setModalShowMS(true)
+                          }
+                        }}
+                        style={{ cursor: 'pointer' }}
+                      >
+                        <i className="fa-solid fa-plus"></i>
+                      </span>
+                    </th>
+                    <th>
+                      Kích cỡ{' '}{' '}
+                      <span
+                        role="button"
+                        tabIndex={0}
+                        className="fa-solid"
+                        onClick={() => setModalShowKC(true)}
+                        onKeyDown={(e) => {
+                          if (e.key === 'Enter') {
+                            setModalShowKC(true)
+                          }
+                        }}
+                        style={{ cursor: 'pointer' }}
+                      >
+                        <i className="fa-solid fa-plus"></i>
+                      </span>
+                    </th>
                     <th>Số lượng</th>
                     <th>Trạng thái</th>
                     <th>Hành động</th>
