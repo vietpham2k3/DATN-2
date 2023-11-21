@@ -3,7 +3,6 @@ import React, { useEffect, useState, createRef } from 'react'
 import classNames from 'classnames'
 import { CRow, CCol, CCard, CCardHeader, CCardBody } from '@coreui/react'
 import { rgbToHex } from '@coreui/utils'
-import { DocsLink } from 'src/components'
 
 const ThemeView = () => {
   const [color, setColor] = useState('rgb(255, 255, 255)')
@@ -53,7 +52,6 @@ const Colors = () => {
       <CCard className="mb-4">
         <CCardHeader>
           Theme colors
-          <DocsLink href="https://coreui.io/docs/utilities/colors/" />
         </CCardHeader>
         <CCardBody>
           <CRow>

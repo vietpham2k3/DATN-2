@@ -1,19 +1,14 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
 /* eslint-disable react/prop-types */
-import Modal from "react-bootstrap/Modal";
-import Button from "react-bootstrap/Button";
-import "../../../scss/AddQuickly.scss";
-import React from "react";
+import Modal from 'react-bootstrap/Modal'
+import Button from 'react-bootstrap/Button'
+import '../../../scss/AddQuickly.scss'
+import React from 'react'
 
 function MyVerticallyCenteredModal(props) {
-  const { onHide, handleSubmit, values, setValues } = props;
+  const { onHide, handleSubmit, values, setValues } = props
   return (
-    <Modal
-      {...props}
-      size="lg"
-      aria-labelledby="contained-modal-title-vcenter"
-      centered
-    >
+    <Modal {...props} size="lg" aria-labelledby="contained-modal-title-vcenter" centered>
       <Modal.Header closeButton>
         <Modal.Title id="contained-modal-title-vcenter">Thêm nhanh</Modal.Title>
       </Modal.Header>
@@ -30,9 +25,9 @@ function MyVerticallyCenteredModal(props) {
           </div>
           <div className="col-6">
             <div className="form-inline">
-              <label style={{ fontWeight: "bold" }} className="form-label me-3">
+              <label style={{ fontWeight: 'bold' }} className="form-label me-3">
                 Trạng thái:
-              </label>{" "}
+              </label>{' '}
               <br />
               <div className="form-check form-check-inline">
                 <input
@@ -71,7 +66,7 @@ function MyVerticallyCenteredModal(props) {
         </form>
       </Modal.Body>
     </Modal>
-  );
+  )
 }
 
-export default MyVerticallyCenteredModal;
+export default MyVerticallyCenteredModal
