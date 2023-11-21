@@ -5,6 +5,8 @@ import { CCard, CCardBody, CCardHeader, CCol, CRow } from '@coreui/react'
 import ReactPaginate from 'react-paginate'
 import Table from 'react-bootstrap/Table'
 import '../../../scss/SanPham.scss'
+import '../../../scss/pageable.scss'
+
 import { Link, useNavigate } from 'react-router-dom'
 import { useState, useEffect } from 'react'
 import { getAllCTSP, deleteCTSP, searchCTSP } from '../../../service/SanPhamService'
@@ -342,10 +344,7 @@ const SanPham = () => {
                 <div className="box col-auto" style={{ marginLeft: '50px', width: '330px' }}>
                   <div className="values">
                     <strong>Khoảng giá:</strong>{' '}
-                    {convertToCurrency(values[0]) + ' - ' + convertToCurrency(values[1])}
                   </div>
-                  <div>{/* <strong>giá cao nhất:</strong> {convertToCurrency(maxPrice)} */}</div>
-
                   <Slider
                     className="slider"
                     value={values}
@@ -355,6 +354,10 @@ const SanPham = () => {
                       setValues(newValues)
                     }}
                   ></Slider>
+                  <div className="values">
+                    <br></br>
+                    {convertToCurrency(values[0]) + ' - ' + convertToCurrency(values[1])}
+                  </div>
                 </div>
               </div>
             </div>
@@ -364,68 +367,80 @@ const SanPham = () => {
             <Form>
               <Row>
                 <Col>
-                  <Form.Select
-                    className="custom-select"
-                    onChange={handleChatLieuChange}
-                    value={chatLieu}
-                  >
-                    <option value="" disabled={chatLieuDefaultSelected}>
-                      ---Chọn chất liệu---
-                    </option>
-                    {listCL.map((c) => (
-                      <option key={c.ten} value={c.ten}>
-                        {c.ten}
+                  <Form.Group controlId="chatLieuSelect">
+                    <Form.Label style={{ fontWeight: 'bold' }}>Chất Liệu: </Form.Label>
+                    <Form.Select
+                      className="custom-select"
+                      onChange={handleChatLieuChange}
+                      value={chatLieu}
+                    >
+                      <option value="" disabled={chatLieuDefaultSelected}>
+                        Tất cả chất liệu
                       </option>
-                    ))}
-                  </Form.Select>
+                      {listCL.map((c) => (
+                        <option key={c.ten} value={c.ten}>
+                          {c.ten}
+                        </option>
+                      ))}
+                    </Form.Select>
+                  </Form.Group>
                 </Col>
                 <Col>
-                  <Form.Select
-                    className="custom-select"
-                    onChange={handleLoaiSanPhamChange}
-                    value={loaiSanPham}
-                  >
-                    <option value="" disabled={loaiSanPhamDefaultSelected}>
-                      ---Chọn loại sản phẩm---
-                    </option>
-                    {listLSP.map((c) => (
-                      <option key={c.ten} value={c.ten}>
-                        {c.ten}
+                  <Form.Group controlId="loaiSanPhamSelect">
+                    <Form.Label style={{ fontWeight: 'bold' }}>Loại Sản Phẩm: </Form.Label>
+                    <Form.Select
+                      className="custom-select"
+                      onChange={handleLoaiSanPhamChange}
+                      value={loaiSanPham}
+                    >
+                      <option value="" disabled={loaiSanPhamDefaultSelected}>
+                        Tất cả loại
                       </option>
-                    ))}
-                  </Form.Select>
+                      {listLSP.map((c) => (
+                        <option key={c.ten} value={c.ten}>
+                          {c.ten}
+                        </option>
+                      ))}
+                    </Form.Select>
+                  </Form.Group>
                 </Col>
                 <Col>
-                  <Form.Select
-                    className="custom-select"
-                    onChange={handleNhaSanXuatChange}
-                    value={nhaSanXuat}
-                  >
-                    <option value="" disabled={nhaSanXuatDefaultSelected}>
-                      ---Chọn nhà sản xuất---
-                    </option>
-                    {listNSX.map((c) => (
-                      <option key={c.ten} value={c.ten}>
-                        {c.ten}
+                  <Form.Group controlId="nhaSanXuatSelect">
+                    <Form.Label style={{ fontWeight: 'bold' }}>Nhà Sản Xuất: </Form.Label>
+                    <Form.Select
+                      className="custom-select"
+                      onChange={handleNhaSanXuatChange}
+                      value={nhaSanXuat}
+                    >
+                      <option value="" disabled={nhaSanXuatDefaultSelected}>
+                        Tất cả nhà sản xuất
                       </option>
-                    ))}
-                  </Form.Select>
+                      {listNSX.map((c) => (
+                        <option key={c.ten} value={c.ten}>
+                          {c.ten}
+                        </option>
+                      ))}
+                    </Form.Select>
+                  </Form.Group>
                 </Col>
                 <Col>
-                  <Form.Select
-                    className="custom-select"
-                    onChange={handleMauSacChange}
-                    value={mauSac}
-                  >
-                    <option value="" disabled={mauSacDefaultSelected}>
-                      ---Chọn màu sắc---
-                    </option>
-                    {uniqueColors.map((c) => (
-                      <option key={c.ma} value={c.ma}>
-                        &nbsp;{c.ma}
+                  <Form.Group controlId="mauSacSelect">
+                    <Form.Label style={{ fontWeight: 'bold' }}>Màu Sắc: </Form.Label>
+                    <Form.Select
+                      className="custom-select"
+                      onChange={handleMauSacChange}
+                      value={mauSac}
+                    >
+                      <option value="" disabled={mauSacDefaultSelected}>
+                        Tất cả màu sắc
                       </option>
-                    ))}
-                  </Form.Select>
+                      {uniqueColors.map((c) => (
+                        <option key={c.ma} value={c.ma}>
+                          &nbsp;{c.ma}
+                        </option>
+                      ))}
+                    </Form.Select>
+                  </Form.Group>
                 </Col>
               </Row>
             </Form>
@@ -472,15 +487,17 @@ const SanPham = () => {
                         <td>{d.sanPham.ten}</td>
                         <td>{d.soLuong || 0}</td>
                         <td>{convertToCurrency(d.giaBan)}</td>
-                        <td>{d.sanPham.trangThai === 1 ? 'Kinh doanh' : 'Ngừng kinh doanh'}</td>
+                        <td>{d.sanPham.trangThai === 1 ? 'Đang bán' : 'Ngừng bán'}</td>
                         <td>
                           <button
                             onClick={() => handleUpdate(d.sanPham.id, d.id)}
-                            className="fa-solid fa-pen"
+                            style={{ color: 'green' }}
+                            className="fa-solid fa-pen-nib"
                           ></button>
                           <button
                             onClick={() => handleDelete(d.sanPham.id)}
-                            className="fa-solid fa-trash mx-3"
+                            style={{ color: 'orange' }}
+                            className="fa-solid fa-trash-can mx-3"
                           ></button>
                         </td>
                       </tr>
@@ -489,11 +506,11 @@ const SanPham = () => {
                 </Table>
                 <ReactPaginate
                   breakLabel="..."
-                  nextLabel="Next >"
+                  nextLabel=">>>"
                   onPageChange={handlePageClick}
                   pageRangeDisplayed={3}
                   pageCount={totalPages}
-                  previousLabel="< Previous"
+                  previousLabel="<<<"
                   pageClassName="page-item"
                   pageLinkClassName="page-link"
                   previousClassName="page-item"
@@ -502,7 +519,7 @@ const SanPham = () => {
                   nextLinkClassName="page-link"
                   breakClassName="page-item"
                   breakLinkClassName="page-link"
-                  containerClassName="pagination justify-content-center"
+                  containerClassName="pagination justify-content-center custom-pagination"
                   activeClassName="active"
                 />
               </div>

@@ -118,7 +118,7 @@ function AddMSKCCTSP(props) {
                   onChange={() => setValues({ ...values, trangThai: 1 })}
                 />
                 <label className="form-check-label" htmlFor="inlineRadio1">
-                  Kinh doanh
+                  Đang bán
                 </label>
               </div>
               <div className="form-check form-check-inline">
@@ -131,7 +131,7 @@ function AddMSKCCTSP(props) {
                   onChange={() => setValues({ ...values, trangThai: 0 })}
                 />
                 <label className="form-check-label" htmlFor="inlineRadio2">
-                  Ngừng kinh doanh
+                  Ngừng bán
                 </label>
               </div>
             </div>

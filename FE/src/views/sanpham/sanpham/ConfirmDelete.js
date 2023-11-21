@@ -35,12 +35,9 @@ const ConfirmDelete = (props) => {
           <Modal.Title>Thông báo</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <div className="body-add-new">Bạn có muốn ngừng kinh doanh thuộc tính này?</div>
+          <div className="body-add-new">Bạn có muốn ngừng bán sản phẩm này?</div>
         </Modal.Body>
         <Modal.Footer>
-          <Button variant="secondary" onClick={handleClose}>
-            Đóng
-          </Button>
           <Button variant="danger" onClick={() => handleConfirm()}>
             Xác nhận
           </Button>

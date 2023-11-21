@@ -48,7 +48,7 @@ public class MauSacServiceImpl implements MauSacService {
         mauSac.setTrangThai(1);
         mauSac.setNgaySua(new Date());
         mauSac.setNgayTao(mauSac.getNgayTao());
-        mauSac.setTen(mauSac.getMa());
+        mauSac.setTen(mauSac.getTen());
         return res.save(mauSac);
     }
 

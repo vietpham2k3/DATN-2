@@ -2,8 +2,6 @@ import React from 'react'
 
 const Dashboard = React.lazy(() => import('./views/dashboard/Dashboard'))
 
-const Charts = React.lazy(() => import('./views/charts/Charts'))
-
 const Colors = React.lazy(() => import('./views/theme/colors/Colors'))
 const Typography = React.lazy(() => import('./views/theme/typography/Typography'))
 
@@ -13,10 +11,14 @@ const AddSanPham = React.lazy(() => import('./views/sanpham/sanpham/AddSanPham')
 const UpdateSanPham = React.lazy(() => import('./views/sanpham/sanpham/UpdateSanPham'))
 
 const MauSac = React.lazy(() => import('./views/sanpham/mausac/MauSac'))
+const AddMauSac = React.lazy(() => import('./views/sanpham/mausac/AddMS'))
+const UpdateMauSac = React.lazy(() => import('./views/sanpham/mausac/UpdateMS'))
+
 const ChatLieu = React.lazy(() => import('./views/sanpham/chatlieu/ChatLieu'))
 
 const routes = [
   { path: '/', exact: true, name: 'Home' },
+  
   { path: '/theme', name: 'Theme', element: Colors, exact: true },
   { path: '/theme/colors', name: 'Colors', element: Colors },
   { path: '/theme/typography', name: 'Typography', element: Typography },
@@ -28,9 +30,15 @@ const routes = [
     element: UpdateSanPham,
   },
   { path: '/quan-ly-san-pham/mau-sac', name: 'Màu Sắc', element: MauSac },
+  { path: '/quan-ly-san-pham/mau-sac/add', element: AddMauSac },
+  { path: '/quan-ly-san-pham/mau-sac/update', element: UpdateMauSac },
+  {
+    path: '/quan-ly-san-pham/mau-sac/detail/:id',
+    element: UpdateMauSac,
+  },
+
   { path: '/quan-ly-san-pham/chat-lieu', name: 'Chất Liệu', element: ChatLieu },
 
-  { path: '/charts', name: 'Charts', element: Charts },
   { path: '/thong-ke', name: 'Thống kê', element: Dashboard },
 ]
 

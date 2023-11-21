@@ -2,7 +2,7 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
 /* eslint-disable react/prop-types */
 import Modal from 'react-bootstrap/Modal'
-import Button from 'react-bootstrap/Button'
+import { Form, Button } from 'react-bootstrap'
 import '../../../scss/AddQuickly.scss'
 import { getAllListMS, getAllListKC } from '../../../service/SanPhamService'
 import { useState } from 'react'
@@ -38,69 +38,59 @@ function UpdateMSKCCTSP(props) {
               <label style={{ fontWeight: 'bold' }} className="form-label me-3">
                 Màu sắc:{' '}
               </label>
-              {listMS.map((d, i) => (
-                <div key={i} className="form-check form-check-inline">
-                  <input
-                    className="form-check-input"
-                    type="radio"
-                    name="1"
-                    id={d.id}
-                    value={d.id}
-                    checked={values && values.mauSac && d.id === values.mauSac.id}
-                    onChange={() =>
-                      setValues({
-                        ...values,
-                        mauSac: {
-                          id: d.id,
-                        },
-                      })
-                    }
-                  />
-                  <label className="form-check-label" htmlFor={d.id}>
-                    <div
-                      style={{
-                        backgroundColor: d.ten,
-                        width: 50,
-                        borderRadius: '10px',
-                      }}
-                    >
-                      &nbsp;
-                    </div>
-                  </label>
-                </div>
-              ))}
+              <Form.Select
+                className="custom-select"
+                value={values?.mauSac?.id || ''}
+                onChange={(e) =>
+                  setValues({
+                    ...values,
+                    mauSac: {
+                      id: e.target.value,
+                    },
+                  })
+                }
+              >
+                <option value="" disabled>
+                  Chọn màu sắc
+                </option>
+                {listMS.map((d, i) => (
+                  <option key={i} value={d.id}>
+                    {d.ma}
+                  </option>
+                ))}
+              </Form.Select>
             </div>
           </div>
+
           <div className="col-12">
             <div className="form-inline">
               <label style={{ fontWeight: 'bold' }} className="form-label me-3">
                 Kích cỡ:{' '}
               </label>
-              {listKC.map((d, i) => (
-                <div key={i} className="form-check form-check-inline">
-                  <input
-                    className="form-check-input"
-                    type="radio"
-                    name="2"
-                    id={d.id}
-                    checked={values && values.kichCo && d.id === values.kichCo.id}
-                    value={d.id}
-                    onChange={() =>
-                      setValues({
-                        ...values,
-                        kichCo: {
-                          id: d.id,
-                        },
-                      })
-                    }
-                  />
-                  <label className="form-check-label" htmlFor={d.id}>
+              <Form.Select
+                className="custom-select"
+                value={values?.kichCo?.id || ''}
+                onChange={(e) =>
+                  setValues({
+                    ...values,
+                    kichCo: {
+                      id: e.target.value,
+                    },
+                  })
+                }
+              >
+                <option value="" disabled>
+                  Chọn kích cỡ
+                </option>
+                {listKC.map((d, i) => (
+                  <option key={i} value={d.id}>
                     {d.ten}
-                  </label>
-                </div>
-              ))}
+                  </option>
+                ))}
+              </Form.Select>
             </div>
           </div>
+
           <div className="col-12">
             <div className="form-inline">
               <label style={{ fontWeight: 'bold' }} className="form-label me-3">
@@ -138,7 +128,7 @@ function UpdateMSKCCTSP(props) {
                   onChange={() => setValues({ ...values, trangThai: 1 })}
                 />
                 <label className="form-check-label" htmlFor="inlineRadio1">
-                  Kinh doanh
+                  Đang bán
                 </label>
               </div>
               <div className="form-check form-check-inline">
@@ -151,11 +141,12 @@ function UpdateMSKCCTSP(props) {
                   onChange={() => setValues({ ...values, trangThai: 0 })}
                 />
                 <label className="form-check-label" htmlFor="inlineRadio2">
-                  Ngừng kinh doanh
+                  Ngừng bán
                 </label>
               </div>
             </div>
           </div>
+
           <div className="col-12">
             <Button type="submit" className="btn btn-primary" onClick={onHide}>
               Cập nhật

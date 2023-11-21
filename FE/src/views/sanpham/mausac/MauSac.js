@@ -1,434 +1,254 @@
 import React from 'react'
-import {
-  CButton,
-  CDropdown,
-  CDropdownDivider,
-  CDropdownItem,
-  CDropdownMenu,
-  CDropdownToggle,
-  CButtonGroup,
-  CButtonToolbar,
-  CCard,
-  CCardBody,
-  CCardHeader,
-  CCol,
-  CFormCheck,
-  CFormInput,
-  CInputGroup,
-  CInputGroupText,
-  CRow,
-} from '@coreui/react'
-import { DocsExample } from '../../../components'
+import { CCard, CCardBody, CCardHeader, CCol, CRow } from '@coreui/react'
+import { useState, useEffect } from 'react'
+import ReactPaginate from 'react-paginate'
+import { toast } from 'react-toastify'
+import { useNavigate } from 'react-router-dom'
+import '../../../scss/MauSac.scss'
+import { getAllPageMS, searchMS, deleteMS } from 'service/ServiceMauSac'
+import _ from 'lodash'
+import '../../../scss/pageable.scss'
+const MauSac = () => {
+  const [filterStatus, setFilterStatus] = useState('')
 
-const ButtonGroups = () => {
+  const [currentPage, setCurrentPage] = useState(0)
+
+  const [data, setData] = useState([])
+  const [totalPages, setTotalPages] = useState()
+  const [dataDelete, setDataDelete] = useState({
+    ma: '',
+  })
+
+  useEffect(() => {
+    getAll(0)
+    setDataDelete()
+  }, [])
+
+  const navigate = useNavigate()
+
+  const getAll = async (page) => {
+    setCurrentPage(page)
+    const res = await getAllPageMS(page)
+    if (res && res.data) {
+      setData(res.data.content)
+      setTotalPages(res.data.totalPages)
+    }
+  }
+
+  const search = async (key, trangThai, page) => {
+    setCurrentPage(page)
+    const res = await searchMS(key, trangThai, page)
+    if (res) {
+      setData(res.data.content)
+      setTotalPages(res.data.totalPages)
+    }
+  }
+
+  const handleSearchMS = _.debounce(async (e) => {
+    let term = e.target.value
+    if (term || filterStatus !== 0) {
+      search(term, filterStatus, 0)
+    } else {
+      search('', 0, currentPage)
+    }
+  }, 100)
+
+  const handlePageClick = (event) => {
+    const selectedPage = event.selected
+    if (filterStatus === '') {
+      getAll(selectedPage)
+    } else {
+      search('', filterStatus, selectedPage)
+    }
+  }
+
+  const del = async (id, values) => {
+    const res = await deleteMS(id, values)
+    if (res) {
+      toast.success('Xóa thành công !')
+      getAll(0)
+    }
+  }
+
+  const handleSubmit = (id) => {
+    del(id, dataDelete)
+  }
+
+  function formatDate(dateString) {
+    if (dateString === null) {
+      return '' // Trả về chuỗi rỗng nếu giá trị là null
+    }
+
+    const dateObject = new Date(dateString)
+
+    const day = dateObject.getDate()
+    const month = dateObject.getMonth() + 1
+    const year = dateObject.getFullYear()
+
+    const hours = dateObject.getHours()
+    const minutes = dateObject.getMinutes()
+    // const seconds = dateObject.getSeconds();
+
+    const formattedDate = `${day}/${month}/${year} ${hours}:${minutes}`
+
+    return formattedDate
+  }
+
   return (
     <CRow>
       <CCol xs={12}>
         <CCard className="mb-4">
           <CCardHeader>
-            <strong>React Button Group</strong> <span>Basic example</span>
+            <strong>Tìm kiếm</strong>
           </CCardHeader>
           <CCardBody>
-            <p>
-              Wrap a series of <code>&lt;CButton&gt;</code> components in{' '}
-              <code>&lt;CButtonGroup&gt;</code>.{' '}
-            </p>
-            <DocsExample href="components/button-group">
-              <CButtonGroup role="group" aria-label="Basic example">
-                <CButton color="primary">Left</CButton>
-                <CButton color="primary">Middle</CButton>
-                <CButton color="primary">Right</CButton>
-              </CButtonGroup>
-            </DocsExample>
-            <p>
-              These classes can also be added to groups of links, as an alternative to the{' '}
-              <code>&lt;CNav&gt;</code> components.
-            </p>
-            <DocsExample href="components/button-group">
-              <CButtonGroup>
-                <CButton href="#" color="primary" active>
-                  Active link
-                </CButton>
-                <CButton href="#" color="primary">
-                  Link
-                </CButton>
-                <CButton href="#" color="primary">
-                  Link
-                </CButton>
-              </CButtonGroup>
-            </DocsExample>
-          </CCardBody>
-        </CCard>
-      </CCol>
-      <CCol xs={12}>
-        <CCard className="mb-4">
-          <CCardHeader>
-            <strong>React Button Group</strong> <span>Mixed styles</span>
-          </CCardHeader>
-          <CCardBody>
-            <DocsExample href="components/button-group#mixed-styles">
-              <CButtonGroup role="group" aria-label="Basic mixed styles example">
-                <CButton color="danger">Left</CButton>
-                <CButton color="warning">Middle</CButton>
-                <CButton color="success">Right</CButton>
-              </CButtonGroup>
-            </DocsExample>
-          </CCardBody>
-        </CCard>
-      </CCol>
-      <CCol xs={12}>
-        <CCard className="mb-4">
-          <CCardHeader>
-            <strong>React Button Group</strong> <span>Outlined styles</span>
-          </CCardHeader>
-          <CCardBody>
-            <DocsExample href="components/button-group#outlined-styles">
-              <CButtonGroup role="group" aria-label="Basic outlined example">
-                <CButton color="primary" variant="outline">
-                  Left
-                </CButton>
-                <CButton color="primary" variant="outline">
-                  Middle
-                </CButton>
-                <CButton color="primary" variant="outline">
-                  Right
-                </CButton>
-              </CButtonGroup>
-            </DocsExample>
-          </CCardBody>
-        </CCard>
-      </CCol>
-      <CCol xs={12}>
-        <CCard className="mb-4">
-          <CCardHeader>
-            <strong>React Button Group</strong> <span>Checkbox and radio button groups</span>
-          </CCardHeader>
-          <CCardBody>
-            <p>
-              Combine button-like checkbox and radio toggle buttons into a seamless looking button
-              group.
-            </p>
-            <DocsExample href="components/button-group#checkbox-and-radio-button-groups">
-              <CButtonGroup role="group" aria-label="Basic checkbox toggle button group">
-                <CFormCheck
-                  button={{ variant: 'outline' }}
-                  id="btncheck1"
-                  autoComplete="off"
-                  label="Checkbox 1"
+            <div className="d-flex justify-content-between">
+              <div className="search">
+                <label htmlFor="colorSearch" style={{ marginRight: '10px', fontWeight: 'bold' }}>
+                  Nhập mã, tên màu cần tìm:{' '}
+                </label>
+                <input
+                  id="colorSearch"
+                  style={{ borderRadius: 15, width: 300 }}
+                  type="text"
+                  className="input-search results-list"
+                  placeholder="Search..."
+                  onChange={handleSearchMS}
                 />
-                <CFormCheck
-                  button={{ variant: 'outline' }}
-                  id="btncheck2"
-                  autoComplete="off"
-                  label="Checkbox 2"
-                />
-                <CFormCheck
-                  button={{ variant: 'outline' }}
-                  id="btncheck3"
-                  autoComplete="off"
-                  label="Checkbox 3"
-                />
-              </CButtonGroup>
-            </DocsExample>
-            <DocsExample href="components/button-group#checkbox-and-radio-button-groups">
-              <CButtonGroup role="group" aria-label="Basic checkbox toggle button group">
-                <CFormCheck
-                  type="radio"
-                  button={{ variant: 'outline' }}
-                  name="btnradio"
-                  id="btnradio1"
-                  autoComplete="off"
-                  label="Radio 1"
-                />
-                <CFormCheck
-                  type="radio"
-                  button={{ variant: 'outline' }}
-                  name="btnradio"
-                  id="btnradio2"
-                  autoComplete="off"
-                  label="Radio 2"
-                />
-                <CFormCheck
-                  type="radio"
-                  button={{ variant: 'outline' }}
-                  name="btnradio"
-                  id="btnradio3"
-                  autoComplete="off"
-                  label="Radio 3"
-                />
-              </CButtonGroup>
-            </DocsExample>
-          </CCardBody>
-        </CCard>
-      </CCol>
-      <CCol xs={12}>
-        <CCard className="mb-4">
-          <CCardHeader>
-            <strong>React Button Group</strong> <span>Button toolbar</span>
-          </CCardHeader>
-          <CCardBody>
-            <p>
-              Join sets of button groups into button toolbars for more complicated components. Use
-              utility classes as needed to space out groups, buttons, and more.
-            </p>
-            <DocsExample href="components/button-group#button-toolbar">
-              <CButtonToolbar role="group" aria-label="Toolbar with button groups">
-                <CButtonGroup className="me-2" role="group" aria-label="First group">
-                  <CButton color="primary">1</CButton>
-                  <CButton color="primary">2</CButton>
-                  <CButton color="primary">3</CButton>
-                  <CButton color="primary">4</CButton>
-                </CButtonGroup>
-                <CButtonGroup className="me-2" role="group" aria-label="Second group">
-                  <CButton color="secondary">5</CButton>
-                  <CButton color="secondary">6</CButton>
-                  <CButton color="secondary">7</CButton>
-                </CButtonGroup>
-                <CButtonGroup className="me-2" role="group" aria-label="Third group">
-                  <CButton color="info">8</CButton>
-                </CButtonGroup>
-              </CButtonToolbar>
-            </DocsExample>
-            <p>
-              Feel free to combine input groups with button groups in your toolbars. Similar to the
-              example above, you’ll likely need some utilities through to space items correctly.
-            </p>
-            <DocsExample href="components/button-group#button-toolbar">
-              <CButtonToolbar className="mb-3" role="group" aria-label="Toolbar with button groups">
-                <CButtonGroup className="me-2" role="group" aria-label="First group">
-                  <CButton color="secondary" variant="outline">
-                    1
-                  </CButton>
-                  <CButton color="secondary" variant="outline">
-                    2
-                  </CButton>
-                  <CButton color="secondary" variant="outline">
-                    3
-                  </CButton>
-                  <CButton color="secondary" variant="outline">
-                    4
-                  </CButton>
-                </CButtonGroup>
-                <CInputGroup>
-                  <CInputGroupText>@</CInputGroupText>
-                  <CFormInput
-                    placeholder="Input group example"
-                    aria-label="Input group example"
-                    aria-describedby="btnGroupAddon"
+              </div>
+
+              <div style={{ marginRight: 50 }}>
+                <span style={{ fontWeight: 'bold', marginRight: 25 }} className="form-check-label">
+                  Trạng Thái:
+                </span>
+
+                <div className="form-check form-check-inline">
+                  <input
+                    className="form-check-input"
+                    type="radio"
+                    name="inlineRadioOptions"
+                    checked={filterStatus === ''}
+                    onChange={() => {
+                      setFilterStatus('')
+                      search('', '', 0)
+                    }}
                   />
-                </CInputGroup>
-              </CButtonToolbar>
-              <CButtonToolbar
-                className="justify-content-between"
-                role="group"
-                aria-label="Toolbar with button groups"
+                  <span style={{ marginLeft: 10 }} className="form-check-label">
+                    Tất Cả
+                  </span>
+                </div>
+                <div className="form-check form-check-inline">
+                  <input
+                    className="form-check-input"
+                    type="radio"
+                    name="inlineRadioOptions"
+                    checked={filterStatus === 0}
+                    onChange={() => {
+                      setFilterStatus(0)
+                      search('', 0, 0)
+                    }}
+                  />
+                  <span className="form-check-label">Đang kích hoạt</span>
+                </div>
+                <div style={{ marginLeft: 10 }} className="form-check form-check-inline">
+                  <input
+                    className="form-check-input"
+                    type="radio"
+                    name="inlineRadioOptions"
+                    checked={filterStatus === 1}
+                    onChange={() => {
+                      setFilterStatus(1)
+                      search('', 1, 0)
+                    }}
+                  />
+                  <span className="form-check-label">Ngừng kích hoạt</span>
+                </div>
+              </div>
+            </div>
+          </CCardBody>
+        </CCard>
+      </CCol>
+      <CCol xs={12}>
+        <CCard className="mb-4">
+          <CCardHeader>
+            <div className="d-flex justify-content-end">
+              <button
+                onClick={() => navigate('/quan-ly-san-pham/mau-sac/add')}
+                className="btn btn-primary "
               >
-                <CButtonGroup className="me-2" role="group" aria-label="First group">
-                  <CButton color="secondary" variant="outline">
-                    1
-                  </CButton>
-                  <CButton color="secondary" variant="outline">
-                    2
-                  </CButton>
-                  <CButton color="secondary" variant="outline">
-                    3
-                  </CButton>
-                  <CButton color="secondary" variant="outline">
-                    4
-                  </CButton>
-                </CButtonGroup>
-                <CInputGroup>
-                  <CInputGroupText>@</CInputGroupText>
-                  <CFormInput
-                    placeholder="Input group example"
-                    aria-label="Input group example"
-                    aria-describedby="btnGroupAddon"
-                  />
-                </CInputGroup>
-              </CButtonToolbar>
-            </DocsExample>
-          </CCardBody>
-        </CCard>
-      </CCol>
-      <CCol xs={12}>
-        <CCard className="mb-4">
-          <CCardHeader>
-            <strong>React Button Group</strong> <span>Sizing</span>
+                Thêm màu sắc
+              </button>
+            </div>
           </CCardHeader>
           <CCardBody>
-            <p>
-              Alternatively, of implementing button sizing classes to each button in a group, set{' '}
-              <code>size</code> property to all <code>&lt;CButtonGroup&gt;</code>&#39;s, including
-              each one when nesting multiple groups.
-            </p>
-            <DocsExample href="components/button-group#sizing">
-              <CButtonGroup size="lg" role="group" aria-label="Large button group">
-                <CButton color="dark" variant="outline">
-                  Left
-                </CButton>
-                <CButton color="dark" variant="outline">
-                  Middle
-                </CButton>
-                <CButton color="dark" variant="outline">
-                  Right
-                </CButton>
-              </CButtonGroup>
-              <br />
-              <CButtonGroup role="group" aria-label="Default button group">
-                <CButton color="dark" variant="outline">
-                  Left
-                </CButton>
-                <CButton color="dark" variant="outline">
-                  Middle
-                </CButton>
-                <CButton color="dark" variant="outline">
-                  Right
-                </CButton>
-              </CButtonGroup>
-              <br />
-              <CButtonGroup size="sm" role="group" aria-label="Small button group">
-                <CButton color="dark" variant="outline">
-                  Left
-                </CButton>
-                <CButton color="dark" variant="outline">
-                  Middle
-                </CButton>
-                <CButton color="dark" variant="outline">
-                  Right
-                </CButton>
-              </CButtonGroup>
-            </DocsExample>
-          </CCardBody>
-        </CCard>
-      </CCol>
-      <CCol xs={12}>
-        <CCard className="mb-4">
-          <CCardHeader>
-            <strong>React Button Group</strong> <span>Nesting</span>
-          </CCardHeader>
-          <CCardBody>
-            <p className="text-medium-emphasis small">
-              Put a <code>&lt;CButtonGroup&gt;</code> inside another{' '}
-              <code>&lt;CButtonGroup&gt;</code> when you need dropdown menus combined with a series
-              of buttons.
-            </p>
-            <DocsExample href="components/button-group#nesting">
-              <CButtonGroup role="group" aria-label="Button group with nested dropdown">
-                <CButton color="primary">1</CButton>
-                <CButton color="primary">2</CButton>
-                <CDropdown variant="btn-group">
-                  <CDropdownToggle color="primary">Dropdown</CDropdownToggle>
-                  <CDropdownMenu>
-                    <CDropdownItem href="#">Action</CDropdownItem>
-                    <CDropdownItem href="#">Another action</CDropdownItem>
-                    <CDropdownItem href="#">Something else here</CDropdownItem>
-                    <CDropdownDivider />
-                    <CDropdownItem href="#">Separated link</CDropdownItem>
-                  </CDropdownMenu>
-                </CDropdown>
-              </CButtonGroup>
-            </DocsExample>
-          </CCardBody>
-        </CCard>
-      </CCol>
-      <CCol xs={12}>
-        <CCard className="mb-4">
-          <CCardHeader>
-            <strong>React Button Group</strong> <span>Vertical variation</span>
-          </CCardHeader>
-          <CCardBody>
-            <p className="text-medium-emphasis small">
-              Create a set of buttons that appear vertically stacked rather than horizontally.{' '}
-              <strong>Split button dropdowns are not supported here.</strong>
-            </p>
-            <DocsExample href="components/button-group/#vertical-variation">
-              <CButtonGroup vertical role="group" aria-label="Vertical button group">
-                <CButton color="dark">Button</CButton>
-                <CButton color="dark">Button</CButton>
-                <CButton color="dark">Button</CButton>
-                <CButton color="dark">Button</CButton>
-                <CButton color="dark">Button</CButton>
-                <CButton color="dark">Button</CButton>
-                <CButton color="dark">Button</CButton>
-              </CButtonGroup>
-            </DocsExample>
-            <DocsExample href="components/button-group/#vertical-variation">
-              <CButtonGroup vertical role="group" aria-label="Vertical button group">
-                <CButton color="primary">Button</CButton>
-                <CButton color="primary">Button</CButton>
-                <CDropdown variant="btn-group">
-                  <CDropdownToggle color="primary">Dropdown</CDropdownToggle>
-                  <CDropdownMenu>
-                    <CDropdownItem href="#">Action</CDropdownItem>
-                    <CDropdownItem href="#">Another action</CDropdownItem>
-                    <CDropdownItem href="#">Something else here</CDropdownItem>
-                    <CDropdownDivider />
-                    <CDropdownItem href="#">Separated link</CDropdownItem>
-                  </CDropdownMenu>
-                </CDropdown>
-                <CButton color="primary">Button</CButton>
-                <CButton color="primary">Button</CButton>
-                <CDropdown variant="btn-group">
-                  <CDropdownToggle color="primary">Dropdown</CDropdownToggle>
-                  <CDropdownMenu>
-                    <CDropdownItem href="#">Action</CDropdownItem>
-                    <CDropdownItem href="#">Another action</CDropdownItem>
-                    <CDropdownItem href="#">Something else here</CDropdownItem>
-                    <CDropdownDivider />
-                    <CDropdownItem href="#">Separated link</CDropdownItem>
-                  </CDropdownMenu>
-                </CDropdown>
-                <CDropdown variant="btn-group">
-                  <CDropdownToggle color="primary">Dropdown</CDropdownToggle>
-                  <CDropdownMenu>
-                    <CDropdownItem href="#">Action</CDropdownItem>
-                    <CDropdownItem href="#">Another action</CDropdownItem>
-                    <CDropdownItem href="#">Something else here</CDropdownItem>
-                    <CDropdownDivider />
-                    <CDropdownItem href="#">Separated link</CDropdownItem>
-                  </CDropdownMenu>
-                </CDropdown>
-                <CDropdown variant="btn-group">
-                  <CDropdownToggle color="primary">Dropdown</CDropdownToggle>
-                  <CDropdownMenu>
-                    <CDropdownItem href="#">Action</CDropdownItem>
-                    <CDropdownItem href="#">Another action</CDropdownItem>
-                    <CDropdownItem href="#">Something else here</CDropdownItem>
-                    <CDropdownDivider />
-                    <CDropdownItem href="#">Separated link</CDropdownItem>
-                  </CDropdownMenu>
-                </CDropdown>
-              </CButtonGroup>
-            </DocsExample>
-            <DocsExample href="components/button-group/#vertical-variation">
-              <CButtonGroup vertical role="group" aria-label="Vertical button group">
-                <CFormCheck
-                  type="radio"
-                  button={{ color: 'danger', variant: 'outline' }}
-                  name="vbtnradio"
-                  id="vbtnradio1"
-                  autoComplete="off"
-                  label="Radio 1"
-                  defaultChecked
-                />
-                <CFormCheck
-                  type="radio"
-                  button={{ color: 'danger', variant: 'outline' }}
-                  name="vbtnradio"
-                  id="vbtnradio2"
-                  autoComplete="off"
-                  label="Radio 2"
-                />
-                <CFormCheck
-                  type="radio"
-                  button={{ color: 'danger', variant: 'outline' }}
-                  name="vbtnradio"
-                  id="vbtnradio3"
-                  autoComplete="off"
-                  label="Radio 3"
-                />
-              </CButtonGroup>
-            </DocsExample>
+            <div>
+              <table style={{ marginTop: 50 }} className="table table-hover">
+                <tr>
+                  <th className="ps-2">#</th>
+                  <th className="ps-2">Tên Màu</th>
+                  <th className="ps-2">Màu</th>
+                  <th className="ps-2">Ngày Tạo</th>
+                  <th className="ps-2">Ngày Sửa</th>
+                  <th className="ps-2">Trạng Thái</th>
+                  <th className="ps-2">Action</th>
+                </tr>
+                <tbody>
+                  {data.map((d, i) => (
+                    <tr key={i}>
+                      <td>{i + 1}</td>
+                      <td>{d.ma}</td>
+                      <td>
+                        <div
+                          style={{
+                            backgroundColor: d.ten,
+                            width: 50,
+                            borderRadius: '10px',
+                            textAlign: 'center',
+                          }}
+                        >
+                          &nbsp;
+                        </div>
+                      </td>
+                      <td>{formatDate(d.ngayTao)}</td>
+                      <td>{formatDate(d.ngaySua)}</td>
+                      <td>{d.trangThai === 0 ? 'Đang kích hoạt' : 'Ngừng kích hoạt'}</td>
+                      <td>
+                        <button
+                          onClick={() => navigate(`/quan-ly-san-pham/mau-sac/detail/${d.id}`)}
+                          style={{ color: 'green' }}
+                          className="fa-solid fa-pen-nib fa-khenh"
+                        ></button>
+
+                        <button
+                          onClick={() => handleSubmit(d.id, { ma: d.ma })}
+                          style={{ color: 'orange' }}
+                          className="fa-solid fa-trash-can mx-3 fa-khenh"
+                        ></button>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+
+              <ReactPaginate
+                breakLabel="..."
+                nextLabel=">>>"
+                onPageChange={handlePageClick}
+                pageRangeDisplayed={3}
+                pageCount={totalPages}
+                previousLabel="<<<"
+                pageClassName="page-item"
+                pageLinkClassName="page-link"
+                previousClassName="page-item"
+                previousLinkClassName="page-link"
+                nextClassName="page-item"
+                nextLinkClassName="page-link"
+                breakClassName="page-item"
+                breakLinkClassName="page-link"
+                containerClassName="pagination justify-content-center custom-pagination"
+                activeClassName="active"
+              />
+            </div>
           </CCardBody>
         </CCard>
       </CCol>
@@ -436,4 +256,4 @@ const ButtonGroups = () => {
   )
 }
 
-export default ButtonGroups
+export default MauSac

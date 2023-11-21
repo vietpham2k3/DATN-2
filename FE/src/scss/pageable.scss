@@ -1,0 +1,14 @@
+.custom-pagination .page-item a.page-link {
+    border-radius: 50%; /* Bo tròn tất cả các nút */
+    margin: 0 15px; /* Khoảng cách giữa các nút */
+  }
+  
+  .custom-pagination .page-item.active a.page-link {
+    background-color: #007bff; /* Màu nền trang hiện tại */
+    color: #fff; /* Màu chữ trang hiện tại */
+  }
+  
+  .custom-pagination .page-item a.page-link:hover {
+    background-color: #cfd8dc; /* Màu nền khi hover */
+  }
+  

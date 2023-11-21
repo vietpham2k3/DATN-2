@@ -16,8 +16,8 @@ import java.util.UUID;
 public interface MauSacRepository extends JpaRepository<MauSac, UUID> {
 
     @Query(value = "SELECT * FROM MauSac \n" +
-            "WHERE (:key IS NULL OR ma LIKE CONCAT('%', :key, '%'))\n" +
-            "      AND (:key IS NULL OR ten LIKE CONCAT('%', :key , '%'))\n" +
+            "WHERE ((:key IS NULL OR ma LIKE CONCAT('%', :key, '%'))\n" +
+            "      OR (:key IS NULL OR ten LIKE CONCAT('%', :key , '%')))\n" +
             "      AND (:trangThai IS NULL OR trang_thai = :trangThai)", nativeQuery = true)
     Page<MauSac> searchPageMS(@Param("key") String key,
                               @Param("trangThai") Integer trangThai,

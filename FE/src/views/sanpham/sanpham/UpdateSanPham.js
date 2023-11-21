@@ -353,7 +353,7 @@ function UpdateSanPham() {
 
   function confirmDeleteImage(imageId) {
     // Sử dụng hộp thoại xác nhận
-    const shouldDelete = window.confirm('Bạn có chắc chắn muốn xóa hình ảnh này?')
+    const shouldDelete = window.confirm('Bạn có muốn xóa hình ảnh này?')
     if (shouldDelete) {
       // Gọi hàm xóa hình ảnh khi người dùng xác nhận
       handleDeleteImage(imageId)
@@ -722,15 +722,18 @@ function UpdateSanPham() {
                         </td>
                         <td>{d.kichCo ? d.kichCo.ten : 'Chưa có kích cỡ nào'}</td>
                         <td>{d.soLuong || 0}</td>
-                        <td>{d.trangThai === 1 ? 'Kinh doanh' : 'Ngừng kinh doanh'}</td>
-                        <td>
+                        <td>{d.trangThai === 1 ? 'Đang bán' : 'Ngừng bán'}</td>
+                        <td onClick={(e) => e.stopPropagation()}>
                           <button
                             onClick={() => handleUpdate(d.id)}
                             style={{ color: 'green' }}
                             className="fa-solid fa-pen-nib"
                           ></button>
                           <button
-                            onClick={() => confirmDeleteItem(d.id)}
+                            onClick={(e) => {
+                              e.stopPropagation()
+                              confirmDeleteItem(d.id)
+                            }}
                             style={{ color: 'orange' }}
                             className="fa-solid fa-trash-can mx-3"
                           ></button>

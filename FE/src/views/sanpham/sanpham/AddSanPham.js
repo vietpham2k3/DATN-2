@@ -67,6 +67,12 @@ function AddSanPham() {
   const [valuesCL, setValuesCL] = useState({
     ten: '',
     trangThai: 0,
+  })  
+  
+  const [valuesMS, setValuesMS] = useState({
+    ten: '#ffffffff',
+    ma: '',
+    trangThai: 0,
   })
 
   const closeModal = () => {
@@ -525,8 +531,8 @@ function AddSanPham() {
             show={modalShowMS}
             onHide={() => setModalShowMS(false)}
             handleSubmit={handleAddMS}
-            values={valuesCL}
-            setValues={setValuesCL}
+            values={valuesMS}
+            setValues={setValuesMS}
           />
         </CCardBody>
       </CCard>
