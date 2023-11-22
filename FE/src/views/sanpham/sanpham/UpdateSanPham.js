@@ -15,6 +15,7 @@ import {
   postCTSP,
 } from '../../../service/SanPhamService'
 import { useEffect } from 'react'
+import { useNavigate } from 'react-router-dom';
 import '../../../scss/SanPham.scss'
 import '../../../scss/UpdateSanPham.scss'
 import { toast } from 'react-toastify'
@@ -64,7 +65,7 @@ function UpdateSanPham() {
   const closeModal5 = () => {
     setShowModal5(false)
   }
-
+  const navigate =  useNavigate();
   const [values, setValues] = useState({
     chatLieu: {
       id: '',
@@ -319,6 +320,7 @@ function UpdateSanPham() {
       putctsp(d.id, updatedValues)
     })
     toast.success('Thành công')
+    navigate('/quan-ly-san-pham/san-pham');
   }
 
   const handleSubmitUpdate = async (event) => {
@@ -452,10 +454,10 @@ function UpdateSanPham() {
                 onChange={(e) => setValues({ ...values, trangThai: e.target.value })}
               >
                 <option value="1" selected={values.sanPham.trangThai === 1}>
-                  Kinh doanh
+                  Đang bán
                 </option>
                 <option value="0" selected={values.sanPham.trangThai === 0}>
-                  Ngừng kinh doanh
+                  Ngừng bán
                 </option>
               </select>
             </div>

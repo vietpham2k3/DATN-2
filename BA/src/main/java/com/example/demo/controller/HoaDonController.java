@@ -804,17 +804,6 @@ public class HoaDonController {
         hd.setSoDienThoai(kh.getSdt());
         hd.setTenNguoiNhan(kh.getTenKhachHang());
         serviceHD.add(hd);
-
-        // Check if a file is provided
-        if (anh != null) {
-            // Get the input stream of the file
-            InputStream inputStream = anh.getInputStream();
-            Blob imageBlob = khService.createBlob(inputStream);
-
-            // Set the image blob to the KhachHang object
-            kh.setAnh(imageBlob);
-        }
-        // Save the KhachHang object
         KhachHang savedKhachHang = khService.add(kh);
         KhachHangDTO savedKhachHangDTO = convertToDto(savedKhachHang);
         return ResponseEntity.status(HttpStatus.CREATED).body(savedKhachHangDTO);
@@ -831,19 +820,6 @@ public class HoaDonController {
                 .matKhau(khachHang.getMatKhau())
                 .trangThai(khachHang.getTrangThai())
                 .build();
-
-        // Convert Blob to byte array
-        Blob anhBlob = khachHang.getAnh();
-        if (anhBlob != null) {
-            try (InputStream inputStream = anhBlob.getBinaryStream()) {
-                byte[] anhBytes = inputStream.readAllBytes();
-                // Convert byte array to base64 string
-                String anhBase64 = Base64.getEncoder().encodeToString(anhBytes);
-                khachHangDTO.setAnh(anhBase64);
-            } catch (SQLException | IOException e) {
-                // Handle the exception
-            }
-        }
 
         return khachHangDTO;
     }

@@ -1,4 +1,7 @@
 import React from 'react'
+import AddNV from 'views/nhanvien/addNV'
+import NhanVien from 'views/nhanvien/nhanvien'
+import UpdateNV from 'views/nhanvien/updateNV'
 import AddChatLieu from 'views/sanpham/chatlieu/AddChatLieu'
 import UpdateChatLieu from 'views/sanpham/chatlieu/UpdateChatLieu'
 import AddKC from 'views/sanpham/kichco/addkc'
@@ -10,6 +13,7 @@ import UpdateLSP from 'views/sanpham/loaisanpham/updatelsp'
 import AddNSX from 'views/sanpham/nhasanxuat/addnsx'
 import NSX from 'views/sanpham/nhasanxuat/nsx'
 import UpdateNSX from 'views/sanpham/nhasanxuat/updatensx'
+import KhachHang from './views/khachhang/khachhang'
 
 const Dashboard = React.lazy(() => import('./views/dashboard/Dashboard'))
 
@@ -80,6 +84,22 @@ const routes = [
     element: UpdateLSP,
   },
 
+  { path: '/nhan-vien/hien-thi', name: 'Nhân viên', element: NhanVien },
+  { path: '/nhan-vien/add', element: AddNV },
+  { path: '/nhan-vien/update', element: UpdateNV },
+  {
+    path: '/nhan-vien/detail/:id',
+    element: UpdateNV,
+  },
+
+  { path: '/khach-hang/hien-thi', name: 'Khách hàng', element: KhachHang },
+  { path: '/khach-hang/add', element: AddNV },
+  { path: '/khach-hang/update', element: UpdateNV },
+  {
+    path: '/khach-hang/detail/:id',
+    element: UpdateNV,
+  },
+  
   { path: '/thong-ke', name: 'Thống kê', element: Dashboard },
 ]
 

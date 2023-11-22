@@ -16,19 +16,19 @@ const _nav = [
   },
   {
     component: CNavTitle,
-    name: 'Theme',
+    name: 'Bán hàng',
   },
   {
     component: CNavItem,
-    name: 'Colors',
+    name: 'Bán hàng trực tiếp',
     to: '/theme/colors',
     icon: <CIcon icon={cilDrop} customClassName="nav-icon" />,
   },
   {
     component: CNavItem,
-    name: 'Typography',
-    to: '/theme/typography',
-    icon: <CIcon icon={cilPencil} customClassName="nav-icon" />,
+    name: 'Đơn hàng',
+    to: '/theme/colors',
+    icon: <CIcon icon={cilDrop} customClassName="nav-icon" />,
   },
   {
     component: CNavTitle,
@@ -73,10 +73,30 @@ const _nav = [
     ],
   },
   {
+    component: CNavTitle,
+    name: 'Quản lý ưu đãi',
+  },
+  {
     component: CNavItem,
-    name: 'Charts',
-    to: '/charts',
-    icon: <CIcon icon={cilChartPie} customClassName="nav-icon" />,
+    name: 'Quản lý khuyến mãi',
+    to: '/khuyen-mai/hien-thi',
+    icon: <CIcon icon={cilDrop} customClassName="nav-icon" />,
+  },
+  {
+    component: CNavTitle,
+    name: 'Quản lý người dùng',
+  },
+  {
+    component: CNavItem,
+    name: 'Quản lý nhân viên',
+    to: '/nhan-vien/hien-thi',
+    icon: <CIcon icon={cilDrop} customClassName="nav-icon" />,
+  },
+  {
+    component: CNavItem,
+    name: 'Quản lý khách hàng',
+    to: '/khach-hang/hien-thi',
+    icon: <CIcon icon={cilPencil} customClassName="nav-icon" />,
   },
 ]
 

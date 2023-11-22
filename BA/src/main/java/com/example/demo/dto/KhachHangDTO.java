@@ -21,7 +21,6 @@ public class KhachHangDTO {
     private String matKhau;
     private Integer trangThai;
     private Boolean gioiTinh;
-    private String anh;
     private String role;
 
 //    private DiaChi diaChi;

@@ -17,7 +17,6 @@ import java.util.UUID;
 @Entity
 @Table(name="KhachHang")
 public class KhachHang implements Serializable {
-
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name="id")
@@ -48,9 +47,15 @@ public class KhachHang implements Serializable {
     @Column(name="gioi_tinh")
     private Boolean gioiTinh;
 
-    @Column(name="anh")
-    @Lob
-    @JsonIgnore
-    private Blob anh;
+    @Column(name = "dia_chi")
+    private String diaChi;
 
+    @Column(name = "tinh")
+    private String tinh;
+
+    @Column(name = "huyen")
+    private String huyen;
+
+    @Column(name = "xa")
+    private String xa;
 }

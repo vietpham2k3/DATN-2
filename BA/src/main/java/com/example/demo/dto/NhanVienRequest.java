@@ -12,7 +12,6 @@ import java.util.UUID;
 @NoArgsConstructor
 
 public class NhanVienRequest {
-
     private UUID id;
 
     private String ma;
@@ -42,7 +41,4 @@ public class NhanVienRequest {
     private Integer trangThai;
 
     private Boolean gioiTinh;
-
-    private String anh;
-
 }

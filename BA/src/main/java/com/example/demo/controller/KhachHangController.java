@@ -52,26 +52,7 @@ public class KhachHangController {
     @GetMapping("/getAll/{id}")
     public ResponseEntity<byte[]> getImage(@PathVariable("id") UUID id) throws IOException, SQLException {
         KhachHang kh = khService.getOne(id);
-        if (kh != null && kh.getAnh() != null) {
-            byte[] imageData = convertBlobToBytes(kh.getAnh());
-            return ResponseEntity.ok().contentType(MediaType.IMAGE_JPEG).body(imageData);
-        }
         return ResponseEntity.notFound().build();
-    }
-
-    private byte[] convertBlobToBytes(Blob blob) throws IOException, SQLException {
-        if (blob != null) {
-            try (InputStream inputStream = blob.getBinaryStream()) {
-                ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
-                byte[] buffer = new byte[4096];
-                int bytesRead;
-                while ((bytesRead = inputStream.read(buffer)) != -1) {
-                    outputStream.write(buffer, 0, bytesRead);
-                }
-                return outputStream.toByteArray();
-            }
-        }
-        return null;
     }
 
     @GetMapping("/getAllKH/{id}")
@@ -115,24 +96,6 @@ public class KhachHangController {
             return ResponseEntity.notFound().build();
         }
 
-        // Convert Blob to byte array
-        byte[] anhBytes = null;
-        Blob anhBlob = khachHang.getAnh();
-        if (anhBlob != null) {
-            try (InputStream inputStream = anhBlob.getBinaryStream()) {
-                anhBytes = inputStream.readAllBytes();
-            } catch (SQLException | IOException e) {
-                // Xử lý ngoại lệ
-            }
-        }
-
-        // Chuyển đổi mảng byte thành chuỗi base64
-        String anhBase64 = null;
-        if (anhBytes != null) {
-            anhBase64 = Base64.getEncoder().encodeToString(anhBytes);
-        }
-
-        // Create a DTO object
         KhachHangDTO khachHangDTO = new KhachHangDTO();
         khachHangDTO.setId(khachHang.getId());
         khachHangDTO.setMaKhachHang(khachHang.getMaKhachHang());
@@ -143,7 +106,6 @@ public class KhachHangController {
         khachHangDTO.setMatKhau(khachHang.getMatKhau());
         khachHangDTO.setGioiTinh(khachHang.getGioiTinh());
         khachHangDTO.setTrangThai(khachHang.getTrangThai());
-        khachHangDTO.setAnh(anhBase64);
 
         return ResponseEntity.ok(khachHangDTO);
     }
@@ -175,19 +137,6 @@ public class KhachHangController {
         //send email
         String matKhauMoi = generateRandomPassword(8);
 
-        // Gán mật khẩu vào đối tượng KhachHang
-        khachHang.setMatKhau(matKhauMoi);
-        // Check if a file is provided
-        if (anh != null) {
-            // Get the input stream of the file
-            InputStream inputStream = anh.getInputStream();
-            Blob imageBlob = khService.createBlob(inputStream);
-
-            // Set the image blob to the KhachHang object
-            khachHang.setAnh(imageBlob);
-        }
-
-        // Save the KhachHang object
         khachHang = khService.add(khachHang);
         KhachHangDTO savedKhachHangDTO = convertToDto(khachHang);
 
@@ -222,14 +171,7 @@ public class KhachHangController {
     public ResponseEntity<?> delete(@PathVariable UUID id,
                                     @RequestParam(value = "anh", required = false) MultipartFile anh) throws IOException, SQLException {
         KhachHang khachHang = new KhachHang();
-        if (anh != null && !anh.isEmpty()) {
-            // Get the input stream of the file
-            InputStream inputStream = anh.getInputStream();
-            Blob imageBlob = khService.createBlob(inputStream);
 
-            // Set the image blob to the KhachHang object
-            khachHang.setAnh(imageBlob);
-        }
 
         // Save the KhachHang object
         KhachHang savedKhachHang = khService.delete(id);
@@ -255,16 +197,6 @@ public class KhachHangController {
         khachHang.setNgaySinh(ngaySinh);
         khachHang.setGioiTinh(gioiTinh);
         khachHang.setTrangThai(trangThai);
-
-        // Check if a file is provided
-        if (anh != null && !anh.isEmpty()) {
-            // Get the input stream of the file
-            InputStream inputStream = anh.getInputStream();
-            Blob imageBlob = khService.createBlob(inputStream);
-
-            // Set the image blob to the KhachHang object
-            khachHang.setAnh(imageBlob);
-        }
 
         // Save the KhachHang object
         KhachHang savedKhachHang = khService.update(khachHang, id);
@@ -307,18 +239,6 @@ public class KhachHangController {
 //                .diaChi(DiaChi.builder().id(khachHang.getId()).build())
                 .build();
 
-        // Set anh field from Blob
-        Blob anhBlob = khachHang.getAnh();
-        if (anhBlob != null) {
-            try (InputStream inputStream = anhBlob.getBinaryStream()) {
-                byte[] anhBytes = inputStream.readAllBytes();
-                // Convert byte array to base64 string
-                String anhBase64 = Base64.getEncoder().encodeToString(anhBytes);
-                khachHangDTO.setAnh(anhBase64);
-            } catch (SQLException | IOException e) {
-                // Handle the exception
-            }
-        }
 
         return khachHangDTO;
     }

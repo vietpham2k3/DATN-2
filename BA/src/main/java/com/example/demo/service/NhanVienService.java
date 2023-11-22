@@ -25,8 +25,6 @@ public interface NhanVienService {
 
     NhanVien update(NhanVien nhanVien, UUID id);
 
-    Blob createBlob(InputStream inputStream) throws SQLException, IOException;
-
     void delete(UUID id);
 
     NhanVien findKhachHangByEmailAndMatKhau(String email, String matKhau);

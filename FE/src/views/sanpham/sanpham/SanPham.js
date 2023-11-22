@@ -456,8 +456,8 @@ const SanPham = () => {
                   <thead>
                     <tr className="text-center">
                       <th>#</th>
-                      <th>Ảnh</th>
                       <th>Mã</th>
+                      <th>Ảnh</th>
                       <th>Tên sản phẩm</th>
                       <th>Số lượng</th>
                       <th>Giá bán</th>
@@ -468,7 +468,8 @@ const SanPham = () => {
                   <tbody className="table-group-divider">
                     {data.map((d, i) => (
                       <tr key={i} className="text-center">
-                        <td>{i + 1}</td>
+                        <td>{i + 1}</td> 
+                        <td>{d.sanPham.ma}</td>
                         <td>
                           <img
                             src={`http://localhost:8080/api/chi-tiet-san-pham/${d.id}`}
@@ -476,7 +477,6 @@ const SanPham = () => {
                             style={{ width: '70px', height: '100px' }}
                           />
                         </td>
-                        <td>{d.sanPham.ma}</td>
                         <td>{d.sanPham.ten}</td>
                         <td>{d.soLuong || 0}</td>
                         <td>{convertToCurrency(d.giaBan)}</td>

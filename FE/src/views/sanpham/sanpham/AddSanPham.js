@@ -286,8 +286,8 @@ function AddSanPham() {
                 aria-label="Default select example"
                 onChange={(e) => setValues({ ...values, trangThai: e.target.value })}
               >
-                <option value="1">Kinh doanh</option>
-                <option value="0">Ngừng kinh doanh</option>
+                <option value="1">Đang bán</option>
+                <option value="0">Ngừng bán</option>
               </select>
             </div>
             <div className="col-6">

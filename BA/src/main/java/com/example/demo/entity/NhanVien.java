@@ -18,9 +18,6 @@ import java.util.UUID;
 @Table(name = "NhanVien")
 
 public class NhanVien {
-
-    private static int i = 1;
-
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id")
@@ -73,9 +70,4 @@ public class NhanVien {
 
     @Column(name="gioi_tinh")
     private Boolean gioiTinh;
-
-    @JsonIgnore
-    @Column(name = "anh")
-    @Lob
-    private Blob anh;
 }

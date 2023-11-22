@@ -83,22 +83,10 @@ public class NhanVienServiceImpl implements NhanVienService {
             o.setNguoiTao(nhanVien.getNguoiTao());
             o.setNguoiSua(nhanVien.getNguoiSua());
             o.setMatKhau(nhanVien.getMatKhau());
-            nhanVien.setVaiTro(nhanVien.getVaiTro());
+            o.setVaiTro(nhanVien.getVaiTro());
             o.setTrangThai(nhanVien.getTrangThai());
             return nvRepository.save(o);
         }).orElse(null);
-    }
-
-    @Override
-    public Blob createBlob(InputStream inputStream) throws SQLException, IOException {
-        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
-        byte[] buffer = new byte[4096];
-        int bytesRead;
-        while ((bytesRead = inputStream.read(buffer)) != -1) {
-            outputStream.write(buffer, 0, bytesRead);
-        }
-        byte[] bytes = outputStream.toByteArray();
-        return new SerialBlob(bytes);
     }
 
     @Override
