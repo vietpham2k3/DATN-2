@@ -19,7 +19,7 @@ import '../../../scss/SanPham.scss'
 import '../../../scss/UpdateSanPham.scss'
 import { toast } from 'react-toastify'
 import { Modal } from 'react-bootstrap'
-import { useNavigate, useParams } from 'react-router'
+import { useParams } from 'react-router'
 import { postCreate } from '../../../service/ServiceChatLieu'
 import { add } from '../../../service/LoaiSanPhamService'
 import { postNSX } from '../../../service/NhaSanXuatService'
@@ -48,7 +48,6 @@ function UpdateSanPham() {
   const [show, setShow] = useState(false)
   const [showUpdate, setShowUpdate] = useState(false)
   const { id, idSP } = useParams()
-  const navigate = useNavigate()
   const [file, setFile] = useState([])
   const [imageList, setImageList] = useState([])
   const [listMSKC, setListMSKC] = useState([])
@@ -117,15 +116,19 @@ function UpdateSanPham() {
     const res = await postMS(value)
     if (res) {
       closeModal()
-      getAllMSKC()
+      setValuesMS({
+        ten: '#ffffffff',
+        ma: '',
+        trangThai: 0,
+      })
+      getAllMSKC(idSP)
     }
   }
+
   const postKichCo = async (value) => {
     const res = await postKC(value)
     if (res) {
-      toast.success('Thêm thành công')
       closeModal()
-      getAllMSKC()
     }
   }
 
@@ -655,7 +658,7 @@ function UpdateSanPham() {
               </button>
             </div>
             <div className="col-12">
-              <Table hover className="my-4">
+              <Table hover className="table">
                 <thead>
                   <tr className="text-center">
                     <th>#</th>
@@ -698,7 +701,7 @@ function UpdateSanPham() {
                     <th>Hành động</th>
                   </tr>
                 </thead>
-                <tbody>
+                <tbody className="table-group-divider">
                   {isLoading ? (
                     <tr>
                       <td colSpan="8" className="text-center">
@@ -883,13 +886,13 @@ function UpdateSanPham() {
         setValues={setValues}
         handleSubmit={handleSubmitUpdate}
       />
-      <MyVerticallyCenteredModal
-        show={modalShowKC}
-        onHide={() => setModalShowKC(false)}
-        handleSubmit={handleSubmit}
-        values={valuesCL}
-        setValues={setValuesCL}
-      />
+           <MyVerticallyCenteredModal
+            show={modalShowKC}
+            onHide={() => setModalShowKC(false)}
+            handleSubmit={handleSubmitKC}
+            values={valuesCL}
+            setValues={setValuesCL}
+          />
       <AddMauSac
         show={modalShowMS}
         onHide={() => setModalShowMS(false)}

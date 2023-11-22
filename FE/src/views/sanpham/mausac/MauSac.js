@@ -182,17 +182,17 @@ const MauSac = () => {
           </CCardHeader>
           <CCardBody>
             <div>
-              <table style={{ marginTop: 50 }} className="table table-hover">
+              <table className="table">
                 <tr>
                   <th className="ps-2">#</th>
-                  <th className="ps-2">Tên Màu</th>
+                  <th className="ps-2">Tên</th>
                   <th className="ps-2">Màu</th>
                   <th className="ps-2">Ngày Tạo</th>
                   <th className="ps-2">Ngày Sửa</th>
                   <th className="ps-2">Trạng Thái</th>
                   <th className="ps-2">Action</th>
                 </tr>
-                <tbody>
+                <tbody className="table-group-divider">
                   {data.map((d, i) => (
                     <tr key={i}>
                       <td>{i + 1}</td>

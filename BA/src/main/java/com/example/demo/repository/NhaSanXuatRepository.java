@@ -14,8 +14,8 @@ import java.util.UUID;
 @Repository
 public interface NhaSanXuatRepository extends JpaRepository<NhaSanXuat, UUID> {
     @Query(value = "SELECT * FROM NhaSanXuat \n" +
-            "WHERE (:key IS NULL OR ma LIKE CONCAT('%', :key, '%'))\n" +
-            "      AND (:key IS NULL OR ten LIKE CONCAT('%', :key , '%'))\n" +
+            "WHERE ((:key IS NULL OR ma LIKE CONCAT('%', :key, '%'))\n" +
+            "      OR (:key IS NULL OR ten LIKE CONCAT('%', :key , '%')))\n" +
             "      AND (:trangThai IS NULL OR trang_thai = :trangThai)", nativeQuery = true)
     Page<NhaSanXuat> searchPageNSX(@Param("key") String key,
                               @Param("trangThai") Integer trangThai,

@@ -5,16 +5,14 @@ import ReactPaginate from 'react-paginate'
 import { toast } from 'react-toastify'
 import { useNavigate } from 'react-router-dom'
 import '../../../scss/MauSac.scss'
-import { fetchAllList, searchCL } from 'service/ServiceChatLieu';
-import { deleteCL } from 'service/ServiceChatLieu';
-import _ from 'lodash'
+import { getAllPages, deleteLSP, searchLSP } from 'service/LoaiSanPhamService';
 import '../../../scss/pageable.scss'
-const ChatLieu = () => {
-  const [filterStatus, setFilterStatus] = useState('');
-  const [currentPage, setCurrentPage] = useState(0);
+const LSP = () => {
+    const navigate = useNavigate();
   const [data, setData] = useState([]);
   const [totalPages, setTotalPages] = useState();
-  const navigate = useNavigate();
+  const [searchTerm, setSearchTerm] = useState('');
+  const [filterStatus, setFilterStatus] = useState('');
   const [dataDelete, setDataDelete] = useState({
     ma: ''
   });
@@ -25,31 +23,40 @@ const ChatLieu = () => {
   }, []);
 
   const getAll = async (page) => {
-    setCurrentPage(page);
-    const res = await fetchAllList(page);
+    // setCurrentPage(page);
+    const res = await getAllPages(page);
     if (res && res.data) {
       setData(res.data.content);
       setTotalPages(res.data.totalPages);
-      console.log(data);
     }
   };
 
-  const search = async (key, trangThai, page) => {
-    const res = await searchCL(key, trangThai, page);
-    if (res) {
+  const search = async (term, trangThai, page) => {
+    const res = await searchLSP(term, trangThai, page);
+    if (res && res.data) {
       setData(res.data.content);
       setTotalPages(res.data.totalPages);
     }
   };
 
-  const handleSearchCL = _.debounce(async (e) => {
-    let term = e.target.value;
-    if (term || filterStatus !== 0) {
-      search(term, filterStatus, currentPage);
-    } else {
-      search('', 0, currentPage);
+  const handleSearchLSP = (e) => {
+    const term = e.target.value;
+    setSearchTerm(term);
+    search(term, filterStatus, 0);
+  };
+
+  const del = async (id, values) => {
+    const res = await deleteLSP(id, values);
+    if (res) {
+      toast.success('Xóa thành công!');
+      getAll(0);
     }
-  }, 100);
+  };
+
+  const handleDeleteLSP = (id) => {
+    del(id, dataDelete);
+  };
+
   const handlePageClick = (event) => {
     const selectedPage = event.selected;
     if (filterStatus === '') {
@@ -57,20 +64,6 @@ const ChatLieu = () => {
     } else {
       search('', filterStatus, selectedPage);
     }
-  };
-
-  // const { id } = useParams();
-
-  const del = async (id, values) => {
-    const res = await deleteCL(id, values);
-    if (res) {
-      toast.success('Xóa thành công !');
-      getAll(0);
-    }
-  };
-
-  const handleSubmit = (id) => {
-    del(id, dataDelete);
   };
 
   function formatDate(dateString) {
@@ -86,6 +79,7 @@ const ChatLieu = () => {
 
     const hours = dateObject.getHours();
     const minutes = dateObject.getMinutes();
+    // const seconds = dateObject.getSeconds();
 
     const formattedDate = `${day}/${month}/${year} ${hours}:${minutes}`;
 
@@ -103,7 +97,7 @@ const ChatLieu = () => {
             <div className="d-flex justify-content-between">
               <div className="search">
                 <label htmlFor="colorSearch" style={{ marginRight: '10px', fontWeight: 'bold' }}>
-                  Nhập mã, tên chất liệu cần tìm:{' '}
+                  Nhập mã, tên loại sp cần tìm:{' '}
                 </label>
                 <input
                   id="colorSearch"
@@ -111,7 +105,7 @@ const ChatLieu = () => {
                   type="text"
                   className="input-search results-list"
                   placeholder="Search..."
-                  onChange={handleSearchCL}
+                  onChange={handleSearchLSP}
                 />
               </div>
 
@@ -171,7 +165,7 @@ const ChatLieu = () => {
           <CCardHeader>
             <div className="d-flex justify-content-end">
               <button
-                onClick={() => navigate('/quan-ly-san-pham/chat-lieu/add')}
+                onClick={() => navigate('/quan-ly-san-pham/lsp/add')}
                 className="btn btn-primary "
               >
                 Thêm
@@ -180,7 +174,7 @@ const ChatLieu = () => {
           </CCardHeader>
           <CCardBody>
             <div>
-            <table style={{textAlign: 'center'}} className="table">
+            <table style={{ textAlign: 'center' }} className="table">
               <tr>
                 <th>#</th>
                 <th>Mã</th>
@@ -194,20 +188,20 @@ const ChatLieu = () => {
                 {data.map((d, i) => (
                   <tr key={i}>
                     <td>{i + 1}</td>
-                    <td> {d.ma}</td>
+                    <td>{d.ma}</td>
                     <td>{d.ten}</td>
                     <td>{formatDate(d.ngayTao)}</td>
                     <td>{formatDate(d.ngaySua)}</td>
                     <td>{d.trangThai === 0 ? 'Đang kích hoạt' : 'Ngừng kích hoạt'}</td>
                     <td>
                       <button
-                        onClick={() => navigate(`/quan-ly-san-pham/chat-lieu/detail/${d.id}`)}
+                        onClick={() => navigate(`/quan-ly-san-pham/lsp/detail/${d.id}`)}
                         style={{ color: 'green' }}
                           className="fa-solid fa-pen-nib fa-khenh"
                       ></button>
 
                       <button
-                        onClick={() => handleSubmit(d.id, { ma: d.ma })}
+                        onClick={() => handleDeleteLSP(d.id, { ma: d.ma })}
                         style={{ color: 'orange' }}
                           className="fa-solid fa-trash-can mx-3 fa-khenh"
                       ></button>
@@ -243,4 +237,4 @@ const ChatLieu = () => {
   )
 }
 
-export default ChatLieu
+export default LSP

@@ -1,4 +1,15 @@
 import React from 'react'
+import AddChatLieu from 'views/sanpham/chatlieu/AddChatLieu'
+import UpdateChatLieu from 'views/sanpham/chatlieu/UpdateChatLieu'
+import AddKC from 'views/sanpham/kichco/addkc'
+import KC from 'views/sanpham/kichco/kichco'
+import UpdateKC from 'views/sanpham/kichco/updatekc'
+import AddLSP from 'views/sanpham/loaisanpham/addlsp'
+import LSP from 'views/sanpham/loaisanpham/loaisp'
+import UpdateLSP from 'views/sanpham/loaisanpham/updatelsp'
+import AddNSX from 'views/sanpham/nhasanxuat/addnsx'
+import NSX from 'views/sanpham/nhasanxuat/nsx'
+import UpdateNSX from 'views/sanpham/nhasanxuat/updatensx'
 
 const Dashboard = React.lazy(() => import('./views/dashboard/Dashboard'))
 
@@ -38,6 +49,36 @@ const routes = [
   },
 
   { path: '/quan-ly-san-pham/chat-lieu', name: 'Chất Liệu', element: ChatLieu },
+  { path: '/quan-ly-san-pham/chat-lieu/add', element: AddChatLieu },
+  { path: '/quan-ly-san-pham/chat-lieu/update', element: UpdateChatLieu },
+  {
+    path: '/quan-ly-san-pham/chat-lieu/detail/:id',
+    element: UpdateChatLieu,
+  },
+
+  { path: '/quan-ly-san-pham/nsx', name: 'Nhà sản xuất', element: NSX },
+  { path: '/quan-ly-san-pham/nsx/add', element: AddNSX },
+  { path: '/quan-ly-san-pham/nsx/update', element: UpdateNSX },
+  {
+    path: '/quan-ly-san-pham/nsx/detail/:id',
+    element: UpdateNSX,
+  },
+
+  { path: '/quan-ly-san-pham/kich-co', name: 'Kích cỡ', element: KC },
+  { path: '/quan-ly-san-pham/kich-co/add', element: AddKC },
+  { path: '/quan-ly-san-pham/kich-co/update', element: UpdateKC },
+  {
+    path: '/quan-ly-san-pham/kich-co/detail/:id',
+    element: UpdateKC,
+  },
+
+  { path: '/quan-ly-san-pham/lsp', name: 'Loại SP', element: LSP },
+  { path: '/quan-ly-san-pham/lsp/add', element: AddLSP },
+  { path: '/quan-ly-san-pham/lsp/update', element: UpdateLSP },
+  {
+    path: '/quan-ly-san-pham/lsp/detail/:id',
+    element: UpdateLSP,
+  },
 
   { path: '/thong-ke', name: 'Thống kê', element: Dashboard },
 ]

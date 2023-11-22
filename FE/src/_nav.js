@@ -47,13 +47,28 @@ const _nav = [
       },
       {
         component: CNavItem,
+        name: 'Chất liệu',
+        to: '/quan-ly-san-pham/chat-lieu',
+      },
+      {
+        component: CNavItem,
+        name: 'Nhà sản xuất',
+        to: '/quan-ly-san-pham/nsx',
+      },
+      {
+        component: CNavItem,
         name: 'Màu sắc',
         to: '/quan-ly-san-pham/mau-sac',
       },
       {
         component: CNavItem,
-        name: 'Chất liệu',
-        to: '/quan-ly-san-pham/chat-lieu',
+        name: 'Loại sản phẩm',
+        to: '/quan-ly-san-pham/lsp',
+      },
+      {
+        component: CNavItem,
+        name: 'Kích cỡ',
+        to: '/quan-ly-san-pham/kich-co',
       },
     ],
   },

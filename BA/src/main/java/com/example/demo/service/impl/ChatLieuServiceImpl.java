@@ -73,7 +73,7 @@ public class ChatLieuServiceImpl implements ChatLieuService {
         chatLieu1.setTrangThai(1);
         chatLieu1.setNgaySua(new Date());
       chatLieu1.setNgayTao(chatLieu1.getNgayTao());
-        chatLieu1.setTen(chatLieu1.getMa());
+        chatLieu1.setTen(chatLieu1.getTen());
         return chatLieuRepository.save(chatLieu1);
     }
 

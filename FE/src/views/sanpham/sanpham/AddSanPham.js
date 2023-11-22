@@ -81,6 +81,7 @@ function AddSanPham() {
     setModalShowNSX(false)
     setModalShowLSP(false)
     setModalShowKC(false)
+    setModalShowMS(false)
     getAllList()
     setValuesCL({
       ten: '',
@@ -119,10 +120,16 @@ function AddSanPham() {
     addMS(valuesMS)
   }
 
-  const addMS = (value) => {
-    const res = postMS(value)
+  const addMS = async (value) => {
+    const res = await postMS(value)
     if (res) {
+      toast.success('Thêm thành công')
       closeModal()
+      setValuesMS({
+        ten: '#ffffffff',
+        ma: '',
+        trangThai: 0,
+      })
     }
   }
 

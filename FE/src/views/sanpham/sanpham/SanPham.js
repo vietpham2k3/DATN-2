@@ -273,94 +273,9 @@ const SanPham = () => {
             <strong>Lọc sản phẩm</strong>
           </CCardHeader>
           <CCardBody>
-            <div className="row">
-              <div className="col-12 search d-flex align-items-center row">
-                <input
-                  type="text"
-                  className="input-search-sp box col-auto"
-                  placeholder="Search..."
-                  value={term}
-                  onChange={handleInputChange}
-                  style={{ width: '300px', height: '35px', marginLeft: 10 }}
-                />
-                <div style={{ marginRight: 80 }} className="box d-flex flex-row col-auto">
-                  <div className="form-check">
-                    <input
-                      className="form-check-input"
-                      type="radio"
-                      checked={radio === ''}
-                      value=""
-                      onClick={handleAllClick}
-                      onChange={handleRadioChange}
-                    />
-                    <label
-                      className="form-check-label"
-                      htmlFor="exampleRadios1"
-                      style={{ width: '60px' }}
-                    >
-                      Tất cả
-                    </label>
-                  </div>
-                  <div className="form-check">
-                    <input
-                      className="form-check-input"
-                      type="radio"
-                      checked={radio === '0'}
-                      value="0"
-                      onChange={handleRadioChange}
-                    />
-                    <label
-                      className="form-check-label"
-                      htmlFor="exampleRadios2"
-                      style={{ width: '150px' }}
-                    >
-                      Ngừng kinh doanh
-                    </label>
-                  </div>
-                  <div className="form-check">
-                    <input
-                      className="form-check-input"
-                      type="radio"
-                      name="exampleRadios"
-                      checked={radio === '1'}
-                      value="1"
-                      onChange={handleRadioChange}
-                    />
-                    <label
-                      className="form-check-label"
-                      htmlFor="exampleRadios3"
-                      style={{ width: '150px' }}
-                    >
-                      Đang kinh doanh
-                    </label>
-                  </div>
-                </div>
-                <div className="box col-auto" style={{ marginLeft: '50px', width: '330px' }}>
-                  <div className="values">
-                    <strong>Khoảng giá:</strong>{' '}
-                  </div>
-                  <Slider
-                    className="slider"
-                    value={values}
-                    min={MIN}
-                    max={maxPrice}
-                    onChange={(newValues) => {
-                      setValues(newValues)
-                    }}
-                  ></Slider>
-                  <div className="values">
-                    <br></br>
-                    {convertToCurrency(values[0]) + ' - ' + convertToCurrency(values[1])}
-                  </div>
-                </div>
-              </div>
-            </div>
-            <br></br>
-            <br></br>
-
             <Form>
               <Row>
-              <Col>
+                <Col>
                   <Form.Group controlId="mauSacSelect">
                     <Form.Label style={{ fontWeight: 'bold' }}>Màu Sắc: </Form.Label>
                     <Form.Select
@@ -436,9 +351,92 @@ const SanPham = () => {
                     </Form.Select>
                   </Form.Group>
                 </Col>
-                
               </Row>
             </Form>
+            <br></br>
+            <br></br>
+            <div className="row">
+              <div className="col-12 search d-flex align-items-center row">
+                <input
+                  type="text"
+                  className="input-search-sp box col-auto"
+                  placeholder="Search..."
+                  value={term}
+                  onChange={handleInputChange}
+                  style={{ width: '300px', height: '35px', marginLeft: 10 }}
+                />
+                <div style={{ marginRight: 80 }} className="box d-flex flex-row col-auto">
+                  <div className="form-check">
+                    <input
+                      className="form-check-input"
+                      type="radio"
+                      checked={radio === ''}
+                      value=""
+                      onClick={handleAllClick}
+                      onChange={handleRadioChange}
+                    />
+                    <label
+                      className="form-check-label"
+                      htmlFor="exampleRadios1"
+                      style={{ width: '60px' }}
+                    >
+                      Tất cả
+                    </label>
+                  </div>
+                  <div className="form-check">
+                    <input
+                      className="form-check-input"
+                      type="radio"
+                      checked={radio === '0'}
+                      value="0"
+                      onChange={handleRadioChange}
+                    />
+                    <label
+                      className="form-check-label"
+                      htmlFor="exampleRadios2"
+                      style={{ width: '100px' }}
+                    >
+                      Ngừng bán
+                    </label>
+                  </div>
+                  <div className="form-check">
+                    <input
+                      className="form-check-input"
+                      type="radio"
+                      name="exampleRadios"
+                      checked={radio === '1'}
+                      value="1"
+                      onChange={handleRadioChange}
+                    />
+                    <label
+                      className="form-check-label"
+                      htmlFor="exampleRadios3"
+                      style={{ width: '80px' }}
+                    >
+                      Đang bán
+                    </label>
+                  </div>
+                </div>
+                <div className="box col-auto" style={{ marginLeft: '50px', width: '330px' }}>
+                  <div className="values">
+                    <strong>Khoảng giá:</strong>{' '}
+                  </div>
+                  <Slider
+                    className="slider"
+                    value={values}
+                    min={MIN}
+                    max={maxPrice}
+                    onChange={(newValues) => {
+                      setValues(newValues)
+                    }}
+                  ></Slider>
+                  <div className="values">
+                    <br></br>
+                    {convertToCurrency(values[0]) + ' - ' + convertToCurrency(values[1])}
+                  </div>
+                </div>
+              </div>
+            </div>
           </CCardBody>
         </CCard>
       </CCol>
@@ -454,7 +452,7 @@ const SanPham = () => {
           <CCardBody>
             <div className="row">
               <div className="col-12">
-                <Table striped hover className="my-4">
+                <Table className="table">
                   <thead>
                     <tr className="text-center">
                       <th>#</th>
@@ -467,7 +465,7 @@ const SanPham = () => {
                       <th>Action</th>
                     </tr>
                   </thead>
-                  <tbody>
+                  <tbody className="table-group-divider">
                     {data.map((d, i) => (
                       <tr key={i} className="text-center">
                         <td>{i + 1}</td>
