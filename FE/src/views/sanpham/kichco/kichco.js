@@ -197,7 +197,6 @@ const KC = () => {
                 <th>Mã</th>
                 <th>Tên</th>
                 <th>Ngày Tạo</th>
-                <th>Ngày Sửa</th>
                 <th>Trạng Thái</th>
                 <th>Action</th>
               </tr>
@@ -208,7 +207,6 @@ const KC = () => {
                     <td> {d.ma}</td>
                     <td>{d.ten}</td>
                     <td>{formatDate(d.ngayTao)}</td>
-                    <td>{formatDate(d.ngaySua)}</td>
                     <td>{d.trangThai === 0 ? 'Đang kích hoạt' : 'Ngừng kích hoạt'}</td>
                     <td>
                       <button

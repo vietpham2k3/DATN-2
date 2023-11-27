@@ -105,6 +105,18 @@ const UpdateNV = () => {
                     />
                   </div>
                   <div className="col-4">
+                    <label htmlFor="diaChi" className="form-label">
+                      Mật khẩu
+                    </label>
+                    <input
+                      id="diaChi"
+                      type="text"
+                      className="form-control"
+                      value={values.matKhau}
+                      onChange={(e) => setValues({ ...values, matKhau: e.target.value })}
+                    />
+                  </div>
+                  <div className="col-4">
                     <label htmlFor="ngaySinh" className="form-label">
                       Ngày Sinh
                     </label>

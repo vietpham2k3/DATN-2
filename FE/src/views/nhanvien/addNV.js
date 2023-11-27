@@ -13,6 +13,7 @@ const AddNV = () => {
     email: '',
     diaChi: '',
     ngaySinh: '',
+    matKhau: '',
     vaiTro: 0,
     gioiTinh: true,
     trangThai: 0,
@@ -87,6 +88,18 @@ const AddNV = () => {
                     />
                   </div>
                   <div className="col-4">
+                    <label htmlFor="diaChi" className="form-label">
+                      Mật khẩu
+                    </label>
+                    <input
+                      id="diaChi"
+                      type="text"
+                      className="form-control"
+                      value={values.matKhau}
+                      onChange={(e) => setValues({ ...values, matKhau: e.target.value })}
+                    />
+                  </div>
+                  <div className="col-4">
                     <label htmlFor="ngaySinh" className="form-label">
                       Ngày Sinh
                     </label>
@@ -112,7 +125,7 @@ const AddNV = () => {
                       <option value={1}>Nhân viên</option>
                     </select>
                   </div>
-                  <div className="col-4" style={{paddingTop: 15}}>
+                  <div className="col-4" style={{paddingTop: 35}}>
                     <label htmlFor="a" className="form-label me-3">
                       Trạng thái:{' '}
                     </label>
@@ -144,7 +157,7 @@ const AddNV = () => {
                       </label>
                     </div>
                   </div>
-                  <div style={{paddingTop: 15}} className="col-4">
+                  <div style={{paddingTop: 35}} className="col-4">
                     <label htmlFor="a" className="form-label me-3" style={{ paddingRight: 5 }}>
                       Giới tính:{' '}
                     </label>
@@ -177,7 +190,7 @@ const AddNV = () => {
                       </label>
                     </div>
                   </div>
-                  <div className="col-4" style={{paddingTop: 20, display: 'flex',justifyContent: 'flex-end'}}>
+                  <div className="col-4" style={{paddingTop: 20, display: 'flex',justifyContent: 'flex-start'}}>
                     <button
                     type="submit" className="btn btn-primary">
                       Thêm nhân viên

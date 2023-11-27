@@ -40,7 +40,6 @@ public class KhachHang implements Serializable {
     @Column(name="mat_khau")
     private String matKhau;
 
-
     @Column(name="trang_thai")
     private Integer trangThai;
 

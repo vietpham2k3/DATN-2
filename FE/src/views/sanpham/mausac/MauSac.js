@@ -188,7 +188,6 @@ const MauSac = () => {
                   <th className="ps-2">Tên</th>
                   <th className="ps-2">Màu</th>
                   <th className="ps-2">Ngày Tạo</th>
-                  <th className="ps-2">Ngày Sửa</th>
                   <th className="ps-2">Trạng Thái</th>
                   <th className="ps-2">Action</th>
                 </tr>
@@ -210,7 +209,6 @@ const MauSac = () => {
                         </div>
                       </td>
                       <td>{formatDate(d.ngayTao)}</td>
-                      <td>{formatDate(d.ngaySua)}</td>
                       <td>{d.trangThai === 0 ? 'Đang kích hoạt' : 'Ngừng kích hoạt'}</td>
                       <td>
                         <button

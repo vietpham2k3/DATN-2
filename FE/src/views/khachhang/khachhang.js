@@ -89,12 +89,9 @@ const KhachHang = () => {
           <CCardBody>
             <div className="d-flex justify-content-between">
               <div className="search">
-                <div>
                   <label htmlFor="colorSearch" style={{ marginRight: '10px', fontWeight: 'bold' }}>
-                    Nhập tên, mã, số điện thoại, email khách hàng cần tìm:
+                    Nhập khách hàng cần tìm:
                   </label>
-                </div>
-                <div style={{paddingTop: 10}}>
                   <input
                     id="colorSearch"
                     style={{ borderRadius: 15, width: 380 }}
@@ -103,19 +100,12 @@ const KhachHang = () => {
                     placeholder="Search..."
                     onChange={handleSearch}
                   />
-                </div>
               </div>
 
               <div style={{ marginRight: 20 }}>
-                <div style={{ paddingBottom: 10 }}>
-                  <label
-                    htmlFor="all"
-                    style={{ fontWeight: 'bold', marginRight: 25 }}
-                    className="form-check-label"
-                  >
-                    Trạng Thái:
-                  </label>
-                </div>
+              <span style={{ fontWeight: 'bold', marginRight: 25 }} className="form-check-label">
+                  Trạng Thái:
+                </span>
                 <div className="form-check form-check-inline">
                   <input
                     className="form-check-input"
@@ -164,7 +154,7 @@ const KhachHang = () => {
         <CCard className="mb-4">
           <CCardHeader>
             <div className="d-flex justify-content-end">
-              <button onClick={() => navigate('/nhan-vien/add')} className="btn btn-primary ">
+              <button onClick={() => navigate('/khach-hang/add')} className="btn btn-primary ">
                 Thêm
               </button>
             </div>

@@ -84,8 +84,8 @@ public class NhanVienController {
         String ma = "NV" + new Random().nextInt(100000);
         nhanVien.setMa(ma);
         nhanVien.setNgayTao(new Date());
-        String matKhauMoi = generateRandomPassword(8);
-        nhanVien.setMatKhau(matKhauMoi);
+//        String matKhauMoi = generateRandomPassword(8);
+//        nhanVien.setMatKhau(matKhauMoi);
 
 //        // Gửi email chứa mật khẩu mới
 //        String subject = "Thông tin tài khoản";

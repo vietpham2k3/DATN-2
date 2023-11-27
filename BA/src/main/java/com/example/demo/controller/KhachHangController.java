@@ -61,33 +61,12 @@ public class KhachHangController {
     }
 
     @GetMapping("/getAllPage")
-    public ResponseEntity<byte[]> getAll(@RequestParam(defaultValue = "0") Integer page) throws IOException {
+    public ResponseEntity<?> getAll(@RequestParam(defaultValue = "0") Integer page) throws IOException {
         Page<KhachHang> khachHangPage = khService.getAll(page);
 
-        // Convert the Page<KhachHang> to byte array
-        byte[] khachHangBytes = convertPageToByteArray(khachHangPage);
-
-        // Set the content type as application/octet-stream
-        HttpHeaders headers = new HttpHeaders();
-        headers.setContentType(MediaType.APPLICATION_OCTET_STREAM);
-        headers.setContentDispositionFormData("attachment", "khachhang.json");
-
-        return ResponseEntity.ok()
-                .headers(headers)
-                .body(khachHangBytes);
+        return ResponseEntity.ok().body(khachHangPage);
     }
 
-    /**
-     * Convert the Page<KhachHang> to byte array.
-     */
-    private byte[] convertPageToByteArray(Page<KhachHang> khachHangPage) throws IOException {
-        ObjectMapper objectMapper = new ObjectMapper();
-        SimpleModule module = new SimpleModule();
-        module.addSerializer(ByteArrayInputStream.class, new AnhKH());
-        objectMapper.registerModule(module);
-        byte[] khachHangBytes = objectMapper.writeValueAsBytes(khachHangPage);
-        return khachHangBytes;
-    }
 
     @GetMapping("/detail/{id}")
     public ResponseEntity<?> detail(@PathVariable UUID id) {
@@ -105,13 +84,17 @@ public class KhachHangController {
         khachHangDTO.setNgaySinh(khachHang.getNgaySinh());
         khachHangDTO.setMatKhau(khachHang.getMatKhau());
         khachHangDTO.setGioiTinh(khachHang.getGioiTinh());
+        khachHangDTO.setDiaChi(khachHang.getDiaChi());
         khachHangDTO.setTrangThai(khachHang.getTrangThai());
+        khachHangDTO.setXa(khachHang.getXa());
+        khachHangDTO.setHuyen(khachHang.getHuyen());
+        khachHangDTO.setTinh(khachHang.getTinh());
 
         return ResponseEntity.ok(khachHangDTO);
     }
 
     @PostMapping("/add")
-    public ResponseEntity<?> add(@RequestParam(value = "anh", required = false) MultipartFile anh,
+    public ResponseEntity<?> add(
                                  @RequestParam("tenKhachHang") String tenKhachHang,
                                  @RequestParam("sdt") String sdt,
                                  @RequestParam("email") String email,
@@ -121,7 +104,8 @@ public class KhachHangController {
                                  @RequestParam("quanHuyen") String quanHuyen,
                                  @RequestParam("phuongXa") String phuongXa,
                                  @RequestParam("diaChi") String diaChi,
-                                 @RequestParam("trangThai") Integer trangThai
+                                 @RequestParam("trangThai") Integer trangThai,
+                                 @RequestParam("matKhau") String matKhau
     ) throws IOException, SQLException {
         // Create a new KhachHang object
         KhachHang khachHang = new KhachHang();
@@ -133,24 +117,29 @@ public class KhachHangController {
         khachHang.setNgaySinh(ngaySinh);
         khachHang.setGioiTinh(gioiTinh);
         khachHang.setTrangThai(trangThai);
+        khachHang.setDiaChi(diaChi);
+        khachHang.setXa(phuongXa);
+        khachHang.setHuyen(quanHuyen);
+        khachHang.setTinh(tinhThanh);
+        khachHang.setMatKhau(matKhau);
 
-        //send email
-        String matKhauMoi = generateRandomPassword(8);
+//        //send email
+//        String matKhauMoi = generateRandomPassword(8);
 
         khachHang = khService.add(khachHang);
         KhachHangDTO savedKhachHangDTO = convertToDto(khachHang);
 
-
-        // Gửi email chứa mật khẩu mới
-        String subject = "Thông tin tài khoản";
-        String body = "<h2>Thông tin tài khoản của bạn</h2>"
-                + "<p>Xin chào, " + tenKhachHang + "</p>"
-                + "<p>Chúng tôi gửi thông tin truy cập hệ thông của bạn:</p>"
-                + "<p>Tên đăng nhập: " + email + "</p>"
-                + "<p>Mật khẩu truy cập tạm thời là: <strong>" + matKhauMoi + "</strong></p>"
-                + "<p>Lưu ý: Đây là mật khẩu mặc định được tạo bởi hệ thống, bạn vui lòng đổi lại để đảm bảo an toàn thông tin</p>"
-                + "<p>Đây là email tự động vui lòng không trả lời.</p>";
-        emailService.sendEmail(email, subject, body);
+//
+//        // Gửi email chứa mật khẩu mới
+//        String subject = "Thông tin tài khoản";
+//        String body = "<h2>Thông tin tài khoản của bạn</h2>"
+//                + "<p>Xin chào, " + tenKhachHang + "</p>"
+//                + "<p>Chúng tôi gửi thông tin truy cập hệ thông của bạn:</p>"
+//                + "<p>Tên đăng nhập: " + email + "</p>"
+//                + "<p>Mật khẩu truy cập tạm thời là: <strong>" + matKhauMoi + "</strong></p>"
+//                + "<p>Lưu ý: Đây là mật khẩu mặc định được tạo bởi hệ thống, bạn vui lòng đổi lại để đảm bảo an toàn thông tin</p>"
+//                + "<p>Đây là email tự động vui lòng không trả lời.</p>";
+//        emailService.sendEmail(email, subject, body);
 
         return ResponseEntity.status(HttpStatus.CREATED).body(savedKhachHangDTO);
     }
@@ -168,39 +157,34 @@ public class KhachHangController {
     }
 
     @PutMapping("/delete/{id}")
-    public ResponseEntity<?> delete(@PathVariable UUID id,
-                                    @RequestParam(value = "anh", required = false) MultipartFile anh) throws IOException, SQLException {
+    public ResponseEntity<?> delete(@PathVariable UUID id) throws IOException, SQLException {
         KhachHang khachHang = new KhachHang();
-
-
-        // Save the KhachHang object
         KhachHang savedKhachHang = khService.delete(id);
         KhachHangDTO savedKhachHangDTO = convertToDto(savedKhachHang);
         return ResponseEntity.status(HttpStatus.CREATED).body(savedKhachHangDTO);
     }
 
     @PutMapping("/update/{id}")
-    public ResponseEntity<?> update(@PathVariable UUID id, @RequestParam(value = "anh", required = false) MultipartFile anh,
-//                                    @RequestParam("maKhachHang") String maKhachHang,
-                                    @RequestParam("tenKhachHang") String tenKhachHang,
-                                    @RequestParam("sdt") String sdt,
-                                    @RequestParam("email") String email,
-                                    @DateTimeFormat(pattern = "yyyy-MM-dd") Date ngaySinh,
-                                    @RequestParam("gioiTinh") Boolean gioiTinh,
-                                    @RequestParam("trangThai") Integer trangThai) throws IOException, SQLException {
+    public ResponseEntity<?> update(@PathVariable UUID id,@RequestBody KhachHang khachHang) throws IOException, SQLException {
         // Create a new KhachHang object
-        KhachHang khachHang = khService.getOne(id);
+        khachHang.setId(id);
+        khachHang.setTenKhachHang(khachHang.getTenKhachHang());
+        khachHang.setSdt(khachHang.getSdt());
+        khachHang.setEmail(khachHang.getEmail());
+        khachHang.setNgaySinh(khachHang.getNgaySinh());
+        khachHang.setGioiTinh(khachHang.getGioiTinh());
+        khachHang.setTrangThai(khachHang.getTrangThai());
+        khachHang.setDiaChi(khachHang.getDiaChi());
+        khachHang.setXa(khachHang.getXa());
+        khachHang.setHuyen(khachHang.getHuyen());
+        khachHang.setTinh(khachHang.getTinh());
+        khachHang.setMatKhau(khachHang.getMatKhau());
 
-        khachHang.setTenKhachHang(tenKhachHang);
-        khachHang.setSdt(sdt);
-        khachHang.setEmail(email);
-        khachHang.setNgaySinh(ngaySinh);
-        khachHang.setGioiTinh(gioiTinh);
-        khachHang.setTrangThai(trangThai);
 
-        // Save the KhachHang object
-        KhachHang savedKhachHang = khService.update(khachHang, id);
-        KhachHangDTO savedKhachHangDTO = convertToDto(savedKhachHang);
+
+        khachHang = khService.add(khachHang);
+        KhachHangDTO savedKhachHangDTO = convertToDto(khachHang);
+
         return ResponseEntity.status(HttpStatus.CREATED).body(savedKhachHangDTO);
     }
 
@@ -212,17 +196,8 @@ public class KhachHangController {
                                     @RequestParam(defaultValue = "0") Integer page) throws IOException {
         Pageable pageable = PageRequest.of(page, 5);
         Page<KhachHang> khachHangPage = khService.searchKH(key, trangThai, gioiTinh, pageable);
-        // Convert the Page<KhachHang> to byte array
-        byte[] khachHangBytes = convertPageToByteArray(khachHangPage);
-//
-//        // Set the content type as application/octet-stream
-        HttpHeaders headers = new HttpHeaders();
-        headers.setContentType(MediaType.APPLICATION_OCTET_STREAM);
-        headers.setContentDispositionFormData("attachment", "khachhang.json");
-//
-        return ResponseEntity.ok()
-                .headers(headers)
-                .body(khachHangBytes);
+
+        return ResponseEntity.ok().body(khachHangPage);
     }
 
     private KhachHangDTO convertToDto(KhachHang khachHang) {
@@ -236,7 +211,10 @@ public class KhachHangController {
                 .matKhau(khachHang.getMatKhau())
                 .trangThai(khachHang.getTrangThai())
                 .gioiTinh(khachHang.getGioiTinh())
-//                .diaChi(DiaChi.builder().id(khachHang.getId()).build())
+                .diaChi(khachHang.getDiaChi())
+                .xa(khachHang.getXa())
+                .huyen(khachHang.getHuyen())
+                .tinh(khachHang.getTinh())
                 .build();
 
 

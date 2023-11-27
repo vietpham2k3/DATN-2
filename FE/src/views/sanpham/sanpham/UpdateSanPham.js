@@ -590,9 +590,9 @@ function UpdateSanPham() {
                 }
               />
             </div>
-            <div className="col-12 d-flex justify-content-end">
+            <div className="col-12 d-flex justify-content-start">
               <button type="submit" className="btn btn-primary">
-                Update
+                Cập nhật 
               </button>
             </div>
           </form>
@@ -641,11 +641,11 @@ function UpdateSanPham() {
         <CCardBody>
           <div className="row">
             <div className="col-10 d-flex align-items-center justify-content-start">
-              <div className="col-md-2" style={{ display: 'flex', justifyContent: 'flex-start' }}>
+              {/* <div className="col-md-2" style={{ display: 'flex', justifyContent: 'flex-start' }}>
                 {qrDataURL && (
                   <img src={qrDataURL} style={{ width: '70px', height: '70px' }} alt="QR Code" />
                 )}
-              </div>
+              </div> */}
             </div>
             <div className="col-2 d-flex justify-content-end align-items-center">
               <button
@@ -744,7 +744,7 @@ function UpdateSanPham() {
                               &nbsp;
                             </div>
                           ) : (
-                            <p>Chưa có màu sắc nào</p>
+                            <p>Không có màu sắc nào</p>
                           )}
                         </td>
                         <td>{d.kichCo ? d.kichCo.ten : 'Chưa có kích cỡ nào'}</td>
@@ -771,7 +771,7 @@ function UpdateSanPham() {
                 </tbody>
                 <Modal show={showModal5} onHide={closeModal5} backdrop="static" keyboard={false}>
                   <Modal.Header closeButton>
-                    <Modal.Title>Thông tin chi tiết</Modal.Title>
+                    <Modal.Title>Tải Ảnh</Modal.Title>
                   </Modal.Header>
                   <Modal.Body>
                     <CCard className={`my-3 ${idCTSP !== null ? 'show' : ''}`} ref={mainCardRef}>
@@ -811,12 +811,12 @@ function UpdateSanPham() {
                           </div>
                           <div className="justify-content-center">
                             <button type="submit" className="btn btn-primary">
-                              Tải ảnh
+                              Tải ảnh lên
                             </button>
                           </div>
                           <div className="justify-content-center">
                             {imageList.length === 0 ? (
-                              <h1>Tải lên ảnh</h1>
+                              <h1></h1>
                             ) : (
                               <>
                                 <br />

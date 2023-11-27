@@ -1,5 +1,6 @@
 package com.example.demo.dto;
 
+import jakarta.persistence.Column;
 import lombok.*;
 
 import java.util.Date;
@@ -22,6 +23,10 @@ public class KhachHangDTO {
     private Integer trangThai;
     private Boolean gioiTinh;
     private String role;
+    private String diaChi;
+    private String tinh;
+    private String huyen;
+    private String xa;
 
 //    private DiaChi diaChi;
 

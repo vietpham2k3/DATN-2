@@ -14,6 +14,8 @@ import AddNSX from 'views/sanpham/nhasanxuat/addnsx'
 import NSX from 'views/sanpham/nhasanxuat/nsx'
 import UpdateNSX from 'views/sanpham/nhasanxuat/updatensx'
 import KhachHang from './views/khachhang/khachhang'
+import AddKH from 'views/khachhang/addKH'
+import UpdateKH from 'views/khachhang/updateKH'
 
 const Dashboard = React.lazy(() => import('./views/dashboard/Dashboard'))
 
@@ -93,11 +95,11 @@ const routes = [
   },
 
   { path: '/khach-hang/hien-thi', name: 'Khách hàng', element: KhachHang },
-  { path: '/khach-hang/add', element: AddNV },
-  { path: '/khach-hang/update', element: UpdateNV },
+  { path: '/khach-hang/add', element: AddKH },
+  { path: '/khach-hang/update', element: UpdateKH },
   {
     path: '/khach-hang/detail/:id',
-    element: UpdateNV,
+    element: UpdateKH,
   },
   
   { path: '/thong-ke', name: 'Thống kê', element: Dashboard },

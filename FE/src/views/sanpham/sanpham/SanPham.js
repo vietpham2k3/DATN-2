@@ -445,7 +445,7 @@ const SanPham = () => {
           <CCardHeader>
             <div style={{ display: 'flex', justifyContent: 'end' }}>
               <Link className="btn btn-primary" to={'/quan-ly-san-pham/san-pham/add'}>
-                Thêm sản phẩm
+              Thêm sản phẩm <i className="fa-solid fa-square-plus"></i>
               </Link>
             </div>
           </CCardHeader>

@@ -513,10 +513,10 @@ function AddSanPham() {
               />
             </div>
 
-            <div className="col-12 d-flex justify-content-end">
+            <div className="col-12 d-flex justify-content-start">
               <div className="hidden-element">
                 <button onClick={handleSubmit} type="submit" className="btn btn-info">
-                  Thêm
+                Thêm sản phẩm <i className="fa-solid fa-square-plus"></i>
                 </button>
               </div>
             </div>
