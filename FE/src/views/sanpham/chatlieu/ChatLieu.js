@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React from 'react'
 import { CCard, CCardBody, CCardHeader, CCol, CRow } from '@coreui/react'
 import { useState, useEffect } from 'react'
@@ -5,91 +6,91 @@ import ReactPaginate from 'react-paginate'
 import { toast } from 'react-toastify'
 import { useNavigate } from 'react-router-dom'
 import '../../../scss/MauSac.scss'
-import { fetchAllList, searchCL } from 'service/ServiceChatLieu';
-import { deleteCL } from 'service/ServiceChatLieu';
+import { fetchAllList, searchCL } from 'service/ServiceChatLieu'
+import { deleteCL } from 'service/ServiceChatLieu'
 import _ from 'lodash'
 import '../../../scss/pageable.scss'
 const ChatLieu = () => {
-  const [filterStatus, setFilterStatus] = useState('');
-  const [currentPage, setCurrentPage] = useState(0);
-  const [data, setData] = useState([]);
-  const [totalPages, setTotalPages] = useState();
-  const navigate = useNavigate();
+  const [filterStatus, setFilterStatus] = useState('')
+  const [currentPage, setCurrentPage] = useState(0)
+  const [data, setData] = useState([])
+  const [totalPages, setTotalPages] = useState()
+  const navigate = useNavigate()
   const [dataDelete, setDataDelete] = useState({
-    ma: ''
-  });
+    ma: '',
+  })
 
   useEffect(() => {
-    getAll(0);
-    setDataDelete();
-  }, []);
+    getAll(0)
+    setDataDelete()
+  }, [])
 
   const getAll = async (page) => {
-    setCurrentPage(page);
-    const res = await fetchAllList(page);
+    setCurrentPage(page)
+    const res = await fetchAllList(page)
     if (res && res.data) {
-      setData(res.data.content);
-      setTotalPages(res.data.totalPages);
-      console.log(data);
+      setData(res.data.content)
+      setTotalPages(res.data.totalPages)
+      console.log(data)
     }
-  };
+  }
 
   const search = async (key, trangThai, page) => {
-    const res = await searchCL(key, trangThai, page);
+    const res = await searchCL(key, trangThai, page)
     if (res) {
-      setData(res.data.content);
-      setTotalPages(res.data.totalPages);
+      setData(res.data.content)
+      setTotalPages(res.data.totalPages)
     }
-  };
+  }
 
   const handleSearchCL = _.debounce(async (e) => {
-    let term = e.target.value;
+    let term = e.target.value
     if (term || filterStatus !== 0) {
-      search(term, filterStatus, currentPage);
+      search(term, filterStatus, currentPage)
     } else {
-      search('', 0, currentPage);
+      search('', 0, currentPage)
     }
-  }, 100);
+  }, 100)
   const handlePageClick = (event) => {
-    const selectedPage = event.selected;
+    const selectedPage = event.selected
     if (filterStatus === '') {
-      getAll(selectedPage);
+      getAll(selectedPage)
     } else {
-      search('', filterStatus, selectedPage);
+      search('', filterStatus, selectedPage)
     }
-  };
+  }
 
   // const { id } = useParams();
 
   const del = async (id, values) => {
-    const res = await deleteCL(id, values);
+    const res = await deleteCL(id, values)
     if (res) {
-      toast.success('Xóa thành công !');
-      getAll(0);
+      toast.success('Xóa thành công !')
+      getAll(0)
     }
-  };
+  }
 
   const handleSubmit = (id) => {
-    del(id, dataDelete);
-  };
+    del(id, dataDelete)
+  }
 
   function formatDate(dateString) {
     if (dateString === null) {
-      return ''; // Trả về chuỗi rỗng nếu giá trị là null
+      return '' // Trả về chuỗi rỗng nếu giá trị là null
     }
 
-    const dateObject = new Date(dateString);
+    const dateObject = new Date(dateString)
 
-    const day = dateObject.getDate();
-    const month = dateObject.getMonth() + 1;
-    const year = dateObject.getFullYear();
+    const day = dateObject.getDate()
+    const month = dateObject.getMonth() + 1
+    const year = dateObject.getFullYear()
 
-    const hours = dateObject.getHours();
-    const minutes = dateObject.getMinutes();
+    const hours = dateObject.getHours()
+    const minutes = dateObject.getMinutes()
 
-    const formattedDate = `${day}/${month}/${year} ${hours}:${minutes}`;
+    const formattedDate = `${day}/${month}/${year} ${hours}:${minutes}`
 
-    return formattedDate;
+    return formattedDate
   }
 
   return (
@@ -202,18 +203,18 @@ const ChatLieu = () => {
                         onClick={() => navigate(`/quan-ly-san-pham/chat-lieu/detail/${d.id}`)}
                         style={{ color: 'green' }}
                           className="fa-solid fa-pen-nib fa-khenh"
-                      ></button>
+                        ></button>
 
-                      <button
-                        onClick={() => handleSubmit(d.id, { ma: d.ma })}
-                        style={{ color: 'orange' }}
+                        <button
+                          onClick={() => handleSubmit(d.id, { ma: d.ma })}
+                          style={{ color: 'orange' }}
                           className="fa-solid fa-trash-can mx-3 fa-khenh"
-                      ></button>
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
+                        ></button>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
 
               <ReactPaginate
                 breakLabel="..."

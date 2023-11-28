@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import React from 'react'
 import { CCard, CCardBody, CCardHeader, CCol, CRow } from '@coreui/react'
 import { useState, useEffect } from 'react'
@@ -5,85 +6,85 @@ import ReactPaginate from 'react-paginate'
 import { toast } from 'react-toastify'
 import { useNavigate } from 'react-router-dom'
 import '../../../scss/MauSac.scss'
-import { getAllPages, deleteLSP, searchLSP } from 'service/LoaiSanPhamService';
+import { getAllPages, deleteLSP, searchLSP } from 'service/LoaiSanPhamService'
 import '../../../scss/pageable.scss'
 const LSP = () => {
-    const navigate = useNavigate();
-  const [data, setData] = useState([]);
-  const [totalPages, setTotalPages] = useState();
-  const [searchTerm, setSearchTerm] = useState('');
-  const [filterStatus, setFilterStatus] = useState('');
+  const navigate = useNavigate()
+  const [data, setData] = useState([])
+  const [totalPages, setTotalPages] = useState()
+  const [searchTerm, setSearchTerm] = useState('')
+  const [filterStatus, setFilterStatus] = useState('')
   const [dataDelete, setDataDelete] = useState({
-    ma: ''
-  });
+    ma: '',
+  })
 
   useEffect(() => {
-    getAll(0);
-    setDataDelete();
-  }, []);
+    getAll(0)
+    setDataDelete()
+  }, [])
 
   const getAll = async (page) => {
     // setCurrentPage(page);
-    const res = await getAllPages(page);
+    const res = await getAllPages(page)
     if (res && res.data) {
-      setData(res.data.content);
-      setTotalPages(res.data.totalPages);
+      setData(res.data.content)
+      setTotalPages(res.data.totalPages)
     }
-  };
+  }
 
   const search = async (term, trangThai, page) => {
-    const res = await searchLSP(term, trangThai, page);
+    const res = await searchLSP(term, trangThai, page)
     if (res && res.data) {
-      setData(res.data.content);
-      setTotalPages(res.data.totalPages);
+      setData(res.data.content)
+      setTotalPages(res.data.totalPages)
     }
-  };
+  }
 
   const handleSearchLSP = (e) => {
-    const term = e.target.value;
-    setSearchTerm(term);
-    search(term, filterStatus, 0);
-  };
+    const term = e.target.value
+    setSearchTerm(term)
+    search(term, filterStatus, 0)
+  }
 
   const del = async (id, values) => {
-    const res = await deleteLSP(id, values);
+    const res = await deleteLSP(id, values)
     if (res) {
-      toast.success('Xóa thành công!');
-      getAll(0);
+      toast.success('Xóa thành công!')
+      getAll(0)
     }
-  };
+  }
 
   const handleDeleteLSP = (id) => {
-    del(id, dataDelete);
-  };
+    del(id, dataDelete)
+  }
 
   const handlePageClick = (event) => {
-    const selectedPage = event.selected;
+    const selectedPage = event.selected
     if (filterStatus === '') {
-      getAll(selectedPage);
+      getAll(selectedPage)
     } else {
-      search('', filterStatus, selectedPage);
+      search('', filterStatus, selectedPage)
     }
-  };
+  }
 
   function formatDate(dateString) {
     if (dateString === null) {
-      return ''; // Trả về chuỗi rỗng nếu giá trị là null
+      return '' // Trả về chuỗi rỗng nếu giá trị là null
     }
 
-    const dateObject = new Date(dateString);
+    const dateObject = new Date(dateString)
 
-    const day = dateObject.getDate();
-    const month = dateObject.getMonth() + 1;
-    const year = dateObject.getFullYear();
+    const day = dateObject.getDate()
+    const month = dateObject.getMonth() + 1
+    const year = dateObject.getFullYear()
 
-    const hours = dateObject.getHours();
-    const minutes = dateObject.getMinutes();
+    const hours = dateObject.getHours()
+    const minutes = dateObject.getMinutes()
     // const seconds = dateObject.getSeconds();
 
-    const formattedDate = `${day}/${month}/${year} ${hours}:${minutes}`;
+    const formattedDate = `${day}/${month}/${year} ${hours}:${minutes}`
 
-    return formattedDate;
+    return formattedDate
   }
 
   return (
@@ -196,18 +197,18 @@ const LSP = () => {
                         onClick={() => navigate(`/quan-ly-san-pham/lsp/detail/${d.id}`)}
                         style={{ color: 'green' }}
                           className="fa-solid fa-pen-nib fa-khenh"
-                      ></button>
+                        ></button>
 
-                      <button
-                        onClick={() => handleDeleteLSP(d.id, { ma: d.ma })}
-                        style={{ color: 'orange' }}
+                        <button
+                          onClick={() => handleDeleteLSP(d.id, { ma: d.ma })}
+                          style={{ color: 'orange' }}
                           className="fa-solid fa-trash-can mx-3 fa-khenh"
-                      ></button>
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
+                        ></button>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
 
               <ReactPaginate
                 breakLabel="..."

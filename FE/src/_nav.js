@@ -1,6 +1,6 @@
 import React from 'react'
 import CIcon from '@coreui/icons-react'
-import { cilChartPie, cilCursor, cilDrop, cilPencil, cilSpeedometer } from '@coreui/icons'
+import { cilCursor, cilDrop, cilPencil, cilSpeedometer } from '@coreui/icons'
 import { CNavGroup, CNavItem, CNavTitle } from '@coreui/react'
 
 const _nav = [
@@ -21,7 +21,7 @@ const _nav = [
   {
     component: CNavItem,
     name: 'Bán hàng trực tiếp',
-    to: '/theme/colors',
+    to: '/ban-hang-tai-quay',
     icon: <i className="fa-solid fa-shop nav-icon"></i>,
   },
   {
