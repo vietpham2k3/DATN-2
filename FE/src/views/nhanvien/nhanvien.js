@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import React from 'react'
 import { CCard, CCardBody, CCardHeader, CCol, CRow } from '@coreui/react'
 import { useState, useEffect } from 'react'
@@ -5,75 +6,75 @@ import ReactPaginate from 'react-paginate'
 import { toast } from 'react-toastify'
 import { useNavigate } from 'react-router-dom'
 import '../../../src/scss/MauSac.scss'
-import { getAllPageNV, deleteNhanVien, searchNV } from 'service/NhanVienService';
+import { getAllPageNV, deleteNhanVien, searchNV } from 'service/NhanVienService'
 import '../../../src/scss/pageable.scss'
-import { Link } from 'react-router-dom';
+import { Link } from 'react-router-dom'
 const NhanVien = () => {
-    const navigate = useNavigate();
-    const [filterStatus, setFilterStatus] = useState(' ');
-    const [searchTerm, setSearchTerm] = useState('');
-    const [data, setData] = useState([]);
-    const [totalPages, setTotalPages] = useState(0);
-  
-    useEffect(() => {
-      getAll(0);
-    }, []);
-  
-    const getAll = async (page) => {
-      const res = await getAllPageNV(page);
-      if (res && res.data) {
-        setData(res.data.content);
-        setTotalPages(res.data.totalPages);
-      }
-    };
-  
-    const del = async (id) => {
-      const res = await deleteNhanVien(id);
-      if (res) {
-        toast.success('Xóa thành công!');
-        getAll(0);
-      }
-    };
-  
-    const handleFilterStatusChange = (status) => {
-      setFilterStatus(status);
-      search(searchTerm, status, 0);
-    };
-  
-    const handleSearch = (e) => {
-      const term = e.target.value;
-      setSearchTerm(term);
-      search(term, filterStatus, 0);
-    };
-  
-    const search = async (term, trangThai, page) => {
-      const res = await searchNV(term, trangThai, page);
-      if (res && res.data) {
-        setData(res.data.content);
-        setTotalPages(res.data.totalPages);
-      }
-    };
-  
-    const handleDeleteKH = (id) => {
-      del(id);
-    };
-  
-    const handlePageClick = (event) => {
-      getAll(event.selected);
-    };
-  
-    function formatDate(dateString) {
-      const dateObject = new Date(dateString);
-  
-      const day = dateObject.getDate();
-      const month = dateObject.getMonth() + 1; // Tháng bắt đầu từ 0, cần cộng thêm 1
-      const year = dateObject.getFullYear();
-  
-      const formattedDate = `${day}/${month}/${year}`;
-  
-      return formattedDate;
+  const navigate = useNavigate()
+  const [filterStatus, setFilterStatus] = useState(' ')
+  const [searchTerm, setSearchTerm] = useState('')
+  const [data, setData] = useState([])
+  const [totalPages, setTotalPages] = useState(0)
+
+  useEffect(() => {
+    getAll(0)
+  }, [])
+
+  const getAll = async (page) => {
+    const res = await getAllPageNV(page)
+    if (res && res.data) {
+      setData(res.data.content)
+      setTotalPages(res.data.totalPages)
     }
-  
+  }
+
+  const del = async (id) => {
+    const res = await deleteNhanVien(id)
+    if (res) {
+      toast.success('Xóa thành công!')
+      getAll(0)
+    }
+  }
+
+  const handleFilterStatusChange = (status) => {
+    setFilterStatus(status)
+    search(searchTerm, status, 0)
+  }
+
+  const handleSearch = (e) => {
+    const term = e.target.value
+    setSearchTerm(term)
+    search(term, filterStatus, 0)
+  }
+
+  const search = async (term, trangThai, page) => {
+    const res = await searchNV(term, trangThai, page)
+    if (res && res.data) {
+      setData(res.data.content)
+      setTotalPages(res.data.totalPages)
+    }
+  }
+
+  const handleDeleteKH = (id) => {
+    del(id)
+  }
+
+  const handlePageClick = (event) => {
+    getAll(event.selected)
+  }
+
+  function formatDate(dateString) {
+    const dateObject = new Date(dateString)
+
+    const day = dateObject.getDate()
+    const month = dateObject.getMonth() + 1 // Tháng bắt đầu từ 0, cần cộng thêm 1
+    const year = dateObject.getFullYear()
+
+    const formattedDate = `${day}/${month}/${year}`
+
+    return formattedDate
+  }
+
   return (
     <CRow>
       <CCol xs={12}>
@@ -152,64 +153,62 @@ const NhanVien = () => {
         <CCard className="mb-4">
           <CCardHeader>
             <div className="d-flex justify-content-end">
-              <button
-                onClick={() => navigate('/nhan-vien/add')}
-                className="btn btn-primary "
-              >
+              <button onClick={() => navigate('/nhan-vien/add')} className="btn btn-primary ">
                 Thêm
               </button>
             </div>
           </CCardHeader>
           <CCardBody>
             <div>
-            <table className="table">
-              <thead>
-                <tr>
-                  <th>#</th>
-                  <th>Mã</th>
-                  <th>Tên</th>
-                  <th>Phone</th>
-                  <th>Email</th>
-                  <th>Địa Chỉ</th>
-                  <th>Ngày Sinh</th>
-                  <th>Vai Trò</th>
-                  <th>Giới Tính</th>
-                  <th>Trạng Thái</th>
-                  <th>Action</th>
-                </tr>
-              </thead>
-              <tbody className="table-group-divider">
-                {data.map((d, i) => (
-                  <tr key={d.id}>
-                    <td>{i + 1}</td>
-                    <td>{d.ma}</td>
-                    <td>{d.ten}</td>
-                    <td>{d.sdt}</td>
-                    <td>{d.email}</td>
-                    <td>{d.diaChi}</td>
-                    <td>{formatDate(d.ngaySinh)}</td>
-                    <td>{d.vaiTro === 0 ? 'Admin' : 'Nhân viên'}</td>
-                    <td>{d.gioiTinh === true ? 'Nam' : 'Nữ'}</td>
-                    <td>{d.trangThai === 0 ? 'Hoạt động' : 'Không hoạt động'}</td>
-
-                    <td>
-                      <Link
-                        className="mx-1"
-                        to={`/nhan-vien/detail/${d.id}`}
-                      >
-                        <i style={{ color: 'green' }}
-                          className="fa-solid fa-pen-nib fa-khenh"></i>
-                      </Link>
-
-                      <button className=" fa-khenh" onClick={() => handleDeleteKH(d.id)}>
-                        <i style={{ color: 'orange' }}
-                          className="fa-solid fa-trash-can fa-khenh"></i>
-                      </button>
-                    </td>
+              <table className="table">
+                <thead>
+                  <tr>
+                    <th>#</th>
+                    <th>Mã</th>
+                    <th>Tên</th>
+                    <th>Phone</th>
+                    <th>Email</th>
+                    <th>Địa Chỉ</th>
+                    <th>Ngày Sinh</th>
+                    <th>Vai Trò</th>
+                    <th>Giới Tính</th>
+                    <th>Trạng Thái</th>
+                    <th>Action</th>
                   </tr>
-                ))}
-              </tbody>
-            </table>
+                </thead>
+                <tbody className="table-group-divider">
+                  {data.map((d, i) => (
+                    <tr key={d.id}>
+                      <td>{i + 1}</td>
+                      <td>{d.ma}</td>
+                      <td>{d.ten}</td>
+                      <td>{d.sdt}</td>
+                      <td>{d.email}</td>
+                      <td>{d.diaChi}</td>
+                      <td>{formatDate(d.ngaySinh)}</td>
+                      <td>{d.vaiTro === 0 ? 'Admin' : 'Nhân viên'}</td>
+                      <td>{d.gioiTinh === true ? 'Nam' : 'Nữ'}</td>
+                      <td>{d.trangThai === 0 ? 'Hoạt động' : 'Không hoạt động'}</td>
+
+                      <td>
+                        <Link className="mx-1" to={`/nhan-vien/detail/${d.id}`}>
+                          <i
+                            style={{ color: 'green' }}
+                            className="fa-solid fa-pen-nib fa-khenh"
+                          ></i>
+                        </Link>
+
+                        <button className=" fa-khenh" onClick={() => handleDeleteKH(d.id)}>
+                          <i
+                            style={{ color: 'orange' }}
+                            className="fa-solid fa-trash-can fa-khenh"
+                          ></i>
+                        </button>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
 
               <ReactPaginate
                 breakLabel="..."

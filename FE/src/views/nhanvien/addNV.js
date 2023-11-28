@@ -1,5 +1,5 @@
 import { CCard, CCardBody, CCardHeader, CCol, CRow } from '@coreui/react'
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import { toast } from 'react-toastify'
 import { addNV } from 'service/NhanVienService'
 import { useNavigate } from 'react-router-dom'
@@ -112,7 +112,7 @@ const AddNV = () => {
                       <option value={1}>Nhân viên</option>
                     </select>
                   </div>
-                  <div className="col-4" style={{paddingTop: 15}}>
+                  <div className="col-4" style={{ paddingTop: 15 }}>
                     <label htmlFor="a" className="form-label me-3">
                       Trạng thái:{' '}
                     </label>
@@ -144,7 +144,7 @@ const AddNV = () => {
                       </label>
                     </div>
                   </div>
-                  <div style={{paddingTop: 15}} className="col-4">
+                  <div style={{ paddingTop: 15 }} className="col-4">
                     <label htmlFor="a" className="form-label me-3" style={{ paddingRight: 5 }}>
                       Giới tính:{' '}
                     </label>
@@ -177,9 +177,11 @@ const AddNV = () => {
                       </label>
                     </div>
                   </div>
-                  <div className="col-4" style={{paddingTop: 20, display: 'flex',justifyContent: 'flex-end'}}>
-                    <button
-                    type="submit" className="btn btn-primary">
+                  <div
+                    className="col-4"
+                    style={{ paddingTop: 20, display: 'flex', justifyContent: 'flex-end' }}
+                  >
+                    <button type="submit" className="btn btn-primary">
                       Thêm nhân viên
                     </button>
                   </div>

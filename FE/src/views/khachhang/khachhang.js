@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import React from 'react'
 import { CCard, CCardBody, CCardHeader, CCol, CRow } from '@coreui/react'
 import { useState, useEffect } from 'react'
@@ -7,7 +8,6 @@ import { useNavigate } from 'react-router-dom'
 import '../../../src/scss/MauSac.scss'
 import { getAllPageKH, deleteKH, searchKh } from 'service/KhachHangService'
 import '../../../src/scss/pageable.scss'
-import { Link } from 'react-router-dom'
 const KhachHang = () => {
   const navigate = useNavigate()
   const [filterStatus, setFilterStatus] = useState(' ')
@@ -94,7 +94,7 @@ const KhachHang = () => {
                     Nhập tên, mã, số điện thoại, email khách hàng cần tìm:
                   </label>
                 </div>
-                <div style={{paddingTop: 10}}>
+                <div style={{ paddingTop: 10 }}>
                   <input
                     id="colorSearch"
                     style={{ borderRadius: 15, width: 380 }}
