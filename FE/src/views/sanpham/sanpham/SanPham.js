@@ -270,91 +270,13 @@ const SanPham = () => {
       <CCol xs={12}>
         <CCard className="mb-4">
           <CCardHeader>
-            <strong>Lọc sản phẩm</strong>
+          <div style={{ display: 'flex', justifyContent: 'flex-start' }}>
+              <Link className="btn btn-primary" to={'/quan-ly-san-pham/san-pham/add'}>
+              Thêm sản phẩm <i className="fa-solid fa-square-plus"></i>
+              </Link>
+            </div>
           </CCardHeader>
           <CCardBody>
-            <Form>
-              <Row>
-                <Col>
-                  <Form.Group controlId="mauSacSelect">
-                    <Form.Label style={{ fontWeight: 'bold' }}>Màu Sắc: </Form.Label>
-                    <Form.Select
-                      className="custom-select"
-                      onChange={handleMauSacChange}
-                      value={mauSac}
-                    >
-                      <option value="" disabled={mauSacDefaultSelected}>
-                        Tất cả màu sắc
-                      </option>
-                      {uniqueColors.map((c) => (
-                        <option key={c.ma} value={c.ma}>
-                          &nbsp;{c.ma}
-                        </option>
-                      ))}
-                    </Form.Select>
-                  </Form.Group>
-                </Col>
-                <Col>
-                  <Form.Group controlId="chatLieuSelect">
-                    <Form.Label style={{ fontWeight: 'bold' }}>Chất Liệu: </Form.Label>
-                    <Form.Select
-                      className="custom-select"
-                      onChange={handleChatLieuChange}
-                      value={chatLieu}
-                    >
-                      <option value="" disabled={chatLieuDefaultSelected}>
-                        Tất cả chất liệu
-                      </option>
-                      {listCL.map((c) => (
-                        <option key={c.ten} value={c.ten}>
-                          {c.ten}
-                        </option>
-                      ))}
-                    </Form.Select>
-                  </Form.Group>
-                </Col>
-                <Col>
-                  <Form.Group controlId="loaiSanPhamSelect">
-                    <Form.Label style={{ fontWeight: 'bold' }}>Loại Sản Phẩm: </Form.Label>
-                    <Form.Select
-                      className="custom-select"
-                      onChange={handleLoaiSanPhamChange}
-                      value={loaiSanPham}
-                    >
-                      <option value="" disabled={loaiSanPhamDefaultSelected}>
-                        Tất cả loại
-                      </option>
-                      {listLSP.map((c) => (
-                        <option key={c.ten} value={c.ten}>
-                          {c.ten}
-                        </option>
-                      ))}
-                    </Form.Select>
-                  </Form.Group>
-                </Col>
-                <Col>
-                  <Form.Group controlId="nhaSanXuatSelect">
-                    <Form.Label style={{ fontWeight: 'bold' }}>Nhà Sản Xuất: </Form.Label>
-                    <Form.Select
-                      className="custom-select"
-                      onChange={handleNhaSanXuatChange}
-                      value={nhaSanXuat}
-                    >
-                      <option value="" disabled={nhaSanXuatDefaultSelected}>
-                        Tất cả nhà sản xuất
-                      </option>
-                      {listNSX.map((c) => (
-                        <option key={c.ten} value={c.ten}>
-                          {c.ten}
-                        </option>
-                      ))}
-                    </Form.Select>
-                  </Form.Group>
-                </Col>
-              </Row>
-            </Form>
-            <br></br>
-            <br></br>
             <div className="row">
               <div className="col-12 search d-flex align-items-center row">
                 <input
@@ -443,11 +365,86 @@ const SanPham = () => {
       <CCol xs={12}>
         <CCard className="mb-4">
           <CCardHeader>
-            <div style={{ display: 'flex', justifyContent: 'end' }}>
-              <Link className="btn btn-primary" to={'/quan-ly-san-pham/san-pham/add'}>
-              Thêm sản phẩm <i className="fa-solid fa-square-plus"></i>
-              </Link>
-            </div>
+          <Form>
+              <Row>
+                <Col>
+                  <Form.Group controlId="mauSacSelect">
+                    <Form.Label style={{ fontWeight: 'bold' }}>Màu Sắc: </Form.Label>
+                    <Form.Select
+                      className="custom-select"
+                      onChange={handleMauSacChange}
+                      value={mauSac}
+                    >
+                      <option value="" disabled={mauSacDefaultSelected}>
+                        Tất cả màu sắc
+                      </option>
+                      {uniqueColors.map((c) => (
+                        <option key={c.ma} value={c.ma}>
+                          &nbsp;{c.ma}
+                        </option>
+                      ))}
+                    </Form.Select>
+                  </Form.Group>
+                </Col>
+                <Col>
+                  <Form.Group controlId="chatLieuSelect">
+                    <Form.Label style={{ fontWeight: 'bold' }}>Chất Liệu: </Form.Label>
+                    <Form.Select
+                      className="custom-select"
+                      onChange={handleChatLieuChange}
+                      value={chatLieu}
+                    >
+                      <option value="" disabled={chatLieuDefaultSelected}>
+                        Tất cả chất liệu
+                      </option>
+                      {listCL.map((c) => (
+                        <option key={c.ten} value={c.ten}>
+                          {c.ten}
+                        </option>
+                      ))}
+                    </Form.Select>
+                  </Form.Group>
+                </Col>
+                <Col>
+                  <Form.Group controlId="loaiSanPhamSelect">
+                    <Form.Label style={{ fontWeight: 'bold' }}>Loại Sản Phẩm: </Form.Label>
+                    <Form.Select
+                      className="custom-select"
+                      onChange={handleLoaiSanPhamChange}
+                      value={loaiSanPham}
+                    >
+                      <option value="" disabled={loaiSanPhamDefaultSelected}>
+                        Tất cả loại
+                      </option>
+                      {listLSP.map((c) => (
+                        <option key={c.ten} value={c.ten}>
+                          {c.ten}
+                        </option>
+                      ))}
+                    </Form.Select>
+                  </Form.Group>
+                </Col>
+                <Col>
+                  <Form.Group controlId="nhaSanXuatSelect">
+                    <Form.Label style={{ fontWeight: 'bold' }}>Nhà Sản Xuất: </Form.Label>
+                    <Form.Select
+                      className="custom-select"
+                      onChange={handleNhaSanXuatChange}
+                      value={nhaSanXuat}
+                    >
+                      <option value="" disabled={nhaSanXuatDefaultSelected}>
+                        Tất cả nhà sản xuất
+                      </option>
+                      {listNSX.map((c) => (
+                        <option key={c.ten} value={c.ten}>
+                          {c.ten}
+                        </option>
+                      ))}
+                    </Form.Select>
+                  </Form.Group>
+                </Col>
+              </Row>
+            </Form>
           </CCardHeader>
           <CCardBody>
             <div className="row">

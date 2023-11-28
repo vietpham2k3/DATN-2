@@ -15,10 +15,18 @@ const UpdateKH = () => {
   const [selectedDistrict, setSelectedDistrict] = useState(null)
   const [selectedWard, setSelectedWard] = useState(null)
 
+  console.log(selectedDistrict)
+  console.log(selectedWard)
+  console.log(selectedProvince)
+
   //Lấy tên
   const [selectedProvinceName, setSelectedProvinceName] = useState('')
   const [selectedDistrictName, setSelectedDistrictName] = useState('')
   const [selectedWardName, setSelectedWardName] = useState('')
+
+  console.log(selectedProvinceName)
+  console.log(selectedDistrictName)
+  console.log(selectedWardName)
 
   const [valuesId, setValuesId] = useState({
     province_id: '',
@@ -67,43 +75,42 @@ const UpdateKH = () => {
   const handleProvinceChange = async (event) => {
     const provinceId = {
       province_id: event.target.value,
-    };
-    setSelectedProvince(event.target.value);
-    setSelectedProvinceName(event.target.options[event.target.selectedIndex].text);
-    setSelectedDistrict(null);
-    setSelectedWard(null);
-    setSelectedDistrictName('');
-    setSelectedWardName('');
+    }
+    setSelectedProvince(event.target.value)
+    setSelectedProvinceName(event.target.options[event.target.selectedIndex].text)
+    setSelectedDistrict(null)
+    setSelectedWard(null)
+    setSelectedDistrictName('')
+    setSelectedWardName('')
     setValues({
       ...values,
       tinh: event.target.options[event.target.selectedIndex].text,
-    });
-    getQuanHuyen(provinceId);
-  };
-  
+    })
+    getQuanHuyen(provinceId)
+  }
+
   const handleDistrictChange = async (event) => {
     const districtId = {
       district_id: event.target.value,
-    };
-    setSelectedDistrict(event.target.value);
-    setSelectedDistrictName(event.target.options[event.target.selectedIndex].text);
-    setSelectedWard(null);
-    setSelectedWardName('');
+    }
+    setSelectedDistrict(event.target.value)
+    setSelectedDistrictName(event.target.options[event.target.selectedIndex].text)
+    setSelectedWard(null)
+    setSelectedWardName('')
     setValues({
       ...values,
       huyen: event.target.options[event.target.selectedIndex].text,
-    });
-    getPhuong(districtId);
-  };
-  
+    })
+    getPhuong(districtId)
+  }
 
   const handleWardChange = (event) => {
     setSelectedWard(event.target.value)
     setSelectedWardName(event.target.options[event.target.selectedIndex].text)
     setValues({
-        ...values,
-        xa: event.target.options[event.target.selectedIndex].text,
-      });
+      ...values,
+      xa: event.target.options[event.target.selectedIndex].text,
+    })
   }
 
   useEffect(() => {

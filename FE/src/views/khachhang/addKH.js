@@ -140,7 +140,7 @@ const AddKH = () => {
       <CCol xs={12}>
         <CCard className="mb-4">
           <CCardHeader>
-            <strong>Thêm Nhân Viên</strong>
+            <strong>Thêm Khách Hàng</strong>
           </CCardHeader>
           <CCardBody>
             <div>

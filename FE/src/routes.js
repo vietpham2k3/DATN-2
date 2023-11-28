@@ -16,6 +16,7 @@ import UpdateNSX from 'views/sanpham/nhasanxuat/updatensx'
 import KhachHang from './views/khachhang/khachhang'
 import AddKH from 'views/khachhang/addKH'
 import UpdateKH from 'views/khachhang/updateKH'
+import KhuyenMai from 'views/khuyenmai/khuyenmai'
 
 const Dashboard = React.lazy(() => import('./views/dashboard/Dashboard'))
 
@@ -102,6 +103,16 @@ const routes = [
     element: UpdateKH,
   },
   
+  
+  { path: '/khuyen-mai/hien-thi', name: 'Khuyến Mãi', element: KhuyenMai },
+  { path: '/khuyen-mai/add', element: AddKH },
+  { path: '/khuyen-mai/update', element: UpdateKH },
+  {
+    path: '/khach-hang/detail/:id',
+    element: UpdateKH,
+  },
+  
+
   { path: '/thong-ke', name: 'Thống kê', element: Dashboard },
 ]
 

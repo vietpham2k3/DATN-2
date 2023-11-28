@@ -8,11 +8,11 @@ const _nav = [
     component: CNavItem,
     name: 'Thống kê',
     to: '/thong-ke',
-    icon: <CIcon icon={cilSpeedometer} customClassName="nav-icon" />,
-    badge: {
-      color: 'info',
-      text: 'NEW',
-    },
+    icon: <i className="fa-solid fa-magnifying-glass-chart nav-icon"></i>,
+    // badge: {
+    //   color: 'info',
+    //   text: 'NEW',
+    // },
   },
   {
     component: CNavTitle,
@@ -22,13 +22,13 @@ const _nav = [
     component: CNavItem,
     name: 'Bán hàng trực tiếp',
     to: '/theme/colors',
-    icon: <CIcon icon={cilDrop} customClassName="nav-icon" />,
+    icon: <i className="fa-solid fa-shop nav-icon"></i>,
   },
   {
     component: CNavItem,
     name: 'Đơn hàng',
-    to: '/theme/colors',
-    icon: <CIcon icon={cilDrop} customClassName="nav-icon" />,
+    to: '/hoa-don/hien-thi',
+    icon: <i className="fa-solid fa-bag-shopping nav-icon"></i>,
   },
   {
     component: CNavTitle,
@@ -38,7 +38,7 @@ const _nav = [
     component: CNavGroup,
     name: 'Quản lý sản phẩm',
     to: '/quan-ly-san-pham',
-    icon: <CIcon icon={cilCursor} customClassName="nav-icon" />,
+    icon: <i className="fa-solid fa-shoe-prints nav-icon"></i>,
     items: [
       {
         component: CNavItem,
@@ -80,7 +80,7 @@ const _nav = [
     component: CNavItem,
     name: 'Quản lý khuyến mãi',
     to: '/khuyen-mai/hien-thi',
-    icon: <CIcon icon={cilDrop} customClassName="nav-icon" />,
+    icon: <i className="fa-solid fa-gift nav-icon"></i>,
   },
   {
     component: CNavTitle,
@@ -90,13 +90,13 @@ const _nav = [
     component: CNavItem,
     name: 'Quản lý nhân viên',
     to: '/nhan-vien/hien-thi',
-    icon: <CIcon icon={cilDrop} customClassName="nav-icon" />,
+    icon: <i className="fa-solid fa-user nav-icon"></i>,
   },
   {
     component: CNavItem,
     name: 'Quản lý khách hàng',
     to: '/khach-hang/hien-thi',
-    icon: <CIcon icon={cilPencil} customClassName="nav-icon" />,
+    icon: <i className="fa-solid fa-users nav-icon"></i>,
   },
 ]
 
