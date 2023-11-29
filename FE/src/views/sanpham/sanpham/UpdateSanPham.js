@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 /* eslint-disable react-hooks/exhaustive-deps */
 import React from 'react'
 import { useState } from 'react'
@@ -15,7 +16,7 @@ import {
   postCTSP,
 } from '../../../service/SanPhamService'
 import { useEffect } from 'react'
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom'
 import '../../../scss/SanPham.scss'
 import '../../../scss/UpdateSanPham.scss'
 import { toast } from 'react-toastify'
@@ -65,7 +66,7 @@ function UpdateSanPham() {
   const closeModal5 = () => {
     setShowModal5(false)
   }
-  const navigate =  useNavigate();
+  const navigate = useNavigate()
   const [values, setValues] = useState({
     chatLieu: {
       id: '',
@@ -320,7 +321,7 @@ function UpdateSanPham() {
       putctsp(d.id, updatedValues)
     })
     toast.success('Thành công')
-    navigate('/quan-ly-san-pham/san-pham');
+    navigate('/quan-ly-san-pham/san-pham')
   }
 
   const handleSubmitUpdate = async (event) => {
@@ -592,7 +593,7 @@ function UpdateSanPham() {
             </div>
             <div className="col-12 d-flex justify-content-start">
               <button type="submit" className="btn btn-primary">
-                Cập nhật 
+                Cập nhật
               </button>
             </div>
           </form>
@@ -682,7 +683,7 @@ function UpdateSanPham() {
                       </span>
                     </th>
                     <th>
-                      Kích cỡ{' '}{' '}
+                      Kích cỡ{' '}
                       <span
                         role="button"
                         tabIndex={0}
@@ -816,7 +817,7 @@ function UpdateSanPham() {
                           </div>
                           <div className="justify-content-center">
                             {imageList.length === 0 ? (
-                              <h1></h1>
+                              {/* <h1></h1> */}
                             ) : (
                               <>
                                 <br />
@@ -888,13 +889,13 @@ function UpdateSanPham() {
         setValues={setValues}
         handleSubmit={handleSubmitUpdate}
       />
-           <MyVerticallyCenteredModal
-            show={modalShowKC}
-            onHide={() => setModalShowKC(false)}
-            handleSubmit={handleSubmitKC}
-            values={valuesCL}
-            setValues={setValuesCL}
-          />
+      <MyVerticallyCenteredModal
+        show={modalShowKC}
+        onHide={() => setModalShowKC(false)}
+        handleSubmit={handleSubmitKC}
+        values={valuesCL}
+        setValues={setValuesCL}
+      />
       <AddMauSac
         show={modalShowMS}
         onHide={() => setModalShowMS(false)}

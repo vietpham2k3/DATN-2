@@ -694,9 +694,13 @@ function DonHang(props) {
                                 Thuộc tính
                               </label>
 
-                              <select className="form-select" aria-label="Default select example">
+                              <select
+                                className="form-select"
+                                aria-label="Default select example"
+                                onChange={(e) => handleDetail(e.target.value)}
+                              >
                                 {mauSacKC.map((d, i) => (
-                                  <option key={i} value={d.id} onChange={() => handleDetail(d.id)}>
+                                  <option key={i} value={d.id}>
                                     {d.mauSac.ma} - {d.kichCo.ten} - {d.chatLieu.ten} -{' '}
                                     {d.loaiSanPham.ten} - {d.nhaSanXuat.ten}
                                   </option>

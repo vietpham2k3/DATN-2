@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { CCard, CCardBody, CCardHeader, CCol, CRow } from '@coreui/react'
 import React, { useEffect, useState } from 'react'
 import { toast } from 'react-toastify'
