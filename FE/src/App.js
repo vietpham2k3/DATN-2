@@ -10,7 +10,7 @@ const loading = (
 );
 
 // Containers
-// const DefaultLayout = React.lazy(() => import("./layout/DefaultLayout"));
+const DefaultLayout = React.lazy(() => import("./layout/DefaultLayout"));
 
 // Pages
 const Login = React.lazy(() => import("./views/pages/login/Login"));
@@ -18,6 +18,9 @@ const Register = React.lazy(() => import("./views/pages/register/Register"));
 const Page404 = React.lazy(() => import("./views/pages/page404/Page404"));
 const Page500 = React.lazy(() => import("./views/pages/page500/Page500"));
 const TrangChu = React.lazy(() => import("views/trang-chu/home/home"));
+const CuaHang = React.lazy(() => import("views/trang-chu/cua-hang/sanpham/SanPham"))
+const DetailSP = React.lazy(() => import("views/trang-chu/cua-hang/sanpham/DetailSanPham"));
+
 
 class App extends Component {
   render() {
@@ -34,7 +37,11 @@ class App extends Component {
             />
             <Route exact path="/404" name="Page 404" element={<Page404 />} />
             <Route exact path="/500" name="Page 500" element={<Page500 />} />
-            <Route path="/trang-chu" name="TrangChu" element={<TrangChu />} />
+            <Route path="*" name="Home" element={<DefaultLayout />} />
+            <Route path="/trang-chu" name="Trang Chủ" element={<TrangChu />} />
+
+            <Route path="/cua-hang" name="Cửa Hàng" element={<CuaHang />} />
+            <Route path="/chi-tiet-sp/:id/:idSP/:idMS" name="Chi Tiết" element={<DetailSP />} />
 
           </Routes>
         </Suspense>

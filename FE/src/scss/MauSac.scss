@@ -1,20 +1,20 @@
 .fa-khenh {
-    border: none;
-    background-color: transparent;
-  }
-  .product-card {
-    position: relative;
-    cursor: pointer;
-  }
+  border: none;
+  background-color: transparent;
+}
+.product-card {
+  cursor: pointer;
+}
 
-  .product-card:hover::after {
-    content: 'Chi tiết';
-    position: absolute;
-    top: 40%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    background-color: rgba(255, 255, 255, 0.8);
-    padding: 10px;
-    border-radius: 5px;
-    font-weight: bold;
-  }
+.product-card:hover::after {
+  content: 'Chi tiết';
+  position: absolute;
+  top: 40%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: rgba(255, 255, 255, 0.8);
+  padding: 10px;
+  border-radius: 5px;
+  font-weight: bold;
+}
+

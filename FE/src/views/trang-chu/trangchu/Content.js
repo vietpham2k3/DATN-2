@@ -17,30 +17,36 @@ function Content() {
   }, [])
 
   const getAllCTSP = async () => {
-    let allProduct
-    const res = await getAllBestseller()
-
-    if (res && res.data && res.data.length > 0) {
-      setData(res.data)
-    } else {
-      allProduct = await getAllProduct()
-      setData(allProduct)
+    try {
+      const res = await getAllBestseller()
+      if (res && res.data && res.data.length > 0) {
+        setData(res.data)
+      } else {
+        const allProduct = await getAllProduct()
+        setData(allProduct)
+      }
+      console.log(res.data) // Log the response
+    } catch (error) {
+      console.error('Error fetching bestseller:', error)
     }
-
-    console.log(allProduct)
   }
 
   const getAllSP = async () => {
-    const res = await getAllSPNEW()
-    if (res && res.data) {
-      setProductNew(res.data)
+    try {
+      const res = await getAllSPNEW()
+      if (res && res.data) {
+        setProductNew(res.data)
+      }
+      console.log(res.data) // Log the response
+    } catch (error) {
+      console.error('Error fetching new products:', error)
     }
   }
 
   const navigate = useNavigate()
 
   const handleDetail = (idCTSP, idSP, idMS) => {
-    navigate(`/detail/${idCTSP}/${idSP}/${idMS}`)
+    navigate(`/chi-tiet-sp/${idCTSP}/${idSP}/${idMS}`)
     localStorage.setItem('idMS', idMS)
   }
 
@@ -71,25 +77,36 @@ function Content() {
                   className="col-xl-3 col-lg-4 col-md-6 col-sm-12 product-item"
                   key={i}
                 >
-                  <Card
+                  <div
                     className="product-card"
                     onClick={() => handleDetail(product.id, product.sanPham.id, product.mauSac.id)}
-                    style={{ width: '260px', height: '400px' }}
+                    style={{ width: '260px', height: '400px', border: "1px solid gray"}}
                   >
-                    <Card.Img
-                      style={{ textAlign: 'center', width: '260px', height: '300px' }}
-                      src={`http://localhost:8080/api/chi-tiet-san-pham/${product.id}`}
-                    />
-                    <Card.Body>
+                    {product && product.id && (
+                      <Card.Img
+                        style={{ textAlign: 'center', width: '260px', height: '300px' }}
+                        src={`http://localhost:8080/api/chi-tiet-san-pham/${product.id}`}
+                      />
+                    )}
+
+                    <Card.Body style={{textAlign: 'center'}}>
                       <Card.Title>{product.sanPham.ten}</Card.Title>
                       <Card.Text>
                         <span style={{ color: 'red' }}>{convertToCurrency(product.giaBan)}</span>
                       </Card.Text>
                     </Card.Body>
-                  </Card>
+                  </div>
                 </div>
               )
             })}
+          </div>
+          <div style={{paddingTop: 35}} className="text-center">
+            <button style={{ fontSize: 20}} className="btn btn1">
+              {' '}
+              <a style={{textDecoration: "none"}} href='/#/cua-hang'>
+              Xem tất cả{' '}
+              </a>
+            </button>
           </div>
         </div>
 
@@ -109,27 +126,39 @@ function Content() {
                     className="col-xl-3 col-lg-4 col-md-6 col-sm-12 product-item"
                     key={index}
                   >
-                    <Card
+                    <div
                       className="product-card"
                       onClick={() =>
                         handleDetail(product.id, product.sanPham.id, product.mauSac.id)
                       }
-                      style={{ width: '260px', height: '400px' }}
-                    >
-                      <Card.Img
-                        style={{ textAlign: 'center', width: '260px', height: '300px' }}
-                        src={`http://localhost:8080/api/chi-tiet-san-pham/${product.id}`}
-                      />
-                      <Card.Body>
+                      style={{ width: '260px', height: '400px', border: "1px solid gray"}}
+                      >
+                      {product && product.id && (
+                        <Card.Img
+                          style={{ textAlign: 'center', width: '260px', height: '300px' }}
+                          src={`http://localhost:8080/api/chi-tiet-san-pham/${product.id}`}
+                          alt="none"
+                        />
+                      )}
+
+                      <Card.Body style={{textAlign: 'center'}}>
                         <Card.Title>{product.sanPham.ten}</Card.Title>
                         <Card.Text>
                           <span style={{ color: 'red' }}>{convertToCurrency(product.giaBan)}</span>
                         </Card.Text>
                       </Card.Body>
-                    </Card>
+                    </div>
                   </div>
                 )
               })}
+          </div>
+          <div style={{paddingTop: 35}} className="text-center">
+            <button style={{ fontSize: 20 }} className="btn btn1">
+            {' '}
+              <a style={{textDecoration: "none"}} href='/#/cua-hang'>
+              Xem tất cả{' '}
+              </a>
+            </button>
           </div>
         </div>
       </section>

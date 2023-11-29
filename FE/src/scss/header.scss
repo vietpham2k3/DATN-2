@@ -12,7 +12,6 @@
   padding: 15px 0;
   /* Khoảng cách giữa phần trên và phần dưới của header */
 }
-
 // CSS cho navbar
 .nav-1 {
   justify-content: space-between;
@@ -25,11 +24,12 @@
 .nameShop {
   color: #fff;
   font-size: 38px;
+//   pointer-events: none;
   /* Kích thước chữ cho tên cửa hàng */
 }
 
 .nameShop:hover {
-  color: rgb(108, 182, 231);
+  color: rgb(246, 241, 241);
   /* Kích thước chữ cho tên cửa hàng */
 }
 

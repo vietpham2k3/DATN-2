@@ -795,7 +795,6 @@ function DonHang(props) {
                       >
                         <InputSpinner
                           key={d.id} // Đặt key duy nhất cho mỗi InputSpinner
-                          type={'real'}
                           max={d.chiTietSanPham.soLuong + d.soLuong}
                           min={1}
                           step={1}
@@ -803,6 +802,7 @@ function DonHang(props) {
                           onChange={(e) =>
                             handleUpdateSl(d.id, d.hoaDon.id, d.chiTietSanPham.id, e)
                           }
+                          type={'real'}
                           variant={'primary'}
                           size="sm"
                           arrows
