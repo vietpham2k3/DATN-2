@@ -298,9 +298,9 @@ export default function BanHangTaiQuay() {
               Chọn khách hàng
             </Button>
             &nbsp;
-            <Button variant="primary" onClick={handleShow3}>
+            {/* <Button variant="primary" onClick={handleShow3}>
               +
-            </Button>
+            </Button> */}
           </CCardHeader>
           <CCardBody>
             {' '}
@@ -465,7 +465,7 @@ export default function BanHangTaiQuay() {
               {check && httt === 'VNPAY' && (
                 <button
                   type="button"
-                  className="btn btn-success"
+                  className="btn btn-dark"
                   disabled={tienThua < 0 || tienKhachDua === 0}
                   onClick={() => handleThanhToanWithVNP()}
                 >
@@ -482,14 +482,16 @@ export default function BanHangTaiQuay() {
                     }
                     fileName="hoa_don.pdf"
                   >
-                    <Text style={styles.button}>Thanh toán1</Text>
+                    <Text style={styles.button}>
+                      <i className="fa-solid fa-cart-shopping"></i> Thanh toán
+                    </Text>
                   </PDFDownloadLink>
                 </button>
               )}
               {check && httt === 'Tiền mặt' && (
                 <button
                   type="button"
-                  className="btn btn-success"
+                  className="btn btn-dark"
                   disabled={tienThua < 0 || tienKhachDua === 0}
                   onClick={() => handleThanhToan()}
                 >
@@ -506,28 +508,30 @@ export default function BanHangTaiQuay() {
                     }
                     fileName="hoa_don.pdf"
                   >
-                    <Text style={styles.button}>Thanh toán2</Text>
+                    <Text style={styles.button}>
+                      <i className="fa-solid fa-cart-shopping"></i> Thanh toán
+                    </Text>
                   </PDFDownloadLink>
                 </button>
               )}
               {!check && httt === 'Tiền mặt' && (
                 <button
                   type="button"
-                  className="btn btn-success"
+                  className="btn btn-dark"
                   disabled={tienThua < 0 || tienKhachDua === 0}
                   onClick={() => handleThanhToan()}
                 >
-                  Thanh toán3
+                  <i className="fa-solid fa-cart-shopping"></i> Thanh toán
                 </button>
               )}
               {!check && httt === 'VNPAY' && (
                 <button
                   type="button"
-                  className="btn btn-success"
+                  className="btn btn-dark"
                   disabled={tienThua < 0 || tienKhachDua === 0}
                   onClick={() => handleThanhToanWithVNP()}
                 >
-                  Thanh toán4
+                  <i className="fa-solid fa-cart-shopping"></i> Thanh toán
                 </button>
               )}
             </div>
