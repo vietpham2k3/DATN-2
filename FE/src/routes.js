@@ -112,6 +112,7 @@ const routes = [
   },
   
   { path: '/thong-ke', name: 'Thống kê', element: Dashboard },
+
 ]
 
 export default routes

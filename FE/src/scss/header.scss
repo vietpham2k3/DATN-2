@@ -1,0 +1,175 @@
+// CSS cho header-container
+.header-content-container {
+  background-color: #fff;
+  /* Màu nền của header */
+  box-shadow: 0 2px 4px rgba(200, 65, 65, 0.1);
+  /* Hiệu ứng đổ bóng */
+}
+
+// CSS cho header
+.header {
+  background: #000;
+  padding: 15px 0;
+  /* Khoảng cách giữa phần trên và phần dưới của header */
+}
+
+// CSS cho navbar
+.nav-1 {
+  justify-content: space-between;
+  /* Căn giữa các phần tử trong navbar */
+  align-items: center;
+  /* Căn giữa theo chiều dọc */
+}
+
+// CSS cho tên cửa hàng
+.nameShop {
+  color: #fff;
+  font-size: 38px;
+  /* Kích thước chữ cho tên cửa hàng */
+}
+
+.nameShop:hover {
+  color: rgb(108, 182, 231);
+  /* Kích thước chữ cho tên cửa hàng */
+}
+
+// CSS cho menu
+.navbar-nav {
+  display: flex;
+  align-items: center;
+  /* Căn giữa các phần tử con theo chiều dọc */
+}
+
+.nav-link {
+  color: #fff;
+  font-size: 20px;
+}
+
+.nav-link:hover {
+  color: rgb(108, 182, 231);
+}
+
+.nav-item {
+  margin-right: 15px;
+  /* Khoảng cách giữa các mục menu */
+}
+
+// CSS cho button tìm kiếm
+.btn-login {
+  background-color: #007bff;
+  /* Màu nền của button */
+  border: none;
+  color: #fff;
+  /* Màu chữ */
+}
+
+// CSS cho biểu tượng user và giỏ hàng
+.nav-link.active {
+  position: relative;
+}
+
+// CSS cho badge trên giỏ hàng
+.badge {
+  top: -8px;
+  /* Điều chỉnh vị trí badge */
+}
+
+// CSS cho ô tìm kiếm
+.search-container {
+  margin-top: 10px;
+  /* Khoảng cách từ header đến ô tìm kiếm */
+}
+
+.search-input {
+  width: 200px;
+  /* Độ rộng của ô tìm kiếm */
+  padding: 5px;
+  /* Kích thước của ô tìm kiếm */
+  border: none;
+  border-bottom: 2px solid #007bff;
+  /* Đường viền dưới của ô tìm kiếm */
+  outline: none;
+}
+
+.search-container-result {
+  position: absolute;
+  width: 100%;
+  max-height: 300px;
+  overflow-y: auto;
+  background-color: #fff;
+  /* Màu nền của kết quả tìm kiếm */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  /* Hiệu ứng đổ bóng */
+  z-index: 1;
+}
+
+.search-container-result h1 {
+  margin: 10px;
+  /* Khoảng cách giữa tiêu đề và kết quả tìm kiếm */
+}
+
+// CSS cho kết quả tìm kiếm
+.search-container-result > div {
+  border-bottom: 1px solid #eee;
+  /* Đường kẻ giữa các kết quả */
+}
+
+// CSS cho nút "Tất cả" trong kết quả tìm kiếm
+Button {
+  margin-top: 10px;
+  /* Khoảng cách giữa kết quả và nút "Tất cả" */
+}
+.box-search1 {
+  width: 100%;
+  height: 50px;
+  box-shadow: 0 0 5px;
+  border-radius: 30px;
+  display: flex;
+  align-items: center;
+  padding-left: 20px;
+  overflow: hidden;
+  background-color: white;
+}
+
+.input-seach1 {
+  border: none;
+  width: 100%;
+  height: 100%;
+  margin-left: 10px;
+  margin-right: 15px;
+  font-size: medium;
+}
+a:hover {
+  text-decoration: none;
+  color: rgb(108, 182, 231);
+}
+a:focus {
+  color: rgb(108, 182, 231);
+
+  text-decoration: none;
+  font-weight: bold;
+}
+.icon-login {
+  background-color: inherit !important;
+  border: none !important;
+  color: rgb(242, 238, 238) !important;
+  font-size: 20px !important;
+  :hover {
+    background-color: inherit;
+    color: rgb(108, 182, 231);
+  }
+}
+.btn-login:hover {
+  background-color: inherit;
+  color: rgb(246, 244, 244);
+}
+.btn-login:active {
+  background-color: transparent !important;
+  color: inherit !important;
+}
+#dropdown-basic-button {
+  background-color: transparent;
+  border: none;
+  color: rgb(251, 246, 246);
+  font-size: 20px;
+}
