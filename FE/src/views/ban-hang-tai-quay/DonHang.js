@@ -625,9 +625,7 @@ function DonHang(props) {
               onHide={handleClose1}
             >
               <Modal.Header closeButton>
-                <Modal.Title id="contained-modal-title-vcenter" style={{ marginLeft: 300 }}>
-                  Thêm Sản Phẩm
-                </Modal.Title>
+                <Modal.Title id="contained-modal-title-vcenter">Thêm Sản Phẩm</Modal.Title>
               </Modal.Header>
               <Modal.Body>
                 <div className="box col-auto col-6">
@@ -695,32 +693,15 @@ function DonHang(props) {
                               <label htmlFor="exampleFormControlInput1" className="form-label">
                                 Thuộc tính
                               </label>
-                              {mauSacKC.map((d, i) => (
-                                <div className="form-check" key={i}>
-                                  <input
-                                    className="form-check-input"
-                                    type="radio"
-                                    name="flexRadioDefault"
-                                    id={d.id}
-                                    value={d.id}
-                                    checked={d.id === dataDetail.id}
-                                    onChange={() => handleDetail(d.id)}
-                                  />
-                                  <label className="form-check-label custom-label" htmlFor={d.id}>
-                                    <div
-                                      style={{
-                                        backgroundColor: d.mauSac.ten,
-                                        width: 50,
-                                        borderRadius: '10px',
-                                      }}
-                                    >
-                                      &nbsp;
-                                    </div>
-                                    &nbsp;- {d.kichCo.ten} - {d.chatLieu.ten} - {d.loaiSanPham.ten}{' '}
-                                    - {d.nhaSanXuat.ten}
-                                  </label>
-                                </div>
-                              ))}
+
+                              <select className="form-select" aria-label="Default select example">
+                                {mauSacKC.map((d, i) => (
+                                  <option key={i} value={d.id} onChange={() => handleDetail(d.id)}>
+                                    {d.mauSac.ma} - {d.kichCo.ten} - {d.chatLieu.ten} -{' '}
+                                    {d.loaiSanPham.ten} - {d.nhaSanXuat.ten}
+                                  </option>
+                                ))}
+                              </select>
                             </div>
                             <div className="mb-3">
                               <label htmlFor="exampleFormControlTextarea1" className="form-label">
@@ -822,8 +803,9 @@ function DonHang(props) {
                           onChange={(e) =>
                             handleUpdateSl(d.id, d.hoaDon.id, d.chiTietSanPham.id, e)
                           }
-                          variant={'dark'}
+                          variant={'primary'}
                           size="sm"
+                          arrows
                         />
                       </div>
                       {d.chiTietSanPham.soLuong < 10 ? (
@@ -851,7 +833,7 @@ function DonHang(props) {
       </div>
       <Modal style={{ marginTop: 120, marginLeft: 150 }} show={show4} onHide={handleClose4}>
         <Modal.Header closeButton>
-          <Modal.Title style={{ marginLeft: 175 }}>Khách Hàng</Modal.Title>
+          <Modal.Title>Khách Hàng</Modal.Title>
         </Modal.Header>
         <div style={{ paddingLeft: 25 }} className="search">
           <input
@@ -867,67 +849,28 @@ function DonHang(props) {
           {kh.map((k, index) => (
             <div
               key={k.id}
-              style={{
-                border: '2px solid skyblue',
-                borderRadius: 10,
-                height: 85,
-                paddingTop: 8,
-                marginTop: index > 0 ? 20 : 0, // Thêm khoảng cách 20px cho phần tử từ thứ 2 trở đi
-              }}
+              // style={{
+              //   border: '2px solid black',
+              //   borderRadius: 5,
+              //   cursor: 'pointer',
+              //   height: 85,
+              //   paddingTop: 8,
+              //   marginTop: index > 0 ? 20 : 0, // Thêm khoảng cách 20px cho phần tử từ thứ 2 trở đi
+              // }}
             >
-              <h7 style={{ paddingLeft: 15 }}>
-                <strong style={{ fontSize: 16 }}>{k.tenKhachHang}</strong> |{' '}
-                <label style={{ fontSize: 15, fontStyle: 'italic' }} htmlFor="sdt">
-                  {' '}
-                  {k.sdt}
+              <div className="form-check">
+                <input
+                  className="form-check-input"
+                  type="radio"
+                  name="exampleRadios"
+                  id={k.id}
+                  value={k.tenKhachHang}
+                  onClick={() => handleChooseKH(k.id, k.tenKhachHang, k.sdt)}
+                  checked={k.tenKhachHang === valuesUpdateHD.tenNguoiNhan}
+                />
+                <label className="form-check-label ms-1" htmlFor={k.id}>
+                  {k.tenKhachHang} ({k.sdt})
                 </label>
-              </h7>
-              <br></br>
-              <div className="row">
-                <div className="col-6" style={{ paddingLeft: 27, marginTop: 15 }}>
-                  <p style={{ fontSize: 12, fontStyle: 'italic' }}>Mã: {k.maKhachHang}</p>
-                </div>
-                <div className="col-3" style={{ paddingLeft: 120, width: 128 }}>
-                  <button
-                    onClick={() => handleChooseKH(k.id, k.tenKhachHang, k.sdt)}
-                    className="relative inline-flex items-center justify-start py-2 pl-4 pr-12 overflow-hidden font-semibold shadow text-indigo-600 transition-all duration-150 ease-in-out rounded hover:pl-10 hover:pr-6 bg-gray-50 group"
-                  >
-                    <span className="absolute bottom-0 left-0 w-full h-1 transition-all duration-150 ease-in-out bg-indigo-600 group-hover:h-full"></span>
-                    <span className="absolute right-0 pr-4 duration-200 ease-out group-hover:translate-x-12">
-                      <svg
-                        className="w-5 h-5 text-green-400"
-                        fill="none"
-                        stroke="currentColor"
-                        viewBox="0 0 24 24"
-                        xmlns="http://www.w3.org/2000/svg"
-                      >
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          strokeWidth="2"
-                          d="M14 5l7 7m0 0l-7 7m7-7H3"
-                        ></path>
-                      </svg>
-                    </span>
-                    <span className="absolute left-0 pl-2.5 -translate-x-12 group-hover:translate-x-0 ease-out duration-200">
-                      <svg
-                        className="w-5 h-5 text-green-400"
-                        fill="none"
-                        stroke="currentColor"
-                        viewBox="0 0 24 24"
-                        xmlns="http://www.w3.org/2000/svg"
-                      >
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          strokeWidth="2"
-                          d="M14 5l7 7m0 0l-7 7m7-7H3"
-                        ></path>
-                      </svg>
-                    </span>
-                    <span className="relative2 text-left group-hover:text-white">Chọn</span>
-                  </button>
-                </div>
               </div>
             </div>
           ))}
