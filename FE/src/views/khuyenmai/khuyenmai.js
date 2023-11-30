@@ -206,8 +206,8 @@ const KhuyenMai = () => {
               <th>Tên</th>
               <th>Mức giảm</th>
               <th>Tối thiểu</th>
-              <th>Bắt đầu</th>
-              <th>Kết thúc</th>
+              <th>Ngày bắt đầu</th>
+              <th>Ngày kết thúc</th>
               <th>Mô tả</th>
               <th>Trạng Thái</th>
               <th>Action</th>
@@ -232,7 +232,7 @@ const KhuyenMai = () => {
                     {d.trangThai !== 0 && d.trangThai !== 1 && <span>Đang diễn ra</span>}
                   </td>
                   <td>
-                    <button className="fa-khenh" onClick={() => navigate(`/voucher/detail/${d.id}`)}>
+                    <button className="fa-khenh" onClick={() => navigate(`/khuyen-mai/detail/${d.id}`)}>
                       <i style={{ color: 'green' }}
                             className="fa-solid fa-pen-nib"></i>
                     </button>

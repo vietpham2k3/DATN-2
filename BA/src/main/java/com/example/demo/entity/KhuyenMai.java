@@ -56,7 +56,6 @@ public class KhuyenMai {
     private Date thoiGianKetThuc;
 
     @Column(name = "mo_ta")
-    @NotBlank(message = "Không được để trống")
     private String moTa;
 
     @Column(name = "trang_thai")

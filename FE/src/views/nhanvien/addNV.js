@@ -157,7 +157,7 @@ const AddNV = () => {
                       </label>
                     </div>
                   </div>
-                  <div style={{paddingTop: 35}} className="col-4">ain
+                  <div style={{paddingTop: 35}} className="col-4">
                     <label htmlFor="a" className="form-label me-3" style={{ paddingRight: 5 }}>
                       Giới tính:{' '}
                     </label>
