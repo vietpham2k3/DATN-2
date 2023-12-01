@@ -63,7 +63,6 @@ public class KhachHangController {
     @GetMapping("/getAllPage")
     public ResponseEntity<?> getAll(@RequestParam(defaultValue = "0") Integer page) throws IOException {
         Page<KhachHang> khachHangPage = khService.getAll(page);
-
         return ResponseEntity.ok().body(khachHangPage);
     }
 
