@@ -5,8 +5,6 @@ import React from 'react'
 import { useNavigate } from 'react-router-dom'
 import '../../scss/DonHang.scss'
 import { getAllPageDH, findVIP } from 'service/ServiceDonHang'
-import { DateRangePicker } from 'rsuite'
-import Select from 'react-select'
 import { FormCheck, FormGroup } from 'react-bootstrap'
 import { format } from 'date-fns'
 import { CCard, CCardBody, CCardHeader, CCol, CRow } from '@coreui/react'
@@ -282,8 +280,6 @@ const HoaDon = () => {
                   <option value="3">Three</option>
                 </Form.Select>
               </div>
-
-       
 
               <div className="search col-6">
                 <label htmlFor="colorSearch" style={{ marginRight: '10px', fontWeight: 'bold' }}>

@@ -1,7 +1,8 @@
+/* eslint-disable no-dupe-keys */
 /* eslint-disable react-hooks/exhaustive-deps */
 import React from 'react'
-import { useEffect, useState, useRef } from 'react'
-import { Link, useParams, useNavigate } from 'react-router-dom'
+import { useEffect, useState } from 'react'
+import { useParams, useNavigate } from 'react-router-dom'
 import { detailCTSP, getAllProduct } from 'service/SanPhamService'
 // import { postGH } from 'services/GioHangService';
 import { Card, Image } from 'react-bootstrap'
@@ -16,7 +17,7 @@ import {
 } from 'service/ServiceDonHang'
 import { Button } from 'rsuite'
 import { toast } from 'react-toastify'
-import { postGH, themGioHang } from 'service/GioHangService'
+import { themGioHang } from 'service/GioHangService'
 function Detail(props) {
   const { id, idSP, idMS } = useParams()
   const [product, setProduct] = useState(null)
@@ -26,13 +27,11 @@ function Detail(props) {
   const [idCTSP, setIdCTSP] = useState(0)
   const [listKC, setListKC] = useState([])
   const [listMS, setListMS] = useState([])
-  const thumbnailContainerRef = useRef(null)
   // const [detailProduct, setDetailProduct] = useState(null);
   // const [check, setCheck] = useState(false);
   // const [listSanPham, setListSanPham] = useState([]);
   const [selectedIdMSSP, setSelectedIdMSSP] = useState('')
   const [quantity, setQuantity] = useState(1)
-  const idMStest = localStorage.getItem('idMS')
   const navigate = useNavigate()
   // ms kc
   const [activeIdKCMaMau, setActiveIdKCMaMau] = useState('')
@@ -95,36 +94,36 @@ function Detail(props) {
     setVal(index + 1)
   }
 
-  const handleNext = () => {
-    let nextVal = val + 1
-    if (nextVal >= imageList.length + 1) {
-      nextVal = 0
-    }
-    setVal(nextVal)
-    const thumbnailContainer = thumbnailContainerRef.current
-    const thumbnailWidth = thumbnailContainer.offsetWidth / imageList.length
-    const scrollLeft = thumbnailWidth * nextVal
-    thumbnailContainer.scrollTo({
-      left: scrollLeft,
-      behavior: 'smooth',
-    })
-    console.log(idMStest)
-  }
+  // const handleNext = () => {
+  //   let nextVal = val + 1
+  //   if (nextVal >= imageList.length + 1) {
+  //     nextVal = 0
+  //   }
+  //   setVal(nextVal)
+  //   const thumbnailContainer = thumbnailContainerRef.current
+  //   const thumbnailWidth = thumbnailContainer.offsetWidth / imageList.length
+  //   const scrollLeft = thumbnailWidth * nextVal
+  //   thumbnailContainer.scrollTo({
+  //     left: scrollLeft,
+  //     behavior: 'smooth',
+  //   })
+  //   console.log(idMStest)
+  // }
 
-  const handlePrevious = () => {
-    let prevVal = val - 1
-    if (prevVal < 0) {
-      prevVal = imageList.length
-    }
-    setVal(prevVal)
-    const thumbnailContainer = thumbnailContainerRef.current
-    const thumbnailWidth = thumbnailContainer.offsetWidth / imageList.length
-    const scrollLeft = thumbnailWidth * prevVal
-    thumbnailContainer.scrollTo({
-      left: scrollLeft,
-      behavior: 'smooth',
-    })
-  }
+  // const handlePrevious = () => {
+  //   let prevVal = val - 1
+  //   if (prevVal < 0) {
+  //     prevVal = imageList.length
+  //   }
+  //   setVal(prevVal)
+  //   const thumbnailContainer = thumbnailContainerRef.current
+  //   const thumbnailWidth = thumbnailContainer.offsetWidth / imageList.length
+  //   const scrollLeft = thumbnailWidth * prevVal
+  //   thumbnailContainer.scrollTo({
+  //     left: scrollLeft,
+  //     behavior: 'smooth',
+  //   })
+  // }
 
   const handleClick2 = (idCTSP, idKCMS) => {
     setActiveIdKCMaMau(idKCMS)
@@ -217,20 +216,20 @@ function Detail(props) {
     localStorage.setItem('idMS', idMS)
   }
 
-  const handleTaoHoaDon = () => {
-    if (!dataLogin) {
-      navigate('/login')
-      return
-    }
-    taoHoaDon('', valuesHDCT)
-  }
+  // const handleTaoHoaDon = () => {
+  //   if (!dataLogin) {
+  //     navigate('/login')
+  //     return
+  //   }
+  //   taoHoaDon('', valuesHDCT)
+  // }
 
-  const taoHoaDon = async (nguoiTao, value) => {
-    const res = await postGH(nguoiTao, value)
-    if (res) {
-      navigate(`/checkoutquick/${res.data}`)
-    }
-  }
+  // const taoHoaDon = async (nguoiTao, value) => {
+  //   const res = await postGH(nguoiTao, value)
+  //   if (res) {
+  //     navigate(`/checkoutquick/${res.data}`)
+  //   }
+  // }
 
   const addSPToGH = async (id, value) => {
     try {
@@ -482,13 +481,13 @@ function Detail(props) {
                   <div
                     className="product-card"
                     onClick={() => handleDetail(product.id, product.sanPham.id, product.mauSac.id)}
-                    style={{ width: '260px', height: '400px', border: "1px solid gray"}}
-                    >
+                    style={{ width: '260px', height: '400px', border: '1px solid gray' }}
+                  >
                     <Card.Img
                       style={{ textAlign: 'center', width: '260px', height: '300px' }}
                       src={`http://localhost:8080/api/chi-tiet-san-pham/${product.id}`}
                     />
-                    <Card.Body style={{textAlign: 'center'}}>
+                    <Card.Body style={{ textAlign: 'center' }}>
                       <Card.Title>{product.sanPham.ten}</Card.Title>
                       <Card.Text>
                         <span>{convertToCurrency(product.giaBan)}</span>

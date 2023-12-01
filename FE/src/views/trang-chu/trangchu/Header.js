@@ -1,3 +1,5 @@
+/* eslint-disable react-hooks/exhaustive-deps */
+/* eslint-disable jsx-a11y/anchor-is-valid */
 import React from 'react'
 import _ from 'lodash'
 import { useState, useEffect } from 'react'
@@ -95,7 +97,7 @@ function Header() {
           </div>
           <div>
             <ul className="navbar-nav">
-            <li className="nav-item mx-3">
+              <li className="nav-item mx-3">
                 <a className="nav-link" href="/#/trang-chu">
                   Trang chủ
                 </a>
