@@ -21,13 +21,13 @@ public interface HoaDonService {
 
     List<String> YCDoiHang(UUID idHD);
 
-    List<HoaDon> searchByTrangThai(Integer[] trangThai, UUID idKH);
+    List<HoaDon> searchByTrangThai(Integer trangThai, UUID idKH);
 
     Page<HoaDon> pageHD(Pageable pageable);
 
     Page<HoaDonCustom> hienThiPageHD(Pageable pageable);
 
-    public Page<HoaDonCustom> searchVIP(String key, Date tuNgay, Date denNgay, Integer[] trangThai,
+    public Page<HoaDonCustom> searchVIP(String key, Date tuNgay, Date denNgay, Integer trangThai,
                                         Integer loaiDon, Double minSL, Double maxSL, Double minTT,
                                         Double maxTT, Pageable pageable);
 

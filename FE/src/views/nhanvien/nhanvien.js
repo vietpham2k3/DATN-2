@@ -198,7 +198,7 @@ const NhanVien = () => {
                           ></i>
                         </Link>
 
-                        <button className="fa-khenh" onClick={() => handleDeleteKH(d.id)}>
+                        <button className="fa-khenh mx-3" onClick={() => handleDeleteKH(d.id)}>
                           <i
                             style={{ color: 'orange' }}
                             className="fa-solid fa-trash-can fa-khenh"

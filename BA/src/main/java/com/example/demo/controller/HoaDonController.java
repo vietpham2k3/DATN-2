@@ -152,7 +152,7 @@ public class HoaDonController {
     }
 
     @GetMapping("searchByTrangThai/{id}")
-    public ResponseEntity<?> searchByTrangThai(@PathVariable UUID id, @RequestParam Integer[] trangThai) {
+    public ResponseEntity<?> searchByTrangThai(@PathVariable UUID id, @RequestParam Integer trangThai) {
         Map<String, Object> map = new HashMap<>();
         List<HoaDon> list = serviceHD.searchByTrangThai(trangThai, id);
 
@@ -355,12 +355,12 @@ public class HoaDonController {
     }
 
     @GetMapping("hien-thi-page-find")
-    public ResponseEntity<?> findVIP(String key, String tuNgay, String denNgay, Integer[] trangThai,
+    public ResponseEntity<?> findVIP(String key, String tuNgay, String denNgay, Integer trangThai,
                                      Integer loaiDon, Double minSL, Double maxSL, Double minTT,
                                      Double maxTT,
                                      @RequestParam(defaultValue = "0") int page) {
         Pageable pageable = PageRequest.of(page, 10);
-        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm aa");
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm");
         Date tuNgayDate = null;
         Date denNgayDate = null;
 

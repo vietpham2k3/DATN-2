@@ -20,10 +20,9 @@ import KhuyenMai from 'views/khuyenmai/khuyenmai'
 import AddKM from 'views/khuyenmai/addKM'
 import UpdateKM from 'views/khuyenmai/updateKM'
 import HoaDon from 'views/hoadon/hoadon'
+import HDCT from 'views/hoadon/hoa-don-chi-tiet'
 
 const Dashboard = React.lazy(() => import('./views/dashboard/Dashboard'))
-
-// const Colors = React.lazy(() => import('./views/theme/colors/Colors'))
 
 // Buttons
 const SanPham = React.lazy(() => import('./views/sanpham/sanpham/SanPham'))
@@ -115,6 +114,7 @@ const routes = [
   },
   
   { path: '/hoa-don/hien-thi', name: 'Hóa Đơn', element: HoaDon },
+  { path: '/hoa-don/chi-tiet/:id', name: 'Hóa Đơn Chi Tiết', element: HDCT },
 
 
   { path: '/thong-ke', name: 'Thống kê', element: Dashboard },
