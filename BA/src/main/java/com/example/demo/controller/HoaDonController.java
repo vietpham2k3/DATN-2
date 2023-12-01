@@ -762,9 +762,6 @@ public class HoaDonController {
                 .body(khachHangBytes);
     }
 
-    /**
-     * Convert the Page<KhachHang> to byte array.
-     */
     private byte[] convertPageToByteArray2(List<KhachHang> khachHangPage) throws IOException {
         ObjectMapper objectMapper = new ObjectMapper();
         SimpleModule module = new SimpleModule();

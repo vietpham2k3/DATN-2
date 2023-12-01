@@ -91,9 +91,7 @@ const KhachHang = () => {
               <div className="search">
                   <label htmlFor="colorSearch" style={{ marginRight: '10px', fontWeight: 'bold' }}>
                     Nhập khách hàng cần tìm:
-                  </label>
-                </div>
-                <div style={{ paddingTop: 10 }}>
+                  </label> 
                   <input
                     id="colorSearch"
                     style={{ borderRadius: 15, width: 380 }}
@@ -102,7 +100,7 @@ const KhachHang = () => {
                     placeholder="Search..."
                     onChange={handleSearch}
                   />
-              </div>
+                </div>
 
               <div style={{ marginRight: 20 }}>
               <span style={{ fontWeight: 'bold', marginRight: 25 }} className="form-check-label">

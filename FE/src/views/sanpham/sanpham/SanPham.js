@@ -22,7 +22,7 @@ import {
 } from '../../../service/SanPhamService'
 
 const MIN = 0
-const MAX = 1000000
+const MAX = 1000000000
 
 const SanPham = () => {
   const [values, setValues] = useState([MIN, 0])

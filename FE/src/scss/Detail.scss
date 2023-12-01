@@ -1,0 +1,168 @@
+.product-count {
+  display: flex;
+}
+.form-control {
+  width: 100%;
+  line-height: 1;
+}
+.btn-dark {
+  margin-top: 0;
+}
+
+.thumbnails-container {
+  margin-top: 10px; /* Adjust the margin as needed */
+}
+
+.anh2 {
+  cursor: pointer;
+  width: 50px; /* Adjust the width of each thumbnail as needed */
+  height: 50px; /* Adjust the height of each thumbnail as needed */
+}
+
+.clicked {
+  border: 2px solid black; /* Style for the clicked thumbnail */
+}
+
+.add-to-cart2,
+.like {
+  background: #0c0c0c;
+  padding: 1.2em 1.5em;
+  border: none;
+  text-transform: UPPERCASE;
+  font-weight: bold;
+  color: #fff;
+  margin-top: 15px;
+}
+.add-to-cart2:hover,
+.like:hover {
+  background: #525251;
+  color: #fff;
+}
+
+.add-to-cart1,
+.like {
+  background: #b61717;
+  padding: 1.2em 1.5em;
+  border: none;
+  text-transform: UPPERCASE;
+  font-weight: bold;
+  color: #fff;
+  margin-top: 15px;
+  margin-left: 20px;
+}
+.add-to-cart1:hover,
+.like:hover {
+  background: #802525;
+  color: #fff;
+}
+.action {
+  padding-top: 30px;
+}
+.size {
+  display: inline-block;
+  border: 1px solid grey;
+  padding: 10px 13px;
+  font-weight: 700;
+  margin-left: 10px;
+  color: black;
+  font-size: 15px;
+  cursor: pointer;
+}
+.trangChu {
+  text-decoration: none;
+  padding-right: 10px;
+}
+.sanPham {
+  text-decoration: none;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+.trangChu:hover {
+  color: #f06be9;
+  font-weight: 600;
+}
+.sanPham:hover {
+  color: #f06be9;
+  font-weight: 600;
+}
+
+/* Add or modify these styles in your existing CSS */
+
+.flex_row {
+  display: flex;
+  justify-content: flex-end; /* Align to the right */
+  align-items: center;
+  padding-top: 20px;
+  margin-left: 0; /* Remove unnecessary margin */
+  max-width: 450px;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: thin;
+  scrollbar-color: transparent transparent;
+}
+
+.thumbnailAnh {
+  padding-left: 10px; /* Adjust padding as needed */
+  padding-right: 10px; /* Add right padding */
+  display: flex;
+  justify-content: flex-end; /* Align to the right */
+  align-items: center;
+}
+
+.flex_row::-webkit-scrollbar {
+  width: 6px;
+}
+
+.flex_row::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.flex_row::-webkit-scrollbar-thumb {
+  background-color: transparent;
+}
+
+.flex_row:hover::-webkit-scrollbar-thumb {
+  background-color: rgba(0, 0, 0, 0.2);
+}
+
+.clicked {
+  border: 3px solid gray;
+}
+.btns {
+  height: 40px;
+  width: 40px;
+  border-radius: 5px;
+  margin-top: auto;
+  margin-bottom: auto;
+}
+.actionImage {
+  display: flex;
+  text-align: left;
+  padding-left: 140px;
+}
+.anh1 {
+  width: 350px;
+  height: 450px;
+}
+.anh2 {
+  width: 100px;
+  height: 100px;
+}
+.active-button {
+  background-color: red;
+  color: white;
+}
+html {
+  overflow: scroll;
+  overflow-x: hidden;
+}
+::-webkit-scrollbar {
+  width: 0; /* Remove scrollbar space */
+  background: transparent; /* Optional: just make scrollbar invisible */
+}
+/* Optional: show position indicator in red */
+::-webkit-scrollbar-thumb {
+  background: #ff0000;
+}
+
+

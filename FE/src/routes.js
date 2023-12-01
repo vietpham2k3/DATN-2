@@ -17,6 +17,9 @@ import KhachHang from './views/khachhang/khachhang'
 import AddKH from 'views/khachhang/addKH'
 import UpdateKH from 'views/khachhang/updateKH'
 import KhuyenMai from 'views/khuyenmai/khuyenmai'
+import AddKM from 'views/khuyenmai/addKM'
+import UpdateKM from 'views/khuyenmai/updateKM'
+import HoaDon from 'views/hoadon/hoadon'
 
 const Dashboard = React.lazy(() => import('./views/dashboard/Dashboard'))
 
@@ -104,14 +107,18 @@ const routes = [
   },
   
   { path: '/khuyen-mai/hien-thi', name: 'Khuyến Mãi', element: KhuyenMai },
-  { path: '/khuyen-mai/add', element: AddKH },
-  { path: '/khuyen-mai/update', element: UpdateKH },
+  { path: '/khuyen-mai/add', element: AddKM },
+  { path: '/khuyen-mai/update', element: UpdateKM },
   {
-    path: '/khach-hang/detail/:id',
-    element: UpdateKH,
+    path: '/khuyen-mai/detail/:id',
+    element: UpdateKM,
   },
   
+  { path: '/hoa-don/hien-thi', name: 'Hóa Đơn', element: HoaDon },
+
+
   { path: '/thong-ke', name: 'Thống kê', element: Dashboard },
+
 ]
 
 export default routes

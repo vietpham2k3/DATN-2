@@ -191,14 +191,14 @@ const NhanVien = () => {
                       <td>{d.trangThai === 0 ? 'Hoạt động' : 'Không hoạt động'}</td>
 
                       <td>
-                        <Link className="mx-1" to={`/nhan-vien/detail/${d.id}`}>
+                        <Link className="fa-khenh" to={`/nhan-vien/detail/${d.id}`}>
                           <i
                             style={{ color: 'green' }}
                             className="fa-solid fa-pen-nib fa-khenh"
                           ></i>
                         </Link>
 
-                        <button className=" fa-khenh" onClick={() => handleDeleteKH(d.id)}>
+                        <button className="fa-khenh" onClick={() => handleDeleteKH(d.id)}>
                           <i
                             style={{ color: 'orange' }}
                             className="fa-solid fa-trash-can fa-khenh"
