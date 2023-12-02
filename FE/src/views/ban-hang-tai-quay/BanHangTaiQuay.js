@@ -281,7 +281,7 @@ export default function BanHangTaiQuay() {
     setValuesUpdateHD({
       ...valuesUpdateHD,
       ...valuesUpdateHD.hinhThucThanhToan,
-      trangThai: 6,
+      trangThai: 4,
       hinhThucThanhToan: {
         ten: dataDetailHD.hinhThucThanhToan.ten,
         tien: tienKhachDua,
@@ -296,7 +296,7 @@ export default function BanHangTaiQuay() {
     setValuesUpdateHD({
       ...valuesUpdateHD,
       ...valuesUpdateHD.hinhThucThanhToan,
-      trangThai: 6,
+      trangThai: 4,
       hinhThucThanhToan: {
         ten: dataDetailHD.hinhThucThanhToan.ten,
         tien: tienKhachDua,
@@ -612,9 +612,6 @@ export default function BanHangTaiQuay() {
               Thêm sản phẩm
             </Button>
             &nbsp; &nbsp;
-            <Button variant="primary" onClick={openModal}>
-              Quét QR
-            </Button>
           </CCardHeader>
           <CCardBody>
             <Box sx={{ width: '100%' }}>

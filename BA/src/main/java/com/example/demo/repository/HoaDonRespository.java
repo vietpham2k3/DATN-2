@@ -30,12 +30,12 @@ public interface HoaDonRespository extends JpaRepository<HoaDon, UUID> {
     @Query(value = "SELECT hd.*, hdct.id as idHDCT, hdct.id_ctsp, hdct.id_hd, hdct.don_gia, hdct.so_luong\n" +
             "FROM HoaDon HD\n" +
             "JOIN HoaDonChiTiet HDCT ON HD.id = HDCT.id_hd\n" +
-            "WHERE HD.trang_thai IN :trangThai \n" +
+            "WHERE HD.trang_thai = :trangThai \n" +
             "and hd.id_kh = :idKH \n" +
             "and loai_don = 1\n" +
             "ORDER BY HD.ngay_sua DESC",
             nativeQuery = true)
-    List<HoaDon> searchByTrangThai(@Param("trangThai") Integer[] trangThai, @Param("idKH") UUID idKH);
+    List<HoaDon> searchByTrangThai(@Param("trangThai") Integer trangThai, @Param("idKH") UUID idKH);
 
     @Query(value = "SELECT HD.id, HD.ma, HD.ten_nguoi_nhan, HD.ngay_tao, \n" +
             "       SUM(HDCT.so_luong) AS tong_so_luong,\n" +
@@ -47,7 +47,7 @@ public interface HoaDonRespository extends JpaRepository<HoaDon, UUID> {
             "       OR (:key IS NULL OR HD.ten_nguoi_nhan LIKE CONCAT('%', :key, '%')))\n" +
             "       AND (:tuNgay IS NULL OR HD.ngay_tao >= :tuNgay) \n" +
             "       AND (:denNgay IS NULL OR HD.ngay_tao <= :denNgay) \n" +
-            "       AND (HD.trang_thai IN :trangThai) \n" +
+            "       AND (:trangThai IS NULL OR HD.trang_thai = :trangThai) \n" +
             "       AND (:loaiDon IS NULL OR HD.loai_don = :loaiDon)\n" +
             "GROUP BY HD.id, HD.ma, HD.ten_nguoi_nhan, HD.ngay_tao, HD.trang_thai, HD.loai_don\n" +
             "HAVING ((:minSL IS NULL OR SUM(HDCT.so_luong) >= :minSL) \n" +
@@ -59,7 +59,7 @@ public interface HoaDonRespository extends JpaRepository<HoaDon, UUID> {
     public Page<HoaDonCustom> findVIP(@Param("key") String key,
                                       @Param("tuNgay") Date tuNgay,
                                       @Param("denNgay") Date denNgay,
-                                      @Param("trangThai") Integer[] trangThai,
+                                      @Param("trangThai") Integer trangThai,
                                       @Param("loaiDon") Integer loaiDon,
                                       @Param("minSL") Double minSL,
                                       @Param("maxSL") Double maxSL,

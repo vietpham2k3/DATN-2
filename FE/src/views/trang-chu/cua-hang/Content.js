@@ -173,19 +173,6 @@ function ContentSanPham() {
     }
   }
 
-  // Hàm xử lý khi chọn cổ áo
-  const handleCollarChange = (collar) => {
-    if (selectedCollars.includes(collar)) {
-      setSelectedCollars(selectedCollars.filter((c) => c !== collar))
-      let filterCollar = filterCretia.listCoAo
-      let listCollarNew = remove(collar, filterCollar)
-      setFilterCretia({ ...filterCretia, listCoAo: listCollarNew })
-    } else {
-      setSelectedCollars([...selectedCollars, collar])
-      setFilterCretia({ ...filterCretia, listCoAo: [...filterCretia.listCoAo, collar] })
-    }
-  }
-
   // Hàm xử lý khi chọn nhà sản xuất
   const handleManufacturerChange = (manufacturer) => {
     if (selectedManufacturers.includes(manufacturer)) {
