@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React from 'react'
@@ -117,17 +118,12 @@ function Header() {
                   Thông Tin Liên Hệ
                 </a>
               </li>
-              {/* <li className="nav-item mx-3">
-                <a className="nav-link" href="#">
-                  Tin Tức
-                </a>
-              </li> */}
             </ul>
           </div>
           <div style={{ paddingLeft: '100px' }}>
             <ul className="navbar-nav">
               <li className="nav-item">
-                <a className="nav-link active" aria-current="page" href="#">
+                {/* <a className="nav-link active" aria-current="page" href="#">
                   <button
                     type="button"
                     className="btn btn-primary position-relative icon-login btn-login"
@@ -136,24 +132,24 @@ function Header() {
                   >
                     <i className="fa-solid fa-magnifying-glass"></i>
                   </button>
-                </a>
+                </a> */}
               </li>
 
               <li className="nav-item">
-                <a className="nav-link active" aria-current="page" href="/gio-hang">
+                <a className="nav-link active" aria-current="page" href="/#/gio-hang">
                   <button
                     type="button"
                     className="btn btn-primary position-relative icon-login btn-login"
                   >
                     <i className="fa-solid fa-cart-shopping"></i>
-                    <span className="position-absolute top-0 start-90 translate-middle badge rounded-pill bg-danger">
+                    <span className="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
                       {!dataLogin ? productCount : productCount || 0}
                     </span>
                   </button>
                 </a>
               </li>
               <li className="nav-item">
-                <a className="nav-link active container" aria-current="page" href="#">
+                <a className="nav-link active container" aria-current="page">
                   {dataLogin && dataLogin.role === 'KH' ? (
                     <DropdownButton
                       id="dropdown-basic-button"

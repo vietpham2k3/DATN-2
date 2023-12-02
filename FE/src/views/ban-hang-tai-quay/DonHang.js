@@ -66,6 +66,7 @@ function DonHang(props) {
     setTienThua,
     tienThua,
     check,
+    updateTTHD
   } = props
   const [inputValue, setInputValue] = useState('')
   const [show, setShow] = useState(false)
@@ -233,17 +234,6 @@ function DonHang(props) {
 
   const handleUpdateHD = () => {
     updateTTHD(id, valuesUpdateHD)
-  }
-
-  const updateTTHD = async (idHD, value) => {
-    try {
-      const res = await updateHD(idHD, value)
-      if (res) {
-        detailHDById(id)
-      }
-    } catch (error) {
-      console.log(error)
-    }
   }
 
   const getKM = async (tien) => {

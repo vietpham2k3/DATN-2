@@ -11,9 +11,12 @@
   background: #000;
   padding: 15px 0;
   /* Khoảng cách giữa phần trên và phần dưới của header */
+  display: flex;
+  justify-content: center;
 }
 // CSS cho navbar
 .nav-1 {
+  display: flex;
   justify-content: space-between;
   /* Căn giữa các phần tử trong navbar */
   align-items: center;
@@ -24,7 +27,7 @@
 .nameShop {
   color: #fff;
   font-size: 38px;
-//   pointer-events: none;
+  //   pointer-events: none;
   /* Kích thước chữ cho tên cửa hàng */
 }
 

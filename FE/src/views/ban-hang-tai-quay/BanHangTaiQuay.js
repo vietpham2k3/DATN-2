@@ -18,11 +18,12 @@ import {
   getById,
   getKmById,
   thanhToan,
+  updateHD,
 } from '../../service/ServiceDonHang'
 import { useEffect } from 'react'
 import { Button, Form } from 'react-bootstrap'
 import { toast } from 'react-toastify'
-import { deleteByIdHD } from '../../service/GioHangService'
+import { addKhuyenMai, deleteByIdHD } from '../../service/GioHangService'
 import { CCard, CCardBody, CCardHeader, CCol, CRow } from '@coreui/react'
 import { pay } from 'service/PayService'
 import { PDFDownloadLink, Text } from '@react-pdf/renderer'
@@ -90,6 +91,16 @@ export default function BanHangTaiQuay() {
     },
     trangThai: 0,
   })
+  const [valuesKhuyenMai, setValuesKhuyenMai] = useState({
+    khuyenMai: {
+      ma: '',
+      tien: 0,
+    },
+    hoaDon: {
+      id: id,
+    },
+    tienGiam: 0,
+  })
   const nvID = {
     nhanVien: { id: dataLoginNV && dataLoginNV.id },
   }
@@ -106,6 +117,7 @@ export default function BanHangTaiQuay() {
       if (dataDetailHD.tongTienKhiGiam || id) {
         VNP(id)
       }
+      setValuesKhuyenMai({ ...valuesKhuyenMai, hoaDon: { id: id } })
     }
   }, [id])
 
@@ -127,6 +139,13 @@ export default function BanHangTaiQuay() {
     setTotalAmount(sum)
     setTongSoLuong(count)
   }, [valuesSanPham])
+
+  useEffect(() => {
+    if (dataHDKM.length > 0) {
+      const totalGiam = dataHDKM.reduce((total, d) => total + d.tienGiam, 0)
+      updateTTHD(id, { ...valuesUpdateHD, tongTienKhiGiam: totalAmount - totalGiam })
+    }
+  }, [dataHDKM])
 
   const add = async () => {
     try {
@@ -161,12 +180,14 @@ export default function BanHangTaiQuay() {
   }
 
   const handleChangeValueTien = (e) => {
+    const totalGiam = dataHDKM.reduce((total, d) => total + d.tienGiam, 0)
     VNP(id)
     setTienKhachDua(Number(e))
     setValuesUpdateHD({
-      ...valuesUpdateHD.hinhThucThanhToan,
       ...valuesUpdateHD,
+      tongTienKhiGiam: totalAmount - totalGiam,
       hinhThucThanhToan: {
+        ...valuesUpdateHD.hinhThucThanhToan,
         tien: e,
         ten: dataDetailHD.hinhThucThanhToan.ten,
         trangThai: 0,
@@ -287,7 +308,51 @@ export default function BanHangTaiQuay() {
   const handleShow4 = () => setShow4(true)
   const handleShow3 = () => setShow3(true)
 
-  console.log(dataDetailHD.tongTien, dataDetailHD.tongTienKhiGiam, tienKhachDua, tienThua)
+  const handleChangeKM = (value) => {
+    const totalGiam = dataHDKM.reduce((total, d) => total + d.tienGiam, 0)
+    setValuesKhuyenMai({
+      ...valuesKhuyenMai,
+      khuyenMai: {
+        ma: value,
+        tien: totalAmount,
+      },
+    })
+  }
+
+  const handleChangeValuesKM = (e) => {
+    if (e.key === 'Enter') {
+      addVToHD(valuesKhuyenMai)
+    }
+  }
+
+  const addVToHD = async (value) => {
+    try {
+      const res = await addKhuyenMai(value)
+      if (res.data === 'error') {
+        toast.error('Mã khuyễn mãi không hợp lệ')
+      } else if (res.data === 'ff') {
+        toast.error('Bạn đang sử dụng mã này')
+      } else {
+        findAllKM(id)
+        const totalGiam = dataHDKM.reduce((total, d) => total + d.tienGiam, 0)
+        toast.success('Thêm mã thành công')
+        updateTTHD(id, { ...valuesUpdateHD, tongTienKhiGiam: totalAmount - totalGiam })
+      }
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
+  const updateTTHD = async (idHD, value) => {
+    try {
+      const res = await updateHD(idHD, value)
+      if (res && id) {
+        detailHDById(id)
+      }
+    } catch (error) {
+      console.log(error)
+    }
+  }
 
   return (
     <CRow>
@@ -343,7 +408,9 @@ export default function BanHangTaiQuay() {
                   <input
                     type="text"
                     style={{ border: 'none', borderBottom: '1px solid gray', textAlign: 'right' }}
-                    // defaultValue={dataDetailKM && dataDetailKM.ma}
+                    value={valuesKhuyenMai.khuyenMai.ma}
+                    onChange={(e) => handleChangeKM(e.target.value)}
+                    onKeyDown={handleChangeValuesKM}
                   />{' '}
                 </p>
               </div>
@@ -606,6 +673,7 @@ export default function BanHangTaiQuay() {
                       setTienThua={setTienThua}
                       tienThua={tienThua}
                       check={check}
+                      updateTTHD={updateTTHD}
                     ></DonHang>
                   </CustomTabPanel>
                 ))

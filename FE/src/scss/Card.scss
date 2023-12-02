@@ -1,0 +1,78 @@
+.card-voucher {
+  width: 100%;
+  border: 1px solid gray;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-items: center;
+  padding-top: 12px;
+}
+
+.wrapper {
+  padding: 50px 0 50px 0;
+}
+
+.card-voucher.active {
+  background-color: yellow;
+}
+
+.ma-giam-gia {
+  display: flex;
+  overflow-x: auto;
+  white-space: nowrap;
+}
+
+.input-spinner {
+  height: 10px;
+}
+
+.card-width {
+  padding-left: 10px;
+  flex: 0 0 auto;
+  width: 250px; /* Định nghĩa chiều rộng của mỗi div card-voucher */
+  margin-right: 10px; /* Khoảng cách giữa các div card-voucher */
+}
+
+.text-voucher {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-right: 10px;
+}
+
+.text-voucher .btn {
+  display: flex;
+  align-items: center;
+  width: 75px;
+  height: 30px;
+  font-size: small;
+  margin-bottom: 10px;
+}
+.cart-san-pham {
+  width: 100%;
+  border-radius: 15px;
+  box-shadow: 3px 3px 10px 2px;
+}
+.title-gio-hang {
+  padding-top: 15px;
+  padding-left: 20px;
+  padding-bottom: 10px;
+}
+.tong-tien-cart {
+  height: 120px;
+  align-items: center;
+  padding-top: 5px;
+  .btn-tt {
+    display: flex;
+    justify-content: center;
+    .btn {
+      width: 50%;
+      height: 50px;
+      font-size: larger;
+    }
+  }
+  .text-total {
+    font-size: medium;
+    margin-left: 30px;
+  }
+}
