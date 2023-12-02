@@ -545,9 +545,7 @@ export default function BanHangTaiQuay() {
               Thêm sản phẩm
             </Button>
             &nbsp; &nbsp;
-            <Button variant="primary" onClick={openModal}>
-              Quét QR
-            </Button>
+    
           </CCardHeader>
           <CCardBody>
             <Box sx={{ width: '100%' }}>

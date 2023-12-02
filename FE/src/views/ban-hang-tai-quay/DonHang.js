@@ -34,8 +34,6 @@ import { detailKM, getAllKM } from '../../service/ServiceKhuyenMai'
 import { toast } from 'react-toastify'
 import Modal from 'react-bootstrap/Modal'
 import { pay } from '../../service/PayService'
-// import QrCodeScannerIcon from '@mui/icons-material/QrCodeScanner'
-// import { QrReader } from 'react-qr-reader'
 function DonHang(props) {
   // eslint-disable-next-line react/prop-types
   const {
@@ -748,7 +746,7 @@ function DonHang(props) {
           )}
           <div className="table-container">
             <Table striped hover className="my-4">
-              <tr className="ps-3">
+              <tr className="ps-5">
                 <th>#</th>
                 <th>Mã</th>
                 <th>Ảnh</th>
@@ -757,7 +755,7 @@ function DonHang(props) {
                 <th>Đơn giá</th>
                 <th>Tổng tiền</th>
               </tr>
-              <tbody>
+              <tbody className="table-group-divider">
                 {valuesSanPham.map((d, i) => (
                   <tr key={i}>
                     <td>{i + 1}</td>

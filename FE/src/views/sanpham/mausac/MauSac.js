@@ -176,7 +176,7 @@ const MauSac = () => {
                 onClick={() => navigate('/quan-ly-san-pham/mau-sac/add')}
                 className="btn btn-primary "
               >
-                Thêm màu sắc
+                Thêm
               </button>
             </div>
           </CCardHeader>

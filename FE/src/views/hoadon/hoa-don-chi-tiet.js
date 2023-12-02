@@ -187,7 +187,7 @@ function HDCT() {
 
     toast.success('Cập nhật thành công !')
     if (id) {
-    await updateHD(id, hoaDon)
+      await updateHD(id, hoaDon)
     }
   }
 
@@ -349,10 +349,11 @@ function HDCT() {
   const [show7, setShow7] = useState(false)
   const [show8, setShow8] = useState(false)
   const [show9, setShow9] = useState(false)
+  const [show99, setShow99] = useState(false)
 
   const handleClose = () => {
-    setShowDC(false);
-  };
+    setShowDC(false)
+  }
 
   const [valuesId, setValuesId] = useState({
     province_id: '',
@@ -410,26 +411,8 @@ function HDCT() {
   const handleClose1 = () => setShow1(false)
   const handleShow1 = () => setShow1(true)
 
-  const handleClose2 = () => setShow2(false)
-  const handleShow2 = () => setShow2(true)
-
-  const handleClose3 = () => setShow3(false)
-  const handleShow3 = () => setShow3(true)
-
-  const handleClose4 = () => setShow4(false)
-  const handleShow4 = () => setShow4(true)
-
-  const handleClose6 = () => setShow6(false)
-  const handleShow6 = () => setShow6(true)
-
-  const handleClose7 = () => setShow7(false)
-  // const handleShow7 = () => setShow7(true);
-
-  const handleClose8 = () => setShow8(false)
-  const handleShow8 = () => setShow8(true)
-
-  const handleClose9 = () => setShow9(false)
-  const handleShow9 = () => setShow9(true)
+  const handleClose99 = () => setShow99(false)
+  const handleShow99 = () => setShow99(true)
 
   const tenNV = {
     nhanVien: { ten: dataLogin && dataLogin.ten },
@@ -572,46 +555,6 @@ function HDCT() {
     event.preventDefault()
     await giaoHangTC(id, lshd4)
   }
-
-  //   // xac nhan giao hang that bai
-
-  //   const giaoHangTB = async (id, value) => {
-  //     const res = await giaoHangThatBai(id, value)
-  //     if (res) {
-  //       toast.success('Cập nhật thành công !')
-  //       setShow9(false)
-  //       detail(id)
-  //       detailListLSHD(id)
-  //     }
-  //   }
-
-  //   const handleXacNhanGiaoHangThatBai = async (event) => {
-  //     event.preventDefault()
-  //     await giaoHangTB(id, lshd5)
-  //   }
-
-  // xac nhan nhan hang
-  // const [lshd25, setLshd25] = useState({
-  //   ghiChu: '',
-  //   nguoiTao: dataLogin && dataLogin.ten
-  // });
-
-  // const xacNhanNhanHang = async (id, value) => {
-  //   const res = await nhanHang(id, value);
-  //   if (res) {
-  //     toast.success('Cập nhật thành công !');
-  //     detail(id);
-  //     detailListLSHD(id);
-  //   }
-  // };
-
-  // const handleXacNhanNhanHang = async (event) => {
-  //   event.preventDefault();
-  //   setLshd25({
-  //     ...lshd25
-  //   });
-  //   await xacNhanNhanHang(id, lshd25);
-  // };
 
   // apiGHN
 
@@ -920,7 +863,10 @@ function HDCT() {
           <div style={styles.container}>
             <Text style={styles.textThuocTinh}>Ngày tạo: {formatDate(hoaDon.ngayThanhToan)}</Text>
             <Text style={styles.textThuocTinh}>Khách hàng: {hoaDon.tenNguoiNhan}</Text>
-            <Text style={styles.textThuocTinh}>Địa chỉ: {hoaDon.diaChi + ' , ' + hoaDon.xa + ', ' + hoaDon.huyen + ', ' + hoaDon.tinh}</Text>
+            <Text style={styles.textThuocTinh}>
+              Địa chỉ:{' '}
+              {hoaDon.diaChi + ' , ' + hoaDon.xa + ', ' + hoaDon.huyen + ', ' + hoaDon.tinh}
+            </Text>
             <Text style={styles.textThuocTinh}>Số điện thoại: {hoaDon.soDienThoai}</Text>
           </div>
           <Text style={styles.titleTB}>DANH SÁCH SẢN PHẨM KHÁCH HÀNG MUA</Text>
@@ -1001,8 +947,7 @@ function HDCT() {
     <Tooltip id="button-tooltip" {...props}>
       Cập Nhật Thông Tin
     </Tooltip>
-  );
-
+  )
 
   return (
     <CRow>
@@ -1030,23 +975,23 @@ function HDCT() {
 
                     {/* //giao hang thanh cong */}
                     {hoaDon.trangThai === 3 && hoaDon.loaiDon === 1 && (
-                      <button style={{width: 150}} onClick={handleXacNhanGiaoHangThanhCong} className="btn btn-success">
+                      <button
+                        style={{ width: 150 }}
+                        onClick={handleXacNhanGiaoHangThanhCong}
+                        className="btn btn-success"
+                      >
                         Giao thành công
                       </button>
                     )}
                   </div>
-                
+
                   {/* //huy don */}
                   <div className="col-auto">
                     {(hoaDon.trangThai === 0 || hoaDon.trangThai === 1) && hoaDon.loaiDon === 1 && (
-                      <button
-                        onClick={handleHuyDon}
-                        className="btn btn-danger"
-                      >
-                         Hủy
+                      <button onClick={handleHuyDon} className="btn btn-danger">
+                        Hủy
                       </button>
                     )}
-             
                   </div>
                 </div>
               </div>
@@ -1175,191 +1120,213 @@ function HDCT() {
       <CCol xs={12}>
         <CCard className="mb-4">
           <CCardHeader>
-            <div className='row'>
+            <div className="row">
+              <div className="col-auto">
+                <strong style={{ fontSize: 25 }}>Thông Tin Hóa Đơn</strong>
+              </div>
+              <div className="col-auto">
+                {hoaDon.trangThai === 0 && hoaDon.loaiDon === 1 && (
+                  <OverlayTrigger
+                    placement="top"
+                    delay={{ show: 250, hide: 300 }}
+                    overlay={renderTooltip}
+                  >
+                    <Link
+                      onClick={handleShow}
+                      className="fa-solid fa-file-pen fa-xl fa-khenh"
+                      style={{ paddingTop: 15, color: 'blueviolet' }}
+                    ></Link>
+                  </OverlayTrigger>
+                )}
 
-                   <div className='col-auto'>
-
-                    <strong style={{ fontSize: 25 }}>Thông Tin Hóa Đơn</strong>
-                    </div>
-                    <div className='col-auto'>
- {hoaDon.trangThai === 0 && hoaDon.loaiDon === 1 && (
-                            <OverlayTrigger
-                            placement="top"
-                            delay={{ show: 250, hide: 300 }}
-                            overlay={renderTooltip}
-                          >
-                            <Link
-                              onClick={handleShow}
-                              className="fa-solid fa-file-pen fa-xl fa-khenh"
-                              style={{ paddingTop: 15, color: "blueviolet" }}
-                            ></Link>
-                          </OverlayTrigger>
-                          )}
-
-                          {hoaDon.trangThai === 4 && (
-                              <button className="btn btn-dark" data-bs-placement="right">
-                                <PDFDownloadLink document={<InvoiceDocument />} fileName="hoa_don.pdf">
-                                    <span style={{fontWeight: 'bold'}}>In Hóa Đơn</span>
-                                </PDFDownloadLink>
-                              </button>
-                          )}
-                    </div>
+                {hoaDon.trangThai === 4 && (
+                  <button className="btn btn-info" data-bs-placement="right">
+                    <PDFDownloadLink document={<InvoiceDocument />} fileName="hoa_don.pdf">
+                      <span style={{ fontWeight: 'bold', fontStyle: 'italic' }}>In Hóa Đơn</span>
+                    </PDFDownloadLink>
+                  </button>
+                )}
+              </div>
             </div>
-       
-                         
-
-
-                    <Modal
-                      style={{ marginLeft: 150, paddingTop: 50 }}
-                      show={showDC}
-                      onHide={handleClose}
-                    >
-                      <Modal.Header closeButton>
-                        <Modal.Title style={{ marginLeft: 50 }}>Cập Nhật Thông Tin Khách Hàng</Modal.Title>
-                      </Modal.Header>
-                      <Modal.Body>
-                        <form className="needs-validation" noValidate onSubmit={handleUpdateHD}>
-                            <div className="col-auto">
-                              <div className="form-group row">
-                                <label style={{ fontWeight: 'bold' }} htmlFor="tenNguoiNhan" className="col-sm-3 col-form-label">
-                                  Họ Và Tên:
-                                </label>
-                                <div className="col-sm-9">
-                                  <input
-                                    type="text"
-                                    className="form-control"
-                                    name="tenNguoiNhan"
-                                    placeholder="Họ Và Tên"
-                                    value={hoaDon.tenNguoiNhan}
-                                    onChange={(e) => {
-                                      setHoaDon({ ...hoaDon, tenNguoiNhan: e.target.value });
-                                      setNone(true);
-                                      setNone1(true);
-                                    }}
-                                  />
-                                  {!none && <div style={{ color: 'red' }}>Tên người nhận không được để trống !</div>}
-                                  {!none1 && <div style={{ color: 'red' }}>Tên người nhận không được quá 30 ký tự và phải là chữ !</div>}
-                                </div>
-                              </div>
-                              <br></br>
-                              <div className="form-group row">
-                                <label style={{ fontWeight: 'bold' }} htmlFor="soDienThoai" className="col-sm-3 col-form-label">
-                                  SĐT:
-                                </label>
-                                <div className="col-sm-9">
-                                  <input
-                                    type="tel"
-                                    className="form-control"
-                                    name="soDienThoai"
-                                    placeholder="Số Điện Thoại"
-                                    value={hoaDon.soDienThoai}
-                                    onChange={(e) => {
-                                      setHoaDon({ ...hoaDon, soDienThoai: e.target.value });
-                                      setNone2(true);
-                                      setNone3(true);
-                                    }}
-                                  />
-                                  {!none2 && <div style={{ color: 'red' }}>Số điện thoại không được để trống !</div>}
-                                  {!none3 && (
-                                    <div style={{ color: 'red' }}>Số điện thoại phải là số, bắt đầu bằng số 0 và phải đúng 10 số !</div>
-                                  )}
-                                </div>
-                              </div>
-                              <br></br>
-                              <div className="form-group row">
-                                <label style={{ fontWeight: 'bold' }} htmlFor="diaChi" className="col-sm-3 col-form-label">
-                                  Địa Chỉ:
-                                </label>
-                                <div className="col-sm-9">
-                                  <textarea
-                                    className="form-control"
-                                    rows="3"
-                                    name="diaChi"
-                                    placeholder="Địa Chỉ"
-                                    value={hoaDon.diaChi}
-                                    onChange={(e) => {
-                                      setHoaDon({ ...hoaDon, diaChi: e.target.value });
-                                      setNone4(true);
-                                      setNone5(true);
-                                    }}
-                                  ></textarea>
-                                  {!none4 && <div style={{ color: 'red' }}>Địa chỉ không được để trống !</div>}
-                                  {!none5 && <div style={{ color: 'red' }}>Địa chỉ không được vượt quá 250 ký tự !</div>}
-                                </div>
-                              </div>
-                            </div>
-                            <br></br>
-                          <br></br>
-     <div className="form-group">
-                                <div className="col-auto">
-                                  <select id="province" className="form-select fsl" onChange={handleProvinceChange}>
-                                    <option value="">-----Chọn tỉnh thành-----</option>
-                                    {thanhPho.map((province) => (
-                                      <option
-                                        key={province.ProvinceID}
-                                        selected={province.NameExtension[1] === hoaDon.tinh}
-                                        value={province.ProvinceID}
-                                      >
-                                        {province.NameExtension[1]}
-                                      </option>
-                                    ))}
-                                  </select>
-                                </div>
-                              </div>
-                              <br></br>
-                              <div className="form-group">
-            
-                                <div className="col-auto">
-                                  <select
-                                    id="district"
-                                    className="form-select fsl"
-                                    disabled={!selectedProvince}
-                                    onChange={(e) => handleDistrictChange(e)}
-                                  >
-                                    <option value="">----Chọn quận huyện-----</option>
-                                    {quan.map((district) => (
-                                      <option
-                                        key={district.DistrictID}
-                                        selected={district.DistrictName === hoaDon.huyen}
-                                        value={district.DistrictID}
-                                      >
-                                        {district.DistrictName}
-                                      </option>
-                                    ))}
-                                  </select>
-                                </div>
-                              </div>
-                              <br></br>
-                              <div className="form-group">
-                                <div className="col-auto">
-                                  <select
-                                    id="ward"
-                                    className="form-select fsl"
-                                    disabled={!selectedProvince || !selectedDistrict}
-                                    onChange={handleWardChange}
-                                  >
-                                    <option value="">-----Chọn phường xã-----</option>
-                                    {phuong.map((ward) => (
-                                      <option key={ward.WardCode} selected={ward.WardName === hoaDon.xa} value={ward.WardCode}>
-                                        {ward.WardName}
-                                      </option>
-                                    ))}
-                                  </select>
-                                </div>
-                              </div>
-                          <br></br>
-                          <br></br>
-                          <div className="text-center">
-                            <button
-                              type="submit"
-                              className="btn btn-primary"
-                            >
-                                Cập Nhật
-                            </button>
+            <Modal style={{ marginLeft: 150, paddingTop: 50 }} show={showDC} onHide={handleClose}>
+              <Modal.Header closeButton>
+                <Modal.Title style={{ marginLeft: 50 }}>Cập Nhật Thông Tin Khách Hàng</Modal.Title>
+              </Modal.Header>
+              <Modal.Body>
+                <form className="needs-validation" noValidate onSubmit={handleUpdateHD}>
+                  <div className="col-auto">
+                    <div className="form-group row">
+                      <label
+                        style={{ fontWeight: 'bold' }}
+                        htmlFor="tenNguoiNhan"
+                        className="col-sm-3 col-form-label"
+                      >
+                        Họ Và Tên:
+                      </label>
+                      <div className="col-sm-9">
+                        <input
+                          type="text"
+                          className="form-control"
+                          name="tenNguoiNhan"
+                          placeholder="Họ Và Tên"
+                          value={hoaDon.tenNguoiNhan}
+                          onChange={(e) => {
+                            setHoaDon({ ...hoaDon, tenNguoiNhan: e.target.value })
+                            setNone(true)
+                            setNone1(true)
+                          }}
+                        />
+                        {!none && (
+                          <div style={{ color: 'red' }}>Tên người nhận không được để trống !</div>
+                        )}
+                        {!none1 && (
+                          <div style={{ color: 'red' }}>
+                            Tên người nhận không được quá 30 ký tự và phải là chữ !
                           </div>
-                        </form>
-                      </Modal.Body>
-                    </Modal>
+                        )}
+                      </div>
+                    </div>
+                    <br></br>
+                    <div className="form-group row">
+                      <label
+                        style={{ fontWeight: 'bold' }}
+                        htmlFor="soDienThoai"
+                        className="col-sm-3 col-form-label"
+                      >
+                        SĐT:
+                      </label>
+                      <div className="col-sm-9">
+                        <input
+                          type="tel"
+                          className="form-control"
+                          name="soDienThoai"
+                          placeholder="Số Điện Thoại"
+                          value={hoaDon.soDienThoai}
+                          onChange={(e) => {
+                            setHoaDon({ ...hoaDon, soDienThoai: e.target.value })
+                            setNone2(true)
+                            setNone3(true)
+                          }}
+                        />
+                        {!none2 && (
+                          <div style={{ color: 'red' }}>Số điện thoại không được để trống !</div>
+                        )}
+                        {!none3 && (
+                          <div style={{ color: 'red' }}>
+                            Số điện thoại phải là số, bắt đầu bằng số 0 và phải đúng 10 số !
+                          </div>
+                        )}
+                      </div>
+                    </div>
+                    <br></br>
+                    <div className="form-group row">
+                      <label
+                        style={{ fontWeight: 'bold' }}
+                        htmlFor="diaChi"
+                        className="col-sm-3 col-form-label"
+                      >
+                        Địa Chỉ:
+                      </label>
+                      <div className="col-sm-9">
+                        <textarea
+                          className="form-control"
+                          rows="3"
+                          name="diaChi"
+                          placeholder="Địa Chỉ"
+                          value={hoaDon.diaChi}
+                          onChange={(e) => {
+                            setHoaDon({ ...hoaDon, diaChi: e.target.value })
+                            setNone4(true)
+                            setNone5(true)
+                          }}
+                        ></textarea>
+                        {!none4 && (
+                          <div style={{ color: 'red' }}>Địa chỉ không được để trống !</div>
+                        )}
+                        {!none5 && (
+                          <div style={{ color: 'red' }}>
+                            Địa chỉ không được vượt quá 250 ký tự !
+                          </div>
+                        )}
+                      </div>
+                    </div>
+                  </div>
+                  <br></br>
+                  <br></br>
+                  <div className="form-group">
+                    <div className="col-auto">
+                      <select
+                        id="province"
+                        className="form-select fsl"
+                        onChange={handleProvinceChange}
+                      >
+                        <option value="">-----Chọn tỉnh thành-----</option>
+                        {thanhPho.map((province) => (
+                          <option
+                            key={province.ProvinceID}
+                            selected={province.NameExtension[1] === hoaDon.tinh}
+                            value={province.ProvinceID}
+                          >
+                            {province.NameExtension[1]}
+                          </option>
+                        ))}
+                      </select>
+                    </div>
+                  </div>
+                  <br></br>
+                  <div className="form-group">
+                    <div className="col-auto">
+                      <select
+                        id="district"
+                        className="form-select fsl"
+                        disabled={!selectedProvince}
+                        onChange={(e) => handleDistrictChange(e)}
+                      >
+                        <option value="">----Chọn quận huyện-----</option>
+                        {quan.map((district) => (
+                          <option
+                            key={district.DistrictID}
+                            selected={district.DistrictName === hoaDon.huyen}
+                            value={district.DistrictID}
+                          >
+                            {district.DistrictName}
+                          </option>
+                        ))}
+                      </select>
+                    </div>
+                  </div>
+                  <br></br>
+                  <div className="form-group">
+                    <div className="col-auto">
+                      <select
+                        id="ward"
+                        className="form-select fsl"
+                        disabled={!selectedProvince || !selectedDistrict}
+                        onChange={handleWardChange}
+                      >
+                        <option value="">-----Chọn phường xã-----</option>
+                        {phuong.map((ward) => (
+                          <option
+                            key={ward.WardCode}
+                            selected={ward.WardName === hoaDon.xa}
+                            value={ward.WardCode}
+                          >
+                            {ward.WardName}
+                          </option>
+                        ))}
+                      </select>
+                    </div>
+                  </div>
+                  <br></br>
+                  <br></br>
+                  <div className="text-center">
+                    <button type="submit" className="btn btn-primary">
+                      Cập Nhật
+                    </button>
+                  </div>
+                </form>
+              </Modal.Body>
+            </Modal>
           </CCardHeader>
           <CCardBody>
             <div>
@@ -1654,10 +1621,161 @@ function HDCT() {
 
       <CCol xs={12}>
         <CCard className="mb-4">
-          {/* <CCardHeader>
-                <strong>Sản Phẩm Trong Đơn</strong>
-              </CCardHeader> */}
-          <CCardBody></CCardBody>
+          <CCardHeader>
+          <Button variant="primary" onClick={handleShow99}>
+              Thêm sản phẩm
+            </Button>
+            <Modal
+              size="lg"
+              aria-labelledby="contained-modal-title-vcenter"
+              centered
+              style={{ marginLeft: 150 }}
+              show={show99}
+              onHide={handleClose99}
+            >
+              <Modal.Header closeButton>
+                <Modal.Title id="contained-modal-title-vcenter">Thêm Sản Phẩm</Modal.Title>
+              </Modal.Header>
+              <Modal.Body>
+                <div className="box col-auto col-6">
+                  <div className="search">
+                    <input
+                      style={{ borderRadius: 15, height: 35 }}
+                      type="text"
+                      className="input-search results-list"
+                      placeholder="Nhập mã hoặc tên sản phẩm cần tìm..."
+                      value={term}
+                      onChange={handleInputChange}
+                    />
+                  </div>
+                </div>
+                <section className="navbar-expand-lg navbar-light bg-light">
+                  <div>
+                    <div className="results-list">
+                      <Table hover>
+                        <tbody>
+                          {dataSP.length > 0 ? (
+                            dataSP.map((d, i) => (
+                              <tr
+                                key={i}
+                                onClick={() => handleAddSoLuong(d.id, d.sanPham.id)}
+                                style={{ cursor: 'pointer' }}
+                              >
+                                <td>
+                                  <img
+                                    src={`http://localhost:8080/api/chi-tiet-san-pham/${d.id}`}
+                                    className="product-image"
+                                    style={{ width: '70px', height: '100px' }}
+                                    alt='"none"'
+                                  />
+                                </td>
+                                <td>{d.sanPham.ma}</td>
+                                <td>{d.sanPham.ten}</td>
+                                <td>{d.soLuong || 0}</td>
+                                <td>{convertToCurrency(d.giaBan)}</td>
+                              </tr>
+                            ))
+                          ) : (
+                            <tr>
+                              <td colSpan={5}>Không có dữ liệu</td>
+                            </tr>
+                          )}
+                        </tbody>
+                      </Table>
+
+                   
+                    </div>
+                  </div>
+                </section>
+              </Modal.Body>
+            </Modal>
+            
+              </CCardHeader>
+          <CCardBody>
+          <div className="table-container">
+            <Table striped hover className="my-4">
+              <tr className="ps-5">
+                <th>#</th>
+                <th>Mã</th>
+                <th>Ảnh</th>
+                <th>Sản phẩm</th>
+                <th>Số lượng</th>
+                <th>Đơn giá</th>
+                <th>Tổng tiền</th>
+              </tr>
+              <tbody className="table-group-divider">
+                {valuesSanPham.map((d, i) => (
+                  <tr key={i}>
+                    <td>{i + 1}</td>
+                    <td>{d.chiTietSanPham.sanPham.ma}</td>
+                    <td>
+                      <img
+                        src={`http://localhost:8080/api/chi-tiet-san-pham/${d.chiTietSanPham.id}`}
+                        className="product-image"
+                        style={{ width: '70px', height: '100px' }}
+                      />
+                    </td>
+                    <td>
+                      {d.chiTietSanPham.sanPham.ten} <br />
+                      {d.chiTietSanPham.kichCo.ten} -{' '}
+                      <span
+                        className="color-circle"
+                        style={{
+                          backgroundColor: d.chiTietSanPham.mauSac.ten,
+                          display: 'inline-block',
+                          verticalAlign: 'middle',
+                          height: '15px',
+                          width: '15px',
+                        }}
+                      ></span>
+                    </td>
+                    <td>
+                      <div
+                        className="input-spinner"
+                        style={{
+                          display: 'flex',
+                          alignItems: 'center',
+                          width: 120,
+                          justifyContent: 'center',
+                        }}
+                      >
+                        <InputSpinner
+                          key={d.id} // Đặt key duy nhất cho mỗi InputSpinner
+                          max={d.chiTietSanPham.soLuong + d.soLuong}
+                          min={1}
+                          step={1}
+                          value={d.soLuong}
+                          onChange={(e) =>
+                            handleUpdateSl(d.id, d.hoaDon.id, d.chiTietSanPham.id, e)
+                          }
+                          type={'real'}
+                          variant={'primary'}
+                          size="sm"
+                          arrows
+                        />
+                      </div>
+                      {d.chiTietSanPham.soLuong < 10 ? (
+                        <span style={{ color: 'red' }}>
+                          Số sản phẩm còn lại: <strong>{d.chiTietSanPham.soLuong}</strong>
+                        </span>
+                      ) : (
+                        ''
+                      )}
+                    </td>
+                    <td>{convertToCurrency(d.donGia)}</td>
+                    <td>{convertToCurrency(d.soLuong * d.donGia)}</td>
+                    <td>
+                      <button
+                        onClick={() => handleDelete(d.id)}
+                        className="fa-solid fa-trash mx-3"
+                      ></button>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </Table>
+          </div>
+          </CCardBody>
         </CCard>
       </CCol>
       {/*  */}

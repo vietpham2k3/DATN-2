@@ -9,7 +9,6 @@ import { Col, FormCheck, FormGroup } from 'react-bootstrap'
 import { CCard, CCardBody, CCardHeader, CCol, CRow } from '@coreui/react'
 import _ from 'lodash'
 import Form from 'react-bootstrap/Form'
-import ModalHDCT from './hoa-don-chi-tiet'
 const HoaDon = () => {
   const [currentPage, setCurrentPage] = useState(0)
   const [totalPages, setTotalPages] = useState(0)
@@ -161,18 +160,14 @@ const HoaDon = () => {
     <CRow>
       <CCol xs={12}>
         <CCard className="mb-4">
-          <CCardHeader>
-            <strong>Tìm kiếm: </strong>
-          </CCardHeader>
           <CCardBody>
             <div className="d-flex justify-content-between">
-              <div className="box col-auto col-4">
+              <div className="box col-auto col-3">
                 <div style={{ textAlign: 'start' }} className="field">
                   <strong>Tìm kiếm hóa đơn: </strong>
                 </div>
                 <input
                   style={{
-                    width: '362px',
                     height: '30px',
                     borderRadius: 20,
                     border: '1px solid gray',
@@ -185,13 +180,12 @@ const HoaDon = () => {
                 />
               </div>
 
-              <div className="box col-auto col-4">
+              <div className="box col-auto col-3">
                 <div style={{ textAlign: 'start' }} className="field">
                   <strong>Từ Ngày : </strong>
                 </div>
                 <input
                   style={{
-                    width: '362px',
                     height: '30px',
                     borderRadius: 20,
                     border: '1px solid black',
@@ -203,13 +197,12 @@ const HoaDon = () => {
                 />
               </div>
 
-              <div className="box col-auto col-4">
+              <div className="box col-auto col-3">
                 <div style={{ textAlign: 'start' }} className="field">
                   <strong>Đến Ngày : </strong>
                 </div>
                 <input
                   style={{
-                    width: '362px',
                     height: '30px',
                     borderRadius: 20,
                     border: '1px solid black',
@@ -228,7 +221,7 @@ const HoaDon = () => {
               style={{ marginTop: 10, display: 'flex', justifyContent: 'center' }}
               className="row"
             >
-              <Col className="col-4">
+              <Col className="col-3">
                 <Form.Group controlId="mauSacSelect">
                   <Form.Label style={{ fontWeight: 'bold' }}>Trạng thái: </Form.Label>
                   <Form.Select
@@ -375,7 +368,7 @@ const HoaDon = () => {
                               fontSize: 18,
                             }}
                           >
-                            Đã hủy 
+                            Đã hủy
                           </span>
                         )}
 
@@ -417,7 +410,6 @@ const HoaDon = () => {
                   ))}
                 </tbody>
               </table>
-
 
               <ReactPaginate
                 breakLabel="..."
