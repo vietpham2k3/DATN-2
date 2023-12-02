@@ -816,9 +816,7 @@ function UpdateSanPham() {
                             </button>
                           </div>
                           <div className="justify-content-center">
-                            {imageList.length === 0 ? (
-                              {/* <h1></h1> */}
-                            ) : (
+                            {imageList.length !== 0 && (
                               <>
                                 <br />
                                 <ul style={{ listStyle: 'none', padding: 0 }} className="ull">
