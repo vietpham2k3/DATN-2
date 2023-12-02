@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 /* eslint-disable jsx-a11y/label-has-associated-control */
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useState, useEffect } from 'react'
@@ -44,7 +45,7 @@ function ContentSanPham() {
 
   const [selectedCollars, setSelectedCollars] = useState([])
   const [selectedManufacturers, setSelectedManufacturers] = useState([])
-  const [collars, setCollars] = useState([]) // Thêm dòng này
+  // const [collars, setCollars] = useState([]) // Thêm dòng này
   const [manufacturers, setManufacturers] = useState([])
 
   //Max khoảng tiền:
@@ -277,7 +278,14 @@ function ContentSanPham() {
             <Accordion defaultActiveKey={['1', '2', '3', '4']}>
               <Accordion.Item eventKey="1">
                 <Accordion.Header>Màu Sắc</Accordion.Header>
-                <Accordion.Body style={{ display: 'flex', justifyContent: 'space-between', maxHeight: 350, overflow: 'auto' }}>
+                <Accordion.Body
+                  style={{
+                    display: 'flex',
+                    justifyContent: 'space-between',
+                    maxHeight: 350,
+                    overflow: 'auto',
+                  }}
+                >
                   <div className="color-filters-section">
                     {colors.slice(0, Math.ceil(colors.length)).map((color, index) => (
                       <Form.Group
@@ -308,17 +316,17 @@ function ContentSanPham() {
 
               <Accordion.Item eventKey="2">
                 <Accordion.Header>Kích Cỡ</Accordion.Header>
-                <Accordion.Body style={{maxHeight: 350, overflow: 'auto'}}>
+                <Accordion.Body style={{ maxHeight: 350, overflow: 'auto' }}>
                   <div className="size-container">
                     {sizes.map((size, index) => (
                       <Form.Group key={index} controlId={`materialCheckbox${index}`}>
-                      <Form.Check
-                        type="checkbox"
-                        label={size.ten}
-                        onChange={() => handleSizeChange(size.ten)}
-                        checked={selectedSizes.includes(size.ten)}
-                      />
-                    </Form.Group>
+                        <Form.Check
+                          type="checkbox"
+                          label={size.ten}
+                          onChange={() => handleSizeChange(size.ten)}
+                          checked={selectedSizes.includes(size.ten)}
+                        />
+                      </Form.Group>
                     ))}
                   </div>
                 </Accordion.Body>
@@ -326,7 +334,7 @@ function ContentSanPham() {
 
               <Accordion.Item eventKey="3" className="eventKey-material">
                 <Accordion.Header>Chất Liệu</Accordion.Header>
-                <Accordion.Body style={{maxHeight: 350, overflow: 'auto'}}>
+                <Accordion.Body style={{ maxHeight: 350, overflow: 'auto' }}>
                   {materials.map((material, index) => (
                     <Form.Group key={index} controlId={`materialCheckbox${index}`}>
                       <Form.Check
@@ -343,24 +351,24 @@ function ContentSanPham() {
               <Accordion.Item eventKey="4">
                 <Accordion.Header>Giá Tiền</Accordion.Header>
                 <Accordion.Body>
-                <div className="box col-auto">
-                  <div className="values">
-                    <strong>Khoảng giá:</strong>{' '}
-                  </div>
-                  <Slider
-                    className="slider"
-                    onChange={handlePriceRangeChange}
+                  <div className="box col-auto">
+                    <div className="values">
+                      <strong>Khoảng giá:</strong>{' '}
+                    </div>
+                    <Slider
+                      className="slider"
+                      onChange={handlePriceRangeChange}
                       value={priceRange}
                       min={MIN}
                       max={maxPrice}
-                  ></Slider>
-                  <div className="values">
-                    <br></br>
-                    {convertToCurrency(displayedPriceRange[0]) +
+                    ></Slider>
+                    <div className="values">
+                      <br></br>
+                      {convertToCurrency(displayedPriceRange[0]) +
                         ' - ' +
-                        convertToCurrency(displayedPriceRange[1])} 
-                                         </div>
-                </div>
+                        convertToCurrency(displayedPriceRange[1])}
+                    </div>
+                  </div>
                 </Accordion.Body>
               </Accordion.Item>
             </Accordion>
@@ -372,16 +380,16 @@ function ContentSanPham() {
           <div className="row">
             <h3 style={{ textAlign: 'center' }}>Sản Phẩm</h3>
             {filteredData.map((d, i) => (
-              <div style={{paddingTop: 20, cursor: 'pointer'}} key={i} className="col-md-4">
+              <div style={{ paddingTop: 20, cursor: 'pointer' }} key={i} className="col-md-4">
                 <div
                   onClick={() => handleDetail(d.id, d.sanPham.id, d.mauSac.id)}
-                  style={{ width: '260px', height: '400px', border: "1px solid gray"}}
-                  >
+                  style={{ width: '260px', height: '400px', border: '1px solid gray' }}
+                >
                   <Card.Img
                     style={{ textAlign: 'center', width: '260px', height: '300px' }}
                     src={`http://localhost:8080/api/chi-tiet-san-pham/${d.id}`}
                   />
-                  <Card.Body style={{textAlign: 'center'}}>
+                  <Card.Body style={{ textAlign: 'center' }}>
                     <Card.Title>{d.sanPham.ten}</Card.Title>
                     <Card.Text>
                       <span>{convertToCurrency(d.giaBan)}</span>

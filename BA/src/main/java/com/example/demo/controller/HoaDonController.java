@@ -262,15 +262,15 @@ public class HoaDonController {
         HoaDon hd = serviceHD.detailHD(id);
         String maLS = "LSHD" + new Random().nextInt(100000);
         LichSuHoaDon ls = serviceLSHD.detail(hd.getId()).builder()
-                .trangThai(6)
+                .trangThai(4)
                 .ma(maLS)
-                .ten("Thanh toán thành công")
+                .ten("Đã hoàn thành")
                 .ngayTao(new Date())
                 .nguoiTao(nguoiTao)
                 .hoaDon(hd)
                 .ghiChu("Đã thanh toán")
                 .build();
-        hd.setTrangThai(6);
+        hd.setTrangThai(4);
         serviceHD.add(hd);
         return ResponseEntity.ok(serviceLSHD.add(ls));
     }
