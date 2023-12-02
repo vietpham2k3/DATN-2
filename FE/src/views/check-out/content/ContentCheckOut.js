@@ -86,10 +86,13 @@ function ContentCheckOut({ dataLogin, idGH }) {
     }
   }, [dataLogin])
 
+  console.log(active);
+
   useEffect(() => {
     if (dataLogin && dataLogin.role === 'KH') {
       setValuesUpdateHD({
         ...valuesUpdateHD,
+        trangThai: active === true ? 0 : 1,
         khachHang: {
           id: dataLogin.id
         },

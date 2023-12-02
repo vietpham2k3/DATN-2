@@ -102,7 +102,7 @@ export default function BanHangTaiQuay() {
     tienGiam: 0,
   })
   const nvID = {
-    nhanVien: { id: dataLoginNV && dataLoginNV.id },
+    nhanVien: { id: (dataLoginNV && dataLoginNV.id) ||  (dataLoginAD && dataLoginAD.id) },
   }
 
   useEffect(() => {

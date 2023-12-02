@@ -991,7 +991,7 @@ function HDCT() {
                         onClick={handleXacNhanGiaoHangThanhCong}
                         className="btn btn-success"
                       >
-                        Giao thành công
+                        Giao hàng thành công
                       </button>
                     )}
                   </div>
@@ -1001,6 +1001,11 @@ function HDCT() {
                     {(hoaDon.trangThai === 0 || hoaDon.trangThai === 1) && hoaDon.loaiDon === 1 && (
                       <button onClick={handleHuyDon} className="btn btn-danger">
                         Hủy
+                      </button>
+                    )}
+                     {(hoaDon.trangThai === 3) && hoaDon.loaiDon === 1 && (
+                      <button onClick={handleHuyDon} className="btn btn-danger">
+                        Giao hàng thất bại
                       </button>
                     )}
                   </div>
@@ -1644,7 +1649,7 @@ function HDCT() {
                   <section className="navbar-expand-lg navbar-light bg-light">
                     <div>
                       <div className="results-list">
-                        <Table hover>
+                        <Table>
                           <tbody>
                             {dataSP.length > 0 ? (
                               dataSP.map((d, i) => (
@@ -1741,7 +1746,7 @@ function HDCT() {
           )}
           <CCardBody>
             <div className="table-container">
-              <Table striped hover className="my-4">
+              <Table striped className="my-4">
                 <tr className="ps-5">
                   <th>#</th>
                   <th>Mã</th>
@@ -1804,16 +1809,11 @@ function HDCT() {
                               arrows
                             />
                           </div>
+
                         ) : (
                           <span style={{ fontWeight: 'bold' }}>{d.soLuong}</span>
                         )}
-                        {d.chiTietSanPham.soLuong < 10 ? (
-                          <span style={{ color: 'red' }}>
-                            Số sản phẩm còn lại: <strong>{d.chiTietSanPham.soLuong}</strong>
-                          </span>
-                        ) : (
-                          ''
-                        )}
+                        
                       </td>
                       <td>{convertToCurrency(d.donGia)}</td>
                       <td>{convertToCurrency(d.soLuong * d.donGia)}</td>

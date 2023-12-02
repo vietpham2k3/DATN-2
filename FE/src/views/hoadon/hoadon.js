@@ -240,7 +240,7 @@ const HoaDon = () => {
                 </Form.Group>
               </Col>
 
-              <Col className="col-5">
+              <Col className="col-6">
                 <Form.Group controlId="mauSacSelect">
                   <Form.Label style={{ fontWeight: 'bold', marginLeft: 80 }}>Loại đơn: </Form.Label>
                   <FormGroup>

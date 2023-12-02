@@ -274,7 +274,7 @@ const ThongKe = () => {
             <CCardBody>
               <CRow>
                 <CCol
-                  style={{ fontSize: 45, fontWeight: 'bold', color: 'red', paddingTop: 25 }}
+                  style={{ fontSize: 40, fontWeight: 'bold', color: 'red', paddingTop: 25 }}
                   xs={6}
                 >
                   {convertToCurrency(tongNam)}
