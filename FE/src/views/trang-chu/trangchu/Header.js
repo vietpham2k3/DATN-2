@@ -155,17 +155,22 @@ function Header() {
                       id="dropdown-basic-button"
                       title={<i className="fa-solid fa-user"></i>}
                     >
-                      <Dropdown.Item style={{ color: 'yellowgreen' }}>
-                        {dataLogin.tenKhachHang}
+                      <Dropdown.Item className="text-center">
+                        Xin chào, {dataLogin.tenKhachHang}
                       </Dropdown.Item>
                       <hr />
-                      <Dropdown.Item onClick={() => navigate('/thong-tin_user')}>
+                      <Dropdown.Item
+                        className="text-center"
+                        onClick={() => navigate('/thong-tin-khach-hang')}
+                      >
                         Tài khoản của tôi
                       </Dropdown.Item>
-                      <Dropdown.Item onClick={() => navigate('/history')}>Đơn hàng</Dropdown.Item>
-                      <Dropdown.Item onClick={() => navigate('/diachi')}>Địa chỉ</Dropdown.Item>
-                      <hr />
-                      <Dropdown.Item onClick={handleLogout}>Đăng xuất</Dropdown.Item>
+                      <Dropdown.Item className="text-center" onClick={() => navigate('/history')}>
+                        Đơn hàng
+                      </Dropdown.Item>
+                      <Dropdown.Item className="text-center" onClick={handleLogout}>
+                        Đăng xuất
+                      </Dropdown.Item>
                     </DropdownButton>
                   ) : (
                     <DropdownButton

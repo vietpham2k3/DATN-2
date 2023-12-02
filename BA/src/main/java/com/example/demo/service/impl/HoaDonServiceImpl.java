@@ -47,7 +47,7 @@ public class HoaDonServiceImpl implements HoaDonService {
     }
 
     @Override
-    public List<HoaDon> searchByTrangThai(Integer trangThai, UUID idKH) {
+    public List<HoaDon> searchByTrangThai(Integer[] trangThai, UUID idKH) {
         return res.searchByTrangThai(trangThai, idKH);
     }
 
