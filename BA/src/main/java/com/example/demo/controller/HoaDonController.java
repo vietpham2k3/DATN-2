@@ -478,6 +478,7 @@ public class HoaDonController {
         hoaDon.setNgaySua(new Date());
         lichSuHoaDon.setTrangThai(4);
         hoaDon.setTrangThai(4);
+        hoaDon.setNgayThanhToan(new Date());
         lichSuHoaDon.setNgayTao(new Date());
         lichSuHoaDon.setMa(maLSHD);
         lichSuHoaDon.setGhiChu(lichSuHoaDon.getGhiChu());

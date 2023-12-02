@@ -127,10 +127,6 @@ public class ThongKeController {
     }
 
     //
-    @GetMapping("so-don-tra-ngay")
-    public ResponseEntity<?> soDonTraNgay() {
-        return ResponseEntity.ok().body(hdSer.soDonTraNgay());
-    }
 
     @GetMapping("so-don-tra-thang")
     public ResponseEntity<?> soDonTraThang() {

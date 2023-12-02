@@ -154,11 +154,6 @@ public class HoaDonServiceImpl implements HoaDonService {
     }
 
     @Override
-    public Integer soDonTraNgay() {
-        return res.soDonTraNgay();
-    }
-
-    @Override
     public Integer soDonHuyThang() {
         return res.soDonHuyThang();
     }

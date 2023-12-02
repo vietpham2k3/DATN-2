@@ -65,8 +65,6 @@ public interface HoaDonService {
 
     public Integer soDonHuyNgay();
 
-    public Integer soDonTraNgay();
-
     public Integer soDonHuyThang();
 
     public Integer soDonTraThang();
