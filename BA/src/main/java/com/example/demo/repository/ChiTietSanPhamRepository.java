@@ -63,15 +63,20 @@ public interface ChiTietSanPhamRepository extends JpaRepository<ChiTietSanPham, 
             "            GROUP BY KC.id, KC.ten , CTSP.id, CTSP.id_sp, CTSP.id_ms, CTSP.so_luong\n" +
             "ORDER BY \n" +
             "    CASE\n" +
-            "        WHEN KC.ten = '37' THEN 1\n" +
-            "        WHEN KC.ten = '38' THEN 2\n" +
-            "        WHEN KC.ten = '39' THEN 3\n" +
-            "        WHEN KC.ten = '40' THEN 4\n" +
-            "        WHEN KC.ten = '41' THEN 5\n" +
-            "        WHEN KC.ten = '42' THEN 6\n" +
-            "        WHEN KC.ten = '43' THEN 7\n" +
-            "        WHEN KC.ten = '44' THEN 8\n" +
-            "        WHEN KC.ten = '45' THEN 9\n" +
+            "        WHEN KC.ten = '34' THEN 1\n" +
+            "        WHEN KC.ten = '35' THEN 2\n" +
+            "        WHEN KC.ten = '36' THEN 3\n" +
+            "        WHEN KC.ten = '37' THEN 4\n" +
+            "        WHEN KC.ten = '38' THEN 5\n" +
+            "        WHEN KC.ten = '39' THEN 6\n" +
+            "        WHEN KC.ten = '40' THEN 7\n" +
+            "        WHEN KC.ten = '41' THEN 8\n" +
+            "        WHEN KC.ten = '42' THEN 9\n" +
+            "        WHEN KC.ten = '43' THEN 10\n" +
+            "        WHEN KC.ten = '44' THEN 11\n" +
+            "        WHEN KC.ten = '45' THEN 12\n" +
+            "        WHEN KC.ten = '46' THEN 13\n" +
+            "        WHEN KC.ten = '47' THEN 14\n" +
             "    END;\n"
             , nativeQuery = true)
     List<String> getKCByIdMSAndIdSP(UUID idMS, UUID idSP);
