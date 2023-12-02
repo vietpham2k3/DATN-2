@@ -152,7 +152,7 @@ public class HoaDonController {
     }
 
     @GetMapping("searchByTrangThai/{id}")
-    public ResponseEntity<?> searchByTrangThai(@PathVariable UUID id, @RequestParam Integer trangThai) {
+    public ResponseEntity<?> searchByTrangThai(@PathVariable UUID id, @RequestParam Integer[] trangThai) {
         Map<String, Object> map = new HashMap<>();
         List<HoaDon> list = serviceHD.searchByTrangThai(trangThai, id);
 

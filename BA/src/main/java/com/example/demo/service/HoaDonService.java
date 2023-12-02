@@ -21,7 +21,7 @@ public interface HoaDonService {
 
     List<String> YCDoiHang(UUID idHD);
 
-    List<HoaDon> searchByTrangThai(Integer trangThai, UUID idKH);
+    List<HoaDon> searchByTrangThai(Integer[] trangThai, UUID idKH);
 
     Page<HoaDon> pageHD(Pageable pageable);
 

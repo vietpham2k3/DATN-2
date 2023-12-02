@@ -90,6 +90,9 @@ function ContentCheckOut({ dataLogin, idGH }) {
     if (dataLogin && dataLogin.role === 'KH') {
       setValuesUpdateHD({
         ...valuesUpdateHD,
+        khachHang: {
+          id: dataLogin.id
+        },
         tenNguoiNhan: dataKH.tenKhachHang,
         nguoiTao: dataKH.tenKhachHang,
         soDienThoai: dataKH.sdt,
@@ -307,7 +310,7 @@ function ContentCheckOut({ dataLogin, idGH }) {
       if (res) {
         toast.success('Thanh toán thành công')
         localStorage.setItem('res', JSON.stringify(res.data.hinhThucThanhToan.id))
-        clear(id, idGH)
+        clear(idGH, id)
       }
     } catch (error) {
       console.log(error)

@@ -30,12 +30,12 @@ public interface HoaDonRespository extends JpaRepository<HoaDon, UUID> {
     @Query(value = "SELECT hd.*, hdct.id as idHDCT, hdct.id_ctsp, hdct.id_hd, hdct.don_gia, hdct.so_luong\n" +
             "FROM HoaDon HD\n" +
             "JOIN HoaDonChiTiet HDCT ON HD.id = HDCT.id_hd\n" +
-            "WHERE HD.trang_thai = :trangThai \n" +
+            "WHERE HD.trang_thai in :trangThai \n" +
             "and hd.id_kh = :idKH \n" +
             "and loai_don = 1\n" +
             "ORDER BY HD.ngay_sua DESC",
             nativeQuery = true)
-    List<HoaDon> searchByTrangThai(@Param("trangThai") Integer trangThai, @Param("idKH") UUID idKH);
+    List<HoaDon> searchByTrangThai(@Param("trangThai") Integer[] trangThai, @Param("idKH") UUID idKH);
 
     @Query(value = "SELECT HD.id, HD.ma, HD.ten_nguoi_nhan, HD.ngay_tao, \n" +
             "       SUM(HDCT.so_luong) AS tong_so_luong,\n" +
