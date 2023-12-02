@@ -7,6 +7,7 @@ import { toast } from 'react-toastify'
 import { getP, getQH, getTP } from 'service/ApiGHNService'
 import { addKhuyenMai, clearGH, thanhToan } from 'service/GioHangService'
 import { detailKH } from 'service/KhachHangService'
+import { payOnline } from 'service/PayService'
 import { getById, getKmById } from 'service/ServiceDonHang'
 
 function ContentCheckOut({ dataLogin, idGH }) {
@@ -17,6 +18,7 @@ function ContentCheckOut({ dataLogin, idGH }) {
   const [phuong, setPhuong] = useState([])
   const [dataKH, setDataKH] = useState([])
   const [active, setActive] = useState('')
+  const [urlPay, setUrlPay] = useState('')
   // const [isThanhToan, setIsThanhToan] = useState(false)
   const [dataHDCT, setDataHDCT] = useState([])
   const [totalAmount, setTotalAmount] = useState(0)
@@ -139,6 +141,7 @@ function ContentCheckOut({ dataLogin, idGH }) {
     if (dataHDKM.length > 0 || totalAmount > 0) {
       const totalGiam = dataHDKM.reduce((total, d) => total + d.tienGiam, 0)
       setTongTienSauKhiGiam(totalAmount - totalGiam)
+      VNP(totalAmount - totalGiam)
     }
   }, [dataHDKM, totalAmount])
 
@@ -317,6 +320,7 @@ function ContentCheckOut({ dataLogin, idGH }) {
       navigate('/trang-chu')
     }
     if (active === false) {
+      window.location.href = urlPay
       thanhToanHD(id, valuesUpdateHD, '')
     }
   }
@@ -329,7 +333,18 @@ function ContentCheckOut({ dataLogin, idGH }) {
     }
   }
 
-  console.log(valuesUpdateHD)
+  const VNP = async (tien) => {
+    try {
+      const res = await payOnline(tien)
+      if (res) {
+        setUrlPay(res.data)
+      }
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
+  console.log(urlPay)
 
   return (
     <div className="row" style={{ height: 1000 }}>
