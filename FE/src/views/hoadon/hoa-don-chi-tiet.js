@@ -537,9 +537,9 @@ function HDCT() {
 
   const handleXacNhanGiaoHang = async (event) => {
     event.preventDefault()
-    if (hoaDon.tienShip === 0 || hoaDon.tienShip === '') {
-      toast.error('Vui lòng nhập tiền ship !')
-      return
+    if (hoaDon.tienShip === 0 || hoaDon.tienShip === '' || hoaDon.tienShip === null) {
+      toast.error('Vui lòng điền phí vận chuyển !')
+      return;
     }
     await giaoHang(id, lshd2)
   }
@@ -987,7 +987,7 @@ function HDCT() {
                     {/* //giao hang thanh cong */}
                     {hoaDon.trangThai === 3 && hoaDon.loaiDon === 1 && (
                       <button
-                        style={{ width: 150 }}
+                        style={{ width: 200 }}
                         onClick={handleXacNhanGiaoHangThanhCong}
                         className="btn btn-success"
                       >
@@ -1533,11 +1533,11 @@ function HDCT() {
                         fontSize: '15px',
                       }}
                     >
-                      {hoaDon.soDienThoai === '' &&(
-                       <>Không có số điện thoại !</> 
+                      {hoaDon.soDienThoai === '' && (
+                        <>Không có số điện thoại !</>
                       )}
-                       {hoaDon.soDienThoai !== '' &&(
-                      hoaDon.soDienThoai && hoaDon.soDienThoai
+                      {hoaDon.soDienThoai !== '' && (
+                        hoaDon.soDienThoai && hoaDon.soDienThoai
                       )}
                     </span>
                   </Col>
@@ -1779,7 +1779,7 @@ function HDCT() {
                       </td>
                       <td>
                         {hoaDon.loaiDon === 1 &&
-                        (hoaDon.trangThai === 0 || hoaDon.trangThai === 1) ? (
+                          (hoaDon.trangThai === 0 || hoaDon.trangThai === 1) ? (
                           <div
                             className="input-spinner"
                             style={{
