@@ -3,7 +3,14 @@ import { Document, Page, Text, View } from '@react-pdf/renderer'
 import React from 'react'
 import { styles } from './Style'
 
-function InvoiceDocument({ dataDetailHD, valuesSanPham, dataHDKM, convertToCurrency, totalAmount, tienThua }) {
+function InvoiceDocument({
+  dataDetailHD,
+  valuesSanPham,
+  dataHDKM,
+  convertToCurrency,
+  totalAmount,
+  tienThua,
+}) {
   function formatDate(dateString) {
     if (dateString === null) {
       return '' // Trả về chuỗi rỗng nếu giá trị là null
@@ -22,16 +29,18 @@ function InvoiceDocument({ dataDetailHD, valuesSanPham, dataHDKM, convertToCurre
 
     return formattedDate
   }
+
+  console.log(dataDetailHD);
   return (
     <Document>
       <Page>
-        <Text style={styles.title}>Sports Shop</Text>
-        <Text style={styles.text}>SDT: 0559044158</Text>
-        <Text style={styles.text}>Email: sportsshop@gmail.com</Text>
-        <Text style={styles.text}>Địa chỉ: Đại Đồng - Tiên Du - Bắc Ninh</Text>
-        <Text style={styles.text}>Ngân hàng: Techcombank - STK: 69696969696969</Text>
-        <Text style={styles.text}>Chủ tải khoản: Trần Quang Dũng</Text>
-        <Text style={styles.titleHD}>HOÁ ĐƠN BÁN HÀNG</Text>
+        <Text style={styles.title}>Shop F5<sup>&reg;</sup></Text>
+        <Text style={styles.text}>SDT: 0365278368</Text>
+        <Text style={styles.text}>Email: shopf5@gmail.com</Text>
+        <Text style={styles.text}>Địa chỉ: Hồi Ninh - Kim Sơn - Ninh Bình</Text>
+        <Text style={styles.text}>Ngân hàng: MBBANK - STK: 9999999999999</Text>
+        <Text style={styles.text}>Chủ tải khoản: Nguyễn Vũ Minh Hiếu</Text>
+        <Text style={styles.titleHD}>HOÁ ĐƠN CHI TIẾT</Text>
         <Text style={styles.textMaHD}>{dataDetailHD.ma}</Text>
 
         <div style={styles.container}>
@@ -39,11 +48,12 @@ function InvoiceDocument({ dataDetailHD, valuesSanPham, dataHDKM, convertToCurre
             Ngày mua: {formatDate(dataDetailHD.ngayThanhToan)}
           </Text>
           <Text style={styles.textThuocTinh}>Khách hàng: {dataDetailHD.tenNguoiNhan}</Text>
+          {/* {dataDetailHD.diaChi !== '' &&(
           <Text style={styles.textThuocTinh}>Địa chỉ: {dataDetailHD.diaChi}</Text>
-          <Text style={styles.textThuocTinh}>Số điện thoại: {dataDetailHD.sdt}</Text>
-          <Text style={styles.textThuocTinh}>
-            Nhân viên bán hàng: {dataDetailHD && dataDetailHD.taiKhoan && dataDetailHD.taiKhoan.ten}
-          </Text>
+          )} */}
+          {dataDetailHD.soDienThoai !== '' &&(
+          <Text style={styles.textThuocTinh}>Số điện thoại: {dataDetailHD.soDienThoai}</Text>
+          )}
         </div>
         <Text style={styles.titleTB}>DANH SÁCH SẢN PHẨM KHÁCH HÀNG MUA</Text>
         <View style={styles.table}>

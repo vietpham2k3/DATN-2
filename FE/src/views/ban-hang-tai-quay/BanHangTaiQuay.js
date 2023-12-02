@@ -281,7 +281,7 @@ export default function BanHangTaiQuay() {
     setValuesUpdateHD({
       ...valuesUpdateHD,
       ...valuesUpdateHD.hinhThucThanhToan,
-      trangThai: 6,
+      trangThai: 4,
       hinhThucThanhToan: {
         ten: dataDetailHD.hinhThucThanhToan.ten,
         tien: tienKhachDua,
@@ -296,7 +296,7 @@ export default function BanHangTaiQuay() {
     setValuesUpdateHD({
       ...valuesUpdateHD,
       ...valuesUpdateHD.hinhThucThanhToan,
-      trangThai: 6,
+      trangThai: 4,
       hinhThucThanhToan: {
         ten: dataDetailHD.hinhThucThanhToan.ten,
         tien: tienKhachDua,

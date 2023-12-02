@@ -244,11 +244,11 @@ public class HoaDonController {
         hoaDon.setMa(hd.getMa());
         hoaDon.setLoaiDon(0);
         if (hoaDon.getTenNguoiNhan().isEmpty()) {
-            hoaDon.setTenNguoiNhan("Khách lẻ");
+            hoaDon.setTenNguoiNhan("Khách vãng lai");
         }
         hoaDon.setTenNguoiNhan(hoaDon.getTenNguoiNhan());
         hoaDon.setSoDienThoai(hoaDon.getSoDienThoai());
-        if (hoaDon.getTrangThai() != 6) {
+        if (hoaDon.getTrangThai() != 4) {
             hoaDon.setTrangThai(0);
         }
         httt = serviceHttt.add(httt);

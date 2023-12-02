@@ -253,10 +253,15 @@ function HDCT() {
 
   const handleAdd = () => {
     // getAllById(id);
+    if (valuesAdd.soLuong <= 0 || valuesAdd.soLuong === '' ) {
+      toast.error('Vui lòng nhập số lượng !')
+      return;
+    }
     if (parseInt(valuesAdd.soLuong) > parseInt(dataDetail.soLuong)) {
       toast.error('Đã vượt quá số lượng hiện có !')
-      return
+      return;
     }
+    setShow99(false)
     add(valuesAdd)
   }
 
@@ -846,28 +851,32 @@ function HDCT() {
       textDecoration: 'none',
     },
   })
-
+console.log(hoaDon);
   const InvoiceDocument = () => {
     return (
       <Document>
         <Page>
-          <Text style={styles.title}>Shoes F5 Shop</Text>
-          <Text style={styles.text}>SDT: 0988888888</Text>
-          <Text style={styles.text}>Email: shoesshopf5@gmail.com</Text>
-          <Text style={styles.text}>Địa chỉ: Hà Du - Tiên Đồng - Hà Nội</Text>
-          <Text style={styles.text}>Ngân hàng: Techcombank - STK: 9999999999999</Text>
+          <Text style={styles.title}>Shop F5<sup>&reg;</sup></Text>
+          <Text style={styles.text}>SDT: 0365278368</Text>
+          <Text style={styles.text}>Email: shopf5@gmail.com</Text>
+          <Text style={styles.text}>Địa chỉ: Hồi Ninh - Kim Sơn - Ninh Bình</Text>
+          <Text style={styles.text}>Ngân hàng: MBBANK - STK: 9999999999999</Text>
           <Text style={styles.text}>Chủ tải khoản: Nguyễn Vũ Minh Hiếu</Text>
-          <Text style={styles.titleHD}>HOÁ ĐƠN BÁN HÀNG</Text>
+          <Text style={styles.titleHD}>HOÁ ĐƠN CHI TIẾT</Text>
           <Text style={styles.textMaHD}>{hoaDon.ma}</Text>
 
           <div style={styles.container}>
             <Text style={styles.textThuocTinh}>Ngày tạo: {formatDate(hoaDon.ngayThanhToan)}</Text>
             <Text style={styles.textThuocTinh}>Khách hàng: {hoaDon.tenNguoiNhan}</Text>
-            <Text style={styles.textThuocTinh}>
+            {(hoaDon.loaiDon === 1)  &&(
+                        <Text style={styles.textThuocTinh}>
               Địa chỉ:{' '}
               {hoaDon.diaChi + ' , ' + hoaDon.xa + ', ' + hoaDon.huyen + ', ' + hoaDon.tinh}
             </Text>
+            )}
+              {hoaDon.soDienThoai !== '' &&(
             <Text style={styles.textThuocTinh}>Số điện thoại: {hoaDon.soDienThoai}</Text>
+              )}
           </div>
           <Text style={styles.titleTB}>DANH SÁCH SẢN PHẨM KHÁCH HÀNG MUA</Text>
           <View style={styles.table}>
@@ -1621,6 +1630,7 @@ function HDCT() {
 
       <CCol xs={12}>
         <CCard className="mb-4">
+        {(hoaDon.loaiDon === 1) && (hoaDon.trangThai === 0 || hoaDon.trangThai === 1)  &&(
           <CCardHeader>
           <Button variant="primary" onClick={handleShow99}>
               Thêm sản phẩm
@@ -1683,14 +1693,71 @@ function HDCT() {
                         </tbody>
                       </Table>
 
+                      <Modal
+                        show={show7}
+                        onHide={() => setShow7(false)}
+                        style={{ marginLeft: 150 }}
+                        backdrop="static"
+                        keyboard={false}
+                        size="md"
+                        aria-labelledby="contained-modal-title-vcenter"
+                        centered
+                      >
+                        <Modal.Header closeButton>
+                          <Modal.Title>Chọn loại của sản phẩm</Modal.Title>
+                        </Modal.Header>
+                        <Modal.Body>
+                          <div className="body-add-new">
+                            <div className="mb-3">
+                              <label htmlFor="exampleFormControlInput1" className="form-label">
+                                Thuộc tính
+                              </label>
+
+                              <select
+                                className="form-select"
+                                aria-label="Default select example"
+                                onChange={(e) => handleDetail(e.target.value)}
+                              >
+                                {mauSacKC.map((d, i) => (
+                                  <option key={i} value={d.id}>
+                                    {d.mauSac.ma} - {d.kichCo.ten} - {d.chatLieu.ten} -{' '}
+                                    {d.loaiSanPham.ten} - {d.nhaSanXuat.ten}
+                                  </option>
+                                ))}
+                              </select>
+                            </div>
+                            <div className="mb-3">
+                              <label htmlFor="exampleFormControlTextarea1" className="form-label">
+                                Số lượng:{' '}
+                                <small>
+                                  Còn lại <strong>{dataDetail.soLuong}</strong>
+                                </small>
+                              </label>
+                              <input
+                                className="form-control"
+                                id="exampleFormControlTextarea1"
+                                type="number"
+                                onChange={(e) =>
+                                  setValuesAdd({ ...valuesAdd, soLuong: e.target.value })
+                                }
+                              ></input>
+                            </div>
+                          </div>
+                        </Modal.Body>
+                        <Modal.Footer>
+                          <Button variant="primary" onClick={() => handleAdd()}>
+                            Thêm
+                          </Button>
+                        </Modal.Footer>
+                      </Modal>
                    
                     </div>
                   </div>
                 </section>
               </Modal.Body>
             </Modal>
-            
-              </CCardHeader>
+            </CCardHeader>
+          )}
           <CCardBody>
           <div className="table-container">
             <Table striped hover className="my-4">
@@ -1730,6 +1797,8 @@ function HDCT() {
                       ></span>
                     </td>
                     <td>
+                    {(hoaDon.loaiDon === 1) && (hoaDon.trangThai === 0 || hoaDon.trangThai === 1)  ?(
+
                       <div
                         className="input-spinner"
                         style={{
@@ -1753,7 +1822,11 @@ function HDCT() {
                           size="sm"
                           arrows
                         />
+                   
                       </div>
+                       ):(
+                        <span style={{fontWeight: 'bold'}}>{d.soLuong}</span>
+                      )}
                       {d.chiTietSanPham.soLuong < 10 ? (
                         <span style={{ color: 'red' }}>
                           Số sản phẩm còn lại: <strong>{d.chiTietSanPham.soLuong}</strong>
@@ -1764,16 +1837,173 @@ function HDCT() {
                     </td>
                     <td>{convertToCurrency(d.donGia)}</td>
                     <td>{convertToCurrency(d.soLuong * d.donGia)}</td>
-                    <td>
+                    {(hoaDon.loaiDon === 1) && (hoaDon.trangThai === 0 || hoaDon.trangThai === 1)  &&(
+                    <td> 
                       <button
                         onClick={() => handleDelete(d.id)}
-                        className="fa-solid fa-trash mx-3"
+                        style={{ color: 'orange' }}
+                        className="fa-solid fa-trash-can fa-khenh"
                       ></button>
                     </td>
+                    )}
                   </tr>
                 ))}
               </tbody>
             </Table>
+
+            <Container style={{ display: 'flex', justifyContent: 'end' }}>
+                <Row style={{ marginBottom: 10 }}>
+                  <Col sm={12} className="row">
+                    <Col sm={6}>
+                      <span
+                        style={{
+                          display: 'inline-block',
+                          width: '120px',
+                          fontSize: '15px',
+                          fontWeight: 'bold'
+                        }}
+                      >
+                        Tiền sản phẩm:
+                      </span>
+                    </Col>
+                    <Col sm={6}>
+                      <span
+                        style={{
+                          display: 'inline-block',
+                          width: '120px',
+                          fontSize: '15px'
+                        }}
+                      >
+                        {convertToCurrency(totalAmount)}
+                      </span>
+                    </Col>
+                  </Col>
+                </Row>
+              </Container>
+
+              <br></br>
+
+              {hoaDon && hoaDon.loaiDon === 1 && (
+                <Container style={{ display: 'flex', justifyContent: 'end' }}>
+                  <Row style={{ marginBottom: 10 }}>
+                    <Col sm={12} className="row">
+                      <Col sm={6}>
+                        <span
+                          style={{
+                            display: 'inline-block',
+                            width: '120px',
+                            fontSize: '15px',
+                            fontWeight: 'bold',
+                            paddingTop: 6
+                            }}
+                        >
+                          Phí ship:
+                        </span>
+                      </Col>
+                      <Col sm={6}>
+                        {(hoaDon && hoaDon.trangThai === 0) || hoaDon.trangThai === 1 ? (
+                          <input
+                          style={{
+                            display: 'inline-block',
+                            width: '120px',
+                            fontSize: '15px',
+                            height: 35
+                          }}
+                     className='form-control'
+                            type="number"
+                            value={hoaDon.tienShip}
+                            onChange={handleTienShipChange}
+                          />
+                        ) : (
+                          <span
+                          style={{
+                            display: 'inline-block',
+                            width: '120px',
+                            fontSize: '15px',
+                            paddingTop: 6
+                            }}
+                          >
+                            {convertToCurrency(hoaDon.tienShip)}
+                          </span>
+                        )}
+                      </Col>
+                    </Col>
+                  </Row>
+                </Container>
+              )}
+              <br></br>
+
+              {dataHDKM && dataHDKM.length > 0 && (
+                <Container style={{ display: 'flex', justifyContent: 'end' }}>
+                  <Row style={{ marginBottom: 10 }}>
+                    <Col sm={12} className="row">
+                      <Col sm={6}>
+                        <span
+                          style={{
+                            display: 'inline-block',
+                            width: '120px',
+                            fontSize: '15px',
+                            fontWeight: 'bold',
+                            color: 'red',
+                            fontStyle: 'italic'
+                          }}
+                        >
+                          Khuyến mãi:
+                        </span>
+                      </Col>
+                      <Col sm={6}>
+                        <span
+                          style={{
+                            display: 'inline-block',
+                            width: '120px',
+                            fontSize: '15px',
+                            color: 'red',
+                            fontStyle: 'italic'
+                          }}
+                        >
+                          {dataHDKM.map((d, i) => (
+                            <tr key={i} style={{ color: 'red' }}>
+                              <td>- {convertToCurrency(d.tienGiam)}</td>
+                            </tr>
+                          ))}
+                        </span>
+                      </Col>
+                    </Col>
+                  </Row>
+                </Container>
+              )}
+
+              <br></br>
+              <Container style={{ display: 'flex', justifyContent: 'end' }}>
+                <Row style={{ marginBottom: 10 }}>
+                  <Col sm={12} className="row">
+                    <Col sm={6}>
+                      <span
+                        style={{
+                          display: 'inline-block',
+                          width: '150px',
+                          fontSize: '22px',
+                          fontWeight: 'bold'
+                        }}
+                      >
+                        Tổng tiền:
+                      </span>
+                    </Col>
+                    <Col sm={6}>
+                      <span
+                        style={{
+                          display: 'inline-block',
+                          width: '200px',
+                          fontSize: '22px',
+                          fontWeight: 'bold'
+                        }}
+                      >
+                        {convertToCurrency(tongTienKhiGiam)}{' '}
+                      </span>
+                    </Col>
+                  </Col>
+                </Row>
+              </Container>
           </div>
           </CCardBody>
         </CCard>

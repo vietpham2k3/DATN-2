@@ -93,7 +93,7 @@ function Header() {
         <nav className="navbar navbar-expand-lg nav-1">
           <div style={{ paddingRight: '180px' }}>
             <a className="navbar-brand nameShop" href="/#/trang-chu">
-              Shop Shoes F5<sup>&reg;</sup>
+              Shop F5<sup>&reg;</sup>
             </a>
           </div>
           <div>
