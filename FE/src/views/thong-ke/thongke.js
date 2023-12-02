@@ -5,21 +5,16 @@ import { useState, useEffect } from 'react'
 import _ from 'lodash'
 
 const ThongKe = () => {
-  
   return (
     <CRow>
       <CCol xs={12}>
         <CCard className="mb-4">
-          <CCardBody>
-            
-          </CCardBody>
+          <CCardBody></CCardBody>
         </CCard>
       </CCol>
       <CCol xs={12}>
         <CCard className="mb-4">
-          <CCardBody>
-          
-          </CCardBody>
+          <CCardBody></CCardBody>
         </CCard>
       </CCol>
     </CRow>

@@ -1,21 +1,12 @@
+/* eslint-disable jsx-a11y/alt-text */
+/* eslint-disable react-hooks/exhaustive-deps */
+/* eslint-disable no-unused-vars */
 /* eslint-disable jsx-a11y/label-has-associated-control */
 /* eslint-disable react/prop-types */
 import React, { useEffect, useState } from 'react'
 import { CCard, CCardBody, CCardHeader, CCol, CRow } from '@coreui/react'
-import TextField from '@mui/material/TextField'
-import { Form } from 'react-bootstrap'
 import { toast } from 'react-toastify'
 import _ from 'lodash'
-import Collapse from '@mui/material/Collapse'
-import IconButton from '@mui/material/IconButton'
-import TableBody from '@mui/material/TableBody'
-import TableCell from '@mui/material/TableCell'
-import TableContainer from '@mui/material/TableContainer'
-import TableHead from '@mui/material/TableHead'
-import TableRow from '@mui/material/TableRow'
-import Typography from '@mui/material/Typography'
-import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown'
-import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp'
 import { Container, Row, Col, Table } from 'react-bootstrap'
 import { detailCTSP, getAllByIdSPTT } from 'service/SanPhamService'
 import Modal from 'react-bootstrap/Modal'
@@ -36,7 +27,6 @@ import {
   addSP,
   getKmById,
   giaoHangThanhCong,
-  giaoHangThatBai,
   updateHoaDon,
 } from 'service/ServiceDonHang'
 import { Button } from 'react-bootstrap'
@@ -45,7 +35,6 @@ import InputSpinner from 'react-bootstrap-input-spinner'
 import OverlayTrigger from 'react-bootstrap/OverlayTrigger'
 import Tooltip from 'react-bootstrap/Tooltip'
 import { Link, useParams } from 'react-router-dom'
-import { yellow } from '@mui/material/colors'
 
 function HDCT() {
   const { id } = useParams()
@@ -1533,12 +1522,8 @@ function HDCT() {
                         fontSize: '15px',
                       }}
                     >
-                      {hoaDon.soDienThoai === '' &&(
-                       <>Không có số điện thoại !</> 
-                      )}
-                       {hoaDon.soDienThoai !== '' &&(
-                      hoaDon.soDienThoai && hoaDon.soDienThoai
-                      )}
+                      {hoaDon.soDienThoai === '' && <>Không có số điện thoại !</>}
+                      {hoaDon.soDienThoai !== '' && hoaDon.soDienThoai && hoaDon.soDienThoai}
                     </span>
                   </Col>
                 </Col>
@@ -1596,11 +1581,7 @@ function HDCT() {
                           {hoaDon.diaChi}, {hoaDon.xa}, {hoaDon.huyen}, {hoaDon.tinh}
                         </p>
                       )}
-                      {hoaDon.diaChi === null && (
-                        <>
-                          Không có địa chỉ !
-                        </>
-                      )}
+                      {hoaDon.diaChi === null && <>Không có địa chỉ !</>}
                     </span>
                   </Col>
                 </Col>
