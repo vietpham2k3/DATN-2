@@ -21,6 +21,7 @@ const TrangChu = React.lazy(() => import('views/trang-chu/home/home'))
 const CuaHang = React.lazy(() => import('views/trang-chu/cua-hang/sanpham/SanPham'))
 const DetailSP = React.lazy(() => import('views/trang-chu/cua-hang/sanpham/DetailSanPham'))
 const GioHang = React.lazy(() => import('views/trang-chu/gio-hang/GioHang'))
+const CheckOut = React.lazy(() => import('views/check-out/CheckOut'))
 
 class App extends Component {
   render() {
@@ -39,6 +40,7 @@ class App extends Component {
             <Route path="/chi-tiet-sp/:id/:idSP/:idMS" name="Chi Tiết" element={<DetailSP />} />
 
             <Route path="/gio-hang" name="Giỏ hàng" element={<GioHang />} />
+            <Route path="/checkout/:id" name="Giỏ hàng" element={<CheckOut />} />
           </Routes>
         </Suspense>
         <ToastContainer
