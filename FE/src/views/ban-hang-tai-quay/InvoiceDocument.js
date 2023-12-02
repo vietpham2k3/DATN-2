@@ -30,11 +30,13 @@ function InvoiceDocument({
     return formattedDate
   }
 
-  console.log(dataDetailHD);
+  console.log(dataDetailHD)
   return (
     <Document>
       <Page>
-        <Text style={styles.title}>Shop F5<sup>&reg;</sup></Text>
+        <Text style={styles.title}>
+          Shop F5<sup>&reg;</sup>
+        </Text>
         <Text style={styles.text}>SDT: 0365278368</Text>
         <Text style={styles.text}>Email: shopf5@gmail.com</Text>
         <Text style={styles.text}>Địa chỉ: Hồi Ninh - Kim Sơn - Ninh Bình</Text>
@@ -51,8 +53,8 @@ function InvoiceDocument({
           {/* {dataDetailHD.diaChi !== '' &&(
           <Text style={styles.textThuocTinh}>Địa chỉ: {dataDetailHD.diaChi}</Text>
           )} */}
-          {dataDetailHD.soDienThoai !== '' &&(
-          <Text style={styles.textThuocTinh}>Số điện thoại: {dataDetailHD.soDienThoai}</Text>
+          {dataDetailHD.soDienThoai !== '' && (
+            <Text style={styles.textThuocTinh}>Số điện thoại: {dataDetailHD.soDienThoai}</Text>
           )}
         </div>
         <Text style={styles.titleTB}>DANH SÁCH SẢN PHẨM KHÁCH HÀNG MUA</Text>

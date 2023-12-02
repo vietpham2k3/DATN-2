@@ -21,23 +21,17 @@ import AddKM from 'views/khuyenmai/addKM'
 import UpdateKM from 'views/khuyenmai/updateKM'
 import HoaDon from 'views/hoadon/hoadon'
 import HDCT from 'views/hoadon/hoa-don-chi-tiet'
-
-const Dashboard = React.lazy(() => import('./views/dashboard/Dashboard'))
-
+import ThongKe from 'views/thong-ke/thongke'
 // Buttons
 const SanPham = React.lazy(() => import('./views/sanpham/sanpham/SanPham'))
 const AddSanPham = React.lazy(() => import('./views/sanpham/sanpham/AddSanPham'))
 const UpdateSanPham = React.lazy(() => import('./views/sanpham/sanpham/UpdateSanPham'))
-
 const MauSac = React.lazy(() => import('./views/sanpham/mausac/MauSac'))
 const AddMauSac = React.lazy(() => import('./views/sanpham/mausac/AddMS'))
 const UpdateMauSac = React.lazy(() => import('./views/sanpham/mausac/UpdateMS'))
-
 const ChatLieu = React.lazy(() => import('./views/sanpham/chatlieu/ChatLieu'))
-
 // Bán hàng tại quầy
 const BanHangTaiQuay = React.lazy(() => import('./views/ban-hang-tai-quay/BanHangTaiQuay'))
-
 const routes = [
   { path: '/', exact: true, name: 'Home' },
 
@@ -117,7 +111,7 @@ const routes = [
   { path: '/hoa-don/chi-tiet/:id', name: 'Hóa Đơn Chi Tiết', element: HDCT },
 
 
-  { path: '/thong-ke', name: 'Thống kê', element: Dashboard },
+  { path: '/thong-ke', name: 'Thống kê', element: ThongKe },
 
 ]
 

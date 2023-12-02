@@ -253,13 +253,13 @@ function HDCT() {
 
   const handleAdd = () => {
     // getAllById(id);
-    if (valuesAdd.soLuong <= 0 || valuesAdd.soLuong === '' ) {
+    if (valuesAdd.soLuong <= 0 || valuesAdd.soLuong === '') {
       toast.error('Vui lòng nhập số lượng !')
-      return;
+      return
     }
     if (parseInt(valuesAdd.soLuong) > parseInt(dataDetail.soLuong)) {
       toast.error('Đã vượt quá số lượng hiện có !')
-      return;
+      return
     }
     setShow99(false)
     add(valuesAdd)
@@ -851,12 +851,14 @@ function HDCT() {
       textDecoration: 'none',
     },
   })
-console.log(hoaDon);
+  console.log(hoaDon)
   const InvoiceDocument = () => {
     return (
       <Document>
         <Page>
-          <Text style={styles.title}>Shop F5<sup>&reg;</sup></Text>
+          <Text style={styles.title}>
+            Shop F5<sup>&reg;</sup>
+          </Text>
           <Text style={styles.text}>SDT: 0365278368</Text>
           <Text style={styles.text}>Email: shopf5@gmail.com</Text>
           <Text style={styles.text}>Địa chỉ: Hồi Ninh - Kim Sơn - Ninh Bình</Text>
@@ -868,15 +870,15 @@ console.log(hoaDon);
           <div style={styles.container}>
             <Text style={styles.textThuocTinh}>Ngày tạo: {formatDate(hoaDon.ngayThanhToan)}</Text>
             <Text style={styles.textThuocTinh}>Khách hàng: {hoaDon.tenNguoiNhan}</Text>
-            {(hoaDon.loaiDon === 1)  &&(
-                        <Text style={styles.textThuocTinh}>
-              Địa chỉ:{' '}
-              {hoaDon.diaChi + ' , ' + hoaDon.xa + ', ' + hoaDon.huyen + ', ' + hoaDon.tinh}
-            </Text>
+            {hoaDon.loaiDon === 1 && (
+              <Text style={styles.textThuocTinh}>
+                Địa chỉ:{' '}
+                {hoaDon.diaChi + ' , ' + hoaDon.xa + ', ' + hoaDon.huyen + ', ' + hoaDon.tinh}
+              </Text>
             )}
-              {hoaDon.soDienThoai !== '' &&(
-            <Text style={styles.textThuocTinh}>Số điện thoại: {hoaDon.soDienThoai}</Text>
-              )}
+            {hoaDon.soDienThoai !== '' && (
+              <Text style={styles.textThuocTinh}>Số điện thoại: {hoaDon.soDienThoai}</Text>
+            )}
           </div>
           <Text style={styles.titleTB}>DANH SÁCH SẢN PHẨM KHÁCH HÀNG MUA</Text>
           <View style={styles.table}>
@@ -1348,32 +1350,6 @@ console.log(hoaDon);
                         width: '100px',
                         fontSize: '15px',
                         fontWeight: 'bold',
-                      }}
-                    >
-                      Mã Hóa Đơn:
-                    </span>
-                  </Col>
-                  <Col sm={3}>
-                    <span
-                      style={{
-                        display: 'inline-block',
-                        width: '300px',
-                        fontSize: '15px',
-                      }}
-                    >
-                      {hoaDon.ma}
-                    </span>
-                  </Col>
-                </Col>
-
-                <Col sm={6} className="row">
-                  <Col sm={3}>
-                    <span
-                      style={{
-                        display: 'inline-block',
-                        width: '100px',
-                        fontSize: '15px',
-                        fontWeight: 'bold',
                         paddingTop: 3,
                       }}
                     >
@@ -1451,11 +1427,7 @@ console.log(hoaDon);
                     </div>
                   </Col>
                 </Col>
-              </Row>
 
-              <br />
-
-              <Row>
                 <Col sm={6} className="row">
                   <Col sm={3}>
                     <span
@@ -1466,21 +1438,26 @@ console.log(hoaDon);
                         fontWeight: 'bold',
                       }}
                     >
-                      Loại Hóa Đơn:
+                      Mã Hóa Đơn:
                     </span>
                   </Col>
                   <Col sm={3}>
-                    <div style={{ display: 'inline-block', width: '300px', fontSize: '15px' }}>
-                      {hoaDon.loaiDon === 0 && (
-                        <span style={{ color: 'darkblue', fontWeight: 'bold' }}>Bán trực tiếp</span>
-                      )}
-                      {hoaDon.loaiDon === 1 && (
-                        <span style={{ color: 'green', fontWeight: 'bold' }}>Mua Hàng Online</span>
-                      )}
-                    </div>
+                    <span
+                      style={{
+                        display: 'inline-block',
+                        width: '300px',
+                        fontSize: '15px',
+                      }}
+                    >
+                      {hoaDon.ma}
+                    </span>
                   </Col>
                 </Col>
+              </Row>
 
+              <br />
+
+              <Row>
                 <Col sm={6} className="row">
                   <Col sm={3}>
                     <span
@@ -1506,11 +1483,65 @@ console.log(hoaDon);
                     </span>
                   </Col>
                 </Col>
+                <Col sm={6} className="row">
+                  <Col sm={3}>
+                    <span
+                      style={{
+                        display: 'inline-block',
+                        width: '100px',
+                        fontSize: '15px',
+                        fontWeight: 'bold',
+                      }}
+                    >
+                      Loại Hóa Đơn:
+                    </span>
+                  </Col>
+                  <Col sm={3}>
+                    <div style={{ display: 'inline-block', width: '300px', fontSize: '15px' }}>
+                      {hoaDon.loaiDon === 0 && (
+                        <span style={{ color: 'darkblue', fontWeight: 'bold' }}>Bán trực tiếp</span>
+                      )}
+                      {hoaDon.loaiDon === 1 && (
+                        <span style={{ color: 'green', fontWeight: 'bold' }}>Mua Hàng Online</span>
+                      )}
+                    </div>
+                  </Col>
+                </Col>
               </Row>
 
               <br />
 
               <Row>
+                <Col sm={6} className="row">
+                  <Col sm={3}>
+                    <span
+                      style={{
+                        display: 'inline-block',
+                        width: '120px',
+                        fontSize: '15px',
+                        fontWeight: 'bold',
+                      }}
+                    >
+                      Số Điện Thoại:
+                    </span>
+                  </Col>
+                  <Col sm={3}>
+                    <span
+                      style={{
+                        display: 'inline-block',
+                        width: '300px',
+                        fontSize: '15px',
+                      }}
+                    >
+                      {hoaDon.soDienThoai === '' &&(
+                       <>Không có số điện thoại !</> 
+                      )}
+                       {hoaDon.soDienThoai !== '' &&(
+                      hoaDon.soDienThoai && hoaDon.soDienThoai
+                      )}
+                    </span>
+                  </Col>
+                </Col>
                 <Col sm={6} className="row">
                   <Col sm={3}>
                     <span
@@ -1536,63 +1567,9 @@ console.log(hoaDon);
                     </span>
                   </Col>
                 </Col>
-
-                <Col sm={6} className="row">
-                  <Col sm={3}>
-                    <span
-                      style={{
-                        display: 'inline-block',
-                        width: '120px',
-                        fontSize: '15px',
-                        fontWeight: 'bold',
-                      }}
-                    >
-                      Số Điện Thoại:
-                    </span>
-                  </Col>
-                  <Col sm={3}>
-                    <span
-                      style={{
-                        display: 'inline-block',
-                        width: '300px',
-                        fontSize: '15px',
-                      }}
-                    >
-                      {hoaDon.soDienThoai && hoaDon.soDienThoai}
-                    </span>
-                  </Col>
-                </Col>
               </Row>
-
               <br />
-
               <Row>
-                <Col sm={6} className="row">
-                  <Col sm={3}>
-                    <span
-                      style={{
-                        display: 'inline-block',
-                        width: '200px',
-                        fontSize: '15px',
-                        fontWeight: 'bold',
-                      }}
-                    >
-                      Ghi Chú:
-                    </span>
-                  </Col>
-                  <Col sm={3}>
-                    <span
-                      style={{
-                        display: 'inline-block',
-                        width: '300px',
-                        fontSize: '15px',
-                      }}
-                    >
-                      {hoaDon.ghiChu && hoaDon.ghiChu}
-                    </span>
-                  </Col>
-                </Col>
-
                 <Col sm={6} className="row">
                   <Col sm={3}>
                     <span
@@ -1614,10 +1591,15 @@ console.log(hoaDon);
                         fontSize: '15px',
                       }}
                     >
-                      {hoaDon.diaChi && (
+                      {hoaDon.diaChi !== null && (
                         <p>
                           {hoaDon.diaChi}, {hoaDon.xa}, {hoaDon.huyen}, {hoaDon.tinh}
                         </p>
+                      )}
+                      {hoaDon.diaChi === null && (
+                        <>
+                          Không có địa chỉ !
+                        </>
                       )}
                     </span>
                   </Col>
@@ -1630,228 +1612,227 @@ console.log(hoaDon);
 
       <CCol xs={12}>
         <CCard className="mb-4">
-        {(hoaDon.loaiDon === 1) && (hoaDon.trangThai === 0 || hoaDon.trangThai === 1)  &&(
-          <CCardHeader>
-          <Button variant="primary" onClick={handleShow99}>
-              Thêm sản phẩm
-            </Button>
-            <Modal
-              size="lg"
-              aria-labelledby="contained-modal-title-vcenter"
-              centered
-              style={{ marginLeft: 150 }}
-              show={show99}
-              onHide={handleClose99}
-            >
-              <Modal.Header closeButton>
-                <Modal.Title id="contained-modal-title-vcenter">Thêm Sản Phẩm</Modal.Title>
-              </Modal.Header>
-              <Modal.Body>
-                <div className="box col-auto col-6">
-                  <div className="search">
-                    <input
-                      style={{ borderRadius: 15, height: 35 }}
-                      type="text"
-                      className="input-search results-list"
-                      placeholder="Nhập mã hoặc tên sản phẩm cần tìm..."
-                      value={term}
-                      onChange={handleInputChange}
-                    />
-                  </div>
-                </div>
-                <section className="navbar-expand-lg navbar-light bg-light">
-                  <div>
-                    <div className="results-list">
-                      <Table hover>
-                        <tbody>
-                          {dataSP.length > 0 ? (
-                            dataSP.map((d, i) => (
-                              <tr
-                                key={i}
-                                onClick={() => handleAddSoLuong(d.id, d.sanPham.id)}
-                                style={{ cursor: 'pointer' }}
-                              >
-                                <td>
-                                  <img
-                                    src={`http://localhost:8080/api/chi-tiet-san-pham/${d.id}`}
-                                    className="product-image"
-                                    style={{ width: '70px', height: '100px' }}
-                                    alt='"none"'
-                                  />
-                                </td>
-                                <td>{d.sanPham.ma}</td>
-                                <td>{d.sanPham.ten}</td>
-                                <td>{d.soLuong || 0}</td>
-                                <td>{convertToCurrency(d.giaBan)}</td>
-                              </tr>
-                            ))
-                          ) : (
-                            <tr>
-                              <td colSpan={5}>Không có dữ liệu</td>
-                            </tr>
-                          )}
-                        </tbody>
-                      </Table>
-
-                      <Modal
-                        show={show7}
-                        onHide={() => setShow7(false)}
-                        style={{ marginLeft: 150 }}
-                        backdrop="static"
-                        keyboard={false}
-                        size="md"
-                        aria-labelledby="contained-modal-title-vcenter"
-                        centered
-                      >
-                        <Modal.Header closeButton>
-                          <Modal.Title>Chọn loại của sản phẩm</Modal.Title>
-                        </Modal.Header>
-                        <Modal.Body>
-                          <div className="body-add-new">
-                            <div className="mb-3">
-                              <label htmlFor="exampleFormControlInput1" className="form-label">
-                                Thuộc tính
-                              </label>
-
-                              <select
-                                className="form-select"
-                                aria-label="Default select example"
-                                onChange={(e) => handleDetail(e.target.value)}
-                              >
-                                {mauSacKC.map((d, i) => (
-                                  <option key={i} value={d.id}>
-                                    {d.mauSac.ma} - {d.kichCo.ten} - {d.chatLieu.ten} -{' '}
-                                    {d.loaiSanPham.ten} - {d.nhaSanXuat.ten}
-                                  </option>
-                                ))}
-                              </select>
-                            </div>
-                            <div className="mb-3">
-                              <label htmlFor="exampleFormControlTextarea1" className="form-label">
-                                Số lượng:{' '}
-                                <small>
-                                  Còn lại <strong>{dataDetail.soLuong}</strong>
-                                </small>
-                              </label>
-                              <input
-                                className="form-control"
-                                id="exampleFormControlTextarea1"
-                                type="number"
-                                onChange={(e) =>
-                                  setValuesAdd({ ...valuesAdd, soLuong: e.target.value })
-                                }
-                              ></input>
-                            </div>
-                          </div>
-                        </Modal.Body>
-                        <Modal.Footer>
-                          <Button variant="primary" onClick={() => handleAdd()}>
-                            Thêm
-                          </Button>
-                        </Modal.Footer>
-                      </Modal>
-                   
+          {hoaDon.loaiDon === 1 && (hoaDon.trangThai === 0 || hoaDon.trangThai === 1) && (
+            <CCardHeader>
+              <Button variant="primary" onClick={handleShow99}>
+                Thêm sản phẩm
+              </Button>
+              <Modal
+                size="lg"
+                aria-labelledby="contained-modal-title-vcenter"
+                centered
+                style={{ marginLeft: 150 }}
+                show={show99}
+                onHide={handleClose99}
+              >
+                <Modal.Header closeButton>
+                  <Modal.Title id="contained-modal-title-vcenter">Thêm Sản Phẩm</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>
+                  <div className="box col-auto col-6">
+                    <div className="search">
+                      <input
+                        style={{ borderRadius: 15, height: 35 }}
+                        type="text"
+                        className="input-search results-list"
+                        placeholder="Nhập mã hoặc tên sản phẩm cần tìm..."
+                        value={term}
+                        onChange={handleInputChange}
+                      />
                     </div>
                   </div>
-                </section>
-              </Modal.Body>
-            </Modal>
+                  <section className="navbar-expand-lg navbar-light bg-light">
+                    <div>
+                      <div className="results-list">
+                        <Table hover>
+                          <tbody>
+                            {dataSP.length > 0 ? (
+                              dataSP.map((d, i) => (
+                                <tr
+                                  key={i}
+                                  onClick={() => handleAddSoLuong(d.id, d.sanPham.id)}
+                                  style={{ cursor: 'pointer' }}
+                                >
+                                  <td>
+                                    <img
+                                      src={`http://localhost:8080/api/chi-tiet-san-pham/${d.id}`}
+                                      className="product-image"
+                                      style={{ width: '70px', height: '100px' }}
+                                      alt='"none"'
+                                    />
+                                  </td>
+                                  <td>{d.sanPham.ma}</td>
+                                  <td>{d.sanPham.ten}</td>
+                                  <td>{d.soLuong || 0}</td>
+                                  <td>{convertToCurrency(d.giaBan)}</td>
+                                </tr>
+                              ))
+                            ) : (
+                              <tr>
+                                <td colSpan={5}>Không có dữ liệu</td>
+                              </tr>
+                            )}
+                          </tbody>
+                        </Table>
+
+                        <Modal
+                          show={show7}
+                          onHide={() => setShow7(false)}
+                          style={{ marginLeft: 150 }}
+                          backdrop="static"
+                          keyboard={false}
+                          size="md"
+                          aria-labelledby="contained-modal-title-vcenter"
+                          centered
+                        >
+                          <Modal.Header closeButton>
+                            <Modal.Title>Chọn loại của sản phẩm</Modal.Title>
+                          </Modal.Header>
+                          <Modal.Body>
+                            <div className="body-add-new">
+                              <div className="mb-3">
+                                <label htmlFor="exampleFormControlInput1" className="form-label">
+                                  Thuộc tính
+                                </label>
+
+                                <select
+                                  className="form-select"
+                                  aria-label="Default select example"
+                                  onChange={(e) => handleDetail(e.target.value)}
+                                >
+                                  {mauSacKC.map((d, i) => (
+                                    <option key={i} value={d.id}>
+                                      {d.mauSac.ma} - {d.kichCo.ten} - {d.chatLieu.ten} -{' '}
+                                      {d.loaiSanPham.ten} - {d.nhaSanXuat.ten}
+                                    </option>
+                                  ))}
+                                </select>
+                              </div>
+                              <div className="mb-3">
+                                <label htmlFor="exampleFormControlTextarea1" className="form-label">
+                                  Số lượng:{' '}
+                                  <small>
+                                    Còn lại <strong>{dataDetail.soLuong}</strong>
+                                  </small>
+                                </label>
+                                <input
+                                  className="form-control"
+                                  id="exampleFormControlTextarea1"
+                                  type="number"
+                                  onChange={(e) =>
+                                    setValuesAdd({ ...valuesAdd, soLuong: e.target.value })
+                                  }
+                                ></input>
+                              </div>
+                            </div>
+                          </Modal.Body>
+                          <Modal.Footer>
+                            <Button variant="primary" onClick={() => handleAdd()}>
+                              Thêm
+                            </Button>
+                          </Modal.Footer>
+                        </Modal>
+                      </div>
+                    </div>
+                  </section>
+                </Modal.Body>
+              </Modal>
             </CCardHeader>
           )}
           <CCardBody>
-          <div className="table-container">
-            <Table striped hover className="my-4">
-              <tr className="ps-5">
-                <th>#</th>
-                <th>Mã</th>
-                <th>Ảnh</th>
-                <th>Sản phẩm</th>
-                <th>Số lượng</th>
-                <th>Đơn giá</th>
-                <th>Tổng tiền</th>
-              </tr>
-              <tbody className="table-group-divider">
-                {valuesSanPham.map((d, i) => (
-                  <tr key={i}>
-                    <td>{i + 1}</td>
-                    <td>{d.chiTietSanPham.sanPham.ma}</td>
-                    <td>
-                      <img
-                        src={`http://localhost:8080/api/chi-tiet-san-pham/${d.chiTietSanPham.id}`}
-                        className="product-image"
-                        style={{ width: '70px', height: '100px' }}
-                      />
-                    </td>
-                    <td>
-                      {d.chiTietSanPham.sanPham.ten} <br />
-                      {d.chiTietSanPham.kichCo.ten} -{' '}
-                      <span
-                        className="color-circle"
-                        style={{
-                          backgroundColor: d.chiTietSanPham.mauSac.ten,
-                          display: 'inline-block',
-                          verticalAlign: 'middle',
-                          height: '15px',
-                          width: '15px',
-                        }}
-                      ></span>
-                    </td>
-                    <td>
-                    {(hoaDon.loaiDon === 1) && (hoaDon.trangThai === 0 || hoaDon.trangThai === 1)  ?(
-
-                      <div
-                        className="input-spinner"
-                        style={{
-                          display: 'flex',
-                          alignItems: 'center',
-                          width: 120,
-                          justifyContent: 'center',
-                        }}
-                      >
-                        <InputSpinner
-                          key={d.id} // Đặt key duy nhất cho mỗi InputSpinner
-                          max={d.chiTietSanPham.soLuong + d.soLuong}
-                          min={1}
-                          step={1}
-                          value={d.soLuong}
-                          onChange={(e) =>
-                            handleUpdateSl(d.id, d.hoaDon.id, d.chiTietSanPham.id, e)
-                          }
-                          type={'real'}
-                          variant={'primary'}
-                          size="sm"
-                          arrows
+            <div className="table-container">
+              <Table striped hover className="my-4">
+                <tr className="ps-5">
+                  <th>#</th>
+                  <th>Mã</th>
+                  <th>Ảnh</th>
+                  <th>Sản phẩm</th>
+                  <th>Số lượng</th>
+                  <th>Đơn giá</th>
+                  <th>Tổng tiền</th>
+                </tr>
+                <tbody className="table-group-divider">
+                  {valuesSanPham.map((d, i) => (
+                    <tr key={i}>
+                      <td>{i + 1}</td>
+                      <td>{d.chiTietSanPham.sanPham.ma}</td>
+                      <td>
+                        <img
+                          src={`http://localhost:8080/api/chi-tiet-san-pham/${d.chiTietSanPham.id}`}
+                          className="product-image"
+                          style={{ width: '70px', height: '100px' }}
                         />
-                   
-                      </div>
-                       ):(
-                        <span style={{fontWeight: 'bold'}}>{d.soLuong}</span>
-                      )}
-                      {d.chiTietSanPham.soLuong < 10 ? (
-                        <span style={{ color: 'red' }}>
-                          Số sản phẩm còn lại: <strong>{d.chiTietSanPham.soLuong}</strong>
-                        </span>
-                      ) : (
-                        ''
-                      )}
-                    </td>
-                    <td>{convertToCurrency(d.donGia)}</td>
-                    <td>{convertToCurrency(d.soLuong * d.donGia)}</td>
-                    {(hoaDon.loaiDon === 1) && (hoaDon.trangThai === 0 || hoaDon.trangThai === 1)  &&(
-                    <td> 
-                      <button
-                        onClick={() => handleDelete(d.id)}
-                        style={{ color: 'orange' }}
-                        className="fa-solid fa-trash-can fa-khenh"
-                      ></button>
-                    </td>
-                    )}
-                  </tr>
-                ))}
-              </tbody>
-            </Table>
+                      </td>
+                      <td>
+                        {d.chiTietSanPham.sanPham.ten} <br />
+                        {d.chiTietSanPham.kichCo.ten} -{' '}
+                        <span
+                          className="color-circle"
+                          style={{
+                            backgroundColor: d.chiTietSanPham.mauSac.ten,
+                            display: 'inline-block',
+                            verticalAlign: 'middle',
+                            height: '15px',
+                            width: '15px',
+                          }}
+                        ></span>
+                      </td>
+                      <td>
+                        {hoaDon.loaiDon === 1 &&
+                        (hoaDon.trangThai === 0 || hoaDon.trangThai === 1) ? (
+                          <div
+                            className="input-spinner"
+                            style={{
+                              display: 'flex',
+                              alignItems: 'center',
+                              width: 120,
+                              justifyContent: 'center',
+                            }}
+                          >
+                            <InputSpinner
+                              key={d.id} // Đặt key duy nhất cho mỗi InputSpinner
+                              max={d.chiTietSanPham.soLuong + d.soLuong}
+                              min={1}
+                              step={1}
+                              value={d.soLuong}
+                              onChange={(e) =>
+                                handleUpdateSl(d.id, d.hoaDon.id, d.chiTietSanPham.id, e)
+                              }
+                              type={'real'}
+                              variant={'primary'}
+                              size="sm"
+                              arrows
+                            />
+                          </div>
+                        ) : (
+                          <span style={{ fontWeight: 'bold' }}>{d.soLuong}</span>
+                        )}
+                        {d.chiTietSanPham.soLuong < 10 ? (
+                          <span style={{ color: 'red' }}>
+                            Số sản phẩm còn lại: <strong>{d.chiTietSanPham.soLuong}</strong>
+                          </span>
+                        ) : (
+                          ''
+                        )}
+                      </td>
+                      <td>{convertToCurrency(d.donGia)}</td>
+                      <td>{convertToCurrency(d.soLuong * d.donGia)}</td>
+                      {hoaDon.loaiDon === 1 &&
+                        (hoaDon.trangThai === 0 || hoaDon.trangThai === 1) && (
+                          <td>
+                            <button
+                              onClick={() => handleDelete(d.id)}
+                              style={{ color: 'orange' }}
+                              className="fa-solid fa-trash-can fa-khenh"
+                            ></button>
+                          </td>
+                        )}
+                    </tr>
+                  ))}
+                </tbody>
+              </Table>
 
-            <Container style={{ display: 'flex', justifyContent: 'end' }}>
+              <Container style={{ display: 'flex', justifyContent: 'end' }}>
                 <Row style={{ marginBottom: 10 }}>
                   <Col sm={12} className="row">
                     <Col sm={6}>
@@ -1860,7 +1841,7 @@ console.log(hoaDon);
                           display: 'inline-block',
                           width: '120px',
                           fontSize: '15px',
-                          fontWeight: 'bold'
+                          fontWeight: 'bold',
                         }}
                       >
                         Tiền sản phẩm:
@@ -1871,7 +1852,7 @@ console.log(hoaDon);
                         style={{
                           display: 'inline-block',
                           width: '120px',
-                          fontSize: '15px'
+                          fontSize: '15px',
                         }}
                       >
                         {convertToCurrency(totalAmount)}
@@ -1894,8 +1875,8 @@ console.log(hoaDon);
                             width: '120px',
                             fontSize: '15px',
                             fontWeight: 'bold',
-                            paddingTop: 6
-                            }}
+                            paddingTop: 6,
+                          }}
                         >
                           Phí ship:
                         </span>
@@ -1903,24 +1884,24 @@ console.log(hoaDon);
                       <Col sm={6}>
                         {(hoaDon && hoaDon.trangThai === 0) || hoaDon.trangThai === 1 ? (
                           <input
-                          style={{
-                            display: 'inline-block',
-                            width: '120px',
-                            fontSize: '15px',
-                            height: 35
-                          }}
-                     className='form-control'
+                            style={{
+                              display: 'inline-block',
+                              width: '120px',
+                              fontSize: '15px',
+                              height: 35,
+                            }}
+                            className="form-control"
                             type="number"
                             value={hoaDon.tienShip}
                             onChange={handleTienShipChange}
                           />
                         ) : (
                           <span
-                          style={{
-                            display: 'inline-block',
-                            width: '120px',
-                            fontSize: '15px',
-                            paddingTop: 6
+                            style={{
+                              display: 'inline-block',
+                              width: '120px',
+                              fontSize: '15px',
+                              paddingTop: 6,
                             }}
                           >
                             {convertToCurrency(hoaDon.tienShip)}
@@ -1945,7 +1926,7 @@ console.log(hoaDon);
                             fontSize: '15px',
                             fontWeight: 'bold',
                             color: 'red',
-                            fontStyle: 'italic'
+                            fontStyle: 'italic',
                           }}
                         >
                           Khuyến mãi:
@@ -1958,7 +1939,7 @@ console.log(hoaDon);
                             width: '120px',
                             fontSize: '15px',
                             color: 'red',
-                            fontStyle: 'italic'
+                            fontStyle: 'italic',
                           }}
                         >
                           {dataHDKM.map((d, i) => (
@@ -1983,7 +1964,7 @@ console.log(hoaDon);
                           display: 'inline-block',
                           width: '150px',
                           fontSize: '22px',
-                          fontWeight: 'bold'
+                          fontWeight: 'bold',
                         }}
                       >
                         Tổng tiền:
@@ -1995,7 +1976,7 @@ console.log(hoaDon);
                           display: 'inline-block',
                           width: '200px',
                           fontSize: '22px',
-                          fontWeight: 'bold'
+                          fontWeight: 'bold',
                         }}
                       >
                         {convertToCurrency(tongTienKhiGiam)}{' '}
@@ -2004,7 +1985,7 @@ console.log(hoaDon);
                   </Col>
                 </Row>
               </Container>
-          </div>
+            </div>
           </CCardBody>
         </CCard>
       </CCol>

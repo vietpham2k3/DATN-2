@@ -64,7 +64,7 @@ function DonHang(props) {
     setTienThua,
     tienThua,
     check,
-    updateTTHD
+    updateTTHD,
   } = props
   const [inputValue, setInputValue] = useState('')
   const [show, setShow] = useState(false)

@@ -89,7 +89,7 @@ function Header() {
 
   return (
     <div className="header-content-container sticky-top">
-      <header style={{ paddingLeft: '120px', backgroundColor: 'black'}} className="header">
+      <header style={{ paddingLeft: '120px', backgroundColor: 'black' }} className="header">
         <nav className="navbar navbar-expand-lg nav-1">
           <div style={{ paddingRight: '180px' }}>
             <a className="navbar-brand nameShop" href="/#/trang-chu">
