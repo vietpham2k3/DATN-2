@@ -135,7 +135,7 @@ function Content() {
                       >
                       {product && product.id && (
                         <Card.Img
-                          style={{ textAlign: 'center', width: '260px', height: '300px' }}
+                          style={{ textAlign: 'center', width: '260px', height: 300 }}
                           src={`http://localhost:8080/api/chi-tiet-san-pham/${product.id}`}
                           alt="none"
                         />
